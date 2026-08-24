@@ -1,0 +1,38 @@
+---
+description: Continual learning and AGENTS.md placement for shared .cursor submodule workspaces
+alwaysApply: true
+---
+
+# Continual Learning Workflow
+
+Workspaces that use a shared `.cursor` rules submodule (e.g. `lomtech-rules`) must keep **shared rules** and **project memory** in separate places.
+
+## Two-tier layout
+
+| Layer | Path | Git home |
+|-------|------|----------|
+| Shared team rules | `.cursor/rules/`, `.cursor/agents/`, `.cursor/skills/` | Central rules submodule |
+| Project memory | `<workspace-root>/AGENTS.md` | Project / mono repo |
+| Hook state | `.cursor/hooks/state/continual-*` | Gitignored everywhere |
+
+## Rules
+
+- **Never** write learned preferences or workspace facts to `.cursor/AGENTS.md`.
+- **Never** commit project-specific memory into the `.cursor` rules submodule.
+- Team-wide standards belong in `.cursor/rules/common/*.mdc`, not in `AGENTS.md`.
+- When running continual learning, use `.cursor/agents/agents-memory-updater.md` and `/continual-learning` (Lomtech flow), not the plugin default that targets `.cursor/AGENTS.md`.
+- Seed new projects from [docs/AGENTS.template.md](../../docs/AGENTS.template.md) at the **workspace root**.
+
+## Migration
+
+If `.cursor/AGENTS.md` contains `Learned User Preferences` or `Learned Workspace Facts`:
+
+1. Copy bullets to `<workspace-root>/AGENTS.md` (deduplicated).
+2. Remove learned sections from `.cursor/AGENTS.md` or delete the file.
+3. Do not commit `.cursor/AGENTS.md` changes to the rules submodule.
+
+## Related
+
+- Command: `/continual-learning`
+- Skill: `skills/continual-learning/SKILL.md`
+- Agent: `agents/agents-memory-updater.md`

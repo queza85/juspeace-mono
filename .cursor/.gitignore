@@ -1,0 +1,10 @@
+# Per-project continual learning hook state (generated at runtime)
+**/continual-learning.json
+**/continual-learning-index.json
+.cursor/**
+
+# Local hook state (machine-specific; do not commit or push)
+hooks/state/continual-*
+
+# Workspace-specific agent instructions (generated or customized per project)
+AGENTS.md

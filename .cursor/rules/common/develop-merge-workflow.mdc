@@ -1,0 +1,30 @@
+---
+description: For substantial work, finish on a feature branch and merge into develop
+alwaysApply: true
+---
+
+# Integrate long-running branches into `develop`
+
+## Policy
+
+- **`develop` is the canonical integration branch** for application repos that use `develop` as their integration branch.
+- When work is **non-trivial** or spans **multiple commits / sessions**, do it on a **dedicated branch** (feature/fix/chore) branched from **`develop`**, not by drifting on unrelated long-lived branches.
+- The task is **not finished** until changes are **merged into `develop`** and **`origin/develop` is up to date** (via PR merge or an explicit merge + push, per team process).
+
+## Agent behavior
+
+1. After tests/lint/type-check pass and the user did not forbid git operations, **merge or open a PR into `develop`**—do not stop with “pushed feature branch only.”
+2. If the parent mono repo tracks submodules, **update submodule pointers** to the new **`develop` HEAD** commits when requested or when completing cross-repo work (see `common-project-preferences` / submodule workflow).
+3. Avoid leaving “latest code” only on `staging`, `main` (app repo), or a stale feature branch while `develop` lags.
+
+## Examples
+
+```text
+❌ BAD: Push `feature/big-refactor` and stop; `develop` never receives the merge.
+
+✅ GOOD: Push branch → merge (or PR) into `develop` → push `origin/develop` → update mono submodule SHAs if applicable.
+```
+
+## Exceptions
+
+- User explicitly says to **not** merge to `develop` yet, or repo has **no `develop` branch** (e.g. mono parent on `main` only)—follow that scope for that task only.

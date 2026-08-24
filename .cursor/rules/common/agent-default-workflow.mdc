@@ -1,0 +1,47 @@
+---
+description: Default agent mode, model, and no-auto-push policy
+alwaysApply: true
+---
+
+# Default Agent Workflow
+
+## Default mode / model (Cursor chat)
+
+- **Default mode for new chats and agents is `Plan`.**
+- **Default model is Claude Opus 4.7 (latest, `claude-opus-4-7-thinking-xhigh`).**
+- Use a different model or mode only when the user explicitly requests it.
+
+## Workflow — Plan → confirm → Auto Build
+
+1. **Plan** — In `Plan` mode, outline scope, approach, risks, and test strategy for the user.
+2. **User confirmation** — Proceed only after the user explicitly approves the plan.
+3. **Build** — After approval, switch to `Auto` mode and implement.
+4. **Re-plan** — If a major fork or architecture decision emerges during implementation, return to `Plan` mode and get updated agreement.
+
+## Push policy — no automatic push (overrides other rules)
+
+- **No automatic `git push`**: Even when tests, lint, and type-check all pass, do not push until the user gives an **explicit push instruction**.
+  - This applies to submodule pushes and parent-repo submodule pointer updates alike.
+- Commit only when the user requests it; wait for a separate instruction before pushing.
+- When changes are committed locally but not pushed, end the response with a one-line status such as: "N commits pending on local branch / M changed files — awaiting push instruction."
+- This rule **takes precedence** over auto-push clauses in `common-project-preferences.mdc` and `common-git-workflow.md`. On conflict, follow this rule.
+- When the user requests a push, validate and sync all repos/submodules with pending changes in the workspace. See [push-sync-workflow](push-sync-workflow.mdc) for details.
+
+## Exceptions
+
+- Push is allowed when the user explicitly says something like "push it", "allow auto push", or "deploy end-to-end."
+- Emergency hotfix auto-handling is allowed only when the user has pre-authorized it.
+
+## Examples
+
+```text
+✅ Recommended flow
+  1) [Plan] Write change plan → user confirms
+  2) [Auto] Implement → tests/lint/type-check pass
+  3) Commit (if requested) → hold push
+  4) User: "push it" → perform push
+
+❌ Prohibited
+  - Pushing without confirmation because tests passed
+  - Pushing submodule updates and parent pointer updates without instruction
+```

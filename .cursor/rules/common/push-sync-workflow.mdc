@@ -1,0 +1,72 @@
+---
+description: Push sync workflow for mono repos and submodules when the user requests push
+alwaysApply: true
+---
+
+# Push Sync Workflow
+
+When the user requests a push, inspect **all active work in the workspace** — not only repos touched in the current chat — validate what you can, and sync passing repos to origin. Include changes left by other agents or sessions.
+
+## Trigger
+
+- User explicitly says "push", "push it", "push through", "sync to latest", or similar.
+- **Full branch sync (all sync):** "모두 push", "push all", "all sync", "전체 push", "develop staging main push", or similar explicit full-sync wording → follow **workspace-root `AGENTS.md` → All Sync Push** (promote `develop` → `staging` → `main` on every app submodule; sync all repos including other agents' work).
+- A "commit" instruction alone does **not** trigger this workflow — commit only, then wait.
+
+**Distinction:** Normal push = **current branch only**. All sync trigger = **develop, staging, and main** on each app repo, plus parent mono `main`.
+
+## Sync targets
+
+Discover targets from `.gitmodules`, workspace layout, or user-specified scope. Do not hardcode repo names.
+
+Typical layout:
+
+- **Parent mono repo** on its default branch (often `main`).
+- **Application submodules** on their integration branch (often `develop`) when that branch exists.
+- **Rules submodule** (e.g. `.cursor`): on push instruction, commit and push **only tracked, intentional changes** (rules, agents, skills, hooks scripts). Then update the parent submodule pointer.
+- **Other rule submodules** (e.g. `.github`): sync only when the user explicitly requests it.
+
+## Rules submodule — excluded from commit/push
+
+The `.cursor` rules submodule is shared across projects. **Never** commit or push these paths from inside the submodule:
+
+- `AGENTS.md` (project memory belongs at workspace root, not in the submodule)
+- `hooks/state/continual-*` and `**/continual-learning*.json` (machine-local hook state)
+- Any other gitignored or generated runtime files
+
+If `git status` inside `.cursor` shows only excluded paths as dirty, treat the submodule as **clean** — do not commit or push. Project memory updates belong in `<workspace-root>/AGENTS.md` in the parent mono/app repo.
+
+Use `git check-ignore -v <path>` when unsure whether a dirty path is excluded.
+
+## Procedure
+
+1. **Status scan**: In each submodule and the parent repo, run `git status` and `git log --oneline @{u}..HEAD` to find uncommitted changes and unpushed commits.
+2. **Per-folder validation**: For each folder with changes or pending commits, run that folder's lint / type-check / unit tests.
+   - **Hold push** for folders that fail validation; report failures to the user.
+   - Continue with other folders (one failure does not block the rest).
+3. **Commit + push (submodules)**: In each passing submodule, commit if needed, then `git push origin <current-branch>`.
+4. **Update parent pointers**: Stage changed submodule SHAs in the parent mono repo → commit → `git push origin <parent-default-branch>`.
+5. **Final report**: Summarize latest SHA and origin sync status for each repo in a table.
+
+## User-specified scope
+
+- If the user says "push backend only" or "push all except admin", apply the workflow only to that scope.
+- With no scope specified, use all targets listed under **Sync targets**.
+
+## Prohibited
+
+- Force push to `main` / `master` / `develop` without explicit user request (see [git workflow rules](common-git-workflow.md)).
+- Bypassing validation with `--no-verify` or similar without user approval.
+
+## Example report format
+
+```text
+✅ Push summary
+- <app-be>           : develop 84c80b4 → 9f2a1e3 (push ok, tests ok)
+- <app-fe-admin>     : develop 7d5177e → c41bb02 (push ok, type-check ok)
+- <app-fe>           : (no changes, skip)
+- <mono-repo>        : main 8e8756f → b73d901 (submodule pointer update push ok)
+
+⚠️ <app-be> unit test failure
+  → hold push for that folder; continue with fe-admin / mono as applicable
+```

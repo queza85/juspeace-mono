@@ -1,0 +1,17 @@
+---
+description: Use docs/glossary.md as canonical KR/EN domain terms when the file exists
+alwaysApply: true
+---
+
+# Workspace glossary
+
+If `docs/glossary.md` exists at the workspace root, it is the **source of truth** for Korean/English domain terms (code identifiers, Excel headers, UI labels, enums).
+
+1. **Read** `docs/glossary.md` before introducing or renaming domain fields, i18n copy, Excel columns, or API names.
+2. Use the glossary **Canonical key** and the listed Excel / UI labels. Do not invent a second name for a term that already exists there.
+3. If a user request conflicts with the glossary, **the glossary wins**.
+4. Add new terms to `docs/glossary.md` in the same change as the code.
+
+Skip this rule only when that file is absent.
+
+@docs/glossary.md

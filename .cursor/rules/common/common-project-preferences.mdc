@@ -1,0 +1,51 @@
+---
+description: "Project-wide preferences — i18n, response language, commit/push policy"
+alwaysApply: true
+---
+# Project-Wide Preferences
+
+Default rules that apply to all work in this workspace.
+
+## 1. Internationalization (i18n) required
+
+All user-facing UI text must use i18n keys — never hardcode strings in components.
+
+- When adding a new key, update **every locale file** the project uses (`messages/*.json` or the project's locale convention) with the same key structure.
+- If a locale file is missing a value, fill it temporarily with the English string to avoid build/runtime errors.
+- Code, comments, and identifiers stay in English.
+
+```typescript
+// ❌ Bad
+<Button>Save</Button>
+
+// ✅ Good
+<Button>{t('common.save')}</Button>
+// + en.json: { "common": { "save": "Save" } }
+// + es.json: { "common": { "save": "Guardar" } }
+```
+
+## 2. Agent responses in English
+
+Explanations, summaries, step-by-step guidance, and conclusions are written in **English**.
+
+Keep the following in their original form:
+
+- Code identifiers, variable/function/class names, file paths, branch names
+- Terminal commands, package/API names, config keys
+- Error/log quotes, external doc and issue URLs
+- Code comments (English by convention)
+
+## 3. Commit / push policy — no automatic push
+
+After completing work:
+
+1. Run relevant lint / type-check / unit tests.
+2. **Wait for explicit user instruction** before `git push`, regardless of test results.
+3. Commit only when the user requests it; push requires a separate instruction.
+4. If tests fail, report the failure and do not push.
+
+Detailed policy (default mode/model, Plan→Auto Build flow, push exceptions) is in
+[agent-default-workflow](agent-default-workflow.mdc).
+
+> Force push to `main`/`master` or destructive commands without user request are
+> prohibited per [git workflow rules](common-git-workflow.md).
