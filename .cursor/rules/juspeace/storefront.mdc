@@ -14,13 +14,14 @@ Read version-matched docs under `juspeace-fe/node_modules/next/dist/docs/` (pref
 
 - App Router, TypeScript, `output: 'standalone'`
 - Tailwind v4 + shadcn/ui
-- Zustand for **cart only**
+- TanStack Query + Form (+ Table when needed); Zustand for **cart only**
 - API via `src/lib/api/*` — never hardcode base URLs in components
 
 ## Do
 
 - Fetch catalog in Server Components
-- `'use client'` only for cart / local UI state
+- TanStack Form + Zod for forms; TanStack Query for client server-state / mutations
+- `'use client'` only for cart / forms / local UI state
 - All UI strings via `t()` and `src/messages/en.json`
 
 ## Don't
