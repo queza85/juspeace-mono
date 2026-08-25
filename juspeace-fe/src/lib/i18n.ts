@@ -1,42 +1,37 @@
-import messages from '@/messages/en.json';
+/**
+ * Shared i18n helpers.
+ * - Server Components: `import { getTranslator } from '@/lib/i18n/server'`
+ * - Client Components: `import { useT, useLocale } from '@/lib/i18n/locale-context'`
+ */
+export {
+  defaultLocale,
+  isLocale,
+  locales,
+  LOCALE_COOKIE,
+  toBcp47,
+  type Locale,
+} from './i18n/config';
+export { translate, formatPriceForLocale } from './i18n/translate';
 
-type Messages = typeof messages;
+import { getBrowserLocaleHint } from './i18n/cookie';
+import { defaultLocale } from './i18n/config';
+import { formatPriceForLocale, translate } from './i18n/translate';
 
-function getNestedValue(source: Record<string, unknown>, path: string) {
-  return path.split('.').reduce<unknown>((current, key) => {
-    if (current && typeof current === 'object' && key in current) {
-      return (current as Record<string, unknown>)[key];
-    }
-
-    return undefined;
-  }, source);
-}
-
-export function t<K extends string>(
-  key: K,
+/**
+ * Sync translator for non-React modules (API client toasts, etc.).
+ * Prefers the browser cookie locale; falls back to English on the server.
+ */
+export function t(
+  key: string,
   values?: Record<string, string | number>,
 ): string {
-  const raw = getNestedValue(messages as Record<string, unknown>, key);
-
-  if (typeof raw !== 'string') {
-    return key;
-  }
-
-  if (!values) {
-    return raw;
-  }
-
-  return Object.entries(values).reduce(
-    (result, [token, value]) => result.replaceAll(`{${token}}`, String(value)),
-    raw,
-  );
+  const locale =
+    typeof window === 'undefined' ? defaultLocale : getBrowserLocaleHint();
+  return translate(locale, key, values);
 }
 
-export type MessageKey = keyof Messages extends string ? string : never;
-
 export function formatPrice(priceCents: number, currency = 'USD') {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency,
-  }).format(priceCents / 100);
+  const locale =
+    typeof window === 'undefined' ? defaultLocale : getBrowserLocaleHint();
+  return formatPriceForLocale(locale, priceCents, currency);
 }

@@ -22,7 +22,7 @@ Read version-matched docs under `juspeace-fe/node_modules/next/dist/docs/` (pref
 - Fetch catalog in Server Components
 - TanStack Form + Zod for forms; TanStack Query for client server-state / mutations
 - `'use client'` only for cart / forms / local UI state
-- All UI strings via `t()` and `src/messages/en.json`
+- All UI strings via `t()` / `useT()` and `src/messages/en.json` + `src/messages/ko.json` (locales: `en`, `ko`)
 
 ## Don't
 

@@ -1,13 +1,17 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/auth/auth-context';
-import { loginFormSchema } from '@/lib/auth/login-schema';
-import { t } from '@/lib/i18n';
+import { createLoginFormSchema } from '@/lib/auth/login-schema';
+import { useLocale, useT } from '@/lib/i18n/locale-context';
 
-function fieldErrorText(errors: unknown[]): string | null {
+function fieldErrorText(
+  errors: unknown[],
+  fallback: string,
+): string | null {
   if (!errors.length) {
     return null;
   }
@@ -24,13 +28,16 @@ function fieldErrorText(errors: unknown[]): string | null {
   ) {
     return (first as { message: string }).message;
   }
-  return t('common.error');
+  return fallback;
 }
 
 export function LoginForm() {
   const { login } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useT();
+  const { locale } = useLocale();
+  const schema = useMemo(() => createLoginFormSchema(locale), [locale]);
 
   const form = useForm({
     defaultValues: {
@@ -38,7 +45,7 @@ export function LoginForm() {
       password: '',
     },
     validators: {
-      onSubmit: loginFormSchema,
+      onSubmit: schema,
     },
     onSubmit: async ({ value }) => {
       await login(value.email, value.password);
@@ -58,7 +65,10 @@ export function LoginForm() {
     >
       <form.Field name="email">
         {(field) => {
-          const error = fieldErrorText(field.state.meta.errors);
+          const error = fieldErrorText(
+            field.state.meta.errors,
+            t('common.error'),
+          );
           return (
             <div className="flex flex-col gap-1.5">
               <label htmlFor={field.name} className="text-sm font-medium">
@@ -86,7 +96,10 @@ export function LoginForm() {
 
       <form.Field name="password">
         {(field) => {
-          const error = fieldErrorText(field.state.meta.errors);
+          const error = fieldErrorText(
+            field.state.meta.errors,
+            t('common.error'),
+          );
           return (
             <div className="flex flex-col gap-1.5">
               <label htmlFor={field.name} className="text-sm font-medium">

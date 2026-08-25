@@ -26,7 +26,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Use TanStack Query for authenticated / interactive client data and mutations.
 - Use TanStack Form + Zod schemas under `src/lib/**/**-schema.ts` for forms.
 - Use `'use client'` only for interactivity (cart, forms, auth UI).
-- Put all user-facing strings in `src/messages/en.json` and render with `t()`.
+- Put all user-facing strings in `src/messages/en.json` **and** `src/messages/ko.json`, render with `t()` / `useT()` / `getTranslator()`.
+- Locales: English (`en`) and Korean (`ko`); cookie `juspeace_locale`; switcher in the header.
 - Keep pages thin; put reusable UI in `src/components/**`.
 - Pass async `params` / `searchParams` correctly (Promise-based in Next 15+).
 

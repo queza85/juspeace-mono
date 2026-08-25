@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
+import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { useAuth } from '@/lib/auth/auth-context';
-import { t } from '@/lib/i18n';
+import { useT } from '@/lib/i18n/locale-context';
 import { useCartTotalItems } from '@/stores/cart-store';
 
 export function SiteHeader() {
+  const t = useT();
   const totalItems = useCartTotalItems();
   const { isAuthenticated, isLoading, logout } = useAuth();
 
@@ -20,6 +22,8 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+
           {!isLoading && isAuthenticated ? (
             <>
               <Link

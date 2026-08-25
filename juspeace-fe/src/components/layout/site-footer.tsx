@@ -1,6 +1,8 @@
-import { t } from '@/lib/i18n';
+import { getTranslator } from '@/lib/i18n/server';
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const { t } = await getTranslator();
+
   return (
     <footer className="mt-auto border-t">
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted-foreground sm:px-6">

@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { t } from '@/lib/i18n';
+import { useT } from '@/lib/i18n/locale-context';
 import type { Product } from '@/lib/api/types';
 import { useCartStore } from '@/stores/cart-store';
 
@@ -11,6 +11,7 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ product, disabled }: AddToCartButtonProps) {
+  const t = useT();
   const addItem = useCartStore((state) => state.addItem);
 
   return (

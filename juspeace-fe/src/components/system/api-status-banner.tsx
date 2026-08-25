@@ -1,9 +1,10 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getHealthStatus } from '@/lib/api/products';
-import { t } from '@/lib/i18n';
+import { getTranslator } from '@/lib/i18n/server';
 
 export async function ApiStatusBanner() {
+  const { t } = await getTranslator();
   const connected = await getHealthStatus()
     .then(() => true)
     .catch(() => false);

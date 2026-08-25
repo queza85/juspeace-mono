@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { AddToCartButton } from '@/components/products/add-to-cart-button';
 import { getProductBySlug } from '@/lib/api/products';
-import { formatPrice, t } from '@/lib/i18n';
+import { getTranslator } from '@/lib/i18n/server';
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -11,6 +11,7 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
+  const { t } = await getTranslator();
 
   try {
     const product = await getProductBySlug(slug);
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
+  const { t, formatPrice } = await getTranslator();
 
   let product;
 
@@ -56,9 +58,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <Badge variant={inStock ? 'secondary' : 'outline'}>
             {inStock ? t('common.inStock') : t('common.outOfStock')}
           </Badge>
-          <h1 className="text-4xl font-semibold tracking-tight">{product.name}</h1>
+          <h1 className="text-4xl font-semibold tracking-tight">
+            {product.name}
+          </h1>
           {product.description ? (
-            <p className="text-lg text-muted-foreground">{product.description}</p>
+            <p className="text-lg text-muted-foreground">
+              {product.description}
+            </p>
           ) : null}
         </div>
 

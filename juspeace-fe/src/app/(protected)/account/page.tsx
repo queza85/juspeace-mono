@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth/auth-context';
-import { t } from '@/lib/i18n';
+import { useT } from '@/lib/i18n/locale-context';
 
 export default function AccountPage() {
+  const t = useT();
   const { user, isLoading, isAuthenticated, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -56,7 +57,10 @@ export default function AccountPage() {
         >
           {t('auth.logout')}
         </button>
-        <Link href="/" className="inline-flex h-9 items-center text-sm text-muted-foreground underline-offset-4 hover:underline">
+        <Link
+          href="/"
+          className="inline-flex h-9 items-center text-sm text-muted-foreground underline-offset-4 hover:underline"
+        >
           {t('auth.backHome')}
         </Link>
       </div>

@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { formatPrice, t } from '@/lib/i18n';
+import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import type { Product } from '@/lib/api/types';
 import { useCartStore } from '@/stores/cart-store';
 
@@ -21,6 +21,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const t = useT();
+  const formatPrice = useFormatPrice();
   const addItem = useCartStore((state) => state.addItem);
   const inStock = product.stock > 0;
 
@@ -45,7 +47,9 @@ export function ProductCard({ product }: ProductCardProps) {
           </Badge>
         </div>
         {product.description ? (
-          <CardDescription className="line-clamp-2">{product.description}</CardDescription>
+          <CardDescription className="line-clamp-2">
+            {product.description}
+          </CardDescription>
         ) : null}
       </CardHeader>
       <CardContent>
