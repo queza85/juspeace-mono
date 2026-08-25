@@ -8,7 +8,7 @@ Browser → Next.js (juspeace-fe:3000) → NestJS API (juspeace-be:7777/api/v1) 
 
 - Frontend: App Router Server Components fetch catalog; Zustand holds cart on the client.
 - Backend: Modular NestJS with Controller → Service → Repository → Prisma.
-- Contract: JSON REST under `/api/v1`; errors as problem-details style payloads.
+- Contract: JSON REST under `/api/v1`; envelope `{ success, message, data }` (message codes in `SCREAMING_SNAKE_CASE`).
 
 ## Ports and URLs
 
@@ -45,8 +45,9 @@ All UI strings: `juspeace-fe/src/messages/en.json` via `t()`.
 ## API contract highlights
 
 - Money: `priceCents` (integer) + `currency` (ISO).
-- Lists: `{ data, total, limit, offset }`.
-- Errors: `{ type, title, status, detail, instance }`.
+- Lists: `{ success, message, data: { items, total, limit, offset } }`.
+- Success: `{ success: true, message: "RETRIEVE_SUCCESSFULLY", data: ... }`.
+- Errors: `{ success: false, message: "INVALID_CREDENTIALS", data: null | { errors } }`.
 
 Shared frontend types: `juspeace-fe/src/lib/api/types.ts`.
 

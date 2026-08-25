@@ -11,5 +11,14 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `product.status` | Catalog visibility lifecycle | `status` (`DRAFT`, `ACTIVE`, `ARCHIVED`) | — |
 | `category` | Product grouping | `Category` | Category |
 | `cart` | Client-side purchase intent collection | — (juspeace-fe Zustand store) | Cart |
+| `user` | Authenticated account (storefront or admin) | `User` | Account |
+| `user.email` | Unique login identifier | `email` | Email |
+| `user.role` | Authorization role | `role` (`USER`, `ADMIN`) | Role |
+| `user.name` | Display name | `name` | Name |
+| `refreshToken` | Opaque rotatable session token (hashed at rest) | `RefreshToken` | — |
+| `datetime.utc` | All persisted timestamps (`createdAt`, `updatedAt`, `expiresAt`, …) | `DateTime` `@db.Timestamptz(3)` (UTC) | Local time via client formatter |
+| `api.message` | Endpoint-specific SCREAMING_SNAKE_CASE response code | `message` (`LOGIN_SUCCESSFULLY`, `PRODUCT_CREATED_SUCCESSFULLY`, …) | Toast via `apiMessages.*` i18n |
+
+**Datetime rule:** Persist UTC only (`TIMESTAMPTZ`). Convert to the viewer’s timezone (e.g. Korea → `Asia/Seoul`, Myanmar → `Asia/Yangon`) in the UI — never store local wall-clock times in the database. Browser clients send `X-Timezone: Asia/Seoul` (IANA) on every API request so the backend can format or log in the caller’s zone without guessing.
 
 When adding new commerce concepts (order, payment, shipment), extend this table in the same change as the code.
