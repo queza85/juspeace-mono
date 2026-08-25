@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: juspeace-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: juspeace_develop
+    volumes:
+      - juspeace_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d juspeace_develop']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  juspeace-be:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juspeace-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '7777:7777'
+    environment:
+      NODE_ENV: production
+      PORT: 7777
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_DATABASE: juspeace_develop
+      DATABASE_URL: postgresql://postgres:root@postgres:5432/juspeace_develop?schema=public
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+
+volumes:
+  juspeace_postgres_data:

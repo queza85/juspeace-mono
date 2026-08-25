@@ -1,0 +1,17 @@
+node_modules
+dist
+coverage
+.git
+.gitignore
+*.md
+.env
+.env.*
+!.env.example
+Dockerfile
+docker-compose.yml
+.dockerignore
+npm-debug.log*
+pnpm-debug.log*
+package-lock.json
+*.tsbuildinfo
+test
