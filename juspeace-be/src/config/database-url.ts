@@ -2,9 +2,7 @@
  * Builds a Prisma-compatible PostgreSQL URL from discrete DB_* vars,
  * or returns DATABASE_URL when already set (Docker overrides).
  */
-export function buildDatabaseUrl(
-  env: NodeJS.ProcessEnv = process.env,
-): string {
+export function buildDatabaseUrl(env: NodeJS.ProcessEnv = process.env): string {
   const explicit = env.DATABASE_URL?.trim();
   if (explicit) {
     return explicit;

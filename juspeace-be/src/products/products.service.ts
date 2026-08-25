@@ -1,6 +1,9 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from '@prisma/client';
-import type { IProductsRepository, ListProductsOptions } from './products.repository.interface';
+import type {
+  IProductsRepository,
+  ListProductsOptions,
+} from './products.repository.interface';
 import { PRODUCTS_REPOSITORY } from './products.repository.interface';
 import {
   ListProductsQueryDto,
@@ -15,7 +18,9 @@ export class ProductsService {
     private readonly productsRepository: IProductsRepository,
   ) {}
 
-  async list(query: ListProductsQueryDto): Promise<PaginatedProductsResponseDto> {
+  async list(
+    query: ListProductsQueryDto,
+  ): Promise<PaginatedProductsResponseDto> {
     const options: ListProductsOptions = {
       status: query.status,
       categorySlug: query.category,
@@ -29,7 +34,7 @@ export class ProductsService {
     ]);
 
     return {
-      data: products.map((product) => this.toResponse(product)),
+      items: products.map((product) => this.toResponse(product)),
       total,
       limit: query.limit ?? 20,
       offset: query.offset ?? 0,
@@ -40,7 +45,7 @@ export class ProductsService {
     const product = await this.productsRepository.findBySlug(slug);
 
     if (!product) {
-      throw new NotFoundException(`Product with slug "${slug}" was not found`);
+      throw new NotFoundException('PRODUCT_NOT_FOUND');
     }
 
     return this.toResponse(product);

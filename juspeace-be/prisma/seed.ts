@@ -1,8 +1,63 @@
-import { PrismaClient, ProductStatus } from '@prisma/client';
+import { PrismaClient, ProductStatus, UserRole } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
+const BCRYPT_ROUNDS = 12;
+
+const DEFAULT_SEED_PASSWORD = 'Test!1234';
+
+async function upsertUser(input: {
+  email: string;
+  password: string;
+  role: UserRole;
+  name: string;
+}) {
+  const passwordHash = await bcrypt.hash(input.password, BCRYPT_ROUNDS);
+  const email = input.email.toLowerCase();
+
+  await prisma.user.upsert({
+    where: { email },
+    update: {
+      passwordHash,
+      role: input.role,
+      name: input.name,
+      isActive: true,
+    },
+    create: {
+      email,
+      passwordHash,
+      role: input.role,
+      name: input.name,
+      isActive: true,
+    },
+  });
+}
+
+async function seedUsers() {
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@lomtech.net';
+  const adminPassword =
+    process.env.SEED_ADMIN_PASSWORD ?? DEFAULT_SEED_PASSWORD;
+  const userEmail = process.env.SEED_USER_EMAIL ?? 'user@lomtech.net';
+  const userPassword = process.env.SEED_USER_PASSWORD ?? DEFAULT_SEED_PASSWORD;
+
+  await upsertUser({
+    email: adminEmail,
+    password: adminPassword,
+    role: UserRole.ADMIN,
+    name: 'Admin',
+  });
+
+  await upsertUser({
+    email: userEmail,
+    password: userPassword,
+    role: UserRole.USER,
+    name: 'Demo User',
+  });
+}
 
 async function main() {
+  await seedUsers();
+
   const essentials = await prisma.category.upsert({
     where: { slug: 'essentials' },
     update: {},

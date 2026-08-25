@@ -61,7 +61,7 @@ export class ProductResponseDto {
 
 export class PaginatedProductsResponseDto {
   @ApiProperty({ type: [ProductResponseDto] })
-  data!: ProductResponseDto[];
+  items!: ProductResponseDto[];
 
   @ApiProperty()
   total!: number;

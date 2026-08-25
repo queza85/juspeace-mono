@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
       POSTGRES_DB: juspeace_develop
+      TZ: UTC
+      PGTZ: UTC
     volumes:
       - juspeace_postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -31,6 +33,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 7777
+      TZ: UTC
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: postgres
@@ -38,6 +41,11 @@ services:
       DB_DATABASE: juspeace_develop
       DATABASE_URL: postgresql://postgres:root@postgres:5432/juspeace_develop?schema=public
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-change-me-to-a-long-random-secret-at-least-32-chars}
+      JWT_ACCESS_TTL: ${JWT_ACCESS_TTL:-15m}
+      REFRESH_TOKEN_TTL_DAYS: ${REFRESH_TOKEN_TTL_DAYS:-7}
+      AUTH_COOKIE_NAME: ${AUTH_COOKIE_NAME:-juspeace_refresh}
+      AUTH_COOKIE_SECURE: ${AUTH_COOKIE_SECURE:-false}
 
 volumes:
   juspeace_postgres_data:

@@ -1,5 +1,6 @@
 import { plainToInstance } from 'class-transformer';
 import {
+  IsBoolean,
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -7,6 +8,7 @@ import {
   IsString,
   Max,
   Min,
+  MinLength,
   validateSync,
 } from 'class-validator';
 import { buildDatabaseUrl } from './database-url';
@@ -15,6 +17,22 @@ enum Environment {
   Development = 'development',
   Production = 'production',
   Test = 'test',
+}
+
+function toBoolean(value: unknown): boolean {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    if (normalized === 'true' || normalized === '1') {
+      return true;
+    }
+    if (normalized === 'false' || normalized === '0') {
+      return false;
+    }
+  }
+  return false;
 }
 
 export class EnvironmentVariables {
@@ -55,10 +73,54 @@ export class EnvironmentVariables {
   @IsString()
   @IsOptional()
   CORS_ORIGINS?: string;
+
+  @IsString()
+  @MinLength(32)
+  JWT_ACCESS_SECRET!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  JWT_ACCESS_TTL: string = '15m';
+
+  @IsInt()
+  @Min(1)
+  @Max(365)
+  REFRESH_TOKEN_TTL_DAYS: number = 7;
+
+  @IsString()
+  @IsNotEmpty()
+  AUTH_COOKIE_NAME: string = 'juspeace_refresh';
+
+  @IsBoolean()
+  AUTH_COOKIE_SECURE: boolean = false;
+
+  @IsString()
+  @IsOptional()
+  SEED_ADMIN_EMAIL?: string;
+
+  @IsString()
+  @IsOptional()
+  SEED_ADMIN_PASSWORD?: string;
+
+  @IsString()
+  @IsOptional()
+  SEED_USER_EMAIL?: string;
+
+  @IsString()
+  @IsOptional()
+  SEED_USER_PASSWORD?: string;
 }
 
 export function validateEnv(config: Record<string, unknown>) {
-  const validated = plainToInstance(EnvironmentVariables, config, {
+  const withDefaults = {
+    ...config,
+    AUTH_COOKIE_SECURE:
+      config.AUTH_COOKIE_SECURE !== undefined
+        ? toBoolean(config.AUTH_COOKIE_SECURE)
+        : config.NODE_ENV === Environment.Production,
+  };
+
+  const validated = plainToInstance(EnvironmentVariables, withDefaults, {
     enableImplicitConversion: true,
   });
 

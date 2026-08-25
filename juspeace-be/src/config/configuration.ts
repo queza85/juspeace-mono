@@ -16,4 +16,15 @@ export default () => ({
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean),
+  auth: {
+    jwtAccessSecret: process.env.JWT_ACCESS_SECRET ?? '',
+    jwtAccessTtl: process.env.JWT_ACCESS_TTL ?? '15m',
+    refreshTokenTtlDays: Number(process.env.REFRESH_TOKEN_TTL_DAYS ?? 7),
+    cookieName: process.env.AUTH_COOKIE_NAME ?? 'juspeace_refresh',
+    cookieSecure:
+      process.env.AUTH_COOKIE_SECURE !== undefined
+        ? process.env.AUTH_COOKIE_SECURE === 'true' ||
+          process.env.AUTH_COOKIE_SECURE === '1'
+        : process.env.NODE_ENV === 'production',
+  },
 });
