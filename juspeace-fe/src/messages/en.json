@@ -1,0 +1,26 @@
+{
+  "common": {
+    "brand": "Juspeace",
+    "tagline": "Mindful essentials for everyday peace",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "addToCart": "Add to cart",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "cart": "Cart",
+    "items": "{count} items"
+  },
+  "home": {
+    "heroTitle": "Welcome to Juspeace",
+    "heroDescription": "Discover curated products crafted for calm, sustainable living.",
+    "featuredProducts": "Featured products",
+    "apiStatus": "API status",
+    "apiConnected": "Connected to backend",
+    "apiDisconnected": "Backend unavailable"
+  },
+  "products": {
+    "empty": "No products available yet.",
+    "viewDetails": "View details"
+  }
+}
