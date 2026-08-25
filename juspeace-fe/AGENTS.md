@@ -14,13 +14,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Next.js 16 App Router, TypeScript strict, `output: 'standalone'`
 - Tailwind CSS v4 + shadcn/ui (`src/components/ui`)
+- **TanStack Query** (`@tanstack/react-query`) for client server-state (auth session, mutations, future interactive lists)
+- **TanStack Form** (`@tanstack/react-form`) + **Zod** for forms (login and future forms)
+- **TanStack Table** (`@tanstack/react-table` via `src/lib/table`) when building sortable/filterable tables
 - Zustand for **cart only** (`src/stores/cart-store.ts`)
 - API via `src/lib/api/*` — never hardcode base URLs in components
 
 ## Do
 
-- Fetch catalog data in Server Components.
-- Use `'use client'` only for interactivity (cart, local UI state).
+- Fetch public catalog data in Server Components (keep SSR for SEO).
+- Use TanStack Query for authenticated / interactive client data and mutations.
+- Use TanStack Form + Zod schemas under `src/lib/**/**-schema.ts` for forms.
+- Use `'use client'` only for interactivity (cart, forms, auth UI).
 - Put all user-facing strings in `src/messages/en.json` and render with `t()`.
 - Keep pages thin; put reusable UI in `src/components/**`.
 - Pass async `params` / `searchParams` correctly (Promise-based in Next 15+).

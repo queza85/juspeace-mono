@@ -21,8 +21,8 @@ export default async function HomePage() {
           {t('home.featuredProducts')}
         </h2>
 
-        {productsResponse && productsResponse.data.length > 0 ? (
-          <ProductGrid products={productsResponse.data} />
+        {productsResponse && productsResponse.items.length > 0 ? (
+          <ProductGrid products={productsResponse.items} />
         ) : (
           <p className="text-muted-foreground">{t('products.empty')}</p>
         )}

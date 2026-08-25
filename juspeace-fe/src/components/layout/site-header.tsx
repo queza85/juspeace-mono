@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
+import { useAuth } from '@/lib/auth/auth-context';
 import { t } from '@/lib/i18n';
-import { useCartStore } from '@/stores/cart-store';
+import { useCartTotalItems } from '@/stores/cart-store';
 
 export function SiteHeader() {
-  const totalItems = useCartStore((state) => state.totalItems());
+  const totalItems = useCartTotalItems();
+  const { isAuthenticated, isLoading, logout } = useAuth();
 
   return (
     <header className="border-b bg-background/80 backdrop-blur">
@@ -17,13 +19,47 @@ export function SiteHeader() {
           {t('common.brand')}
         </Link>
 
-        <Link href="/" className={buttonVariants({ variant: 'outline', size: 'sm', className: 'gap-2' })}>
-          <ShoppingBag className="size-4" />
-          {t('common.cart')}
-          {totalItems > 0 ? (
-            <Badge variant="secondary">{totalItems}</Badge>
+        <div className="flex items-center gap-2">
+          {!isLoading && isAuthenticated ? (
+            <>
+              <Link
+                href="/account"
+                className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+              >
+                {t('auth.account')}
+              </Link>
+              <button
+                type="button"
+                onClick={() => void logout()}
+                className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+              >
+                {t('auth.logout')}
+              </button>
+            </>
+          ) : !isLoading ? (
+            <Link
+              href="/login"
+              className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+            >
+              {t('auth.login')}
+            </Link>
           ) : null}
-        </Link>
+
+          <Link
+            href="/"
+            className={buttonVariants({
+              variant: 'outline',
+              size: 'sm',
+              className: 'gap-2',
+            })}
+          >
+            <ShoppingBag className="size-4" />
+            {t('common.cart')}
+            {totalItems > 0 ? (
+              <Badge variant="secondary">{totalItems}</Badge>
+            ) : null}
+          </Link>
+        </div>
       </div>
     </header>
   );

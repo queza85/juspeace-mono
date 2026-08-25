@@ -1,9 +1,13 @@
+import { useSyncExternalStore } from 'react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Product } from '@/lib/api/types';
 
 export interface CartItem {
-  product: Pick<Product, 'id' | 'slug' | 'name' | 'priceCents' | 'currency' | 'imageUrl'>;
+  product: Pick<
+    Product,
+    'id' | 'slug' | 'name' | 'priceCents' | 'currency' | 'imageUrl'
+  >;
   quantity: number;
 }
 
@@ -21,7 +25,9 @@ export const useCartStore = create<CartState>()(
       items: [],
       addItem: (product, quantity = 1) => {
         set((state) => {
-          const existing = state.items.find((item) => item.product.id === product.id);
+          const existing = state.items.find(
+            (item) => item.product.id === product.id,
+          );
 
           if (existing) {
             return {
@@ -44,10 +50,20 @@ export const useCartStore = create<CartState>()(
         }));
       },
       clearCart: () => set({ items: [] }),
-      totalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
+      totalItems: () =>
+        get().items.reduce((total, item) => total + item.quantity, 0),
     }),
     {
       name: 'juspeace-cart',
     },
   ),
 );
+
+/** SSR-safe cart count — server + hydration pass use 0, then persist updates. */
+export function useCartTotalItems() {
+  return useSyncExternalStore(
+    (onStoreChange) => useCartStore.subscribe(onStoreChange),
+    () => useCartStore.getState().totalItems(),
+    () => 0,
+  );
+}
