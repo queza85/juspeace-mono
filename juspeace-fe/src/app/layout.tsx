@@ -1,9 +1,22 @@
 import type { Metadata } from 'next';
-import { SiteFooter } from '@/components/layout/site-footer';
-import { SiteHeader } from '@/components/layout/site-header';
+import { Fragment_Mono, Instrument_Serif } from 'next/font/google';
 import { AppProviders } from '@/components/providers/app-providers';
 import { getLocale } from '@/lib/i18n/server';
 import './globals.css';
+
+const instrumentSerif = Instrument_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const fragmentMono = Fragment_Mono({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-fragment-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -17,13 +30,12 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className="h-full">
+    <html
+      lang={locale}
+      className={`h-full ${instrumentSerif.variable} ${fragmentMono.variable}`}
+    >
       <body className="min-h-full flex flex-col antialiased">
-        <AppProviders locale={locale}>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </AppProviders>
+        <AppProviders locale={locale}>{children}</AppProviders>
       </body>
     </html>
   );

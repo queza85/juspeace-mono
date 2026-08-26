@@ -8,8 +8,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-mono: var(--font-fragment-mono), ui-monospace, monospace;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-display), ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,6 +41,13 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-jp-hero-overlay: var(--jp-hero-overlay);
+  --color-jp-card: var(--jp-card);
+  --color-jp-accent-teal: var(--jp-accent-teal);
+  --color-jp-stock-red: var(--jp-stock-red);
+  --color-jp-border-hero: var(--jp-border-hero);
+  --color-jp-muted: var(--jp-muted);
+  --color-jp-light-gray: var(--jp-light-gray);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -81,6 +90,17 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* JUSPEACE landing tokens */
+  --jp-hero-overlay: #00000040;
+  --jp-card: rgba(231, 231, 231, 0.42);
+  --jp-accent-teal: #33b194;
+  --jp-stock-red: #b13333;
+  --jp-border-hero: rgba(255, 255, 255, 0.6);
+  --jp-muted: rgba(0, 0, 0, 0.6);
+  --jp-light-gray: #f5f5f5;
+  --font-display: ui-sans-serif, system-ui, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
 }
 
 .dark {
@@ -125,6 +145,6 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
   }
 }

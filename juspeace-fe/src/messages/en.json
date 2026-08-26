@@ -72,5 +72,166 @@
     "label": "Language",
     "en": "English",
     "ko": "한국어"
+  },
+  "landing": {
+    "nav": {
+      "story": "STORY",
+      "collection": "COLLECTION",
+      "donation": "DONATION",
+      "faq": "FAQ",
+      "trackOrder": "TRACK ORDER",
+      "bag": "BAG ( {count} )",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "hero": {
+      "titleLine1": "Love Together.",
+      "titleLine2": "Change Together.",
+      "description": "JUSPEACE, a name combining Justice &\nPeace. This is a\nbracelet created by a foundation\nestablished through G-Dragon's\ncopyright donation .",
+      "tag": "WHITE | PURE HOPE",
+      "buyNow": "BUY NOW",
+      "exploreCollection": "EXPLORE COLLECTION",
+      "scroll": "Scroll",
+      "thumbnail": "Hero thumbnail {index}"
+    },
+    "brandStory": {
+      "label": "Brand Story",
+      "quote": "In 2024, G-Dragon suggested finding small justices in everyday life",
+      "subtext": "that acknowledge differences and create a world without prejudice.",
+      "leftCaption": "JUSTICE & PEACE",
+      "leftBody": "The belief that peace is achieved only when justice is realized became the name.",
+      "rightCaption": "THE CAMPAIGN",
+      "rightBody": "The path where small loves come together bring peace to the world",
+      "leftImage": "Justice & Peace visual",
+      "centerImage": "Brand story feature",
+      "rightImage": "Campaign visual"
+    },
+    "relationship": {
+      "label": "THE RELATIONSHIP",
+      "statementLine1": "The juspeace",
+      "statementLine2": "bracelet - embodies that pledge",
+      "statementLine3": "on the wrist."
+    },
+    "collection": {
+      "label": "PRODUCT COLLECTION",
+      "headingLine1": "Product",
+      "headingLine2": "Collection",
+      "index": "[1]",
+      "moreDetails": "More Details",
+      "buyNow": "BUY NOW",
+      "stocks": "{count} stocks",
+      "qtyDecrease": "Decrease quantity",
+      "qtyIncrease": "Increase quantity",
+      "imagePlaceholder": "Product image",
+      "fallbackBlack": {
+        "category": "BLACK",
+        "title": "STRONG COMMIMENT",
+        "panelName": "BLACK _ Strong commitment",
+        "variant": "Black",
+        "description": "Responsibility, Justice - Unwavering faith and responsibility. The power to change the world begins with unshakable heart."
+      },
+      "fallbackWhite": {
+        "category": "WHITE",
+        "title": "PURE HOPE",
+        "panelName": "White_Pure hope",
+        "variant": "White",
+        "description": "Hope and healing - the purest beginning to change the world. Your small act of sharing becomes someone's new tomorrow."
+      },
+      "fallbackStripe": {
+        "category": "STRIPE",
+        "title": "HARMONY & PEACE",
+        "panelName": "Stripe_Harmony & Peace",
+        "variant": "Stripe",
+        "description": "Diversity, harmony peace - true peace begins when we respect differences."
+      }
+    },
+    "features": {
+      "label": "FEATURES",
+      "headingLine1": "Product",
+      "headingLine2": "Features",
+      "items": {
+        "bracelet": "The bracelet",
+        "lettering": "Antique silver lettering",
+        "adjustment": "Side adjustment to fit the wrist",
+        "endTip": "Sturdy metal end tip",
+        "bead": "JUSPEACE engraved bead"
+      }
+    },
+    "gallery": {
+      "label": "GALLERY",
+      "headingLine1": "Product",
+      "headingLine2": "Gallery",
+      "count": "26",
+      "categories": {
+        "productOnly": "Product only images",
+        "lifestyle": "Life Style Images",
+        "closeUp": "Close Up Images",
+        "packaging": "Packaging Images",
+        "mobileSwipe": "Mobile Swipe Gallery",
+        "desktopThumbnails": "Desktop Thumbnails"
+      }
+    },
+    "donation": {
+      "label": "Donation",
+      "headlineLine1": "Your act of peace",
+      "headlineLine2": "become someone's",
+      "headlineLine3": "chance at life.",
+      "body": "Every bracelet sold is direct contribution to youth rehabilitation programs and art therapy initiatives at the heart of JUSPEACE.",
+      "priceTag": "₩ 150,000 - Donation Bracelet",
+      "mediaLabel": "Donation visual",
+      "playLabel": "Play donation video"
+    },
+    "faq": {
+      "sectionLabel": "GALLERY",
+      "heading": "FAQs",
+      "answerSoon": "Answer coming soon.",
+      "q1": "Is this an official JUSPEACE product ?",
+      "a1": "Answer coming soon.",
+      "q2": "What products are available ?",
+      "a2": "Answer coming soon.",
+      "q3": "Which countries can place orders ?",
+      "a3": "Answer coming soon.",
+      "q4": "Which countries can place orders ?",
+      "a4": "Answer coming soon.",
+      "q5": "Which payment methods are supported ?",
+      "a5": "Answer coming soon.",
+      "q6": "How long does the delivery take ?",
+      "a6": "Answer coming soon.",
+      "q7": "How can customers track their orders?",
+      "a7": "Answer coming soon.",
+      "q8": "How are cancellation and refund requests handled?",
+      "a8": "Answer coming soon.",
+      "q9": "Where will the proceeds be donated ?",
+      "a9": "Answer coming soon.",
+      "q10": "How can customers contact support?",
+      "a10": "Answer coming soon."
+    },
+    "footer": {
+      "newsletterLabel": "Newsletter",
+      "newsletterHeadline": "Be the first to know what's new.",
+      "emailPlaceholder": "Email",
+      "subscribe": "Subscribe",
+      "newsletterHint": "No noise , just curated updates.",
+      "pagesLabel": "Pages",
+      "aboutCompany": "About Company",
+      "aboutFoundation": "About Foundation",
+      "customerSupport": "Customer Support",
+      "cancellationPolicy": "Cancellation and Refund Policy",
+      "donationNotice": "Donation Notice",
+      "privacyPolicy": "Privacy Policy",
+      "shippingPolicy": "Shipping Policy",
+      "terms": "Terms & Conditions",
+      "contactLabel": "Contact / business",
+      "contactEmail": "love@juspeace.ai",
+      "businessInfo": "233-82-01129 ( verify business info )",
+      "locationLabel": "Location",
+      "location": "36F , Three IFC , 10 Gukjegeumung-ro, Yeongdeungpo-gu, Seoul , South Korea",
+      "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
+      "tagline": "JUSTICE & PEACE , WOVEN AS ONE",
+      "foundation": "JUSPACE FOUNDATION",
+      "socialX": "X",
+      "socialInstagram": "Instagram",
+      "socialYoutube": "YouTube"
+    }
   }
 }

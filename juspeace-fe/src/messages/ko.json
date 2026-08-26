@@ -72,5 +72,166 @@
     "label": "언어",
     "en": "English",
     "ko": "한국어"
+  },
+  "landing": {
+    "nav": {
+      "story": "스토리",
+      "collection": "컬렉션",
+      "donation": "기부",
+      "faq": "FAQ",
+      "trackOrder": "주문 조회",
+      "bag": "BAG ( {count} )",
+      "openMenu": "메뉴 열기",
+      "closeMenu": "메뉴 닫기"
+    },
+    "hero": {
+      "titleLine1": "함께 사랑하다.",
+      "titleLine2": "함께 바꾸다.",
+      "description": "JUSPEACE는 Justice와 Peace를\n합친 이름입니다. G-Dragon의\n저작권 기부로 설립된 재단이\n만든 브레이슬릿입니다.",
+      "tag": "WHITE | 순수한 희망",
+      "buyNow": "구매하기",
+      "exploreCollection": "컬렉션 살펴보기",
+      "scroll": "스크롤",
+      "thumbnail": "히어로 썸네일 {index}"
+    },
+    "brandStory": {
+      "label": "브랜드 스토리",
+      "quote": "2024년, G-Dragon은 일상 속에서 작은 정의를 찾자고 제안했습니다",
+      "subtext": "차이를 인정하고 편견 없는 세상을 만들어 가자는 이야기입니다.",
+      "leftCaption": "정의와 평화",
+      "leftBody": "정의가 실현될 때 비로소 평화가 이루어진다는 믿음이 이름이 되었습니다.",
+      "rightCaption": "캠페인",
+      "rightBody": "작은 사랑이 모여 세상에 평화를 전하는 길입니다",
+      "leftImage": "정의와 평화 비주얼",
+      "centerImage": "브랜드 스토리 대표 이미지",
+      "rightImage": "캠페인 비주얼"
+    },
+    "relationship": {
+      "label": "관계",
+      "statementLine1": "juspeace",
+      "statementLine2": "브레이슬릿은 그 다짐을",
+      "statementLine3": "손목에 새깁니다."
+    },
+    "collection": {
+      "label": "제품 컬렉션",
+      "headingLine1": "제품",
+      "headingLine2": "컬렉션",
+      "index": "[1]",
+      "moreDetails": "자세히 보기",
+      "buyNow": "구매하기",
+      "stocks": "{count}개 재고",
+      "qtyDecrease": "수량 줄이기",
+      "qtyIncrease": "수량 늘리기",
+      "imagePlaceholder": "제품 이미지",
+      "fallbackBlack": {
+        "category": "BLACK",
+        "title": "강한 다짐",
+        "panelName": "BLACK _ 강한 다짐",
+        "variant": "Black",
+        "description": "책임과 정의 — 흔들리지 않는 믿음과 책임. 세상을 바꾸는 힘은 굳건한 마음에서 시작됩니다."
+      },
+      "fallbackWhite": {
+        "category": "WHITE",
+        "title": "순수한 희망",
+        "panelName": "White_순수한 희망",
+        "variant": "White",
+        "description": "희망과 치유 — 세상을 바꾸는 가장 순수한 시작. 당신의 작은 나눔이 누군가의 새로운 내일이 됩니다."
+      },
+      "fallbackStripe": {
+        "category": "STRIPE",
+        "title": "조화와 평화",
+        "panelName": "Stripe_조화와 평화",
+        "variant": "Stripe",
+        "description": "다양성, 조화, 평화 — 진정한 평화는 차이를 존중할 때 시작됩니다."
+      }
+    },
+    "features": {
+      "label": "특징",
+      "headingLine1": "제품",
+      "headingLine2": "특징",
+      "items": {
+        "bracelet": "브레이슬릿",
+        "lettering": "앤티크 실버 각인",
+        "adjustment": "손목에 맞게 조절되는 사이드",
+        "endTip": "견고한 메탈 엔드 팁",
+        "bead": "JUSPEACE 각인 비드"
+      }
+    },
+    "gallery": {
+      "label": "갤러리",
+      "headingLine1": "제품",
+      "headingLine2": "갤러리",
+      "count": "26",
+      "categories": {
+        "productOnly": "제품 단독 이미지",
+        "lifestyle": "라이프스타일 이미지",
+        "closeUp": "클로즈업 이미지",
+        "packaging": "패키징 이미지",
+        "mobileSwipe": "모바일 스와이프 갤러리",
+        "desktopThumbnails": "데스크톱 썸네일"
+      }
+    },
+    "donation": {
+      "label": "기부",
+      "headlineLine1": "당신의 평화로운 행동이",
+      "headlineLine2": "누군가에게는",
+      "headlineLine3": "삶의 기회가 됩니다.",
+      "body": "판매된 모든 브레이슬릿은 JUSPEACE의 핵심인 청소년 재활 프로그램과 예술 치료 활동에 직접 기부됩니다.",
+      "priceTag": "₩ 150,000 - 기부 브레이슬릿",
+      "mediaLabel": "기부 비주얼",
+      "playLabel": "기부 영상 재생"
+    },
+    "faq": {
+      "sectionLabel": "갤러리",
+      "heading": "자주 묻는 질문",
+      "answerSoon": "답변 준비 중입니다.",
+      "q1": "공식 JUSPEACE 제품인가요?",
+      "a1": "답변 준비 중입니다.",
+      "q2": "어떤 제품이 있나요?",
+      "a2": "답변 준비 중입니다.",
+      "q3": "어느 국가에서 주문할 수 있나요?",
+      "a3": "답변 준비 중입니다.",
+      "q4": "어느 국가에서 주문할 수 있나요?",
+      "a4": "답변 준비 중입니다.",
+      "q5": "어떤 결제 수단을 지원하나요?",
+      "a5": "답변 준비 중입니다.",
+      "q6": "배송은 얼마나 걸리나요?",
+      "a6": "답변 준비 중입니다.",
+      "q7": "주문은 어떻게 조회하나요?",
+      "a7": "답변 준비 중입니다.",
+      "q8": "취소 및 환불은 어떻게 처리되나요?",
+      "a8": "답변 준비 중입니다.",
+      "q9": "수익금은 어디에 기부되나요?",
+      "a9": "답변 준비 중입니다.",
+      "q10": "고객 지원은 어떻게 연락하나요?",
+      "a10": "답변 준비 중입니다."
+    },
+    "footer": {
+      "newsletterLabel": "뉴스레터",
+      "newsletterHeadline": "새로운 소식을 가장 먼저 받아보세요.",
+      "emailPlaceholder": "이메일",
+      "subscribe": "구독하기",
+      "newsletterHint": "소음 없이, 엄선된 소식만.",
+      "pagesLabel": "페이지",
+      "aboutCompany": "회사 소개",
+      "aboutFoundation": "재단 소개",
+      "customerSupport": "고객 지원",
+      "cancellationPolicy": "취소 및 환불 정책",
+      "donationNotice": "기부 안내",
+      "privacyPolicy": "개인정보 처리방침",
+      "shippingPolicy": "배송 정책",
+      "terms": "이용약관",
+      "contactLabel": "문의 / 사업자",
+      "contactEmail": "love@juspeace.ai",
+      "businessInfo": "233-82-01129 (사업자 정보 확인)",
+      "locationLabel": "위치",
+      "location": "대한민국 서울특별시 영등포구 국제금융로 10, 쓰리 IFC 36층",
+      "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
+      "tagline": "정의와 평화, 하나로 엮다",
+      "foundation": "JUSPACE FOUNDATION",
+      "socialX": "X",
+      "socialInstagram": "Instagram",
+      "socialYoutube": "YouTube"
+    }
   }
 }
