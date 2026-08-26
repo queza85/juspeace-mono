@@ -6,6 +6,7 @@ import { GallerySection } from '@/components/landing/gallery-section';
 import { HeroSection } from '@/components/landing/hero-section';
 import { LandingFooter } from '@/components/landing/landing-footer';
 import { LandingHeader } from '@/components/landing/landing-header';
+import { LandingScrollMotion } from '@/components/landing/landing-scroll-motion';
 import { ProductCollectionSection } from '@/components/landing/product-collection-section';
 import { RelationshipSection } from '@/components/landing/relationship-section';
 import { listProducts } from '@/lib/api/products';
@@ -15,6 +16,7 @@ export default async function LandingPage() {
 
   return (
     <>
+      <LandingScrollMotion />
       <LandingHeader />
       <HeroSection />
       <BrandStorySection />

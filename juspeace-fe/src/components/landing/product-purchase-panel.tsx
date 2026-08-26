@@ -29,9 +29,9 @@ export function ProductPurchasePanel({
   const canBuy = Boolean(product) && stock > 0;
 
   return (
-    <div className="relative w-full max-w-[699px] rounded-[32px] border border-black/6 bg-jp-card p-6 sm:p-8">
-      <p className="font-serif text-2xl text-black sm:text-[28px]">{panelName}</p>
-      <p className="mt-4 font-mono text-xl leading-8 text-jp-muted">
+    <div className="relative w-full max-w-[480px] rounded-[20px] border border-black/6 bg-jp-card p-3.5 sm:p-4">
+      <p className="font-serif text-base text-black sm:text-lg">{panelName}</p>
+      <p className="mt-1.5 font-mono text-xs leading-5 text-jp-muted sm:text-sm">
         {variantLabel}|{' '}
         <span className="text-jp-stock-red">
           {t('landing.collection.stocks', { count: stock.toFixed(2) })}
@@ -41,41 +41,41 @@ export function ProductPurchasePanel({
       {detailsHref ? (
         <Link
           href={detailsHref}
-          className="mt-2 inline-block font-mono text-base text-jp-muted underline underline-offset-4"
+          className="mt-0.5 inline-block font-mono text-xs text-jp-muted underline underline-offset-4"
         >
           {t('landing.collection.moreDetails')}
         </Link>
       ) : (
-        <span className="mt-2 inline-block font-mono text-base text-jp-muted underline underline-offset-4">
+        <span className="mt-0.5 inline-block font-mono text-xs text-jp-muted underline underline-offset-4">
           {t('landing.collection.moreDetails')}
         </span>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center gap-3 sm:absolute sm:right-8 sm:top-[71px] sm:mt-0">
-        <div className="flex h-[54px] w-[98px] items-center justify-between border border-black/10 bg-white px-3">
+      <div className="mt-3 flex flex-wrap items-center gap-2 sm:absolute sm:right-4 sm:top-[42px] sm:mt-0">
+        <div className="flex h-9 w-[80px] items-center justify-between border border-black/10 bg-white px-2">
           <button
             type="button"
             aria-label={t('landing.collection.qtyDecrease')}
-            className="flex size-6 items-center justify-center"
+            className="flex size-4 items-center justify-center"
             onClick={() => setQuantity((value) => Math.max(1, value - 1))}
           >
-            <Minus className="size-3" />
+            <Minus className="size-2.5" />
           </button>
-          <span className="font-mono text-lg">{quantity}</span>
+          <span className="font-mono text-sm">{quantity}</span>
           <button
             type="button"
             aria-label={t('landing.collection.qtyIncrease')}
-            className="flex size-6 items-center justify-center"
+            className="flex size-4 items-center justify-center"
             onClick={() => setQuantity((value) => value + 1)}
           >
-            <Plus className="size-3" />
+            <Plus className="size-2.5" />
           </button>
         </div>
 
         <button
           type="button"
           disabled={!canBuy}
-          className="inline-flex h-[54px] min-w-[163px] items-center justify-center bg-white px-6 font-mono text-lg text-black disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-9 min-w-[112px] items-center justify-center bg-white px-4 font-mono text-sm text-black disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => {
             if (!product) return;
             addItem(

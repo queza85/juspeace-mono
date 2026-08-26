@@ -92,7 +92,19 @@
       "buyNow": "BUY NOW",
       "exploreCollection": "EXPLORE COLLECTION",
       "scroll": "Scroll",
-      "thumbnail": "Hero thumbnail {index}"
+      "thumbnail": "Hero thumbnail {index}",
+      "marquee": {
+        "ariaLabel": "Hero collection preview",
+        "item1": "BLACK | STRONG COMMITMENT",
+        "item2": "STRIPE | HARMONY & PEACE",
+        "item3": "WHITE | PURE HOPE",
+        "item4": "JUSTICE | PEACE",
+        "item5": "LOVE | TOGETHER",
+        "item6": "HOPE | HEALING",
+        "item7": "CAMPAIGN | HEART",
+        "item8": "PLEDGE | WRIST",
+        "item9": "JUSPEACE | FOREVER"
+      }
     },
     "brandStory": {
       "label": "Brand Story",
@@ -228,7 +240,7 @@
       "location": "36F , Three IFC , 10 Gukjegeumung-ro, Yeongdeungpo-gu, Seoul , South Korea",
       "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
       "tagline": "JUSTICE & PEACE , WOVEN AS ONE",
-      "foundation": "JUSPACE FOUNDATION",
+      "foundation": "JUSPEACE FOUNDATION",
       "socialX": "X",
       "socialInstagram": "Instagram",
       "socialYoutube": "YouTube"

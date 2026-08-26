@@ -29,7 +29,10 @@ export async function DonationSection() {
       </SectionShell>
 
       <SectionShell id="donation" className="bg-white py-16 lg:py-24">
-        <div className="mx-auto flex max-w-[583px] flex-col items-center text-center">
+        <div
+          data-scroll-reveal
+          className="mx-auto flex max-w-[583px] flex-col items-center text-center"
+        >
           <SectionLabel>{t('landing.donation.label')}</SectionLabel>
           <SectionHeading className="mt-6 text-[clamp(2rem,5vw,3.625rem)] leading-[1.12] tracking-[-0.02em]">
             <span className="block">{t('landing.donation.headlineLine1')}</span>

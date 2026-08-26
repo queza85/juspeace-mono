@@ -148,3 +148,117 @@
     @apply font-sans scroll-smooth;
   }
 }
+
+/* Landing hover interactions — quiet, editorial */
+@layer components {
+  .jp-nav-link {
+    @apply relative inline-block whitespace-nowrap transition-[opacity,letter-spacing,color] duration-300 ease-out;
+  }
+
+  .jp-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s ease-out;
+  }
+
+  .jp-nav-link:hover {
+    @apply opacity-100 tracking-[2.4px];
+  }
+
+  .jp-nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .jp-hero-title-line {
+    @apply inline-block transition-[opacity,transform,letter-spacing] duration-500 ease-out;
+  }
+
+  .jp-hero-title-line:hover {
+    @apply tracking-[0.02em] opacity-80;
+    transform: translateY(-2px);
+  }
+
+  .jp-hero-description {
+    @apply relative;
+  }
+
+  .jp-hero-description .jp-hero-word {
+    display: inline-block;
+    transition:
+      opacity 0.35s ease-out,
+      transform 0.35s ease-out,
+      color 0.35s ease-out;
+    transition-delay: 0ms;
+  }
+
+  .jp-hero-description:hover .jp-hero-word {
+    transform: translateY(-2px);
+    opacity: 0.72;
+    transition-delay: calc(var(--i, 0) * 28ms);
+  }
+
+  .jp-hero-description:hover .jp-hero-word:nth-child(odd) {
+    opacity: 1;
+  }
+
+  .jp-cta-primary {
+    @apply relative inline-flex items-center justify-center border border-transparent transition-[color,background-color,border-color,transform,box-shadow] duration-300 ease-out;
+  }
+
+  .jp-cta-primary:hover {
+    @apply border-white bg-transparent text-white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  .jp-cta-link {
+    @apply relative inline-block transition-[opacity,letter-spacing] duration-300 ease-out;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    text-decoration: none;
+  }
+
+  .jp-cta-link:hover {
+    @apply tracking-[0.06em] opacity-80;
+    background-size: 0% 1px;
+  }
+
+  .jp-utility-link {
+    @apply transition-[color,background-color,border-color] duration-300 ease-out;
+  }
+
+  .jp-utility-link:hover {
+    @apply border-white bg-white text-black;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jp-nav-link,
+    .jp-nav-link::after,
+    .jp-hero-title-line,
+    .jp-hero-description .jp-hero-word,
+    .jp-cta-primary,
+    .jp-cta-link,
+    .jp-utility-link {
+      transition: none !important;
+    }
+
+    .jp-cta-primary:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .jp-hero-title-line:hover,
+    .jp-hero-description:hover .jp-hero-word {
+      transform: none;
+    }
+  }
+}

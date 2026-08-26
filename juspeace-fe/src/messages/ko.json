@@ -92,7 +92,19 @@
       "buyNow": "구매하기",
       "exploreCollection": "컬렉션 살펴보기",
       "scroll": "스크롤",
-      "thumbnail": "히어로 썸네일 {index}"
+      "thumbnail": "히어로 썸네일 {index}",
+      "marquee": {
+        "ariaLabel": "히어로 컬렉션 미리보기",
+        "item1": "BLACK | 강한 다짐",
+        "item2": "STRIPE | 조화와 평화",
+        "item3": "WHITE | 순수한 희망",
+        "item4": "JUSTICE | 평화",
+        "item5": "LOVE | 함께",
+        "item6": "HOPE | 치유",
+        "item7": "CAMPAIGN | 마음",
+        "item8": "PLEDGE | 손목",
+        "item9": "JUSPEACE | 영원히"
+      }
     },
     "brandStory": {
       "label": "브랜드 스토리",
@@ -228,7 +240,7 @@
       "location": "대한민국 서울특별시 영등포구 국제금융로 10, 쓰리 IFC 36층",
       "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
       "tagline": "정의와 평화, 하나로 엮다",
-      "foundation": "JUSPACE FOUNDATION",
+      "foundation": "JUSPEACE FOUNDATION",
       "socialX": "X",
       "socialInstagram": "Instagram",
       "socialYoutube": "YouTube"

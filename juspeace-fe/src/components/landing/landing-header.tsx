@@ -59,7 +59,7 @@ function HeaderUtilityCard() {
       <Link
         href="#collection"
         className={cn(
-          'box-border flex items-center gap-1.5 border border-r-0 border-jp-border-hero px-3.5 font-serif text-[13px] leading-none tracking-[0.04em] text-white/70',
+          'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 border-jp-border-hero px-3.5 font-serif text-[13px] leading-none tracking-[0.04em] text-white/70',
           CONTROL_H,
         )}
       >
@@ -105,7 +105,7 @@ export function LandingHeader() {
       <div className="relative mx-auto grid h-[72px] max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-20 sm:gap-6 sm:px-8 lg:px-12 xl:px-[75px]">
         <Link
           href="/"
-          className="relative block size-9 shrink-0 overflow-hidden rounded-full sm:size-10"
+          className="relative block size-9 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-10"
           aria-label={t('common.brand')}
         >
           <Image
@@ -123,7 +123,7 @@ export function LandingHeader() {
             <Link
               key={link.key}
               href={link.href}
-              className="shrink-0 whitespace-nowrap transition-opacity hover:opacity-70"
+              className="jp-nav-link shrink-0"
             >
               {t(link.key)}
             </Link>
@@ -139,7 +139,7 @@ export function LandingHeader() {
             <Link
               href="#collection"
               className={cn(
-                'flex items-center gap-1 border border-r-0 border-jp-border-hero px-2.5 font-serif text-[12px] text-white/70',
+                'jp-utility-link flex items-center gap-1 border border-r-0 border-jp-border-hero px-2.5 font-serif text-[12px] text-white/70',
                 CONTROL_H,
               )}
             >
@@ -175,7 +175,7 @@ export function LandingHeader() {
               <Link
                 key={link.key}
                 href={link.href}
-                className="py-1"
+                className="jp-nav-link w-fit py-1"
                 onClick={() => setMenuOpen(false)}
               >
                 {t(link.key)}

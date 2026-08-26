@@ -32,9 +32,9 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang={locale}
-      className={`h-full ${instrumentSerif.variable} ${fragmentMono.variable}`}
+      className={`min-h-full overflow-x-clip ${instrumentSerif.variable} ${fragmentMono.variable}`}
     >
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="flex min-h-full flex-col overflow-x-clip antialiased">
         <AppProviders locale={locale}>{children}</AppProviders>
       </body>
     </html>

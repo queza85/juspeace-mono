@@ -19,34 +19,39 @@ export function FaqSection() {
 
   return (
     <SectionShell id="faq" className="bg-white py-16 lg:py-28">
-      <div className="mx-auto mb-12 flex max-w-[1116px] flex-col items-center text-center lg:mb-16">
+      <div
+        data-scroll-reveal
+        className="mx-auto mb-12 flex max-w-[1116px] flex-col items-center text-center lg:mb-16"
+      >
         <SectionLabel>{t('landing.faq.sectionLabel')}</SectionLabel>
         <SectionHeading className="mt-4">{t('landing.faq.heading')}</SectionHeading>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2 lg:gap-5">
-        <div className="space-y-4 lg:space-y-5">
+      <div data-scroll-stagger className="grid gap-3 lg:grid-cols-2 lg:gap-4">
+        <div className="space-y-3 lg:space-y-4">
           {left.map((id) => (
-            <FaqItem
-              key={id}
-              id={id}
-              question={t(`landing.faq.q${id}`)}
-              answer={t(`landing.faq.a${id}`)}
-              open={openId === id}
-              onToggle={() => setOpenId((current) => (current === id ? null : id))}
-            />
+            <div key={id} data-scroll-stagger-item>
+              <FaqItem
+                id={id}
+                question={t(`landing.faq.q${id}`)}
+                answer={t(`landing.faq.a${id}`)}
+                open={openId === id}
+                onToggle={() => setOpenId((current) => (current === id ? null : id))}
+              />
+            </div>
           ))}
         </div>
-        <div className="space-y-4 lg:space-y-5">
+        <div className="space-y-3 lg:space-y-4">
           {right.map((id) => (
-            <FaqItem
-              key={id}
-              id={id}
-              question={t(`landing.faq.q${id}`)}
-              answer={t(`landing.faq.a${id}`)}
-              open={openId === id}
-              onToggle={() => setOpenId((current) => (current === id ? null : id))}
-            />
+            <div key={id} data-scroll-stagger-item>
+              <FaqItem
+                id={id}
+                question={t(`landing.faq.q${id}`)}
+                answer={t(`landing.faq.a${id}`)}
+                open={openId === id}
+                onToggle={() => setOpenId((current) => (current === id ? null : id))}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -68,20 +73,20 @@ function FaqItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-[32px] border border-black/6 bg-jp-card">
+    <div className="overflow-hidden rounded-[24px] border border-black/6 bg-jp-card">
       <button
         type="button"
-        className="flex min-h-[112px] w-full items-center justify-between gap-4 px-6 py-6 text-left sm:min-h-[156px] sm:px-10"
+        className="flex min-h-[88px] w-full items-center justify-between gap-3 px-5 py-4 text-left sm:min-h-[112px] sm:gap-4 sm:px-7 sm:py-5"
         aria-expanded={open}
         aria-controls={`faq-panel-${id}`}
         onClick={onToggle}
       >
-        <span className="font-mono text-lg leading-8 text-black sm:text-2xl">
+        <span className="font-mono text-base leading-6 text-black sm:text-lg sm:leading-7">
           {question}
         </span>
         <Plus
           className={cn(
-            'size-4 shrink-0 transition-transform duration-200',
+            'size-3.5 shrink-0 transition-transform duration-200 sm:size-4',
             open && 'rotate-45',
           )}
           aria-hidden
@@ -95,7 +100,7 @@ function FaqItem({
         )}
       >
         <div className="overflow-hidden">
-          <p className="px-6 pb-6 font-mono text-base leading-7 text-jp-muted sm:px-10 sm:pb-8">
+          <p className="px-5 pb-4 font-mono text-sm leading-6 text-jp-muted sm:px-7 sm:pb-5 sm:text-base sm:leading-7">
             {answer}
           </p>
         </div>
