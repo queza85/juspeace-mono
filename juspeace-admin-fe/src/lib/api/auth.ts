@@ -5,11 +5,15 @@ import type {
   AuthUser,
 } from './types';
 
-export async function login(email: string, password: string) {
+export async function login(
+  email: string,
+  password: string,
+  rememberMe = false,
+) {
   const envelope = await apiRequestEnvelope<AuthTokensResponse>('/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, rememberMe }),
     withCredentials: true,
     noStore: true,
     notify: 'both',

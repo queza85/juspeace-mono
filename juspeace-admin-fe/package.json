@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "docker:build": "docker compose build",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down"
@@ -32,12 +34,15 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tanstack/react-query-devtools": "^5.102.3",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
+    "jsdom": "^26.1.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

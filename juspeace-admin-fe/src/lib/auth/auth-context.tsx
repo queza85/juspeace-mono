@@ -30,7 +30,7 @@ interface AuthContextValue {
   accessToken: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
   logout: () => Promise<void>;
   refresh: () => Promise<boolean>;
 }
@@ -75,8 +75,9 @@ async function fetchSession(): Promise<AuthSession | null> {
 function persistAdminSession(
   queryClient: ReturnType<typeof useQueryClient>,
   session: AuthSession,
+  persistent = false,
 ) {
-  setSessionHint(true);
+  setSessionHint(true, persistent);
   queryClient.setQueryData<AuthSession>(authKeys.session(), session);
 }
 
@@ -96,10 +97,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     mutationFn: ({
       email,
       password,
+      rememberMe,
     }: {
       email: string;
       password: string;
-    }) => authApi.login(email, password),
+      rememberMe: boolean;
+    }) => authApi.login(email, password, rememberMe),
   });
 
   const logoutMutation = useMutation({
@@ -123,8 +126,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = useCallback(
-    async (email: string, password: string) => {
-      const data = await loginMutation.mutateAsync({ email, password });
+    async (email: string, password: string, rememberMe = false) => {
+      const data = await loginMutation.mutateAsync({
+        email,
+        password,
+        rememberMe,
+      });
 
       if (!isAdminUser(data.user.role)) {
         await clearNonAdminSession(data.accessToken);
@@ -132,10 +139,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new AdminAccessDeniedError();
       }
 
-      persistAdminSession(queryClient, {
-        accessToken: data.accessToken,
-        user: data.user,
-      });
+      persistAdminSession(
+        queryClient,
+        {
+          accessToken: data.accessToken,
+          user: data.user,
+        },
+        rememberMe,
+      );
     },
     [loginMutation, queryClient],
   );

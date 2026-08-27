@@ -26,7 +26,7 @@ export function OAuthCallbackHandler() {
 
     async function complete() {
       try {
-        setSessionHint(true);
+        setSessionHint(true, true);
         const { accessToken } = await authApi.refreshSession();
         const user = await authApi.getMe(accessToken);
 
