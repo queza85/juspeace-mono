@@ -5,7 +5,18 @@
     "loading": "로딩 중...",
     "error": "문제가 발생했습니다",
     "retry": "다시 시도",
-    "notFound": "페이지를 찾을 수 없습니다"
+    "notFound": "페이지를 찾을 수 없습니다",
+    "pagination": {
+      "showing": "{total}개 중 {from}–{to} {itemLabel}",
+      "previous": "이전 페이지",
+      "next": "다음 페이지",
+      "navigation": "테이블 페이지네이션",
+      "currentPage": "{totalPages}페이지 중 {page}페이지",
+      "pageSize": "페이지당 행 수",
+      "products": "상품",
+      "orders": "주문",
+      "items": "항목"
+    }
   },
   "auth": {
     "login": "로그인",
@@ -257,6 +268,81 @@
           "shipped": "배송 중",
           "returned": "반품"
         }
+      }
+    },
+    "products": {
+      "title": "상품",
+      "description": "상품 카탈로그를 검색, 필터링 및 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 KPI 및 주문 수",
+      "byBrand": "{brand} 제작",
+      "kpi": {
+        "products": "상품",
+        "orders": "주문",
+        "sales": "매출",
+        "customers": "고객",
+        "revenue": "수익",
+        "activeListings": "활성 등록",
+        "totalOrders": "총 주문",
+        "todaysSales": "오늘 매출",
+        "totalCustomers": "총 고객",
+        "totalRevenue": "총 수익"
+      },
+      "filters": {
+        "category": "카테고리",
+        "status": "상태",
+        "priceRange": "가격 범위",
+        "allCategories": "카테고리",
+        "allStatuses": "상태",
+        "allPrices": "가격 범위",
+        "priceUnder50": "$50 미만",
+        "price50to100": "$50 – $100",
+        "priceOver100": "$100 초과",
+        "categories": {
+          "essentials": "에센셜",
+          "bracelet": "팔찌",
+          "home": "홈",
+          "general": "일반"
+        }
+      },
+      "columns": {
+        "product": "상품",
+        "sku": "SKU",
+        "category": "카테고리",
+        "stock": "재고",
+        "price": "가격",
+        "orders": "주문",
+        "status": "상태",
+        "published": "게시일",
+        "actions": "작업"
+      },
+      "status": {
+        "DRAFT": "초안",
+        "ACTIVE": "게시됨",
+        "ARCHIVED": "보관됨"
+      },
+      "table": {
+        "title": "상품 목록",
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "addProduct": "상품 추가",
+        "moreFilters": "추가 필터",
+        "pageSize": "페이지당 행 수",
+        "selectAll": "이 페이지의 모든 상품 선택",
+        "selectProduct": "{name} 선택",
+        "loadError": "상품을 불러올 수 없습니다. 다시 시도해 주세요.",
+        "empty": "필터와 일치하는 상품이 없습니다.",
+        "publishedPlaceholder": "—",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경"
+      },
+      "pagination": {
+        "itemLabel": "상품"
+      },
+      "actions": {
+        "view": "상품 보기",
+        "edit": "상품 수정",
+        "delete": "상품 삭제"
       }
     }
   },

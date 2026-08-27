@@ -5,7 +5,18 @@
     "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Try again",
-    "notFound": "Page not found"
+    "notFound": "Page not found",
+    "pagination": {
+      "showing": "Showing {from} to {to} of {total} {itemLabel}",
+      "previous": "Previous page",
+      "next": "Next page",
+      "navigation": "Table pagination",
+      "currentPage": "Page {page} of {totalPages}",
+      "pageSize": "Rows per page",
+      "products": "products",
+      "orders": "orders",
+      "items": "items"
+    }
   },
   "auth": {
     "login": "Log in",
@@ -257,6 +268,81 @@
           "shipped": "Shipped",
           "returned": "Returned"
         }
+      }
+    },
+    "products": {
+      "title": "Products",
+      "description": "Browse, filter, and manage your product catalog.",
+      "mockDataNotice": "Preview — sample KPI and order counts",
+      "byBrand": "by: {brand}",
+      "kpi": {
+        "products": "Products",
+        "orders": "Orders",
+        "sales": "Sales",
+        "customers": "Customers",
+        "revenue": "Revenue",
+        "activeListings": "Active Listings",
+        "totalOrders": "Total Orders",
+        "todaysSales": "Today's Sales",
+        "totalCustomers": "Total Customers",
+        "totalRevenue": "Total Revenue"
+      },
+      "filters": {
+        "category": "Category",
+        "status": "Status",
+        "priceRange": "Price range",
+        "allCategories": "Category",
+        "allStatuses": "Status",
+        "allPrices": "Price Range",
+        "priceUnder50": "Under $50",
+        "price50to100": "$50 – $100",
+        "priceOver100": "Over $100",
+        "categories": {
+          "essentials": "Essentials",
+          "bracelet": "Bracelet",
+          "home": "Home",
+          "general": "General"
+        }
+      },
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "category": "Category",
+        "stock": "Stock",
+        "price": "Price",
+        "orders": "Orders",
+        "status": "Status",
+        "published": "Published",
+        "actions": "Actions"
+      },
+      "status": {
+        "DRAFT": "Draft",
+        "ACTIVE": "Published",
+        "ARCHIVED": "Archived"
+      },
+      "table": {
+        "title": "Product List",
+        "searchPlaceholder": "Search for something...",
+        "filterBy": "Filter By:",
+        "addProduct": "Add Product",
+        "moreFilters": "More filters",
+        "pageSize": "Rows per page",
+        "selectAll": "Select all products on this page",
+        "selectProduct": "Select {name}",
+        "loadError": "Unable to load products. Please try again.",
+        "empty": "No products match your filters.",
+        "publishedPlaceholder": "—",
+        "sortBy": "Sort by {column}",
+        "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+        "sortDescending": "Sorted by {column}, descending. Activate to sort ascending"
+      },
+      "pagination": {
+        "itemLabel": "products"
+      },
+      "actions": {
+        "view": "View product",
+        "edit": "Edit product",
+        "delete": "Delete product"
       }
     }
   },

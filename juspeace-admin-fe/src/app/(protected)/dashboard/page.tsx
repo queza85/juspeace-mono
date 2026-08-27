@@ -8,7 +8,7 @@ import { useT } from '@/lib/i18n/locale-context';
 
 function ChartSectionSkeleton() {
   return (
-    <div className="h-full min-h-48 animate-pulse rounded-lg border border-border/70 bg-muted/20" />
+    <div className="h-full min-h-48 animate-pulse rounded-none border border-border/70 bg-muted/20" />
   );
 }
 

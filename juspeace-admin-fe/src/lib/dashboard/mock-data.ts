@@ -1,5 +1,15 @@
 export type KpiTrendDirection = 'up' | 'down' | 'new';
-export type KpiFooterDot = 'blue' | 'gray' | 'green' | 'purple';
+export type KpiBadgeTone = 'green' | 'purple' | 'indigo' | 'orange' | 'cyan';
+export type KpiIconTone = 'slate' | 'lavender' | 'sky';
+export type KpiFooterDot =
+  | 'blue'
+  | 'gray'
+  | 'green'
+  | 'purple'
+  | 'teal'
+  | 'orange'
+  | 'indigo'
+  | 'lavender';
 
 export interface KpiMetric {
   id: string;
@@ -10,6 +20,10 @@ export interface KpiMetric {
   subLabelKey: string;
   subValue: string;
   footerDot: KpiFooterDot;
+  /** Overrides trend-based badge color when set (products page KPIs). */
+  badgeTone?: KpiBadgeTone;
+  /** Circular icon background on the card. Defaults to slate. */
+  iconTone?: KpiIconTone;
 }
 
 export interface DailySalesPoint {

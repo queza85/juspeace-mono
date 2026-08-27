@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 export const dashboardPanelClass =
-  'rounded-lg border border-border/70 bg-card shadow-none ring-0';
+  'rounded-none border border-border/70 bg-card shadow-none ring-0';
 
 export function DashboardPanel({
   title,
