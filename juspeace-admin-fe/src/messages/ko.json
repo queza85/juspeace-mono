@@ -41,20 +41,146 @@
   "admin": {
     "accessDenied": "관리자 권한이 없는 계정입니다.",
     "shell": {
-      "title": "Juspeace Admin",
+      "title": "Admin Site",
       "subtitle": "운영 콘솔"
     },
+    "header": {
+      "searchPlaceholder": "검색어를 입력하세요...",
+      "toggleSidebar": "내비게이션 토글",
+      "messages": "메시지",
+      "notifications": "알림",
+      "settings": "설정",
+      "darkMode": "다크 모드로 전환",
+      "lightMode": "라이트 모드로 전환",
+      "defaultUser": "관리자"
+    },
     "nav": {
-      "dashboard": "대시보드"
+      "dashboard": "대시보드",
+      "orders": "주문",
+      "inventory": "재고",
+      "products": "상품",
+      "customers": "고객",
+      "shipping": "배송 및 추적",
+      "payments": "결제",
+      "reports": "리포트",
+      "content": "콘텐츠",
+      "adminManagement": "관리자 관리",
+      "settings": "설정",
+      "sections": {
+        "menu": "메뉴",
+        "apps": "앱",
+        "others": "기타"
+      }
     },
     "dashboard": {
       "title": "대시보드",
       "welcome": "다시 오신 것을 환영합니다, {name}님.",
       "welcomeFallback": "다시 오신 것을 환영합니다.",
       "description": "카탈로그, 주문, 플랫폼 설정을 이곳에서 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 데이터",
       "apiStatus": "API 상태",
       "apiConnected": "백엔드에 연결됨",
-      "apiDisconnected": "백엔드를 사용할 수 없음"
+      "apiDisconnected": "백엔드를 사용할 수 없음",
+      "empty": {
+        "noData": "데이터 없음",
+        "sales": "주문 데이터가 연결되면 매출 차트가 표시됩니다.",
+        "salesDescription": "주간 매출 개요",
+        "alerts": "현재 운영 알림이 없습니다.",
+        "alertsDescription": "확인이 필요한 항목",
+        "orders": "주문 API 연결 후 최근 주문이 여기에 표시됩니다.",
+        "ordersDescription": "스토어 최근 거래"
+      },
+      "kpi": {
+        "totalOrders": "총 주문",
+        "paidOrders": "결제 완료",
+        "awaitingShipment": "출고 대기",
+        "shippedOrders": "배송 중",
+        "completedOrders": "완료된 주문",
+        "cancelledRefunded": "취소 / 환불",
+        "totalSales": "총 매출",
+        "remainingInventory": "잔여 재고",
+        "lowStockAlert": "재고 부족 알림",
+        "todaysOrders": "오늘 주문",
+        "todaysPaidOrders": "오늘 결제 완료",
+        "todayAwaitingShipment": "오늘 출고 대기",
+        "todaysShippedOrders": "오늘 배송 중",
+        "todayCompletedOrders": "오늘 완료된 주문",
+        "todaysCancelledRefunded": "오늘 취소 / 환불",
+        "todaysSales": "오늘 매출",
+        "lastMonthRemainingInventory": "지난달 잔여 재고",
+        "todaysLowStockAlert": "오늘 재고 부족 알림",
+        "viewDetails": "상세 보기"
+      },
+      "charts": {
+        "dailySales": "일별 매출",
+        "dateLabel": "2026년 8월 28일",
+        "productBreakdown": "상품별 매출 비중",
+        "totalSales": "총 매출",
+        "sales": "매출",
+        "filters": {
+          "month": "월",
+          "year": "년",
+          "week": "주",
+          "monthValue": "8월",
+          "yearValue": "2026",
+          "weekValue": "4주차"
+        },
+        "days": {
+          "mon": "월",
+          "tue": "화",
+          "wed": "수",
+          "thu": "목",
+          "fri": "금",
+          "sat": "토",
+          "sun": "일"
+        },
+        "products": {
+          "wirelessHeadphones": "무선 헤드폰",
+          "smartWatch": "스마트 워치",
+          "bluetoothSpeaker": "블루투스 스피커",
+          "smartphone": "스마트폰",
+          "laptop": "노트북",
+          "other": "기타 상품"
+        }
+      },
+      "alerts": {
+        "title": "중요 운영 알림",
+        "review": "검토",
+        "viewAll": "모든 알림 보기",
+        "awaitingShipment": "출고 대기 주문 {count}건",
+        "failedPayments": "결제 실패 {count}건",
+        "missingTracking": "운송장 미등록 주문 {count}건",
+        "lowStock": "최소 재고 미달 상품 {count}개",
+        "pendingRefunds": "환불 요청 대기 {count}건"
+      },
+      "orders": {
+        "title": "최근 주문",
+        "viewAll": "전체 주문 보기",
+        "view": "주문 보기",
+        "delete": "주문 삭제",
+        "columns": {
+          "orderNumber": "주문 번호",
+          "orderDate": "주문 일시",
+          "customer": "고객명",
+          "product": "상품",
+          "quantity": "수량",
+          "paymentAmount": "결제 금액",
+          "paymentStatus": "결제 상태",
+          "orderStatus": "주문 상태",
+          "shippingStatus": "배송 상태",
+          "action": "작업"
+        },
+        "status": {
+          "paid": "결제 완료",
+          "failed": "실패",
+          "pending": "대기",
+          "refunded": "환불",
+          "confirmed": "확인됨",
+          "cancelled": "취소",
+          "shipped": "배송 중",
+          "returned": "반품"
+        }
+      }
     }
   },
   "apiMessages": {

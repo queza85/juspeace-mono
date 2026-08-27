@@ -41,20 +41,146 @@
   "admin": {
     "accessDenied": "This account does not have administrator access.",
     "shell": {
-      "title": "Juspeace Admin",
+      "title": "Admin Site",
       "subtitle": "Operations console"
     },
+    "header": {
+      "searchPlaceholder": "Search for something...",
+      "toggleSidebar": "Toggle navigation",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "settings": "Settings",
+      "darkMode": "Switch to dark mode",
+      "lightMode": "Switch to light mode",
+      "defaultUser": "Admin"
+    },
     "nav": {
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "inventory": "Inventory",
+      "products": "Products",
+      "customers": "Customers",
+      "shipping": "Shipping and Tracking",
+      "payments": "Payments",
+      "reports": "Reports",
+      "content": "Content",
+      "adminManagement": "Admin Management",
+      "settings": "Settings",
+      "sections": {
+        "menu": "Menu",
+        "apps": "Apps",
+        "others": "Others"
+      }
     },
     "dashboard": {
       "title": "Dashboard",
       "welcome": "Welcome back, {name}.",
       "welcomeFallback": "Welcome back.",
       "description": "Manage catalog, orders, and platform settings from here.",
+      "mockDataNotice": "Preview — sample data",
       "apiStatus": "API status",
       "apiConnected": "Connected to backend",
-      "apiDisconnected": "Backend unavailable"
+      "apiDisconnected": "Backend unavailable",
+      "empty": {
+        "noData": "No data yet",
+        "sales": "Sales charts will appear once order data is connected.",
+        "salesDescription": "Weekly revenue overview",
+        "alerts": "No operational alerts right now.",
+        "alertsDescription": "Items that need your attention",
+        "orders": "Recent orders will show here after the orders API is connected.",
+        "ordersDescription": "Latest transactions across the store"
+      },
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "paidOrders": "Paid Orders",
+        "awaitingShipment": "Awaiting Shipment",
+        "shippedOrders": "Shipped Orders",
+        "completedOrders": "Completed Orders",
+        "cancelledRefunded": "Cancelled / Refunded Orders",
+        "totalSales": "Total Sales",
+        "remainingInventory": "Remaining Inventory",
+        "lowStockAlert": "Low Stock Alert",
+        "todaysOrders": "Today's Orders",
+        "todaysPaidOrders": "Today's Paid Orders",
+        "todayAwaitingShipment": "Today awaiting shipment",
+        "todaysShippedOrders": "Today's Shipped Orders",
+        "todayCompletedOrders": "Today Completed Orders",
+        "todaysCancelledRefunded": "Today's Cancelled / Refunded Orders",
+        "todaysSales": "Today's Sales",
+        "lastMonthRemainingInventory": "Last month's remaining inventory",
+        "todaysLowStockAlert": "Today's low stock alert",
+        "viewDetails": "View details"
+      },
+      "charts": {
+        "dailySales": "Daily Sales",
+        "dateLabel": "28 Aug, 2026",
+        "productBreakdown": "Product Sales Breakdown",
+        "totalSales": "Total Sales",
+        "sales": "Sales",
+        "filters": {
+          "month": "Month",
+          "year": "Year",
+          "week": "Week",
+          "monthValue": "August",
+          "yearValue": "2026",
+          "weekValue": "Week 4"
+        },
+        "days": {
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "Fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        },
+        "products": {
+          "wirelessHeadphones": "Wireless Headphones",
+          "smartWatch": "Smart Watch",
+          "bluetoothSpeaker": "Bluetooth Speaker",
+          "smartphone": "Smartphone",
+          "laptop": "Laptop",
+          "other": "Other Products"
+        }
+      },
+      "alerts": {
+        "title": "Important Operational Alerts",
+        "review": "Review",
+        "viewAll": "View All Alerts",
+        "awaitingShipment": "{count} orders waiting for shipment",
+        "failedPayments": "{count} payments failed",
+        "missingTracking": "{count} orders missing tracking numbers",
+        "lowStock": "{count} products below minimum stock",
+        "pendingRefunds": "{count} refund requests pending"
+      },
+      "orders": {
+        "title": "Recent Orders",
+        "viewAll": "View All Orders",
+        "view": "View order",
+        "delete": "Delete order",
+        "columns": {
+          "orderNumber": "Order Number",
+          "orderDate": "Order Date",
+          "customer": "Customer Name",
+          "product": "Product",
+          "quantity": "Quantity",
+          "paymentAmount": "Payment Amount",
+          "paymentStatus": "Payment Status",
+          "orderStatus": "Order Status",
+          "shippingStatus": "Shipping Status",
+          "action": "Action"
+        },
+        "status": {
+          "paid": "Paid",
+          "failed": "Failed",
+          "pending": "Pending",
+          "refunded": "Refunded",
+          "confirmed": "Confirmed",
+          "cancelled": "Cancelled",
+          "shipped": "Shipped",
+          "returned": "Returned"
+        }
+      }
     }
   },
   "apiMessages": {
