@@ -16,6 +16,8 @@ import {
   Trash2,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { dashboardPanelClass } from '@/components/dashboard/dashboard-panel';
 import { StatusBadge } from '@/components/dashboard/status-badge';
 import {
@@ -128,19 +130,37 @@ function TableActionButton({
   label,
   children,
   destructive = false,
+  href,
 }: {
   label: string;
   children: React.ReactNode;
   destructive?: boolean;
+  href?: string;
 }) {
+  const className = cn(
+    'inline-flex size-6 items-center justify-center rounded-full border border-border/70 bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground',
+    destructive && 'hover:border-destructive/30 hover:text-destructive',
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-label={label}
+        className={className}
+        onClick={(event) => event.stopPropagation()}
+      >
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <button
       type="button"
       aria-label={label}
-      className={cn(
-        'inline-flex size-6 items-center justify-center rounded-full border border-border/70 bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground',
-        destructive && 'hover:border-destructive/30 hover:text-destructive',
-      )}
+      className={className}
+      onClick={(event) => event.stopPropagation()}
     >
       {children}
     </button>
@@ -578,20 +598,42 @@ function ProductRow({
   formatPrice: (priceCents: number, currency?: string) => string;
   t: (key: string, values?: Record<string, string | number>) => string;
 }) {
+  const router = useRouter();
   const sku = formatProductSku(product.slug);
   const category = inferCategoryLabel(product.slug);
   const orders = getMockOrderCount(product.slug);
   const published = getMockPublishedAt(product.slug, locale);
+  const detailHref = `/products/${product.slug}`;
+
+  const openDetail = useCallback(() => {
+    router.push(detailHref);
+  }, [detailHref, router]);
+
+  const stopRowNavigation = useCallback((event: React.MouseEvent | React.KeyboardEvent) => {
+    event.stopPropagation();
+  }, []);
 
   return (
-    <tr className="border-b border-border/40 last:border-0 hover:bg-muted/15">
-      <td className="px-3 py-2.5">
+    <tr
+      className="cursor-pointer border-b border-border/40 last:border-0 hover:bg-muted/15"
+      onClick={openDetail}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openDetail();
+        }
+      }}
+      tabIndex={0}
+      role="link"
+      aria-label={t('admin.products.actions.view')}
+    >
+      <td className="px-3 py-2.5" onClick={stopRowNavigation} onKeyDown={stopRowNavigation}>
         <input
           type="checkbox"
           checked={selected}
           onChange={() => onToggleSelect(product.id)}
           aria-label={t('admin.products.table.selectProduct', { name: product.name })}
-          className="size-3 rounded border-border accent-primary"
+          className="size-3 cursor-pointer rounded border-border accent-primary"
         />
       </td>
       <td className="px-3 py-2.5">
@@ -628,9 +670,12 @@ function ProductRow({
         <span>{published.date}</span>{' '}
         <span className="text-[11px]">{published.time}</span>
       </td>
-      <td className="px-3 py-2.5">
+      <td className="px-3 py-2.5" onClick={stopRowNavigation} onKeyDown={stopRowNavigation}>
         <div className="flex items-center gap-1">
-          <TableActionButton label={t('admin.products.actions.view')}>
+          <TableActionButton
+            label={t('admin.products.actions.view')}
+            href={`/products/${product.slug}`}
+          >
             <Eye className="size-3" />
           </TableActionButton>
           <TableActionButton label={t('admin.products.actions.edit')}>

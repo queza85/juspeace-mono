@@ -91,17 +91,17 @@ function NavLink({
 
   if (item.disabled || !item.href) {
     return (
-      <span className={className} aria-disabled="true">
+      <span className={cn(className, 'min-w-0')} aria-disabled="true">
         <Icon className="size-4 shrink-0" aria-hidden />
-        {t(item.labelKey)}
+        <span className="truncate">{t(item.labelKey)}</span>
       </span>
     );
   }
 
   return (
-    <Link href={item.href} className={className} onClick={onNavigate}>
+    <Link href={item.href} className={cn(className, 'min-w-0')} onClick={onNavigate}>
       <Icon className="size-4 shrink-0" aria-hidden />
-      {t(item.labelKey)}
+      <span className="truncate">{t(item.labelKey)}</span>
     </Link>
   );
 }
@@ -121,13 +121,13 @@ function AdminSidebarNav({
   return (
     <nav
       className={cn(
-        'flex flex-1 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar text-sidebar-foreground',
+        'sidebar-nav-scroll flex h-full min-h-0 flex-col overflow-x-hidden overflow-y-auto border-r border-sidebar-border bg-sidebar text-sidebar-foreground',
         className,
       )}
     >
       <div
         className={cn(
-          'flex min-w-[15rem] flex-col gap-6 p-4',
+          'flex w-full min-w-0 flex-col gap-6 p-4',
           sidebarContentAnimateClass,
         )}
         data-open={open ? 'true' : 'false'}
@@ -168,9 +168,9 @@ export function AdminSidebar({
 }: AdminSidebarProps) {
   if (variant === 'full') {
     return (
-      <aside className="flex h-full w-60 flex-col bg-sidebar">
+      <aside className="flex h-full w-60 flex-col overflow-hidden bg-sidebar">
         <AdminSidebarBrand />
-        <AdminSidebarNav onNavigate={onNavigate} className="border-r-0" />
+        <AdminSidebarNav onNavigate={onNavigate} className="min-h-0 flex-1 border-r-0" />
       </aside>
     );
   }
@@ -178,12 +178,12 @@ export function AdminSidebar({
   return (
     <aside
       className={cn(
-        'flex shrink-0 flex-col overflow-hidden',
+        'flex h-full shrink-0 flex-col overflow-hidden',
         sidebarAnimateClass,
         collapsed ? 'w-0' : SIDEBAR_WIDTH_CLASS,
       )}
     >
-      <AdminSidebarNav onNavigate={onNavigate} open={!collapsed} />
+      <AdminSidebarNav onNavigate={onNavigate} open={!collapsed} className="h-full" />
     </aside>
   );
 }

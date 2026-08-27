@@ -19,14 +19,14 @@ export function AdminShell({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex h-screen flex-col overflow-hidden">
       <div className="flex h-14 shrink-0">
         <AdminSidebarBrand open={sidebarOpen} className="hidden lg:flex" />
         <AdminHeader onToggleSidebar={toggleSidebar} className="min-w-0 flex-1" />
       </div>
 
       <div className="flex min-h-0 flex-1">
-        <div className="hidden shrink-0 overflow-hidden lg:block">
+        <div className="hidden h-full shrink-0 lg:block">
           <AdminSidebar collapsed={!sidebarOpen} />
         </div>
 
@@ -47,7 +47,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           </>
         ) : null}
 
-        <main className="min-w-0 flex-1 bg-dashboard-surface p-4 md:p-6">
+        <main className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-dashboard-surface p-4 md:p-6">
           {children}
         </main>
       </div>

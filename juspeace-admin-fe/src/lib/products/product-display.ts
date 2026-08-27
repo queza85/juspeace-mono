@@ -217,3 +217,15 @@ export function getMockPublishedAt(
 
   return { date, time };
 }
+
+/** Single-line published label for product detail (Figma: "28 Apr, 2025 10:15 AM"). */
+export function formatProductPublishedAt(slug: string, locale: Locale): string {
+  const { date, time } = getMockPublishedAt(slug, locale);
+
+  if (locale === 'ko') {
+    return `${date} ${time}`;
+  }
+
+  const formattedDate = date.replace(/^(\d+ \w+) (\d{4})$/, '$1, $2');
+  return `${formattedDate} ${time}`;
+}

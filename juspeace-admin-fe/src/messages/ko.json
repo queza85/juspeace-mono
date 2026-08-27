@@ -343,6 +343,81 @@
         "view": "상품 보기",
         "edit": "상품 수정",
         "delete": "상품 삭제"
+      },
+      "detail": {
+        "pageTitle": "상품 상세",
+        "breadcrumbLabel": "경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "상품 상세",
+        "mockDataNotice": "미리보기 — 샘플 리뷰 및 성과 데이터",
+        "backToProducts": "상품 목록으로",
+        "loadError": "상품을 불러올 수 없습니다. 다시 시도해 주세요.",
+        "notFound": "상품을 찾을 수 없습니다.",
+        "selectImage": "상품 이미지 {index} 선택",
+        "inStock": "재고 있음",
+        "outOfStock": "품절",
+        "reviewCount": "({count}개 리뷰)",
+        "productInfoTitle": "상품 정보:",
+        "detailsTitle": "상세 :",
+        "readMore": "더 보기...",
+        "readLess": "접기",
+        "sampleDescriptionParagraph1": "이 제품은 일상 착용을 위해 설계되었으며, 깔끔한 실루엣, 내구성 있는 코드 구조, 장시간 착용에도 편안한 잠금장치를 갖추고 있습니다.",
+        "sampleDescriptionParagraph2": "캐주얼 착용과 선물용 모두에 어울리도록 마감을 정교하게 처리했으며, 출고 전 품질 검수를 거치고 Juspeace 브랜드 톤에 맞는 미니멀하고 보호적인 패키징을 사용합니다.",
+        "fields": {
+          "sku": "SKU:",
+          "category": "카테고리:",
+          "price": "가격:",
+          "stock": "재고:",
+          "orders": "주문:",
+          "published": "게시일:",
+          "status": "상태:"
+        },
+        "bullets": {
+          "1": "오래 사용할 수 있도록 엄선된 프리미엄 소재.",
+          "2": "재활용 가능한 포장재와 최소한의 패키징.",
+          "3": "출고 전 품질 검수를 거친 제품.",
+          "4": "일반 배송 가능 및 선물용 포장에 적합."
+        },
+        "reviews": {
+          "title": "리뷰 관리",
+          "newThisWeek": "이번 주 +{count}건",
+          "summaryDescription": "고밀도 폼 시트와 등받이로 뛰어난 편안함을 제공합니다.",
+          "starLabel": "{count}점",
+          "columns": {
+            "reviewer": "리뷰어",
+            "review": "리뷰",
+            "date": "날짜",
+            "status": "상태",
+            "action": "작업"
+          },
+          "status": {
+            "published": "게시됨",
+            "pending": "대기"
+          },
+          "actions": {
+            "view": "리뷰 보기",
+            "edit": "리뷰 수정",
+            "delete": "리뷰 삭제"
+          },
+          "samples": {
+            "1": {
+              "title": "좋은 상품, 다시 구매할 의향 있어요!",
+              "excerpt": "팔찌가 튼튼하고 사진과 동일합니다. 배송도 빠르고 포장이 고급스러웠습니다."
+            },
+            "2": {
+              "title": "아름다운 장인 정신",
+              "excerpt": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다."
+            },
+            "3": {
+              "title": "전반적으로 좋지만 사이즈 참고",
+              "excerpt": "구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠습니다."
+            },
+            "4": {
+              "title": "기대 이상이에요",
+              "excerpt": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다."
+            }
+          }
+        }
       }
     }
   },

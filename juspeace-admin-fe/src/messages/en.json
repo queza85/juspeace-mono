@@ -343,6 +343,81 @@
         "view": "View product",
         "edit": "Edit product",
         "delete": "Delete product"
+      },
+      "detail": {
+        "pageTitle": "Product Details",
+        "breadcrumbLabel": "Breadcrumb",
+        "breadcrumbEcommerce": "Ecommerce",
+        "breadcrumbCurrent": "Product Details",
+        "mockDataNotice": "Preview — sample review and performance data",
+        "backToProducts": "Back Products",
+        "loadError": "Unable to load this product. Please try again.",
+        "notFound": "Product not found.",
+        "selectImage": "Select product image {index}",
+        "inStock": "In Stock",
+        "outOfStock": "Out of Stock",
+        "reviewCount": "({count} Reviews)",
+        "productInfoTitle": "Product Info:",
+        "detailsTitle": "Details :",
+        "readMore": "Read More...",
+        "readLess": "Read Less",
+        "sampleDescriptionParagraph1": "This piece is designed for everyday wear with a clean silhouette, durable cord construction, and a secure clasp that keeps the fit comfortable through long hours of use.",
+        "sampleDescriptionParagraph2": "The finish is refined for both casual and gift-ready presentation, with quality checks completed before dispatch and packaging kept minimal, protective, and aligned with the Juspeace brand tone.",
+        "fields": {
+          "sku": "SKU:",
+          "category": "Category:",
+          "price": "Price:",
+          "stock": "Stock:",
+          "orders": "Orders:",
+          "published": "Published:",
+          "status": "Status:"
+        },
+        "bullets": {
+          "1": "Premium materials selected for long-term daily use.",
+          "2": "Packaged with recyclable materials and minimal waste.",
+          "3": "Quality-checked before dispatch from the fulfillment center.",
+          "4": "Eligible for standard shipping and gift-ready presentation."
+        },
+        "reviews": {
+          "title": "Manage Reviews",
+          "newThisWeek": "+{count} new this week",
+          "summaryDescription": "High-density foam seat and back for exceptional comfort.",
+          "starLabel": "{count} Star",
+          "columns": {
+            "reviewer": "Reviewer",
+            "review": "Review",
+            "date": "Date",
+            "status": "Status",
+            "action": "Action"
+          },
+          "status": {
+            "published": "Published",
+            "pending": "Pending"
+          },
+          "actions": {
+            "view": "View review",
+            "edit": "Edit review",
+            "delete": "Delete review"
+          },
+          "samples": {
+            "1": {
+              "title": "Great product, would buy again!",
+              "excerpt": "The bracelet feels sturdy and looks exactly like the photos. Shipping was fast and the packaging felt premium."
+            },
+            "2": {
+              "title": "Beautiful craftsmanship",
+              "excerpt": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it."
+            },
+            "3": {
+              "title": "Mostly great, sizing note",
+              "excerpt": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description."
+            },
+            "4": {
+              "title": "Exceeded expectations",
+              "excerpt": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection."
+            }
+          }
+        }
       }
     }
   },
