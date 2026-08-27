@@ -15,6 +15,10 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `user.email` | Unique login identifier | `email` | Email |
 | `user.role` | Authorization role | `role` (`USER`, `ADMIN`) | Role |
 | `user.name` | Display name | `name` | Name |
+| `user.passwordHash` | Optional bcrypt hash; null for OAuth-only users | `passwordHash` | — |
+| `oauthAccount` | Linked identity from an external provider | `OAuthAccount` | — |
+| `oauthAccount.provider` | Social identity provider | `provider` (`GOOGLE`) | — |
+| `oauthAccount.providerUserId` | Provider subject / user id (e.g. Google `sub`) | `providerUserId` | — |
 | `refreshToken` | Opaque rotatable session token (hashed at rest) | `RefreshToken` | — |
 | `datetime.utc` | All persisted timestamps (`createdAt`, `updatedAt`, `expiresAt`, …) | `DateTime` `@db.Timestamptz(3)` (UTC) | Local time via client formatter |
 | `api.message` | Endpoint-specific SCREAMING_SNAKE_CASE response code | `message` (`LOGIN_SUCCESSFULLY`, `PRODUCT_CREATED_SUCCESSFULLY`, …) | Toast via `apiMessages.*` i18n |

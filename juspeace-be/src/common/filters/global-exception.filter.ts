@@ -71,6 +71,11 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
+    // OAuth guards may redirect before throwing; avoid double-writing the body.
+    if (response.headersSent) {
+      return;
+    }
+
     const status =
       exception instanceof HttpException
         ? exception.getStatus()

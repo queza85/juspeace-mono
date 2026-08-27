@@ -1,11 +1,12 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User, UserRole } from '@prisma/client';
+import { OAuthProvider, User, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service';
 import type { IAuthRepository } from './auth.repository.interface';
 import { AUTH_REPOSITORY } from './auth.repository.interface';
+import type { GoogleOAuthProfile } from './strategies/google.strategy';
 
 jest.mock('bcrypt', () => ({
   compare: jest.fn(),
@@ -30,7 +31,24 @@ describe('AuthService', () => {
     updatedAt: now,
   };
 
+  const oauthOnlyUser: User = {
+    ...activeUser,
+    id: 'user-oauth',
+    email: 'oauth@juspeace.local',
+    passwordHash: null,
+    name: 'OAuth User',
+  };
+
+  const googleProfile: GoogleOAuthProfile = {
+    providerUserId: 'google-sub-1',
+    email: 'oauth@juspeace.local',
+    emailVerified: true,
+    name: 'OAuth User',
+  };
+
   beforeEach(() => {
+    jest.clearAllMocks();
+
     authRepository = {
       findUserByEmail: jest.fn(),
       findUserById: jest.fn(),
@@ -39,6 +57,10 @@ describe('AuthService', () => {
       revokeRefreshToken: jest.fn(),
       revokeRefreshTokenFamily: jest.fn(),
       revokeAllUserRefreshTokens: jest.fn(),
+      findOAuthAccount: jest.fn(),
+      createUserFromOAuth: jest.fn(),
+      createOAuthAccount: jest.fn(),
+      createUserWithOAuthAccount: jest.fn(),
     };
 
     jwtService = {
@@ -62,11 +84,7 @@ describe('AuthService', () => {
       jwtService as unknown as JwtService,
       configService,
     );
-  });
 
-  it('logs in with valid credentials and stores hashed refresh token', async () => {
-    authRepository.findUserByEmail.mockResolvedValue(activeUser);
-    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
     authRepository.createRefreshToken.mockResolvedValue({
       id: 'rt-1',
       userId: activeUser.id,
@@ -78,6 +96,11 @@ describe('AuthService', () => {
       ipAddress: null,
       createdAt: now,
     });
+  });
+
+  it('logs in with valid credentials and stores hashed refresh token', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(activeUser);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
 
     const session = await service.login(activeUser.email, 'password123');
 
@@ -104,6 +127,15 @@ describe('AuthService', () => {
     ).rejects.toBeInstanceOf(UnauthorizedException);
   });
 
+  it('rejects password login for OAuth-only users', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(oauthOnlyUser);
+
+    await expect(
+      service.login(oauthOnlyUser.email, 'any-password'),
+    ).rejects.toBeInstanceOf(UnauthorizedException);
+    expect(bcrypt.compare).not.toHaveBeenCalled();
+  });
+
   it('rotates refresh tokens on successful refresh', async () => {
     const rawToken = 'raw-refresh-token';
     const tokenHash = service.hashToken(rawToken);
@@ -119,17 +151,6 @@ describe('AuthService', () => {
       ipAddress: null,
       createdAt: now,
       user: activeUser,
-    });
-    authRepository.createRefreshToken.mockResolvedValue({
-      id: 'rt-new',
-      userId: activeUser.id,
-      tokenHash: 'new-hash',
-      familyId: 'family-1',
-      expiresAt: new Date(Date.now() + 86_400_000),
-      revokedAt: null,
-      userAgent: null,
-      ipAddress: null,
-      createdAt: now,
     });
 
     const session = await service.refresh(rawToken);
@@ -186,6 +207,100 @@ describe('AuthService', () => {
     await service.logout(rawToken);
 
     expect(authRepository.revokeRefreshToken.mock.calls).toEqual([['rt-1']]);
+  });
+
+  describe('loginWithGoogle', () => {
+    it('provisions a new user when no account exists', async () => {
+      authRepository.findOAuthAccount.mockResolvedValue(null);
+      authRepository.findUserByEmail.mockResolvedValue(null);
+      authRepository.createUserWithOAuthAccount.mockResolvedValue(
+        oauthOnlyUser,
+      );
+
+      const session = await service.loginWithGoogle(googleProfile);
+
+      expect(authRepository.createUserWithOAuthAccount.mock.calls).toEqual([
+        [
+          { email: googleProfile.email, name: googleProfile.name },
+          {
+            provider: OAuthProvider.GOOGLE,
+            providerUserId: googleProfile.providerUserId,
+          },
+        ],
+      ]);
+      expect(session.user.email).toBe(oauthOnlyUser.email);
+      expect(session.accessToken).toBe('access-token');
+    });
+
+    it('reuses an existing OAuth account on return login', async () => {
+      authRepository.findOAuthAccount.mockResolvedValue({
+        id: 'oa-1',
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: googleProfile.providerUserId,
+        userId: oauthOnlyUser.id,
+        createdAt: now,
+        updatedAt: now,
+        user: oauthOnlyUser,
+      });
+
+      const session = await service.loginWithGoogle(googleProfile);
+
+      expect(authRepository.createUserWithOAuthAccount.mock.calls).toEqual([]);
+      expect(authRepository.createOAuthAccount.mock.calls).toEqual([]);
+      expect(session.user.id).toBe(oauthOnlyUser.id);
+    });
+
+    it('links Google to an existing email user when email is verified', async () => {
+      authRepository.findOAuthAccount.mockResolvedValue(null);
+      authRepository.findUserByEmail.mockResolvedValue(activeUser);
+      authRepository.createOAuthAccount.mockResolvedValue({
+        id: 'oa-2',
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: googleProfile.providerUserId,
+        userId: activeUser.id,
+        createdAt: now,
+        updatedAt: now,
+      });
+
+      const session = await service.loginWithGoogle({
+        ...googleProfile,
+        email: activeUser.email,
+      });
+
+      expect(authRepository.createOAuthAccount.mock.calls).toEqual([
+        [
+          {
+            userId: activeUser.id,
+            provider: OAuthProvider.GOOGLE,
+            providerUserId: googleProfile.providerUserId,
+          },
+        ],
+      ]);
+      expect(session.user.id).toBe(activeUser.id);
+    });
+
+    it('rejects unverified Google emails', async () => {
+      await expect(
+        service.loginWithGoogle({ ...googleProfile, emailVerified: false }),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+      expect(authRepository.findOAuthAccount.mock.calls).toEqual([]);
+    });
+
+    it('rejects inactive users on Google login', async () => {
+      authRepository.findOAuthAccount.mockResolvedValue({
+        id: 'oa-1',
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: googleProfile.providerUserId,
+        userId: oauthOnlyUser.id,
+        createdAt: now,
+        updatedAt: now,
+        user: { ...oauthOnlyUser, isActive: false },
+      });
+
+      await expect(
+        service.loginWithGoogle(googleProfile),
+      ).rejects.toBeInstanceOf(UnauthorizedException);
+    });
   });
 });
 

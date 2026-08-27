@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { RefreshToken, User } from '@prisma/client';
+import {
+  OAuthAccount,
+  OAuthProvider,
+  RefreshToken,
+  User,
+} from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
+  CreateOAuthAccountInput,
   CreateRefreshTokenInput,
+  CreateUserFromOAuthInput,
   IAuthRepository,
+  OAuthAccountWithUser,
 } from './auth.repository.interface';
 
 @Injectable()
@@ -72,5 +80,62 @@ export class PrismaAuthRepository implements IAuthRepository {
       data: { revokedAt },
     });
     return result.count;
+  }
+
+  findOAuthAccount(
+    provider: OAuthProvider,
+    providerUserId: string,
+  ): Promise<OAuthAccountWithUser | null> {
+    return this.prisma.oAuthAccount.findUnique({
+      where: {
+        provider_providerUserId: { provider, providerUserId },
+      },
+      include: { user: true },
+    });
+  }
+
+  createUserFromOAuth(input: CreateUserFromOAuthInput): Promise<User> {
+    return this.prisma.user.create({
+      data: {
+        email: input.email.toLowerCase(),
+        name: input.name ?? null,
+        passwordHash: null,
+      },
+    });
+  }
+
+  createOAuthAccount(input: CreateOAuthAccountInput): Promise<OAuthAccount> {
+    return this.prisma.oAuthAccount.create({
+      data: {
+        userId: input.userId,
+        provider: input.provider,
+        providerUserId: input.providerUserId,
+      },
+    });
+  }
+
+  async createUserWithOAuthAccount(
+    userInput: CreateUserFromOAuthInput,
+    oauthInput: Omit<CreateOAuthAccountInput, 'userId'>,
+  ): Promise<User> {
+    return this.prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email: userInput.email.toLowerCase(),
+          name: userInput.name ?? null,
+          passwordHash: null,
+        },
+      });
+
+      await tx.oAuthAccount.create({
+        data: {
+          userId: user.id,
+          provider: oauthInput.provider,
+          providerUserId: oauthInput.providerUserId,
+        },
+      });
+
+      return user;
+    });
   }
 }

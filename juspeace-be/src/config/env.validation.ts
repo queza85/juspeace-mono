@@ -96,6 +96,26 @@ export class EnvironmentVariables {
 
   @IsString()
   @IsOptional()
+  GOOGLE_CLIENT_ID?: string;
+
+  @IsString()
+  @IsOptional()
+  GOOGLE_CLIENT_SECRET?: string;
+
+  @IsString()
+  @IsOptional()
+  GOOGLE_CALLBACK_URL?: string;
+
+  @IsString()
+  @IsOptional()
+  OAUTH_SUCCESS_REDIRECT_URL?: string;
+
+  @IsString()
+  @IsOptional()
+  OAUTH_FAILURE_REDIRECT_URL?: string;
+
+  @IsString()
+  @IsOptional()
   SEED_ADMIN_EMAIL?: string;
 
   @IsString()

@@ -1,7 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
+import { OAuthProvider, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { createHash, randomBytes, timingSafeEqual } from 'crypto';
 import { AUTH_REPOSITORY } from './auth.repository.interface';
@@ -11,6 +11,7 @@ import {
   AuthTokensResponseDto,
   UserResponseDto,
 } from './dto/auth.dto';
+import type { GoogleOAuthProfile } from './strategies/google.strategy';
 import { JwtPayload } from './strategies/jwt.strategy';
 
 const REFRESH_TOKEN_BYTES = 32;
@@ -52,7 +53,7 @@ export class AuthService {
   ): Promise<IssuedSession> {
     const user = await this.authRepository.findUserByEmail(email);
 
-    if (!user || !user.isActive) {
+    if (!user || !user.isActive || !user.passwordHash) {
       throw new UnauthorizedException('INVALID_CREDENTIALS');
     }
 
@@ -60,6 +61,55 @@ export class AuthService {
     if (!passwordMatches) {
       throw new UnauthorizedException('INVALID_CREDENTIALS');
     }
+
+    return this.issueSession(user, meta);
+  }
+
+  async loginWithGoogle(
+    profile: GoogleOAuthProfile,
+    meta: SessionMeta = {},
+  ): Promise<IssuedSession> {
+    if (!profile.emailVerified) {
+      throw new UnauthorizedException('OAUTH_EMAIL_NOT_VERIFIED');
+    }
+
+    const existingAccount = await this.authRepository.findOAuthAccount(
+      OAuthProvider.GOOGLE,
+      profile.providerUserId,
+    );
+
+    if (existingAccount) {
+      if (!existingAccount.user.isActive) {
+        throw new UnauthorizedException('INVALID_CREDENTIALS');
+      }
+      return this.issueSession(existingAccount.user, meta);
+    }
+
+    const existingUser = await this.authRepository.findUserByEmail(
+      profile.email,
+    );
+
+    if (existingUser) {
+      if (!existingUser.isActive) {
+        throw new UnauthorizedException('INVALID_CREDENTIALS');
+      }
+
+      await this.authRepository.createOAuthAccount({
+        userId: existingUser.id,
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: profile.providerUserId,
+      });
+
+      return this.issueSession(existingUser, meta);
+    }
+
+    const user = await this.authRepository.createUserWithOAuthAccount(
+      { email: profile.email, name: profile.name },
+      {
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: profile.providerUserId,
+      },
+    );
 
     return this.issueSession(user, meta);
   }

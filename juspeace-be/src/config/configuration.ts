@@ -26,5 +26,20 @@ export default () => ({
         ? process.env.AUTH_COOKIE_SECURE === 'true' ||
           process.env.AUTH_COOKIE_SECURE === '1'
         : process.env.NODE_ENV === 'production',
+    oauth: {
+      successRedirectUrl:
+        process.env.OAUTH_SUCCESS_REDIRECT_URL ??
+        'http://localhost:3000/auth/callback',
+      failureRedirectUrl:
+        process.env.OAUTH_FAILURE_REDIRECT_URL ??
+        'http://localhost:3000/login?error=oauth',
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+        callbackUrl:
+          process.env.GOOGLE_CALLBACK_URL ??
+          'http://localhost:7777/api/v1/auth/google/callback',
+      },
+    },
   },
 });

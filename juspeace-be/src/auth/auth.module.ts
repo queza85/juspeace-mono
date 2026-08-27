@@ -6,6 +6,9 @@ import { AdminController, AuthController } from './auth.controller';
 import { AUTH_REPOSITORY } from './auth.repository.interface';
 import { PrismaAuthRepository } from './auth.repository';
 import { AuthService } from './auth.service';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
+import { OAuthController } from './oauth/oauth.controller';
+import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
@@ -25,10 +28,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       }),
     }),
   ],
-  controllers: [AuthController, AdminController],
+  controllers: [AuthController, AdminController, OAuthController],
   providers: [
     AuthService,
     JwtStrategy,
+    GoogleStrategy,
+    GoogleAuthGuard,
     {
       provide: AUTH_REPOSITORY,
       useClass: PrismaAuthRepository,

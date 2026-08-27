@@ -21,6 +21,7 @@ import { Throttle } from '@nestjs/throttler';
 import type { Request, Response } from 'express';
 import { ApiMessage } from '../common/decorators/api-message.decorator';
 import { ApiResponseDto } from '../common/dto/api-response.dto';
+import { clearRefreshCookie, setRefreshCookie } from './auth.cookie';
 import { AuthService } from './auth.service';
 import type { AuthUser } from './auth.repository.interface';
 import { UserRole } from './auth.repository.interface';
@@ -66,7 +67,10 @@ export class AuthController {
       ipAddress: req.ip,
     });
 
-    this.setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs);
+    setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs, {
+      cookieName: this.cookieName,
+      cookieSecure: this.cookieSecure,
+    });
     return this.authService.toAuthTokensResponse(session);
   }
 
@@ -88,7 +92,10 @@ export class AuthController {
       ipAddress: req.ip,
     });
 
-    this.setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs);
+    setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs, {
+      cookieName: this.cookieName,
+      cookieSecure: this.cookieSecure,
+    });
     return this.authService.toAccessTokenResponse(session);
   }
 
@@ -104,7 +111,10 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<null> {
     await this.authService.logout(this.readRefreshToken(req));
-    this.clearRefreshCookie(res);
+    clearRefreshCookie(res, {
+      cookieName: this.cookieName,
+      cookieSecure: this.cookieSecure,
+    });
     return null;
   }
 
@@ -124,7 +134,10 @@ export class AuthController {
     }
 
     await this.authService.logoutAll(user.id);
-    this.clearRefreshCookie(res);
+    clearRefreshCookie(res, {
+      cookieName: this.cookieName,
+      cookieSecure: this.cookieSecure,
+    });
     return null;
   }
 
@@ -158,29 +171,6 @@ export class AuthController {
     }
 
     return undefined;
-  }
-
-  private setRefreshCookie(
-    res: Response,
-    refreshToken: string,
-    maxAgeMs: number,
-  ): void {
-    res.cookie(this.cookieName, refreshToken, {
-      httpOnly: true,
-      secure: this.cookieSecure,
-      sameSite: 'strict',
-      path: '/api/v1/auth',
-      maxAge: maxAgeMs,
-    });
-  }
-
-  private clearRefreshCookie(res: Response): void {
-    res.clearCookie(this.cookieName, {
-      httpOnly: true,
-      secure: this.cookieSecure,
-      sameSite: 'strict',
-      path: '/api/v1/auth',
-    });
   }
 }
 
