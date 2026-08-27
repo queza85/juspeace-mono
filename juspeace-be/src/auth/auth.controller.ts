@@ -31,10 +31,25 @@ import {
   AccessTokenResponseDto,
   AuthTokensResponseDto,
   LoginDto,
+  RegisterDto,
   UserResponseDto,
 } from './dto/auth.dto';
+import {
+  ForgotPasswordRequestDto,
+  ForgotPasswordResetDto,
+  ForgotPasswordVerifyDto,
+  ForgotPasswordVerifyResponseDto,
+} from './dto/password-reset.dto';
+import {
+  TwoFactorChallengeResponseDto,
+  TwoFactorDevChallengeDto,
+  TwoFactorResendDto,
+  TwoFactorVerifyDto,
+} from './dto/two-factor.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
+import { PasswordResetService } from './password-reset.service';
+import { TwoFactorService } from './two-factor.service';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -44,11 +59,125 @@ export class AuthController {
 
   constructor(
     private readonly authService: AuthService,
+    private readonly passwordResetService: PasswordResetService,
+    private readonly twoFactorService: TwoFactorService,
     private readonly configService: ConfigService,
   ) {
     this.cookieName = this.configService.getOrThrow<string>('auth.cookieName');
     this.cookieSecure =
       this.configService.getOrThrow<boolean>('auth.cookieSecure');
+  }
+
+  @Post('register')
+  @HttpCode(HttpStatus.CREATED)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  @ApiMessage('REGISTER_SUCCESSFULLY')
+  @ApiOperation({ summary: 'Register a new administrator account' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async register(@Body() dto: RegisterDto): Promise<UserResponseDto> {
+    return this.authService.register(dto.name, dto.email, dto.password);
+  }
+
+  @Post('forgot-password')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 3, ttl: 3_600_000 } })
+  @ApiMessage('PASSWORD_RESET_REQUESTED')
+  @ApiOperation({ summary: 'Request a password reset code by email' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async forgotPassword(@Body() dto: ForgotPasswordRequestDto): Promise<null> {
+    await this.passwordResetService.requestReset(dto.email);
+    return null;
+  }
+
+  @Post('forgot-password/resend')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 3, ttl: 3_600_000 } })
+  @ApiMessage('PASSWORD_RESET_CODE_SENT')
+  @ApiOperation({ summary: 'Resend a password reset code' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async resendForgotPassword(
+    @Body() dto: ForgotPasswordRequestDto,
+  ): Promise<null> {
+    await this.passwordResetService.resendCode(dto.email);
+    return null;
+  }
+
+  @Post('forgot-password/verify')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
+  @ApiMessage('PASSWORD_RESET_CODE_VERIFIED')
+  @ApiOperation({ summary: 'Verify a password reset OTP code' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async verifyForgotPassword(
+    @Body() dto: ForgotPasswordVerifyDto,
+  ): Promise<ForgotPasswordVerifyResponseDto> {
+    return this.passwordResetService.verifyCode(dto.email, dto.code);
+  }
+
+  @Post('forgot-password/reset')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  @ApiMessage('PASSWORD_RESET_SUCCESSFULLY')
+  @ApiOperation({ summary: 'Set a new password using a verified reset token' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async resetForgotPassword(
+    @Body() dto: ForgotPasswordResetDto,
+  ): Promise<null> {
+    await this.passwordResetService.resetPassword(dto.resetToken, dto.password);
+    return null;
+  }
+
+  @Post('two-factor/challenge/dev')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  @ApiMessage('TWO_FACTOR_CODE_SENT')
+  @ApiOperation({
+    summary:
+      'Dev-only: create a 2FA challenge and email OTP (disabled unless TWO_FACTOR_DEV_CHALLENGE=true)',
+  })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async createTwoFactorDevChallenge(
+    @Body() dto: TwoFactorDevChallengeDto,
+  ): Promise<TwoFactorChallengeResponseDto> {
+    return this.twoFactorService.createDevChallenge(dto.email);
+  }
+
+  @Post('two-factor/resend')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 3, ttl: 3_600_000 } })
+  @ApiMessage('TWO_FACTOR_CODE_SENT')
+  @ApiOperation({ summary: 'Resend a two-factor authentication OTP' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async resendTwoFactor(@Body() dto: TwoFactorResendDto): Promise<null> {
+    await this.twoFactorService.resendCode(dto.challengeToken);
+    return null;
+  }
+
+  @Post('two-factor/verify')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
+  @ApiMessage('TWO_FACTOR_VERIFIED')
+  @ApiOperation({ summary: 'Verify a two-factor OTP and issue a session' })
+  @ApiOkResponse({ type: ApiResponseDto })
+  async verifyTwoFactor(
+    @Body() dto: TwoFactorVerifyDto,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<AuthTokensResponseDto> {
+    const session = await this.twoFactorService.verifyCode(
+      dto.challengeToken,
+      dto.code,
+      {
+        userAgent: req.headers['user-agent'],
+        ipAddress: req.ip,
+      },
+    );
+
+    setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs, {
+      cookieName: this.cookieName,
+      cookieSecure: this.cookieSecure,
+    });
+    return this.authService.toAuthTokensResponse(session);
   }
 
   @Post('login')

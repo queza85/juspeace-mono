@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import type { Request, Response } from 'express';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { PasswordResetService } from './password-reset.service';
+import { TwoFactorService } from './two-factor.service';
 import * as authCookie from './auth.cookie';
 import { UserRole } from './auth.repository.interface';
 
@@ -38,6 +40,23 @@ describe('AuthController remember me', () => {
         {
           provide: AuthService,
           useValue: authService,
+        },
+        {
+          provide: PasswordResetService,
+          useValue: {
+            requestReset: jest.fn(),
+            resendCode: jest.fn(),
+            verifyCode: jest.fn(),
+            resetPassword: jest.fn(),
+          },
+        },
+        {
+          provide: TwoFactorService,
+          useValue: {
+            createDevChallenge: jest.fn(),
+            resendCode: jest.fn(),
+            verifyCode: jest.fn(),
+          },
         },
         {
           provide: ConfigService,

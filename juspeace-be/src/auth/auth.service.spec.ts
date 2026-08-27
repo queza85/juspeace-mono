@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { OAuthProvider, User, UserRole } from '@prisma/client';
@@ -27,8 +27,17 @@ describe('AuthService', () => {
     role: UserRole.USER,
     name: 'Demo User',
     isActive: true,
+    twoFactorEnabled: false,
     createdAt: now,
     updatedAt: now,
+  };
+
+  const adminUser: User = {
+    ...activeUser,
+    id: 'admin-1',
+    email: 'admin@juspeace.local',
+    role: UserRole.ADMIN,
+    name: 'Admin User',
   };
 
   const oauthOnlyUser: User = {
@@ -61,6 +70,26 @@ describe('AuthService', () => {
       createUserFromOAuth: jest.fn(),
       createOAuthAccount: jest.fn(),
       createUserWithOAuthAccount: jest.fn(),
+      createUserWithPassword: jest.fn(),
+      updateUserPassword: jest.fn(),
+      invalidateActivePasswordResetCodes: jest.fn(),
+      createPasswordResetCode: jest.fn(),
+      findLatestActivePasswordResetCode: jest.fn(),
+      incrementPasswordResetCodeAttempts: jest.fn(),
+      consumePasswordResetCode: jest.fn(),
+      createPasswordResetSession: jest.fn(),
+      findPasswordResetSessionByHash: jest.fn(),
+      consumePasswordResetSession: jest.fn(),
+      invalidateActivePasswordResetSessions: jest.fn(),
+      invalidateActiveTwoFactorChallenges: jest.fn(),
+      createTwoFactorChallenge: jest.fn(),
+      findTwoFactorChallengeByHash: jest.fn(),
+      consumeTwoFactorChallenge: jest.fn(),
+      invalidateActiveTwoFactorCodes: jest.fn(),
+      createTwoFactorCode: jest.fn(),
+      findLatestActiveTwoFactorCode: jest.fn(),
+      incrementTwoFactorCodeAttempts: jest.fn(),
+      consumeTwoFactorCode: jest.fn(),
     };
 
     jwtService = {
@@ -99,6 +128,42 @@ describe('AuthService', () => {
       ipAddress: null,
       createdAt: now,
     });
+  });
+
+  it('registers a new admin user without issuing a session', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(null);
+    (bcrypt.hash as jest.Mock).mockResolvedValue('hashed-password');
+    authRepository.createUserWithPassword.mockResolvedValue(adminUser);
+
+    const user = await service.register(
+      'Admin User',
+      'admin@juspeace.local',
+      'password123',
+    );
+
+    expect(bcrypt.hash as jest.Mock).toHaveBeenCalledWith('password123', 12);
+    expect(authRepository.createUserWithPassword.mock.calls).toEqual([
+      [
+        {
+          email: 'admin@juspeace.local',
+          passwordHash: 'hashed-password',
+          name: 'Admin User',
+          role: UserRole.ADMIN,
+        },
+      ],
+    ]);
+    expect(user.id).toBe(adminUser.id);
+    expect(user.role).toBe(UserRole.ADMIN);
+    expect(authRepository.createRefreshToken.mock.calls).toHaveLength(0);
+  });
+
+  it('rejects registration when the email is already taken', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(activeUser);
+
+    await expect(
+      service.register('Another User', activeUser.email, 'password123'),
+    ).rejects.toBeInstanceOf(ConflictException);
+    expect(authRepository.createUserWithPassword.mock.calls).toHaveLength(0);
   });
 
   it('logs in with valid credentials and stores hashed refresh token', async () => {

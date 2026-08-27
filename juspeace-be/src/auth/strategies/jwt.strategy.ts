@@ -33,14 +33,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new UnauthorizedException('INVALID_CREDENTIALS');
     }
 
-    return {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-      name: user.name,
-      isActive: user.isActive,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
+    // Omit passwordHash for the request-scoped AuthUser.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordHash, ...authUser } = user;
+    return authUser;
   }
 }

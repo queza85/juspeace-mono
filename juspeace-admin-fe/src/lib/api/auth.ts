@@ -5,6 +5,125 @@ import type {
   AuthUser,
 } from './types';
 
+export async function register(name: string, email: string, password: string) {
+  const envelope = await apiRequestEnvelope<AuthUser>('/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password }),
+    withCredentials: true,
+    noStore: true,
+    notify: 'success',
+  });
+
+  return envelope.data;
+}
+
+export async function requestPasswordReset(email: string) {
+  const envelope = await apiRequestEnvelope<null>('/auth/forgot-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+    withCredentials: true,
+    noStore: true,
+    notify: 'both',
+  });
+
+  return envelope.data;
+}
+
+export async function resendPasswordResetCode(email: string) {
+  const envelope = await apiRequestEnvelope<null>(
+    '/auth/forgot-password/resend',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+      withCredentials: true,
+      noStore: true,
+      notify: 'success',
+    },
+  );
+
+  return envelope.data;
+}
+
+export async function verifyPasswordResetCode(email: string, code: string) {
+  const envelope = await apiRequestEnvelope<{ resetToken: string }>(
+    '/auth/forgot-password/verify',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, code }),
+      withCredentials: true,
+      noStore: true,
+      notify: 'error',
+    },
+  );
+
+  return envelope.data;
+}
+
+export async function resetPassword(resetToken: string, password: string) {
+  const envelope = await apiRequestEnvelope<null>('/auth/forgot-password/reset', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ resetToken, password }),
+    withCredentials: true,
+    noStore: true,
+    notify: 'success',
+  });
+
+  return envelope.data;
+}
+
+export async function createTwoFactorChallengeDev(email: string) {
+  const envelope = await apiRequestEnvelope<{ challengeToken: string }>(
+    '/auth/two-factor/challenge/dev',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+      withCredentials: true,
+      noStore: true,
+      notify: 'both',
+    },
+  );
+
+  return envelope.data;
+}
+
+export async function resendTwoFactorCode(challengeToken: string) {
+  const envelope = await apiRequestEnvelope<null>('/auth/two-factor/resend', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ challengeToken }),
+    withCredentials: true,
+    noStore: true,
+    notify: 'success',
+  });
+
+  return envelope.data;
+}
+
+export async function verifyTwoFactorCode(
+  challengeToken: string,
+  code: string,
+) {
+  const envelope = await apiRequestEnvelope<AuthTokensResponse>(
+    '/auth/two-factor/verify',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ challengeToken, code }),
+      withCredentials: true,
+      noStore: true,
+      notify: 'both',
+    },
+  );
+
+  return envelope.data;
+}
+
 export async function login(
   email: string,
   password: string,

@@ -4,6 +4,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { buildGoogleOAuthUrl } from '@/lib/api/oauth';
@@ -99,6 +100,9 @@ export function LoginForm() {
   const { locale } = useLocale();
   const schema = useMemo(() => createLoginFormSchema(locale), [locale]);
   const oauthError = searchParams.get('error') === 'oauth';
+  const registrationSuccess = searchParams.get('registered') === '1';
+  const resetSuccess = searchParams.get('reset') === '1';
+  const registeredEmail = searchParams.get('email')?.trim() ?? '';
   const [formError, setFormError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const rememberedEmail = getRememberedEmail();
@@ -107,10 +111,12 @@ export function LoginForm() {
   const returnUrl = searchParams.get('returnUrl') || '/dashboard';
   const safeReturnUrl = returnUrl.startsWith('/') ? returnUrl : '/dashboard';
   const googleOAuthUrl = buildGoogleOAuthUrl(safeReturnUrl);
+  const initialEmail =
+    registeredEmail.length > 0 ? registeredEmail : rememberedEmail;
 
   const form = useForm({
     defaultValues: {
-      email: rememberedEmail,
+      email: initialEmail,
       password: '',
     },
     validators: {
@@ -159,6 +165,18 @@ export function LoginForm() {
         {oauthError ? (
           <p className="text-sm text-destructive" role="alert">
             {t('auth.oauthCallbackFailed')}
+          </p>
+        ) : null}
+
+        {registrationSuccess ? (
+          <p className="text-sm text-emerald-700" role="status">
+            {t('auth.signUpSuccessMessage')}
+          </p>
+        ) : null}
+
+        {resetSuccess ? (
+          <p className="text-sm text-emerald-700" role="status">
+            {t('auth.forgotPasswordFlow.resetSuccessMessage')}
           </p>
         ) : null}
 
@@ -270,9 +288,12 @@ export function LoginForm() {
               />
               {t('auth.rememberMe')}
             </label>
-            <span className="text-[13px] font-medium text-primary underline underline-offset-2">
+            <Link
+              href="/forgot-password"
+              className="text-[13px] font-medium text-primary underline underline-offset-2"
+            >
               {t('auth.forgotPassword')}
-            </span>
+            </Link>
           </div>
 
           <form.Subscribe selector={(state) => state.isSubmitting}>
@@ -291,9 +312,12 @@ export function LoginForm() {
 
         <p className="text-center text-[13px] text-muted-foreground">
           {t('auth.noAccount')}{' '}
-          <span className="font-medium text-primary underline underline-offset-2">
+          <Link
+            href="/register"
+            className="font-medium text-primary underline underline-offset-2"
+          >
             {t('auth.signUpHere')}
-          </span>
+          </Link>
         </p>
 
         <div className="relative py-1">

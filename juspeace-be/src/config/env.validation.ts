@@ -139,6 +139,53 @@ export class EnvironmentVariables {
   @IsString()
   @IsOptional()
   SEED_USER_PASSWORD?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  MAIL_FROM: string = 'Juspeace Admin <noreply@juspeace.local>';
+
+  @IsString()
+  @IsNotEmpty()
+  SMTP_HOST: string = '127.0.0.1';
+
+  @IsInt()
+  @Min(1)
+  @Max(65535)
+  SMTP_PORT: number = 1025;
+
+  @IsString()
+  @IsOptional()
+  SMTP_USER?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_PASSWORD?: string;
+
+  @IsBoolean()
+  SMTP_SECURE: boolean = false;
+
+  @IsInt()
+  @Min(1)
+  @Max(60)
+  PASSWORD_RESET_CODE_TTL_MINUTES: number = 10;
+
+  @IsInt()
+  @Min(1)
+  @Max(60)
+  PASSWORD_RESET_TOKEN_TTL_MINUTES: number = 15;
+
+  @IsInt()
+  @Min(1)
+  @Max(60)
+  TWO_FACTOR_CODE_TTL_MINUTES: number = 10;
+
+  @IsInt()
+  @Min(1)
+  @Max(60)
+  TWO_FACTOR_CHALLENGE_TTL_MINUTES: number = 15;
+
+  @IsBoolean()
+  TWO_FACTOR_DEV_CHALLENGE: boolean = false;
 }
 
 export function validateEnv(config: Record<string, unknown>) {
@@ -148,6 +195,12 @@ export function validateEnv(config: Record<string, unknown>) {
       config.AUTH_COOKIE_SECURE !== undefined
         ? toBoolean(config.AUTH_COOKIE_SECURE)
         : config.NODE_ENV === Environment.Production,
+    SMTP_SECURE:
+      config.SMTP_SECURE !== undefined ? toBoolean(config.SMTP_SECURE) : false,
+    TWO_FACTOR_DEV_CHALLENGE:
+      config.TWO_FACTOR_DEV_CHALLENGE !== undefined
+        ? toBoolean(config.TWO_FACTOR_DEV_CHALLENGE)
+        : false,
   };
 
   const validated = plainToInstance(EnvironmentVariables, withDefaults, {

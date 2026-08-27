@@ -20,6 +20,14 @@ services:
       timeout: 5s
       retries: 10
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: juspeace-mailpit
+    restart: unless-stopped
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
   juspeace-be:
     build:
       context: ./juspeace-be
@@ -29,6 +37,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     ports:
       - '7777:7777'
     environment:
@@ -47,6 +57,14 @@ services:
       REFRESH_TOKEN_TTL_DAYS: ${REFRESH_TOKEN_TTL_DAYS:-7}
       AUTH_COOKIE_NAME: ${AUTH_COOKIE_NAME:-juspeace_refresh}
       AUTH_COOKIE_SECURE: ${AUTH_COOKIE_SECURE:-false}
+      MAIL_FROM: ${MAIL_FROM:-Juspeace Admin <noreply@juspeace.local>}
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_SECURE: 'false'
+      PASSWORD_RESET_CODE_TTL_MINUTES: ${PASSWORD_RESET_CODE_TTL_MINUTES:-10}
+      PASSWORD_RESET_TOKEN_TTL_MINUTES: ${PASSWORD_RESET_TOKEN_TTL_MINUTES:-15}
 
   juspeace-fe:
     build:

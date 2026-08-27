@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AdminShell } from '@/components/layout/admin-shell';
 import { useAuth } from '@/lib/auth/auth-context';
+import { consumeSessionExpired } from '@/lib/auth/session-hint';
 
 export default function ProtectedLayout({
   children,
@@ -17,6 +18,10 @@ export default function ProtectedLayout({
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       const returnUrl = encodeURIComponent(pathname || '/dashboard');
+      if (consumeSessionExpired()) {
+        router.replace(`/session-expired?returnUrl=${returnUrl}`);
+        return;
+      }
       router.replace(`/login?returnUrl=${returnUrl}`);
     }
   }, [isLoading, isAuthenticated, pathname, router]);

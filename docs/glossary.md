@@ -20,6 +20,11 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `oauthAccount.provider` | Social identity provider | `provider` (`GOOGLE`) | — |
 | `oauthAccount.providerUserId` | Provider subject / user id (e.g. Google `sub`) | `providerUserId` | — |
 | `refreshToken` | Opaque rotatable session token (hashed at rest) | `RefreshToken` | — |
+| `passwordResetCode` | Single-use 6-digit OTP for password recovery (hashed at rest) | `PasswordResetCode` | Verification Code |
+| `passwordResetSession` | Short-lived opaque token after OTP verify (hashed at rest) | `PasswordResetSession` | — |
+| `twoFactorEnabled` | Whether email OTP 2FA is required after password login (not enforced until wired) | `User.twoFactorEnabled` | — |
+| `twoFactorChallenge` | Pending 2FA login context after password check (hashed challenge token) | `TwoFactorChallenge` | — |
+| `twoFactorCode` | Single-use 6-digit OTP for login 2FA (hashed at rest) | `TwoFactorCode` | Verification Code |
 | `datetime.utc` | All persisted timestamps (`createdAt`, `updatedAt`, `expiresAt`, …) | `DateTime` `@db.Timestamptz(3)` (UTC) | Local time via client formatter |
 | `api.message` | Endpoint-specific SCREAMING_SNAKE_CASE response code | `message` (`LOGIN_SUCCESSFULLY`, `PRODUCT_CREATED_SUCCESSFULLY`, …) | Toast via `apiMessages.*` i18n |
 

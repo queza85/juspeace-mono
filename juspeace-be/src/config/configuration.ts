@@ -50,4 +50,28 @@ export default () => ({
       },
     },
   },
+  mail: {
+    from: process.env.MAIL_FROM ?? 'Juspeace Admin <noreply@juspeace.local>',
+    smtp: {
+      host: process.env.SMTP_HOST ?? '127.0.0.1',
+      port: Number(process.env.SMTP_PORT ?? 1025),
+      user: process.env.SMTP_USER ?? '',
+      password: process.env.SMTP_PASSWORD ?? '',
+      secure:
+        process.env.SMTP_SECURE === 'true' || process.env.SMTP_SECURE === '1',
+    },
+  },
+  passwordReset: {
+    codeTtlMinutes: Number(process.env.PASSWORD_RESET_CODE_TTL_MINUTES ?? 10),
+    tokenTtlMinutes: Number(process.env.PASSWORD_RESET_TOKEN_TTL_MINUTES ?? 15),
+  },
+  twoFactor: {
+    codeTtlMinutes: Number(process.env.TWO_FACTOR_CODE_TTL_MINUTES ?? 10),
+    challengeTtlMinutes: Number(
+      process.env.TWO_FACTOR_CHALLENGE_TTL_MINUTES ?? 15,
+    ),
+    devChallengeEnabled:
+      process.env.TWO_FACTOR_DEV_CHALLENGE === 'true' ||
+      process.env.TWO_FACTOR_DEV_CHALLENGE === '1',
+  },
 });

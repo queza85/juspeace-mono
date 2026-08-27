@@ -1,5 +1,9 @@
 import { toast } from '@/components/ui/toast';
 import { humanizeApiMessage } from '@/lib/api/format-message';
+import {
+  markSessionExpired,
+  setSessionHint,
+} from '@/lib/auth/session-hint';
 import type { ApiEnvelope, ApiErrorBody } from './types';
 
 const API_BASE_URL =
@@ -48,6 +52,24 @@ function notifyBrowser(messageCode: string, variant: 'success' | 'error') {
     return;
   }
   toast(humanizeApiMessage(messageCode), variant);
+}
+
+function redirectToSessionExpired() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  const path = window.location.pathname;
+  if (path === '/session-expired' || path.startsWith('/login')) {
+    return;
+  }
+
+  setSessionHint(false);
+  markSessionExpired();
+  const returnUrl = encodeURIComponent(`${path}${window.location.search}`);
+  // Full navigation from fetch layer; no router available here.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- session expiry must hard-reset client state
+  window.location.assign(`/session-expired?returnUrl=${returnUrl}`);
 }
 
 function buildUrl(path: string, params?: RequestOptions['params']) {
@@ -156,6 +178,10 @@ export async function apiRequestEnvelope<T>(
       : undefined;
     const messageCode =
       body?.message ?? `REQUEST_FAILED_${response.status}`;
+
+    if (response.status === 401 && accessToken) {
+      redirectToSessionExpired();
+    }
 
     if (shouldNotifyError(notify)) {
       notifyBrowser(messageCode, 'error');

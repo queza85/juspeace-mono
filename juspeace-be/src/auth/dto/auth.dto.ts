@@ -8,6 +8,22 @@ import {
 } from 'class-validator';
 import { UserRole } from '@prisma/client';
 
+export class RegisterDto {
+  @ApiProperty({ example: 'Admin User' })
+  @IsString()
+  @MinLength(1)
+  name!: string;
+
+  @ApiProperty({ example: 'admin@juspeace.local' })
+  @IsEmail()
+  email!: string;
+
+  @ApiProperty({ minLength: 8 })
+  @IsString()
+  @MinLength(8)
+  password!: string;
+}
+
 export class LoginDto {
   @ApiProperty({ example: 'admin@juspeace.local' })
   @IsEmail()

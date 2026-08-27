@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { hasSessionHint, setSessionHint } from '@/lib/auth/session-hint';
+import {
+  clearSessionExpired,
+  consumeSessionExpired,
+  hasSessionHint,
+  markSessionExpired,
+  setSessionHint,
+} from '@/lib/auth/session-hint';
 
 describe('session-hint', () => {
   beforeEach(() => {
@@ -36,5 +42,20 @@ describe('session-hint', () => {
     expect(hasSessionHint()).toBe(false);
     expect(window.sessionStorage.length).toBe(0);
     expect(window.localStorage.length).toBe(0);
+  });
+
+  it('tracks session expiry as a one-time flag', () => {
+    markSessionExpired();
+
+    expect(consumeSessionExpired()).toBe(true);
+    expect(consumeSessionExpired()).toBe(false);
+  });
+
+  it('clears session expiry flag when clearing session hint on logout', () => {
+    markSessionExpired();
+    setSessionHint(false);
+    clearSessionExpired();
+
+    expect(consumeSessionExpired()).toBe(false);
   });
 });

@@ -15,7 +15,9 @@ import {
   isAdminUser,
 } from '@/lib/auth/admin-access';
 import {
+  clearSessionExpired,
   hasSessionHint,
+  markSessionExpired,
   setSessionHint,
 } from '@/lib/auth/session-hint';
 import { authKeys } from '@/lib/query/keys';
@@ -47,7 +49,8 @@ async function clearNonAdminSession(accessToken: string): Promise<void> {
 }
 
 async function fetchSession(): Promise<AuthSession | null> {
-  if (!hasSessionHint()) {
+  const hadSession = hasSessionHint();
+  if (!hadSession) {
     return null;
   }
 
@@ -65,6 +68,7 @@ async function fetchSession(): Promise<AuthSession | null> {
     setSessionHint(false);
 
     if (error instanceof ApiError && error.status === 401) {
+      markSessionExpired();
       return null;
     }
 
@@ -120,6 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     onSettled: async () => {
       setSessionHint(false);
+      clearSessionExpired();
       queryClient.setQueryData(authKeys.session(), null);
       await queryClient.invalidateQueries({ queryKey: authKeys.all });
     },
@@ -158,6 +163,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [logoutMutation, sessionQuery.data?.accessToken]);
 
   const refresh = useCallback(async () => {
+    const hadSession = hasSessionHint();
     try {
       const session = await queryClient.fetchQuery({
         queryKey: authKeys.session(),
@@ -166,6 +172,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return Boolean(session);
     } catch {
       setSessionHint(false);
+      if (hadSession) {
+        markSessionExpired();
+      }
       queryClient.setQueryData(authKeys.session(), null);
       return false;
     }

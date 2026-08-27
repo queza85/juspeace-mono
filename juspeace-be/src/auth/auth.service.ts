@@ -1,7 +1,12 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { OAuthProvider, User } from '@prisma/client';
+import { OAuthProvider, User, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { createHash, randomBytes, timingSafeEqual } from 'crypto';
 import { AUTH_REPOSITORY } from './auth.repository.interface';
@@ -15,6 +20,7 @@ import type { GoogleOAuthProfile } from './strategies/google.strategy';
 import { JwtPayload } from './strategies/jwt.strategy';
 
 const REFRESH_TOKEN_BYTES = 32;
+const BCRYPT_ROUNDS = 12;
 
 export interface SessionMeta {
   userAgent?: string;
@@ -63,6 +69,30 @@ export class AuthService {
       this.configService.getOrThrow<string>('auth.jwtAccessTtl');
   }
 
+  async register(
+    name: string,
+    email: string,
+    password: string,
+  ): Promise<UserResponseDto> {
+    const normalizedEmail = email.toLowerCase();
+    const existingUser =
+      await this.authRepository.findUserByEmail(normalizedEmail);
+
+    if (existingUser) {
+      throw new ConflictException('EMAIL_ALREADY_EXISTS');
+    }
+
+    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    const user = await this.authRepository.createUserWithPassword({
+      email: normalizedEmail,
+      passwordHash,
+      name: name.trim(),
+      role: UserRole.ADMIN,
+    });
+
+    return this.toUserResponse(user);
+  }
+
   async login(
     email: string,
     password: string,
@@ -80,6 +110,7 @@ export class AuthService {
       throw new UnauthorizedException('INVALID_CREDENTIALS');
     }
 
+    // Future 2FA: if (user.twoFactorEnabled) return twoFactorService.createChallenge(...)
     return this.issueSession(user, meta, this.createFamilyId(), {
       rememberMe: options.rememberMe ?? false,
     });
@@ -235,7 +266,7 @@ export class AuthService {
     return timingSafeEqual(left, right);
   }
 
-  private async issueSession(
+  async issueSession(
     user: User,
     meta: SessionMeta,
     familyId = this.createFamilyId(),
