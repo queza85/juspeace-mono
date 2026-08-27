@@ -12,7 +12,9 @@ export default () => ({
     url: buildDatabaseUrl(),
   },
   databaseUrl: buildDatabaseUrl(),
-  corsOrigins: (process.env.CORS_ORIGINS ?? 'http://localhost:3000')
+  corsOrigins: (
+    process.env.CORS_ORIGINS ?? 'http://localhost:3000,http://localhost:3001'
+  )
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean),

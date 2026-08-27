@@ -40,7 +40,7 @@ services:
       DB_PASSWORD: root
       DB_DATABASE: juspeace_develop
       DATABASE_URL: postgresql://postgres:root@postgres:5432/juspeace_develop?schema=public
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:3001}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-change-me-to-a-long-random-secret-at-least-32-chars}
       JWT_ACCESS_TTL: ${JWT_ACCESS_TTL:-15m}
       REFRESH_TOKEN_TTL_DAYS: ${REFRESH_TOKEN_TTL_DAYS:-7}
