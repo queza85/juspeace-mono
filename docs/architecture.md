@@ -3,7 +3,8 @@
 ## Overview
 
 ```text
-Browser → Next.js (juspeace-fe:3000) → NestJS API (juspeace-be:7777/api/v1) → PostgreSQL (5432)
+Browser → Next.js storefront (juspeace-fe:3000) ──┐
+Browser → Next.js admin (juspeace-admin-fe:3001) ─┼→ NestJS API (juspeace-be:7777/api/v1) → PostgreSQL (5432)
 ```
 
 - Frontend: App Router Server Components fetch catalog; Zustand holds cart on the client.
@@ -15,6 +16,7 @@ Browser → Next.js (juspeace-fe:3000) → NestJS API (juspeace-be:7777/api/v1) 
 | Service | Local URL |
 | --- | --- |
 | Storefront | http://localhost:3000 |
+| Admin console | http://localhost:3001 |
 | API | http://localhost:7777/api/v1 |
 | Swagger | http://localhost:7777/docs |
 | Health | http://localhost:7777/api/v1/health |
@@ -59,7 +61,8 @@ Three compose modes:
 Root docker-compose.yml
   ├── postgres
   ├── juspeace-be  (build ./juspeace-be)
-  └── juspeace-fe  (build ./juspeace-fe)
+  ├── juspeace-fe  (build ./juspeace-fe)
+  └── juspeace-admin-fe  (build ./juspeace-admin-fe)
 
 juspeace-be/docker-compose.yml
   ├── postgres
@@ -67,6 +70,9 @@ juspeace-be/docker-compose.yml
 
 juspeace-fe/docker-compose.yml
   └── juspeace-fe   # expects API via NEXT_PUBLIC_API_URL
+
+juspeace-admin-fe/docker-compose.yml
+  └── juspeace-admin-fe   # port 3001; expects API via NEXT_PUBLIC_API_URL
 ```
 
 In containers, the API uses `DATABASE_URL` host `postgres`. Browsers still call the API at `http://localhost:7777/api/v1` unless you change the build arg.
@@ -75,11 +81,11 @@ Backend container CMD: `node dist/main.js`. Run Prisma migrations separately whe
 
 ## Env alignment
 
-| Concern | juspeace-fe | juspeace-be |
+| Concern | juspeace-fe / juspeace-admin-fe | juspeace-be |
 | --- | --- | --- |
 | API base | `NEXT_PUBLIC_API_URL` | — |
 | DB | — | `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE` (+ optional `DATABASE_URL`) |
-| CORS | — | `CORS_ORIGINS` (include frontend origin) |
+| CORS | — | `CORS_ORIGINS` (comma-separated storefront + admin origins) |
 
 Local Postgres defaults: `postgres` / `root` / `juspeace_develop` on `127.0.0.1:5432`.
 

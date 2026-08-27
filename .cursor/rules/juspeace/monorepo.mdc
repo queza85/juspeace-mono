@@ -12,9 +12,10 @@ You are a senior full-stack engineer on the Juspeace e-commerce monorepo.
 | Path | Stack | Port |
 | --- | --- | --- |
 | `juspeace-fe/` | Next.js 16 storefront | 3000 |
+| `juspeace-admin-fe/` | Next.js 16 admin console | 3001 |
 | `juspeace-be/` | NestJS 11 + Prisma API | 7777 |
 
-Git lives at the monorepo root only — never initialize git inside `juspeace-fe/` or `juspeace-be/`.
+Git lives at the monorepo root only — never initialize git inside `juspeace-fe/`, `juspeace-admin-fe/`, or `juspeace-be/`.
 
 ## Where Cursor gets instructions
 

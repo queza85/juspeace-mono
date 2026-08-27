@@ -1,0 +1,73 @@
+{
+  "common": {
+    "brand": "Juspeace Admin",
+    "tagline": "Operations console for Juspeace",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "notFound": "Page not found"
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Admin sign in",
+    "loginSubtitle": "Use an administrator account to access the console.",
+    "loginFailed": "Unable to sign in. Please try again.",
+    "loginWithGoogle": "Continue with Google",
+    "orDivider": "or",
+    "oauthCallbackLoading": "Completing sign-in…",
+    "oauthCallbackFailed": "Google sign-in failed. Please try again.",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "role": "Role",
+    "noName": "—",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "passwordMin": "Password must be at least 8 characters"
+    }
+  },
+  "admin": {
+    "accessDenied": "This account does not have administrator access.",
+    "shell": {
+      "title": "Juspeace Admin",
+      "subtitle": "Operations console"
+    },
+    "nav": {
+      "dashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome back, {name}.",
+      "welcomeFallback": "Welcome back.",
+      "description": "Manage catalog, orders, and platform settings from here.",
+      "apiStatus": "API status",
+      "apiConnected": "Connected to backend",
+      "apiDisconnected": "Backend unavailable"
+    }
+  },
+  "apiMessages": {
+    "LOGIN_SUCCESSFULLY": "Login successful",
+    "LOGOUT_SUCCESSFULLY": "Logged out successfully",
+    "LOGOUT_ALL_SUCCESSFULLY": "Logged out from all devices",
+    "REFRESH_SUCCESSFULLY": "Session refreshed",
+    "USER_RETRIEVED_SUCCESSFULLY": "User retrieved successfully",
+    "HEALTH_CHECKED_SUCCESSFULLY": "Health check successful",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "Admin health retrieved successfully",
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "INVALID_REFRESH_TOKEN": "Session expired. Please sign in again",
+    "INSUFFICIENT_PERMISSIONS": "You do not have permission to do that",
+    "VALIDATION_FAILED": "Please check your input and try again",
+    "UNAUTHORIZED": "Please sign in to continue",
+    "FORBIDDEN": "Access denied",
+    "NOT_FOUND": "Resource not found",
+    "TOO_MANY_REQUESTS": "Too many attempts. Please wait and try again",
+    "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

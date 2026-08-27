@@ -28,13 +28,15 @@ Project memory stays in **root `AGENTS.md`**, never `.cursor/AGENTS.md`. Details
 | Path | Role | Port |
 | --- | --- | --- |
 | `juspeace-fe/` | Next.js 16 storefront | 3000 |
+| `juspeace-admin-fe/` | Next.js 16 admin console | 3001 |
 | `juspeace-be/` | NestJS 11 + Prisma API | 7777 |
-| `docker-compose.yml` | Full stack: postgres + API + storefront | — |
+| `docker-compose.yml` | Full stack: postgres + API + storefront + admin | — |
 | `docs/` | Architecture, glossary, harness docs | — |
 
 Nested / scoped instructions when editing that tree:
 
 - `juspeace-fe/AGENTS.md` + `.cursor/rules/juspeace/storefront.mdc`
+- `juspeace-admin-fe/AGENTS.md` + `.cursor/rules/juspeace/admin.mdc`
 - `juspeace-be/AGENTS.md` + `.cursor/rules/juspeace/api.mdc`
 
 ## Verification gates
@@ -47,6 +49,9 @@ cd juspeace-be && pnpm run build && pnpm test && pnpm run lint
 
 # Frontend
 cd juspeace-fe && pnpm run build && pnpm run lint
+
+# Admin frontend
+cd juspeace-admin-fe && pnpm run build && pnpm run lint
 ```
 
 Docker (when Docker Desktop is available):
@@ -68,7 +73,7 @@ cd juspeace-fe && pnpm run docker:build
 ## Integration defaults
 
 - Frontend API base: `NEXT_PUBLIC_API_URL=http://localhost:7777/api/v1`
-- Backend CORS: `CORS_ORIGINS=http://localhost:3000`
+- Backend CORS: `CORS_ORIGINS=http://localhost:3000,http://localhost:3001`
 - Backend prefix: `/api/v1`
 - Swagger: `http://localhost:7777/docs`
 - Postgres (local): `DB_HOST=127.0.0.1`, `DB_PORT=5432`, `DB_USER=postgres`, `DB_PASSWORD=root`, `DB_DATABASE=juspeace_develop`

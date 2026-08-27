@@ -21,19 +21,21 @@ E-commerce platform for the Juspeace shop — Next.js storefront and NestJS API 
 ```text
 juspeace-mono/
 ├── juspeace-fe/       # Next.js storefront (port 3000)
+├── juspeace-admin-fe/ # Next.js admin console (port 3001)
 ├── juspeace-be/       # NestJS API (port 7777)
-├── docker-compose.yml # Full stack: postgres + API + storefront
+├── docker-compose.yml # Full stack: postgres + API + storefront + admin
 ├── docs/              # Architecture, glossary, agent harness
 └── AGENTS.md          # AI agent identity and harness index
 ```
 
-Git is managed at the **monorepo root only**. Do not initialize git inside `juspeace-fe/` or `juspeace-be/`.
+Git is managed at the **monorepo root only**. Do not initialize git inside `juspeace-fe/`, `juspeace-admin-fe/`, or `juspeace-be/`.
 
 ## Ports
 
 | Service | URL / Port |
 | --- | --- |
-| Frontend | http://localhost:3000 |
+| Storefront | http://localhost:3000 |
+| Admin console | http://localhost:3001 |
 | Backend API | http://localhost:7777/api/v1 |
 | Swagger | http://localhost:7777/docs |
 | PostgreSQL | localhost:5432 |
@@ -46,7 +48,7 @@ From the monorepo root:
 docker compose up --build
 ```
 
-This starts Postgres, the NestJS API, and the Next.js storefront.
+This starts Postgres, the NestJS API, the Next.js storefront, and the admin console.
 
 ## Quick start — local development
 

@@ -1,0 +1,73 @@
+{
+  "common": {
+    "brand": "Juspeace Admin",
+    "tagline": "Juspeace 운영 콘솔",
+    "loading": "로딩 중...",
+    "error": "문제가 발생했습니다",
+    "retry": "다시 시도",
+    "notFound": "페이지를 찾을 수 없습니다"
+  },
+  "auth": {
+    "login": "로그인",
+    "logout": "로그아웃",
+    "loginTitle": "관리자 로그인",
+    "loginSubtitle": "관리자 계정으로 콘솔에 접속해 주세요.",
+    "loginFailed": "로그인에 실패했습니다. 다시 시도해 주세요.",
+    "loginWithGoogle": "Google로 계속하기",
+    "orDivider": "또는",
+    "oauthCallbackLoading": "로그인 완료 중…",
+    "oauthCallbackFailed": "Google 로그인에 실패했습니다. 다시 시도해 주세요.",
+    "email": "이메일",
+    "password": "비밀번호",
+    "name": "이름",
+    "role": "역할",
+    "noName": "—",
+    "validation": {
+      "emailRequired": "이메일을 입력해 주세요",
+      "emailInvalid": "올바른 이메일 주소를 입력해 주세요",
+      "passwordMin": "비밀번호는 최소 8자 이상이어야 합니다"
+    }
+  },
+  "admin": {
+    "accessDenied": "관리자 권한이 없는 계정입니다.",
+    "shell": {
+      "title": "Juspeace Admin",
+      "subtitle": "운영 콘솔"
+    },
+    "nav": {
+      "dashboard": "대시보드"
+    },
+    "dashboard": {
+      "title": "대시보드",
+      "welcome": "다시 오신 것을 환영합니다, {name}님.",
+      "welcomeFallback": "다시 오신 것을 환영합니다.",
+      "description": "카탈로그, 주문, 플랫폼 설정을 이곳에서 관리합니다.",
+      "apiStatus": "API 상태",
+      "apiConnected": "백엔드에 연결됨",
+      "apiDisconnected": "백엔드를 사용할 수 없음"
+    }
+  },
+  "apiMessages": {
+    "LOGIN_SUCCESSFULLY": "로그인되었습니다",
+    "LOGOUT_SUCCESSFULLY": "로그아웃되었습니다",
+    "LOGOUT_ALL_SUCCESSFULLY": "모든 기기에서 로그아웃되었습니다",
+    "REFRESH_SUCCESSFULLY": "세션이 갱신되었습니다",
+    "USER_RETRIEVED_SUCCESSFULLY": "사용자 정보를 불러왔습니다",
+    "HEALTH_CHECKED_SUCCESSFULLY": "상태 확인에 성공했습니다",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "관리자 상태를 불러왔습니다",
+    "INVALID_CREDENTIALS": "이메일 또는 비밀번호가 올바르지 않습니다",
+    "INVALID_REFRESH_TOKEN": "세션이 만료되었습니다. 다시 로그인해 주세요",
+    "INSUFFICIENT_PERMISSIONS": "이 작업을 수행할 권한이 없습니다",
+    "VALIDATION_FAILED": "입력값을 확인하고 다시 시도해 주세요",
+    "UNAUTHORIZED": "계속하려면 로그인해 주세요",
+    "FORBIDDEN": "접근이 거부되었습니다",
+    "NOT_FOUND": "요청한 리소스를 찾을 수 없습니다",
+    "TOO_MANY_REQUESTS": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요",
+    "INTERNAL_SERVER_ERROR": "문제가 발생했습니다. 다시 시도해 주세요"
+  },
+  "language": {
+    "label": "언어",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

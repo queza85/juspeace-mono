@@ -1,0 +1,45 @@
+---
+description: Juspeace admin frontend (Next.js) conventions when editing juspeace-admin-fe
+globs: juspeace-admin-fe/**
+alwaysApply: false
+---
+
+# Juspeace Admin FE (`juspeace-admin-fe`)
+
+## Before Next.js APIs
+
+Read version-matched docs under `juspeace-admin-fe/node_modules/next/dist/docs/` (prefer retrieval over training data). Preserve the managed block in `juspeace-admin-fe/AGENTS.md`.
+
+## Stack
+
+- App Router, TypeScript, `output: 'standalone'`, dev port **3001**
+- Tailwind v4 + shadcn/ui
+- TanStack Query + Form + Table
+- API via `src/lib/api/*` — never hardcode base URLs in components
+- **ADMIN role required** for authenticated sessions
+
+## Do
+
+- TanStack Form + Zod for forms; TanStack Query for client server-state / mutations
+- `'use client'` only for forms / auth UI / interactive tables
+- All UI strings via `t()` / `useT()` and `src/messages/en.json` + `src/messages/ko.json` (locales: `en`, `ko`)
+- Reject non-ADMIN users at login and session restore
+
+## Don't
+
+- Hardcode UI copy in JSX
+- Store secrets/JWTs in browser storage (except non-secret session hint)
+- Initialize git in this package
+
+## Skills to apply
+
+- `juspeace-frontend` (shared FE patterns)
+- `juspeace-integration` when changing API contracts
+
+## Verify
+
+```bash
+cd juspeace-admin-fe && pnpm run build && pnpm run lint
+```
+
+@juspeace-admin-fe/AGENTS.md

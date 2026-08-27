@@ -41,7 +41,7 @@ services:
       DB_PASSWORD: root
       DB_DATABASE: juspeace_develop
       DATABASE_URL: postgresql://postgres:root@postgres:5432/juspeace_develop?schema=public
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:3001}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-change-me-to-a-long-random-secret-at-least-32-chars}
       JWT_ACCESS_TTL: ${JWT_ACCESS_TTL:-15m}
       REFRESH_TOKEN_TTL_DAYS: ${REFRESH_TOKEN_TTL_DAYS:-7}
@@ -63,6 +63,23 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:7777/api/v1}
       PORT: 3000
+      HOSTNAME: 0.0.0.0
+
+  juspeace-admin-fe:
+    build:
+      context: ./juspeace-admin-fe
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:7777/api/v1}
+    container_name: juspeace-admin-frontend
+    restart: unless-stopped
+    depends_on:
+      - juspeace-be
+    ports:
+      - '3001:3001'
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:7777/api/v1}
+      PORT: 3001
       HOSTNAME: 0.0.0.0
 
 volumes:
