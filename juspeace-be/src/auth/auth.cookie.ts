@@ -10,7 +10,7 @@ const AUTH_COOKIE_PATH = '/api/v1/auth';
 export function setRefreshCookie(
   res: Response,
   refreshToken: string,
-  maxAgeMs: number,
+  maxAgeMs: number | null,
   options: RefreshCookieOptions,
 ): void {
   res.cookie(options.cookieName, refreshToken, {
@@ -18,7 +18,7 @@ export function setRefreshCookie(
     secure: options.cookieSecure,
     sameSite: 'strict',
     path: AUTH_COOKIE_PATH,
-    maxAge: maxAgeMs,
+    ...(maxAgeMs !== null ? { maxAge: maxAgeMs } : {}),
   });
 }
 

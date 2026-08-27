@@ -69,8 +69,11 @@ describe('AuthService', () => {
 
     const configService = {
       getOrThrow: jest.fn((key: string) => {
-        if (key === 'auth.refreshTokenTtlDays') {
-          return 7;
+        if (key === 'auth.refreshTokenSessionTtlDays') {
+          return 1;
+        }
+        if (key === 'auth.refreshTokenRememberTtlDays') {
+          return 5;
         }
         if (key === 'auth.jwtAccessTtl') {
           return '15m';
@@ -118,6 +121,39 @@ describe('AuthService', () => {
     expect(typeof createArgs?.familyId).toBe('string');
   });
 
+  it('issues a longer refresh token when rememberMe is enabled', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(activeUser);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+    const session = await service.login(
+      activeUser.email,
+      'password123',
+      {},
+      { rememberMe: true },
+    );
+
+    expect(session.refreshMaxAgeMs).toBe(5 * 24 * 60 * 60 * 1000);
+
+    const createArgs = authRepository.createRefreshToken.mock.calls[0]?.[0];
+    const ttlMs = createArgs.expiresAt.getTime() - Date.now();
+    expect(ttlMs).toBeGreaterThan(4 * 24 * 60 * 60 * 1000);
+    expect(ttlMs).toBeLessThanOrEqual(5 * 24 * 60 * 60 * 1000);
+  });
+
+  it('issues a session-scoped refresh token when rememberMe is disabled', async () => {
+    authRepository.findUserByEmail.mockResolvedValue(activeUser);
+    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+    const session = await service.login(activeUser.email, 'password123');
+
+    expect(session.refreshMaxAgeMs).toBeNull();
+
+    const createArgs = authRepository.createRefreshToken.mock.calls[0]?.[0];
+    const ttlMs = createArgs.expiresAt.getTime() - Date.now();
+    expect(ttlMs).toBeGreaterThan(23 * 60 * 60 * 1000);
+    expect(ttlMs).toBeLessThanOrEqual(24 * 60 * 60 * 1000);
+  });
+
   it('rejects invalid credentials with a generic error', async () => {
     authRepository.findUserByEmail.mockResolvedValue(activeUser);
     (bcrypt.compare as jest.Mock).mockResolvedValue(false);
@@ -160,6 +196,32 @@ describe('AuthService', () => {
     expect(createArgs?.familyId).toBe('family-1');
     expect(session.accessToken).toBe('access-token');
     expect(session.refreshToken).not.toBe(rawToken);
+  });
+
+  it('preserves remember-me sessions when rotating refresh tokens', async () => {
+    const rawToken = 'remember-refresh-token';
+    const tokenHash = service.hashToken(rawToken);
+    const rememberTtlMs = 5 * 24 * 60 * 60 * 1000;
+    const createdAt = new Date(Date.now() - 60_000);
+
+    authRepository.findRefreshTokenByHash.mockResolvedValue({
+      id: 'rt-remember',
+      userId: activeUser.id,
+      tokenHash,
+      familyId: 'family-remember',
+      expiresAt: new Date(Date.now() + rememberTtlMs),
+      revokedAt: null,
+      userAgent: null,
+      ipAddress: null,
+      createdAt,
+      user: activeUser,
+    });
+
+    const session = await service.refresh(rawToken);
+
+    expect(session.refreshMaxAgeMs).toBe(rememberTtlMs);
+    const createArgs = authRepository.createRefreshToken.mock.calls[0]?.[0];
+    expect(createArgs?.familyId).toBe('family-remember');
   });
 
   it('revokes the token family when a revoked refresh token is reused', async () => {

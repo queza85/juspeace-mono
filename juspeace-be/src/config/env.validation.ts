@@ -87,6 +87,16 @@ export class EnvironmentVariables {
   @Max(365)
   REFRESH_TOKEN_TTL_DAYS: number = 7;
 
+  @IsInt()
+  @Min(1)
+  @Max(365)
+  REFRESH_TOKEN_SESSION_TTL_DAYS: number = 1;
+
+  @IsInt()
+  @Min(1)
+  @Max(365)
+  REFRESH_TOKEN_REMEMBER_TTL_DAYS: number = 5;
+
   @IsString()
   @IsNotEmpty()
   AUTH_COOKIE_NAME: string = 'juspeace_refresh';

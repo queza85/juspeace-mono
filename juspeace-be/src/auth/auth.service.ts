@@ -25,12 +25,18 @@ export interface IssuedSession {
   accessToken: string;
   refreshToken: string;
   user: UserResponseDto;
-  refreshMaxAgeMs: number;
+  /** null = browser session cookie (cleared when the browser closes) */
+  refreshMaxAgeMs: number | null;
+}
+
+export interface LoginOptions {
+  rememberMe?: boolean;
 }
 
 @Injectable()
 export class AuthService {
-  private readonly refreshTtlDays: number;
+  private readonly sessionTtlMs: number;
+  private readonly rememberTtlMs: number;
   private readonly jwtAccessTtl: string;
 
   constructor(
@@ -39,9 +45,20 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {
-    this.refreshTtlDays = this.configService.getOrThrow<number>(
-      'auth.refreshTokenTtlDays',
-    );
+    this.sessionTtlMs =
+      this.configService.getOrThrow<number>('auth.refreshTokenSessionTtlDays') *
+      24 *
+      60 *
+      60 *
+      1000;
+    this.rememberTtlMs =
+      this.configService.getOrThrow<number>(
+        'auth.refreshTokenRememberTtlDays',
+      ) *
+      24 *
+      60 *
+      60 *
+      1000;
     this.jwtAccessTtl =
       this.configService.getOrThrow<string>('auth.jwtAccessTtl');
   }
@@ -50,6 +67,7 @@ export class AuthService {
     email: string,
     password: string,
     meta: SessionMeta = {},
+    options: LoginOptions = {},
   ): Promise<IssuedSession> {
     const user = await this.authRepository.findUserByEmail(email);
 
@@ -62,7 +80,9 @@ export class AuthService {
       throw new UnauthorizedException('INVALID_CREDENTIALS');
     }
 
-    return this.issueSession(user, meta);
+    return this.issueSession(user, meta, this.createFamilyId(), {
+      rememberMe: options.rememberMe ?? false,
+    });
   }
 
   async loginWithGoogle(
@@ -82,7 +102,14 @@ export class AuthService {
       if (!existingAccount.user.isActive) {
         throw new UnauthorizedException('INVALID_CREDENTIALS');
       }
-      return this.issueSession(existingAccount.user, meta);
+      return this.issueSession(
+        existingAccount.user,
+        meta,
+        this.createFamilyId(),
+        {
+          rememberMe: true,
+        },
+      );
     }
 
     const existingUser = await this.authRepository.findUserByEmail(
@@ -100,7 +127,9 @@ export class AuthService {
         providerUserId: profile.providerUserId,
       });
 
-      return this.issueSession(existingUser, meta);
+      return this.issueSession(existingUser, meta, this.createFamilyId(), {
+        rememberMe: true,
+      });
     }
 
     const user = await this.authRepository.createUserWithOAuthAccount(
@@ -111,7 +140,9 @@ export class AuthService {
       },
     );
 
-    return this.issueSession(user, meta);
+    return this.issueSession(user, meta, this.createFamilyId(), {
+      rememberMe: true,
+    });
   }
 
   async refresh(
@@ -146,7 +177,10 @@ export class AuthService {
 
     await this.authRepository.revokeRefreshToken(stored.id);
 
-    return this.issueSession(stored.user, meta, stored.familyId);
+    const rememberMe = this.isPersistentRefreshToken(stored);
+    return this.issueSession(stored.user, meta, stored.familyId, {
+      rememberMe,
+    });
   }
 
   async logout(rawRefreshToken: string | undefined): Promise<void> {
@@ -205,12 +239,14 @@ export class AuthService {
     user: User,
     meta: SessionMeta,
     familyId = this.createFamilyId(),
+    options: { rememberMe?: boolean } = {},
   ): Promise<IssuedSession> {
+    const rememberMe = options.rememberMe ?? false;
+    const refreshTtlMs = rememberMe ? this.rememberTtlMs : this.sessionTtlMs;
     const accessToken = await this.signAccessToken(user);
     const rawRefreshToken =
       randomBytes(REFRESH_TOKEN_BYTES).toString('base64url');
-    const refreshMaxAgeMs = this.refreshTtlDays * 24 * 60 * 60 * 1000;
-    const expiresAt = new Date(Date.now() + refreshMaxAgeMs);
+    const expiresAt = new Date(Date.now() + refreshTtlMs);
 
     await this.authRepository.createRefreshToken({
       userId: user.id,
@@ -225,8 +261,16 @@ export class AuthService {
       accessToken,
       refreshToken: rawRefreshToken,
       user: this.toUserResponse(user),
-      refreshMaxAgeMs,
+      refreshMaxAgeMs: rememberMe ? refreshTtlMs : null,
     };
+  }
+
+  private isPersistentRefreshToken(stored: {
+    createdAt: Date;
+    expiresAt: Date;
+  }): boolean {
+    const issuedTtlMs = stored.expiresAt.getTime() - stored.createdAt.getTime();
+    return issuedTtlMs > (this.sessionTtlMs + this.rememberTtlMs) / 2;
   }
 
   private async signAccessToken(user: User): Promise<string> {

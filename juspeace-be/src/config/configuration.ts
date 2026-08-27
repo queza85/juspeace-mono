@@ -22,6 +22,12 @@ export default () => ({
     jwtAccessSecret: process.env.JWT_ACCESS_SECRET ?? '',
     jwtAccessTtl: process.env.JWT_ACCESS_TTL ?? '15m',
     refreshTokenTtlDays: Number(process.env.REFRESH_TOKEN_TTL_DAYS ?? 7),
+    refreshTokenSessionTtlDays: Number(
+      process.env.REFRESH_TOKEN_SESSION_TTL_DAYS ?? 1,
+    ),
+    refreshTokenRememberTtlDays: Number(
+      process.env.REFRESH_TOKEN_REMEMBER_TTL_DAYS ?? 5,
+    ),
     cookieName: process.env.AUTH_COOKIE_NAME ?? 'juspeace_refresh',
     cookieSecure:
       process.env.AUTH_COOKIE_SECURE !== undefined

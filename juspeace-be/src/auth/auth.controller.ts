@@ -62,10 +62,15 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthTokensResponseDto> {
-    const session = await this.authService.login(dto.email, dto.password, {
-      userAgent: req.headers['user-agent'],
-      ipAddress: req.ip,
-    });
+    const session = await this.authService.login(
+      dto.email,
+      dto.password,
+      {
+        userAgent: req.headers['user-agent'],
+        ipAddress: req.ip,
+      },
+      { rememberMe: dto.rememberMe ?? false },
+    );
 
     setRefreshCookie(res, session.refreshToken, session.refreshMaxAgeMs, {
       cookieName: this.cookieName,
