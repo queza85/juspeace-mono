@@ -47,7 +47,7 @@ const navSections: NavSection[] = [
     sectionKey: 'admin.nav.sections.apps',
     items: [
       { href: '/orders', labelKey: 'admin.nav.orders', icon: ShoppingCart },
-      { labelKey: 'admin.nav.inventory', icon: ClipboardList, disabled: true },
+      { href: '/inventory', labelKey: 'admin.nav.inventory', icon: ClipboardList },
       { href: '/products', labelKey: 'admin.nav.products', icon: ShoppingBag },
       { labelKey: 'admin.nav.customers', icon: UserCircle, disabled: true },
       { labelKey: 'admin.nav.shipping', icon: MapPin, disabled: true },

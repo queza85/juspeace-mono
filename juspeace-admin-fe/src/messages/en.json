@@ -894,6 +894,161 @@
           }
         }
       }
+    },
+    "inventory": {
+      "title": "Inventory",
+      "description": "Monitor stock levels, reservations, and availability across product variations.",
+      "mockDataNotice": "Preview — sample inventory data",
+      "kpi": {
+        "totalStock": "Total Stock",
+        "availableStock": "Available Stock",
+        "reservedStock": "Reserved Stock",
+        "soldQuantity": "Sold Quantity",
+        "lowStockItems": "Low Stock Items",
+        "soldOutItems": "Sold Out Items",
+        "todayTotalStock": "Today's total stock change",
+        "todayAvailableStock": "Today's available stock",
+        "todayReservedStock": "Today's reserved stock",
+        "todaySoldQuantity": "Today's sold quantity",
+        "todayLowStockItems": "Today's low stock items",
+        "todaySoldOutItems": "Today's sold out items"
+      },
+      "filters": {
+        "variation": "Variation",
+        "stockStatus": "Stock Status"
+      },
+      "columns": {
+        "product": "Product",
+        "variation": "Variation",
+        "sku": "SKU",
+        "initialStock": "Initial Stock",
+        "availableStock": "Available Stock",
+        "reservedStock": "Reserved Stock",
+        "soldQuantity": "Sold Quantity",
+        "cancelledReturned": "Cancelled / Returned",
+        "stockStatus": "Stock Status",
+        "actions": "Action"
+      },
+      "stockStatus": {
+        "in_stock": "In Stock",
+        "low_stock": "Low Stock",
+        "sold_out": "Sold Out"
+      },
+      "table": {
+        "searchPlaceholder": "Search for something...",
+        "filterBy": "Filter By:",
+        "selectAll": "Select all inventory items on this page",
+        "selectItem": "Select {name}",
+        "empty": "No inventory items match your filters.",
+        "sortBy": "Sort by {column}",
+        "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+        "sortDescending": "Sorted by {column}, descending. Activate to sort ascending"
+      },
+      "pagination": {
+        "itemLabel": "products"
+      },
+      "actions": {
+        "view": "View inventory item"
+      },
+      "detail": {
+        "pageTitle": "Inventory Management Details",
+        "breadcrumbLabel": "Breadcrumb",
+        "breadcrumbEcommerce": "Ecommerce",
+        "breadcrumbCurrent": "Inventory Management Details",
+        "backToInventory": "Back Inventory",
+        "heading": "Inventory Management Details",
+        "notFound": "Inventory item not found.",
+        "noImage": "No image",
+        "sections": {
+          "productSummary": "Product Summary",
+          "stockHistory": "Stock History"
+        },
+        "fields": {
+          "productName": "Product Name",
+          "productVariation": "Product Variation",
+          "sku": "SKU",
+          "initialStock": "Initial Stock",
+          "availableStock": "Available Stock",
+          "reservedStock": "Reserved Stock",
+          "soldQuantity": "Sold Quantity",
+          "cancelledReturnedQuantity": "Cancelled / Returned Quantity",
+          "stockStatus": "Stock Status"
+        },
+        "actions": {
+          "adjustStock": "Adjust Stock",
+          "markSoldOut": "Mark As Sold out",
+          "setLowStockThreshold": "Set Low-Stock Threshold",
+          "exportData": "Export Inventory data"
+        },
+        "dialogs": {
+          "stockQuantityLabel": "Stock Quantity",
+          "adjustStock": {
+            "title": "Adjust Stock",
+            "description": "Enter the new stock quantity to update the inventory for this product.",
+            "cancel": "Cancel",
+            "confirm": "Update",
+            "close": "Close adjust stock dialog",
+            "successPreview": "Stock updated to {quantity} (preview)."
+          },
+          "setThreshold": {
+            "title": "Set Low-Stock Threshold",
+            "description": "Enter the stock level at which this product should be marked as low stock.",
+            "cancel": "Cancel",
+            "confirm": "Update",
+            "close": "Close set low-stock threshold dialog",
+            "successPreview": "Low-stock threshold set to {quantity} (preview)."
+          },
+          "markSoldOut": {
+            "title": "Mark As Sold Out",
+            "description": "Are you sure you want to mark this product as sold out? The product will no longer be available for purchase until stock is updated.",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "close": "Close mark as sold out dialog",
+            "successPreview": "Item marked as sold out (preview)."
+          },
+          "export": {
+            "title": "Export Inventory Data",
+            "description": "Export the current inventory information. Select a file format to download the data.",
+            "formatLegend": "Export file format",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "Cancel",
+            "confirm": "Export",
+            "close": "Close export inventory dialog",
+            "successPreview": "Inventory export started as {format} (preview)."
+          }
+        },
+        "history": {
+          "searchPlaceholder": "Search for something...",
+          "filterBy": "Filter By:",
+          "empty": "No stock history entries match your filters.",
+          "sortBy": "Sort by {column}",
+          "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+          "sortDescending": "Sorted by {column}, descending. Activate to sort ascending",
+          "filters": {
+            "action": "Action"
+          },
+          "actions": {
+            "stock_added": "Stock Added",
+            "sold": "Sold",
+            "returned": "Returned",
+            "reserved": "Reserved"
+          },
+          "columns": {
+            "date": "Date",
+            "action": "Action",
+            "quantity": "Quantity",
+            "before": "Before",
+            "after": "After",
+            "reason": "Reason"
+          },
+          "pagination": {
+            "itemLabel": "stock histories"
+          }
+        }
+      }
     }
   },
   "apiMessages": {

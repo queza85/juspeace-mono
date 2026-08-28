@@ -894,6 +894,161 @@
           }
         }
       }
+    },
+    "inventory": {
+      "title": "재고",
+      "description": "상품 변형별 재고 수준, 예약 및 가용 재고를 모니터링합니다.",
+      "mockDataNotice": "미리보기 — 샘플 재고 데이터",
+      "kpi": {
+        "totalStock": "총 재고",
+        "availableStock": "가용 재고",
+        "reservedStock": "예약 재고",
+        "soldQuantity": "판매 수량",
+        "lowStockItems": "재고 부족 품목",
+        "soldOutItems": "품절 품목",
+        "todayTotalStock": "오늘 총 재고 변동",
+        "todayAvailableStock": "오늘 가용 재고",
+        "todayReservedStock": "오늘 예약 재고",
+        "todaySoldQuantity": "오늘 판매 수량",
+        "todayLowStockItems": "오늘 재고 부족 품목",
+        "todaySoldOutItems": "오늘 품절 품목"
+      },
+      "filters": {
+        "variation": "변형",
+        "stockStatus": "재고 상태"
+      },
+      "columns": {
+        "product": "상품",
+        "variation": "변형",
+        "sku": "SKU",
+        "initialStock": "초기 재고",
+        "availableStock": "가용 재고",
+        "reservedStock": "예약 재고",
+        "soldQuantity": "판매 수량",
+        "cancelledReturned": "취소 / 반품",
+        "stockStatus": "재고 상태",
+        "actions": "작업"
+      },
+      "stockStatus": {
+        "in_stock": "재고 있음",
+        "low_stock": "재고 부족",
+        "sold_out": "품절"
+      },
+      "table": {
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "selectAll": "이 페이지의 모든 재고 항목 선택",
+        "selectItem": "{name} 선택",
+        "empty": "필터와 일치하는 재고 항목이 없습니다.",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경하려면 활성화",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경하려면 활성화"
+      },
+      "pagination": {
+        "itemLabel": "상품"
+      },
+      "actions": {
+        "view": "재고 항목 보기"
+      },
+      "detail": {
+        "pageTitle": "재고 관리 상세",
+        "breadcrumbLabel": "탐색 경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "재고 관리 상세",
+        "backToInventory": "재고 목록으로",
+        "heading": "재고 관리 상세",
+        "notFound": "재고 항목을 찾을 수 없습니다.",
+        "noImage": "이미지 없음",
+        "sections": {
+          "productSummary": "상품 요약",
+          "stockHistory": "재고 이력"
+        },
+        "fields": {
+          "productName": "상품명",
+          "productVariation": "상품 변형",
+          "sku": "SKU",
+          "initialStock": "초기 재고",
+          "availableStock": "가용 재고",
+          "reservedStock": "예약 재고",
+          "soldQuantity": "판매 수량",
+          "cancelledReturnedQuantity": "취소 / 반품 수량",
+          "stockStatus": "재고 상태"
+        },
+        "actions": {
+          "adjustStock": "재고 조정",
+          "markSoldOut": "품절 처리",
+          "setLowStockThreshold": "재고 부족 임계값 설정",
+          "exportData": "재고 데이터 내보내기"
+        },
+        "dialogs": {
+          "stockQuantityLabel": "재고 수량",
+          "adjustStock": {
+            "title": "재고 조정",
+            "description": "이 상품의 재고를 업데이트할 새 재고 수량을 입력하세요.",
+            "cancel": "취소",
+            "confirm": "업데이트",
+            "close": "재고 조정 대화상자 닫기",
+            "successPreview": "재고가 {quantity}(으)로 업데이트되었습니다(미리보기)."
+          },
+          "setThreshold": {
+            "title": "재고 부족 임계값 설정",
+            "description": "이 상품이 재고 부족으로 표시될 재고 수준을 입력하세요.",
+            "cancel": "취소",
+            "confirm": "업데이트",
+            "close": "재고 부족 임계값 설정 대화상자 닫기",
+            "successPreview": "재고 부족 임계값이 {quantity}(으)로 설정되었습니다(미리보기)."
+          },
+          "markSoldOut": {
+            "title": "품절 처리",
+            "description": "이 상품을 품절 처리하시겠습니까? 재고가 업데이트될 때까지 구매할 수 없습니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "품절 처리 대화상자 닫기",
+            "successPreview": "품절 처리되었습니다(미리보기)."
+          },
+          "export": {
+            "title": "재고 데이터 내보내기",
+            "description": "현재 재고 정보를 내보냅니다. 다운로드할 파일 형식을 선택하세요.",
+            "formatLegend": "내보내기 파일 형식",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "취소",
+            "confirm": "내보내기",
+            "close": "재고 내보내기 대화상자 닫기",
+            "successPreview": "{format} 형식으로 재고 내보내기가 시작되었습니다(미리보기)."
+          }
+        },
+        "history": {
+          "searchPlaceholder": "검색어를 입력하세요...",
+          "filterBy": "필터:",
+          "empty": "필터와 일치하는 재고 이력이 없습니다.",
+          "sortBy": "{column} 기준 정렬",
+          "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경하려면 활성화",
+          "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경하려면 활성화",
+          "filters": {
+            "action": "작업"
+          },
+          "actions": {
+            "stock_added": "재고 추가",
+            "sold": "판매",
+            "returned": "반품",
+            "reserved": "예약"
+          },
+          "columns": {
+            "date": "날짜",
+            "action": "작업",
+            "quantity": "수량",
+            "before": "이전",
+            "after": "이후",
+            "reason": "사유"
+          },
+          "pagination": {
+            "itemLabel": "재고 이력"
+          }
+        }
+      }
     }
   },
   "apiMessages": {

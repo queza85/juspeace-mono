@@ -9,6 +9,7 @@ const PRODUCT_IMAGES_BY_SLUG: Record<string, string> = {
   'organic-cotton-tote': '/product-collection/juspeace_mr3.png',
   'bamboo-water-bottle': '/product-collection/ju_mar6.png',
   'hand-poured-soy-candle': '/product-collection/juespeace_mar4.png',
+  'white-pure-hope': '/product-feature/pf1.png',
 };
 
 const FALLBACK_PRODUCT_IMAGES = [
