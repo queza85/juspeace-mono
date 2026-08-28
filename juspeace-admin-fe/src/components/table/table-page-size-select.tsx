@@ -50,6 +50,9 @@ function TablePageSizeSelectComponent({
 
 export const TablePageSizeSelect = memo(TablePageSizeSelectComponent);
 
+const defaultFilterSelectClassName =
+  'h-7 w-[7.25rem] appearance-none rounded-md border border-border/70 bg-background py-0 pr-6 pl-7 text-[11px] text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30';
+
 export function TableFilterSelect({
   icon,
   ariaLabel,
@@ -57,6 +60,7 @@ export function TableFilterSelect({
   onChange,
   children,
   className,
+  selectClassName,
 }: {
   icon?: ReactNode;
   ariaLabel: string;
@@ -64,10 +68,8 @@ export function TableFilterSelect({
   onChange: (value: string) => void;
   children: ReactNode;
   className?: string;
+  selectClassName?: string;
 }) {
-  const filterSelectClassName =
-    'h-7 w-[7.25rem] appearance-none rounded-md border border-border/70 bg-background py-0 pr-6 pl-7 text-[11px] text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30';
-
   return (
     <div className={cn('relative shrink-0', className)}>
       {icon ? (
@@ -79,7 +81,11 @@ export function TableFilterSelect({
         aria-label={ariaLabel}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className={cn(filterSelectClassName, icon ? 'pl-7' : 'pl-2.5')}
+        className={cn(
+          defaultFilterSelectClassName,
+          selectClassName,
+          icon ? 'pl-7' : 'pl-2.5',
+        )}
       >
         {children}
       </select>

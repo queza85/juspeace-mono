@@ -1,6 +1,7 @@
 'use client';
 
 import { memo } from 'react';
+import Link from 'next/link';
 import { Eye, Trash2 } from 'lucide-react';
 import { DashboardPanel } from '@/components/dashboard/dashboard-panel';
 import { StatusBadge } from '@/components/dashboard/status-badge';
@@ -15,12 +16,12 @@ function RecentOrdersTableComponent() {
     <DashboardPanel
       title={t('admin.dashboard.orders.title')}
       action={
-        <button
-          type="button"
+        <Link
+          href="/orders"
           className="text-[11px] font-medium text-primary hover:underline"
         >
           {t('admin.dashboard.orders.viewAll')}
-        </button>
+        </Link>
       }
     >
       <div className="-mx-4 overflow-x-auto md:-mx-5">

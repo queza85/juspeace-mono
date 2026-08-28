@@ -7,6 +7,7 @@ const toneStyles: Record<OrderStatusTone, string> = {
   danger: 'bg-red-50 text-red-600',
   info: 'bg-blue-50 text-blue-700',
   neutral: 'bg-muted text-muted-foreground',
+  accent: 'bg-violet-50 text-violet-700',
 };
 
 export function StatusBadge({

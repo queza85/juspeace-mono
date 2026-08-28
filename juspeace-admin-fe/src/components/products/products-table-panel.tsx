@@ -55,6 +55,12 @@ import {
 } from '@/lib/table';
 import { cn } from '@/lib/utils';
 
+const tableEdgeCellClass = {
+  first: 'py-2.5 pr-3 pl-4 md:pl-5',
+  middle: 'px-3 py-2.5',
+  last: 'py-2.5 pr-4 pl-3 md:pr-5',
+} as const;
+
 type StatusFilter = 'all' | ProductStatus;
 type CategoryFilter = 'all' | 'essentials' | 'bracelet' | 'home' | 'general';
 
@@ -422,22 +428,22 @@ function ProductsTablePanelComponent() {
       </div>
 
       <div className="-mx-4 overflow-x-auto md:-mx-5">
-        <table className="w-full table-fixed text-xs">
+        <table className="w-full min-w-[1040px] table-fixed text-xs">
           <colgroup>
             <col className="w-[3%]" />
-            <col className="w-[20%]" />
+            <col className="w-[17%]" />
             <col className="w-[9%]" />
             <col className="w-[9%]" />
             <col className="w-[7%]" />
             <col className="w-[8%]" />
             <col className="w-[7%]" />
             <col className="w-[9%]" />
-            <col className="w-[14%]" />
-            <col className="w-[14%]" />
+            <col className="w-[13%]" />
+            <col className="w-[18%]" />
           </colgroup>
           <thead>
             <tr className="border-b border-border/60 bg-muted/30 text-left text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
-              <th className="w-9 px-3 py-2.5">
+              <th className={cn('w-9', tableEdgeCellClass.first)}>
                 <input
                   type="checkbox"
                   checked={allPageSelected}
@@ -446,7 +452,7 @@ function ProductsTablePanelComponent() {
                   className="size-3 rounded border-border accent-primary"
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.product')}
                   column="product"
@@ -456,8 +462,8 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.product'))}
                 />
               </th>
-              <th className="px-3 py-2.5">{t('admin.products.columns.sku')}</th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>{t('admin.products.columns.sku')}</th>
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.category')}
                   column="category"
@@ -467,7 +473,7 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.category'))}
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.stock')}
                   column="stock"
@@ -477,7 +483,7 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.stock'))}
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.price')}
                   column="price"
@@ -487,7 +493,7 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.price'))}
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.orders')}
                   column="orders"
@@ -497,7 +503,7 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.orders'))}
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={tableEdgeCellClass.middle}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.status')}
                   column="status"
@@ -507,7 +513,7 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.status'))}
                 />
               </th>
-              <th className="px-3 py-2.5">
+              <th className={cn(tableEdgeCellClass.middle, 'whitespace-nowrap')}>
                 <SortableHeaderButton
                   label={t('admin.products.columns.published')}
                   column="published"
@@ -517,7 +523,9 @@ function ProductsTablePanelComponent() {
                   {...sortLabelFor(t('admin.products.columns.published'))}
                 />
               </th>
-              <th className="px-3 py-2.5">{t('admin.products.columns.actions')}</th>
+              <th className={cn(tableEdgeCellClass.last, 'whitespace-nowrap')}>
+                {t('admin.products.columns.actions')}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -630,7 +638,11 @@ function ProductRow({
       role="link"
       aria-label={t('admin.products.actions.view')}
     >
-      <td className="px-3 py-2.5" onClick={stopRowNavigation} onKeyDown={stopRowNavigation}>
+      <td
+        className={tableEdgeCellClass.first}
+        onClick={stopRowNavigation}
+        onKeyDown={stopRowNavigation}
+      >
         <input
           type="checkbox"
           checked={selected}
@@ -639,7 +651,7 @@ function ProductRow({
           className="size-3 cursor-pointer rounded border-border accent-primary"
         />
       </td>
-      <td className="px-3 py-2.5">
+      <td className={tableEdgeCellClass.middle}>
         <div className="flex items-center gap-2.5">
           <ProductThumbnail
             name={product.name}
@@ -656,24 +668,28 @@ function ProductRow({
           </div>
         </div>
       </td>
-      <td className="px-3 py-2.5 text-muted-foreground">{sku}</td>
-      <td className="px-3 py-2.5 text-muted-foreground">{category}</td>
-      <td className="px-3 py-2.5 text-muted-foreground">{product.stock}</td>
-      <td className="px-3 py-2.5 text-muted-foreground">
+      <td className={cn(tableEdgeCellClass.middle, 'text-muted-foreground')}>{sku}</td>
+      <td className={cn(tableEdgeCellClass.middle, 'text-muted-foreground')}>{category}</td>
+      <td className={cn(tableEdgeCellClass.middle, 'text-muted-foreground')}>{product.stock}</td>
+      <td className={cn(tableEdgeCellClass.middle, 'text-muted-foreground')}>
         {formatPrice(product.priceCents, product.currency)}
       </td>
-      <td className="px-3 py-2.5 text-muted-foreground">{orders}</td>
-      <td className="px-3 py-2.5">
+      <td className={cn(tableEdgeCellClass.middle, 'text-muted-foreground')}>{orders}</td>
+      <td className={tableEdgeCellClass.middle}>
         <StatusBadge
           label={t(productStatusLabelKey(product.status))}
           tone={productStatusTone(product.status)}
         />
       </td>
-      <td className="px-3 py-2.5 whitespace-nowrap text-muted-foreground">
+      <td className={cn(tableEdgeCellClass.middle, 'whitespace-nowrap text-muted-foreground')}>
         <span>{published.date}</span>{' '}
         <span className="text-[11px]">{published.time}</span>
       </td>
-      <td className="px-3 py-2.5" onClick={stopRowNavigation} onKeyDown={stopRowNavigation}>
+      <td
+        className={tableEdgeCellClass.last}
+        onClick={stopRowNavigation}
+        onKeyDown={stopRowNavigation}
+      >
         <div className="flex items-center gap-1">
           <TableActionButton
             label={t('admin.products.actions.view')}

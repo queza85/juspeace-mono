@@ -569,6 +569,331 @@
           "saveChanges": "변경 사항 저장"
         }
       }
+    },
+    "orders": {
+      "title": "주문",
+      "description": "고객 주문을 검색, 필터링 및 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 주문 데이터",
+      "kpi": {
+        "todayOrders": "오늘 주문",
+        "cancelledOrders": "취소된 주문",
+        "todaysCancelledOrders": "오늘 취소된 주문"
+      },
+      "filters": {
+        "dateRange": "기간",
+        "orderStatus": "주문 상태",
+        "paymentStatus": "결제 상태",
+        "shippingStatus": "배송 상태",
+        "country": "국가",
+        "product": "상품",
+        "trackingStatus": "운송장 등록 상태",
+        "trackingRegistered": "등록됨",
+        "trackingMissing": "미등록",
+        "today": "오늘",
+        "thisWeek": "이번 주",
+        "thisMonth": "이번 달"
+      },
+      "columns": {
+        "orderNumber": "주문 번호",
+        "orderDate": "주문일",
+        "customer": "고객명",
+        "country": "국가",
+        "product": "상품",
+        "quantity": "수량",
+        "paymentAmount": "결제 금액",
+        "paymentStatus": "결제 상태",
+        "orderStatus": "주문 상태",
+        "shippingStatus": "배송 상태",
+        "trackingNumber": "운송장 번호",
+        "actions": "작업"
+      },
+      "paymentStatus": {
+        "paid": "결제 완료",
+        "failed": "결제 실패",
+        "pending": "대기",
+        "refunded": "환불됨"
+      },
+      "orderStatus": {
+        "pending": "대기",
+        "confirmed": "확인됨",
+        "shipped": "배송됨",
+        "cancelled": "취소됨"
+      },
+      "shippingStatus": {
+        "pending": "대기",
+        "shipped": "배송됨",
+        "returned": "반품됨"
+      },
+      "countries": {
+        "myanmar": "미얀마",
+        "singapore": "싱가포르",
+        "thailand": "태국",
+        "malaysia": "말레이시아",
+        "vietnam": "베트남"
+      },
+      "table": {
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "selectAll": "이 페이지의 모든 주문 선택",
+        "selectOrder": "{orderNumber} 선택",
+        "empty": "필터와 일치하는 주문이 없습니다.",
+        "noTracking": "-",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경"
+      },
+      "pagination": {
+        "itemLabel": "주문"
+      },
+      "actions": {
+        "view": "주문 보기",
+        "delete": "주문 삭제"
+      },
+      "bulkActions": {
+        "selectedCount": "주문 {count}건 선택됨",
+        "hint": "일괄 작업은 선택한 주문에만 적용됩니다.",
+        "changeOrderStatus": "주문 상태 변경",
+        "registerTracking": "운송장 번호 등록",
+        "markAsShipped": "배송 완료 처리",
+        "export": "내보내기",
+        "printDocument": "문서 인쇄",
+        "clearSelection": "선택 해제"
+      },
+      "changeStatusDialog": {
+        "title": "주문 상태 변경",
+        "description": "선택한 주문의 상태를 업데이트합니다. 변경 사항은 선택한 모든 주문에 적용됩니다.",
+        "orderStatusLabel": "주문 상태",
+        "cancel": "취소",
+        "confirm": "변경",
+        "close": "주문 상태 변경 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건의 상태 변경이 예약되었습니다(미리보기)."
+      },
+      "registerTrackingDialog": {
+        "title": "운송장 번호 등록",
+        "description": "선택한 주문에 유효한 배송사 및 운송장 정보를 등록합니다.",
+        "trackingNumberLabel": "운송장 번호",
+        "carrierLabel": "배송사",
+        "trackingPlaceholder": "운송장 번호 입력",
+        "cancel": "취소",
+        "confirm": "등록",
+        "close": "운송장 등록 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건에 운송장이 등록되었습니다(미리보기)."
+      },
+      "markShippedDialog": {
+        "title": "주문 배송 완료 처리",
+        "description": "선택한 주문 {count}건을 배송 완료로 표시하시겠습니까? 배송 상태가 업데이트되고 고객에게 알림이 전송됩니다.",
+        "cancel": "취소",
+        "confirm": "확인",
+        "close": "배송 완료 처리 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건이 배송 완료로 표시되었습니다(미리보기)."
+      },
+      "exportDialog": {
+        "title": "선택 주문 내보내기",
+        "description": "선택한 주문 {count}건의 데이터를 내보냅니다. 다운로드 전 파일 형식과 데이터 필드를 선택하세요.",
+        "formatLegend": "내보내기 파일 형식",
+        "formats": {
+          "csv": "CSV",
+          "xlsx": "Excel (.xlsx)"
+        },
+        "cancel": "취소",
+        "confirm": "내보내기",
+        "close": "주문 내보내기 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건을 {format} 형식으로 내보내기 시작(미리보기)."
+      },
+      "printDocumentsDialog": {
+        "title": "문서 인쇄",
+        "description": "선택한 주문 {count}건의 문서를 인쇄하려고 합니다. 계속하려면 확인하세요.",
+        "cancel": "취소",
+        "confirm": "계속",
+        "close": "문서 인쇄 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건의 인쇄 작업이 예약되었습니다(미리보기)."
+      },
+      "deleteOrderDialog": {
+        "title": "주문 삭제?",
+        "description": "이 주문을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+        "cancel": "취소",
+        "confirm": "삭제",
+        "close": "주문 삭제 대화상자 닫기",
+        "successPreview": "주문 {orderNumber}이(가) 삭제되었습니다(미리보기)."
+      },
+      "detail": {
+        "pageTitle": "주문 관리 상세",
+        "breadcrumbLabel": "경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "주문 관리 상세",
+        "backToOrders": "주문 목록으로",
+        "heading": "주문 관리 상세",
+        "notFound": "주문을 찾을 수 없습니다.",
+        "noImage": "이미지 없음",
+        "noTrackingEntries": "등록된 운송장 번호가 없습니다.",
+        "sections": {
+          "orderSummary": "주문 요약",
+          "productInformation": "상품 정보",
+          "customerInformation": "고객 정보",
+          "shippingInformation": "배송 정보",
+          "paymentInformation": "결제 정보",
+          "pgTransactionInformation": "PG 거래 정보",
+          "orderStatusHistory": "주문 상태 이력",
+          "trackingNumber": "운송장 번호",
+          "internalNotes": "내부 메모",
+          "customerFacingNotes": "고객용 메모",
+          "cancellationAndRefund": "취소 및 환불 정보"
+        },
+        "fields": {
+          "orderNumber": "주문 번호",
+          "orderDate": "주문 일시",
+          "customer": "고객",
+          "country": "국가",
+          "orderStatus": "주문 상태",
+          "paymentStatus": "결제 상태",
+          "shippingStatus": "배송 상태",
+          "totalAmount": "총 금액",
+          "category": "카테고리",
+          "sku": "SKU",
+          "quantity": "수량",
+          "price": "가격",
+          "subtotal": "소계",
+          "customerName": "고객명",
+          "email": "이메일",
+          "phone": "연락처",
+          "recipient": "수령인",
+          "shippingAddress": "배송 주소",
+          "trackingNumber": "운송장 번호",
+          "paymentMethod": "결제 수단",
+          "paymentProvider": "결제 제공업체",
+          "transactionNumber": "거래 번호",
+          "paymentAmount": "결제 금액",
+          "transactionId": "거래 ID",
+          "provider": "제공업체",
+          "paymentTime": "결제 시간",
+          "response": "응답",
+          "status": "상태",
+          "cancellationStatus": "취소 상태",
+          "refundStatus": "환불 상태",
+          "refundAmount": "환불 금액",
+          "refundHistory": "환불 이력"
+        },
+        "paymentMethods": {
+          "card": "카드"
+        },
+        "pgResponses": {
+          "success": "성공",
+          "failed": "실패"
+        },
+        "pgStatus": {
+          "completed": "완료",
+          "pending": "대기",
+          "failed": "실패"
+        },
+        "cancellationStatus": {
+          "notCancelled": "취소되지 않음",
+          "cancelled": "취소됨"
+        },
+        "refundStatus": {
+          "notRefund": "환불 없음",
+          "refunded": "환불됨",
+          "partial": "부분 환불"
+        },
+        "refundHistory": {
+          "none": "환불 내역 없음",
+          "refunded": "환불 처리됨"
+        },
+        "notes": {
+          "internalPlaceholder": "내부 메모를 입력하세요…",
+          "customerPlaceholder": "고객용 메모를 입력하세요…",
+          "addNote": "메모 추가",
+          "saveNote": "메모 저장",
+          "internalSavedPreview": "내부 메모가 저장되었습니다(미리보기).",
+          "customerSavedPreview": "고객용 메모가 저장되었습니다(미리보기)."
+        },
+        "actions": {
+          "updateOrderStatus": "주문 상태 변경",
+          "registerTracking": "운송장 등록/수정",
+          "markAsShipped": "배송 완료 처리",
+          "refund": "환불",
+          "download": "주문 정보 다운로드",
+          "print": "주문 정보 인쇄",
+          "cancelOrder": "주문 취소"
+        },
+        "dialogs": {
+          "updateStatus": {
+            "title": "주문 상태 변경",
+            "description": "주문 진행 및 이행 워크플로를 최신 상태로 유지하기 위해 주문 상태를 변경합니다.",
+            "orderStatusLabel": "주문 상태",
+            "cancel": "취소",
+            "confirm": "변경",
+            "close": "주문 상태 변경 대화상자 닫기",
+            "successPreview": "주문 상태가 변경되었습니다(미리보기)."
+          },
+          "registerTracking": {
+            "title": "운송장 번호 등록",
+            "description": "배송 완료 전에 새 운송장 번호와 배송사 정보를 추가합니다.",
+            "trackingStatusLabel": "운송장 상태",
+            "trackingStatusNotRegistered": "미등록",
+            "trackingStatusRegistered": "등록됨",
+            "trackingNumberLabel": "운송장 번호",
+            "carrierLabel": "배송사",
+            "trackingPlaceholder": "운송장 번호 입력",
+            "cancel": "취소",
+            "confirm": "등록",
+            "close": "운송장 등록 대화상자 닫기",
+            "successPreview": "운송장 번호가 등록되었습니다(미리보기)."
+          },
+          "markShipped": {
+            "title": "주문 배송 완료 처리",
+            "description": "이 주문을 배송 완료로 표시하시겠습니까? 배송 상태가 업데이트되고 고객에게 알림이 전송됩니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "배송 완료 처리 대화상자 닫기",
+            "successPreview": "주문이 배송 완료로 표시되었습니다(미리보기)."
+          },
+          "refund": {
+            "title": "환불",
+            "description": "이 주문에 대한 환불을 처리하시겠습니까? 환불 상태 및 결제 정보가 업데이트됩니다.",
+            "amountLabel": "환불 금액",
+            "typeLabel": "환불 유형",
+            "types": {
+              "full": "전액 환불",
+              "partial": "부분 환불"
+            },
+            "reasonLabel": "환불 사유",
+            "reasonPlaceholder": "환불 사유를 입력하세요…",
+            "cancel": "취소",
+            "confirm": "환불",
+            "close": "환불 대화상자 닫기",
+            "successPreview": "환불이 처리되었습니다(미리보기)."
+          },
+          "download": {
+            "title": "주문 정보 다운로드",
+            "description": "이 주문의 정보를 다운로드합니다. 다운로드 전 파일 형식을 선택하세요.",
+            "formatLegend": "다운로드 파일 형식",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "취소",
+            "confirm": "내보내기",
+            "close": "주문 다운로드 대화상자 닫기",
+            "successPreview": "{format} 형식으로 다운로드를 시작했습니다(미리보기)."
+          },
+          "print": {
+            "title": "주문 정보 인쇄",
+            "description": "이 주문의 정보를 인쇄하려고 합니다. 계속하려면 확인하세요.",
+            "cancel": "취소",
+            "confirm": "계속",
+            "close": "주문 인쇄 대화상자 닫기",
+            "successPreview": "인쇄 작업이 예약되었습니다(미리보기)."
+          },
+          "cancel": {
+            "title": "주문 취소",
+            "description": "이 주문을 취소하시겠습니까? 주문 상태가 업데이트되고 취소 내역이 기록됩니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "주문 취소 대화상자 닫기",
+            "successPreview": "주문 취소가 예약되었습니다(미리보기)."
+          }
+        }
+      }
     }
   },
   "apiMessages": {

@@ -50,7 +50,8 @@ export type OrderStatusTone =
   | 'warning'
   | 'danger'
   | 'info'
-  | 'neutral';
+  | 'neutral'
+  | 'accent';
 
 export interface RecentOrderRow {
   id: string;
