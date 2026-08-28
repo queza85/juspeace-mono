@@ -25,7 +25,7 @@ import {
   TablePageSizeSelect,
 } from '@/components/table/table-page-size-select';
 import { TablePagination } from '@/components/table/table-pagination';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useClientPaginatedItems } from '@/lib/hooks/use-pagination';
 import { listProducts } from '@/lib/api/products';
@@ -412,10 +412,13 @@ function ProductsTablePanelComponent() {
           />
         </div>
 
-        <Button size="xs" className="h-8 shrink-0 px-3">
+        <Link
+          href="/products/new"
+          className={cn(buttonVariants({ size: 'xs' }), 'h-8 shrink-0 px-3')}
+        >
           <Plus className="size-3.5" aria-hidden />
           {t('admin.products.table.addProduct')}
-        </Button>
+        </Link>
       </div>
 
       <div className="-mx-4 overflow-x-auto md:-mx-5">
@@ -678,7 +681,10 @@ function ProductRow({
           >
             <Eye className="size-3" />
           </TableActionButton>
-          <TableActionButton label={t('admin.products.actions.edit')}>
+          <TableActionButton
+            label={t('admin.products.actions.edit')}
+            href={`/products/${product.slug}/edit`}
+          >
             <Pencil className="size-3" />
           </TableActionButton>
           <TableActionButton

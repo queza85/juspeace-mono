@@ -399,24 +399,174 @@
             "edit": "리뷰 수정",
             "delete": "리뷰 삭제"
           },
+          "detailDialog": {
+            "title": "리뷰 상세",
+            "close": "리뷰 상세 닫기",
+            "orderId": "주문 ID",
+            "reviewDate": "리뷰 날짜",
+            "reviewStatus": "리뷰 상태",
+            "product": "상품",
+            "rating": "평점",
+            "ratingOutOf": "5점 중 {rating}점",
+            "productSku": "SKU: {sku} · {category}",
+            "reviewTitle": "리뷰 제목",
+            "reviewContent": "리뷰 내용",
+            "photo": "사진"
+          },
+          "editDialog": {
+            "title": "리뷰 수정",
+            "close": "리뷰 수정 닫기",
+            "cancel": "취소",
+            "saveChanges": "변경 사항 저장",
+            "ratingSelect": "평점 선택",
+            "ratingOptions": {
+              "1": "1. 매우 나쁨",
+              "2": "2. 나쁨",
+              "3": "3. 보통",
+              "4": "4. 좋음",
+              "5": "5. 매우 좋음"
+            },
+            "characterCount": "{current}/{max}",
+            "photoHint": "최대 5장까지 사진을 추가할 수 있습니다.",
+            "addPhoto": "사진 추가",
+            "removePhoto": "사진 제거",
+            "savePreview": "리뷰 변경 사항이 저장되었습니다 (미리보기)."
+          },
+          "deleteDialog": {
+            "title": "리뷰를 삭제할까요?",
+            "description": "이 리뷰를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            "cancel": "취소",
+            "delete": "삭제",
+            "close": "리뷰 삭제 닫기",
+            "deletePreview": "리뷰가 삭제되었습니다 (미리보기)."
+          },
           "samples": {
             "1": {
               "title": "좋은 상품, 다시 구매할 의향 있어요!",
-              "excerpt": "팔찌가 튼튼하고 사진과 동일합니다. 배송도 빠르고 포장이 고급스러웠습니다."
+              "excerpt": "팔찌가 튼튼하고 사진과 동일합니다. 배송도 빠르고 포장이 고급스러웠습니다.",
+              "content": "이 팔찌 정말 마음에 들어요! 흰색 끈과 세련된 다크 하드웨어가 깔끔하고, 'JUSTICE / PEACE' 디테일이 의미 있는 스타일을 줍니다. 품질도 훌륭하고 착용감도 매우 편해요."
             },
             "2": {
               "title": "아름다운 장인 정신",
-              "excerpt": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다."
+              "excerpt": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다.",
+              "content": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다. 포장을 열자마자 고급스러운 느낌이었습니다."
             },
             "3": {
               "title": "전반적으로 좋지만 사이즈 참고",
-              "excerpt": "구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠습니다."
+              "excerpt": "구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠습니다.",
+              "content": "전반적으로 구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠지만, 가격 대비 품질과 마감은 기대 이상이었습니다."
             },
             "4": {
               "title": "기대 이상이에요",
-              "excerpt": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다."
+              "excerpt": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다.",
+              "content": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다. 디테일이 은은하지만 의미 있고, 하루 종일 편하게 착용할 수 있어요."
             }
           }
+        }
+      },
+      "add": {
+        "pageTitle": "새 상품 추가",
+        "breadcrumbCurrent": "새 상품 추가",
+        "optional": "선택",
+        "submitPreview": "상품 양식이 확인되었습니다. 생성 API는 아직 연결되지 않았습니다.",
+        "sections": {
+          "information": {
+            "title": "상품 정보",
+            "description": "새 상품을 추가하려면 아래 필드에 필요한 정보를 입력하세요."
+          },
+          "image": {
+            "title": "상품 이미지",
+            "description": "상품 이미지를 업로드하려면 아래 옵션을 사용해 파일을 선택하세요."
+          },
+          "pricing": {
+            "title": "가격",
+            "description": "아래 옵션을 사용해 기본 가격과 적용 가능한 할인을 설정하세요."
+          },
+          "organize": {
+            "title": "분류",
+            "description": "브랜드, 카테고리, 하위 카테고리, 상태, 태그를 선택해 상품을 분류하세요."
+          }
+        },
+        "fields": {
+          "name": "상품명",
+          "sku": "SKU",
+          "stock": "재고",
+          "description": "상품 설명",
+          "basePrice": "기본 가격",
+          "discountType": "할인 유형",
+          "discountValue": "할인 값",
+          "brand": "브랜드",
+          "category": "카테고리",
+          "status": "상태",
+          "tags": "태그"
+        },
+        "placeholders": {
+          "name": "상품명 입력",
+          "sku": "SOFA-10058",
+          "stock": "250",
+          "description": "상품 설명 입력...",
+          "basePrice": "기본 가격 입력 (예: 199.99)",
+          "discountType": "할인 선택",
+          "discountValue": "할인 또는 퍼센트 입력",
+          "brand": "브랜드명 입력",
+          "category": "카테고리 선택",
+          "status": "상태 선택",
+          "tags": "쉼표로 구분된 태그 입력"
+        },
+        "discountTypes": {
+          "PERCENTAGE": "퍼센트",
+          "FIXED": "고정 금액"
+        },
+        "validation": {
+          "nameRequired": "상품명은 필수입니다.",
+          "skuRequired": "SKU는 필수입니다.",
+          "stockRequired": "재고는 필수입니다.",
+          "stockInvalid": "올바른 재고 수량을 입력하세요.",
+          "basePriceRequired": "기본 가격은 필수입니다.",
+          "basePriceInvalid": "올바른 가격을 입력하세요.",
+          "brandRequired": "브랜드는 필수입니다.",
+          "categoryRequired": "카테고리는 필수입니다.",
+          "statusRequired": "상태는 필수입니다."
+        },
+        "image": {
+          "dropTitle": "파일을 여기에 놓거나 클릭하여 업로드하세요.",
+          "dropHint": "이미지를 드래그하거나 아래 버튼으로 파일을 선택할 수 있습니다.",
+          "browse": "이미지 찾아보기",
+          "remove": "{name} 제거",
+          "removeExisting": "이미지 제거"
+        },
+        "actions": {
+          "discard": "취소",
+          "saveDraft": "임시 저장",
+          "publish": "게시"
+        }
+      },
+      "edit": {
+        "pageTitle": "상품 수정",
+        "breadcrumbCurrent": "상품 수정",
+        "backToProduct": "상품 상세로 돌아가기",
+        "submitPreview": "상품 변경 사항이 확인되었습니다. 수정 API는 아직 연결되지 않았습니다.",
+        "sections": {
+          "information": {
+            "title": "상품 정보",
+            "description": "아래 필드에서 상품 정보를 수정하세요."
+          },
+          "image": {
+            "title": "상품 이미지",
+            "description": "새 파일을 업로드하거나 기존 이미지를 제거하여 상품 이미지를 관리하세요."
+          },
+          "pricing": {
+            "title": "가격",
+            "description": "이 상품의 기본 가격과 적용 가능한 할인을 수정하세요."
+          },
+          "organize": {
+            "title": "분류",
+            "description": "브랜드, 카테고리, 상태, 태그를 수정하세요."
+          }
+        },
+        "actions": {
+          "cancel": "취소",
+          "saveChanges": "변경 사항 저장"
         }
       }
     }

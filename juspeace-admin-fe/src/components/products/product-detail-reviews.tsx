@@ -1,14 +1,19 @@
 'use client';
 
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { CircleCheck, Eye, Pencil, Star, Trash2 } from 'lucide-react';
+import { ProductReviewDeleteDialog } from '@/components/products/product-review-delete-dialog';
+import { ProductReviewDetailDialog } from '@/components/products/product-review-detail-dialog';
+import { ProductReviewEditDialog } from '@/components/products/product-review-edit-dialog';
 import { ProductStarRating } from '@/components/products/product-star-rating';
+import { toast } from '@/components/ui/toast';
 import type { Product } from '@/lib/api/types';
 import { useT } from '@/lib/i18n/locale-context';
 import {
   getProductReviewSummary,
   getProductReviews,
+  type ProductReviewRow,
   type ProductReviewStatus,
 } from '@/lib/products/mock-data';
 import { cn } from '@/lib/utils';
@@ -34,10 +39,12 @@ function ReviewActionButton({
   label,
   children,
   destructive = false,
+  onClick,
 }: {
   label: string;
   children: React.ReactNode;
   destructive?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
     <button
@@ -47,6 +54,7 @@ function ReviewActionButton({
         'inline-flex size-6 items-center justify-center rounded-full border border-border/70 bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground',
         destructive && 'hover:border-destructive/30 hover:text-destructive',
       )}
+      onClick={onClick}
     >
       {children}
     </button>
@@ -55,16 +63,69 @@ function ReviewActionButton({
 
 function ProductDetailReviewsComponent({ product }: { product: Product }) {
   const t = useT();
+  const [selectedReview, setSelectedReview] = useState<ProductReviewRow | null>(null);
+  const [editingReview, setEditingReview] = useState<ProductReviewRow | null>(null);
+  const [deletingReview, setDeletingReview] = useState<ProductReviewRow | null>(null);
+  const [deletedReviewIds, setDeletedReviewIds] = useState<Set<string>>(() => new Set());
   const summary = useMemo(
     () => getProductReviewSummary(product.slug),
     [product.slug],
   );
-  const reviews = useMemo(() => getProductReviews(product.slug), [product.slug]);
+  const reviews = useMemo(
+    () =>
+      getProductReviews(product.slug).filter((review) => !deletedReviewIds.has(review.id)),
+    [deletedReviewIds, product.slug],
+  );
   const maxDistribution = Math.max(...summary.distribution.map((item) => item.count), 1);
   const summaryText = t('admin.products.detail.reviews.summaryDescription');
 
+  const openReview = useCallback((review: ProductReviewRow) => {
+    setSelectedReview(review);
+  }, []);
+
+  const closeReview = useCallback(() => {
+    setSelectedReview(null);
+  }, []);
+
+  const openEditReview = useCallback((review: ProductReviewRow) => {
+    setEditingReview(review);
+  }, []);
+
+  const closeEditReview = useCallback(() => {
+    setEditingReview(null);
+  }, []);
+
+  const openDeleteReview = useCallback((review: ProductReviewRow) => {
+    setDeletingReview(review);
+  }, []);
+
+  const closeDeleteReview = useCallback(() => {
+    setDeletingReview(null);
+  }, []);
+
+  const confirmDeleteReview = useCallback(() => {
+    if (!deletingReview) {
+      return;
+    }
+
+    setDeletedReviewIds((current) => new Set(current).add(deletingReview.id));
+    setSelectedReview((current) =>
+      current?.id === deletingReview.id ? null : current,
+    );
+    setEditingReview((current) =>
+      current?.id === deletingReview.id ? null : current,
+    );
+    toast(t('admin.products.detail.reviews.deleteDialog.deletePreview'), 'success');
+    setDeletingReview(null);
+  }, [deletingReview, t]);
+
+  const stopRowAction = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+  }, []);
+
   return (
-    <section className="overflow-hidden rounded-lg border border-border/60 bg-card">
+    <>
+      <section className="overflow-hidden rounded-lg border border-border/60 bg-card">
       <h2 className="border-b border-border/60 px-4 py-3 text-sm font-semibold text-[#111827]">
         {t('admin.products.detail.reviews.title')}
       </h2>
@@ -134,7 +195,8 @@ function ProductDetailReviewsComponent({ product }: { product: Product }) {
             {reviews.map((review) => (
               <tr
                 key={review.id}
-                className="border-b border-border/40 last:border-0 hover:bg-muted/10"
+                className="cursor-pointer border-b border-border/40 last:border-0 hover:bg-muted/10"
+                onClick={() => openReview(review)}
               >
                 <td className="px-4 py-3 align-top">
                   <div className="flex items-center gap-2.5">
@@ -180,17 +242,33 @@ function ProductDetailReviewsComponent({ product }: { product: Product }) {
                 <td className="px-4 py-3 align-top">
                   <ReviewStatusBadge status={review.status} />
                 </td>
-                <td className="px-4 py-3 align-top">
+                <td className="px-4 py-3 align-top" onClick={stopRowAction}>
                   <div className="flex items-center gap-1">
-                    <ReviewActionButton label={t('admin.products.detail.reviews.actions.view')}>
+                    <ReviewActionButton
+                      label={t('admin.products.detail.reviews.actions.view')}
+                      onClick={(event) => {
+                        stopRowAction(event);
+                        openReview(review);
+                      }}
+                    >
                       <Eye className="size-3" />
                     </ReviewActionButton>
-                    <ReviewActionButton label={t('admin.products.detail.reviews.actions.edit')}>
+                    <ReviewActionButton
+                      label={t('admin.products.detail.reviews.actions.edit')}
+                      onClick={(event) => {
+                        stopRowAction(event);
+                        openEditReview(review);
+                      }}
+                    >
                       <Pencil className="size-3" />
                     </ReviewActionButton>
                     <ReviewActionButton
                       label={t('admin.products.detail.reviews.actions.delete')}
                       destructive
+                      onClick={(event) => {
+                        stopRowAction(event);
+                        openDeleteReview(review);
+                      }}
                     >
                       <Trash2 className="size-3" />
                     </ReviewActionButton>
@@ -202,6 +280,26 @@ function ProductDetailReviewsComponent({ product }: { product: Product }) {
         </table>
       </div>
     </section>
+
+      <ProductReviewDetailDialog
+        open={selectedReview != null}
+        review={selectedReview}
+        product={product}
+        onClose={closeReview}
+      />
+      <ProductReviewEditDialog
+        open={editingReview != null}
+        review={editingReview}
+        product={product}
+        onClose={closeEditReview}
+      />
+      <ProductReviewDeleteDialog
+        open={deletingReview != null}
+        review={deletingReview}
+        onClose={closeDeleteReview}
+        onConfirm={confirmDeleteReview}
+      />
+    </>
   );
 }
 

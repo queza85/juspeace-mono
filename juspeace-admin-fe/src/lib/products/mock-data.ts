@@ -90,6 +90,9 @@ export interface ProductReviewRow {
   rating: number;
   titleKey: string;
   excerptKey: string;
+  contentKey: string;
+  orderId: string;
+  photoSrc?: string;
   date: string;
   time: string;
   status: ProductReviewStatus;
@@ -151,13 +154,16 @@ const REVIEW_SAMPLES = [
   {
     id: '1',
     reviewerName: 'Sophia Lee',
-    reviewerEmail: 'sophia.lee@email.com',
+    reviewerEmail: 'sophia.lee@digitalshop.com',
     avatarSrc: '/product-feature/pf1.png',
-    rating: 5,
+    rating: 4,
     titleKey: 'admin.products.detail.reviews.samples.1.title',
     excerptKey: 'admin.products.detail.reviews.samples.1.excerpt',
-    date: '22 Apr, 2025',
-    time: '04:12 PM',
+    contentKey: 'admin.products.detail.reviews.samples.1.content',
+    orderId: '#ORD-13724',
+    photoSrc: '/product-feature/pf6.png',
+    date: '21 Aug, 2025',
+    time: '10:05 AM',
     status: 'published' as const,
   },
   {
@@ -168,6 +174,9 @@ const REVIEW_SAMPLES = [
     rating: 5,
     titleKey: 'admin.products.detail.reviews.samples.2.title',
     excerptKey: 'admin.products.detail.reviews.samples.2.excerpt',
+    contentKey: 'admin.products.detail.reviews.samples.2.content',
+    orderId: '#ORD-13208',
+    photoSrc: '/product-feature/pf2.png',
     date: '19 Apr, 2025',
     time: '11:48 AM',
     status: 'published' as const,
@@ -180,6 +189,8 @@ const REVIEW_SAMPLES = [
     rating: 4,
     titleKey: 'admin.products.detail.reviews.samples.3.title',
     excerptKey: 'admin.products.detail.reviews.samples.3.excerpt',
+    contentKey: 'admin.products.detail.reviews.samples.3.content',
+    orderId: '#ORD-12891',
     date: '15 Apr, 2025',
     time: '09:05 PM',
     status: 'pending' as const,
@@ -192,6 +203,9 @@ const REVIEW_SAMPLES = [
     rating: 5,
     titleKey: 'admin.products.detail.reviews.samples.4.title',
     excerptKey: 'admin.products.detail.reviews.samples.4.excerpt',
+    contentKey: 'admin.products.detail.reviews.samples.4.content',
+    orderId: '#ORD-12456',
+    photoSrc: '/product-feature/pf5.png',
     date: '12 Apr, 2025',
     time: '02:30 PM',
     status: 'published' as const,

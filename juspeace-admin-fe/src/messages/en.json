@@ -399,24 +399,174 @@
             "edit": "Edit review",
             "delete": "Delete review"
           },
+          "detailDialog": {
+            "title": "Review Details",
+            "close": "Close review details",
+            "orderId": "Order ID",
+            "reviewDate": "Review Date",
+            "reviewStatus": "Review Status",
+            "product": "Product",
+            "rating": "Rating",
+            "ratingOutOf": "{rating} out of 5",
+            "productSku": "SKU: {sku} · {category}",
+            "reviewTitle": "Review Title",
+            "reviewContent": "Review Content",
+            "photo": "Photo"
+          },
+          "editDialog": {
+            "title": "Edit Review",
+            "close": "Close edit review dialog",
+            "cancel": "Cancel",
+            "saveChanges": "Save Changes",
+            "ratingSelect": "Select rating",
+            "ratingOptions": {
+              "1": "1. Poor",
+              "2": "2. Fair",
+              "3": "3. Average",
+              "4": "4. Good",
+              "5": "5. Excellent"
+            },
+            "characterCount": "{current}/{max}",
+            "photoHint": "You can add up to 5 photos.",
+            "addPhoto": "Add photo",
+            "removePhoto": "Remove photo",
+            "savePreview": "Review changes saved (preview)."
+          },
+          "deleteDialog": {
+            "title": "Delete Review?",
+            "description": "Are you sure you want to delete this review ? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "close": "Close delete review dialog",
+            "deletePreview": "Review deleted (preview)."
+          },
           "samples": {
             "1": {
               "title": "Great product, would buy again!",
-              "excerpt": "The bracelet feels sturdy and looks exactly like the photos. Shipping was fast and the packaging felt premium."
+              "excerpt": "The bracelet feels sturdy and looks exactly like the photos. Shipping was fast and the packaging felt premium.",
+              "content": "Obsessed with this bracelet! The white cord and sleek dark hardware look so clean, and the 'JUSTICE / PEACE' detail gives it meaningful style. Fantastic quality and super comfortable"
             },
             "2": {
               "title": "Beautiful craftsmanship",
-              "excerpt": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it."
+              "excerpt": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it.",
+              "content": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it. The presentation felt premium from the moment we opened the package."
             },
             "3": {
               "title": "Mostly great, sizing note",
-              "excerpt": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description."
+              "excerpt": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description.",
+              "content": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description, but the quality and finish still exceeded what I expected for the price."
             },
             "4": {
               "title": "Exceeded expectations",
-              "excerpt": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection."
+              "excerpt": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection.",
+              "content": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection. The details are subtle but meaningful, and it wears comfortably all day."
             }
           }
+        }
+      },
+      "add": {
+        "pageTitle": "Add New Product",
+        "breadcrumbCurrent": "Add New Product",
+        "optional": "Optional",
+        "submitPreview": "Product form validated. API create endpoint is not connected yet.",
+        "sections": {
+          "information": {
+            "title": "Product Information",
+            "description": "To add a new product, please provide the necessary details in the fields below."
+          },
+          "image": {
+            "title": "Product Image",
+            "description": "To upload a product image, please use the option below to select and upload the relevant file."
+          },
+          "pricing": {
+            "title": "Pricing",
+            "description": "Set the base price and applicable discount for the product using the options below."
+          },
+          "organize": {
+            "title": "Organize",
+            "description": "Organize your product by selecting the appropriate brand, category, sub-category, status, and tags."
+          }
+        },
+        "fields": {
+          "name": "Product Name",
+          "sku": "SKU",
+          "stock": "Stock",
+          "description": "Product Description",
+          "basePrice": "Base Price",
+          "discountType": "Discount Type",
+          "discountValue": "Discount Value",
+          "brand": "Brand",
+          "category": "Category",
+          "status": "Status",
+          "tags": "Tags"
+        },
+        "placeholders": {
+          "name": "Enter product name",
+          "sku": "SOFA-10058",
+          "stock": "250",
+          "description": "Enter product description...",
+          "basePrice": "Enter base price (e.g., 199.99)",
+          "discountType": "Choose Discount",
+          "discountValue": "Enter discount or percentage",
+          "brand": "Enter brand name",
+          "category": "Choose Category",
+          "status": "Choose Status",
+          "tags": "Enter tags separated by commas"
+        },
+        "discountTypes": {
+          "PERCENTAGE": "Percentage",
+          "FIXED": "Fixed amount"
+        },
+        "validation": {
+          "nameRequired": "Product name is required.",
+          "skuRequired": "SKU is required.",
+          "stockRequired": "Stock is required.",
+          "stockInvalid": "Enter a valid stock quantity.",
+          "basePriceRequired": "Base price is required.",
+          "basePriceInvalid": "Enter a valid price.",
+          "brandRequired": "Brand is required.",
+          "categoryRequired": "Category is required.",
+          "statusRequired": "Status is required."
+        },
+        "image": {
+          "dropTitle": "Drop files here or click to upload.",
+          "dropHint": "You can drag images here, or browse files via the button below.",
+          "browse": "Browse Images",
+          "remove": "Remove {name}",
+          "removeExisting": "Remove image"
+        },
+        "actions": {
+          "discard": "Discard",
+          "saveDraft": "Save as Draft",
+          "publish": "Publish"
+        }
+      },
+      "edit": {
+        "pageTitle": "Edit Product",
+        "breadcrumbCurrent": "Edit Product",
+        "backToProduct": "Back to Product Details",
+        "submitPreview": "Product changes validated. API update endpoint is not connected yet.",
+        "sections": {
+          "information": {
+            "title": "Product Information",
+            "description": "Update the product details in the fields below."
+          },
+          "image": {
+            "title": "Product Image",
+            "description": "Manage product images by uploading new files or removing existing ones."
+          },
+          "pricing": {
+            "title": "Pricing",
+            "description": "Update the base price and applicable discount for this product."
+          },
+          "organize": {
+            "title": "Organize",
+            "description": "Update brand, category, status, and tags for this product."
+          }
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "saveChanges": "Save Changes"
         }
       }
     }

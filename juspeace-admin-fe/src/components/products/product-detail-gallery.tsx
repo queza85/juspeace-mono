@@ -2,6 +2,7 @@
 
 import { memo, useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Pencil } from 'lucide-react';
 import type { Product } from '@/lib/api/types';
 import { useT } from '@/lib/i18n/locale-context';
@@ -61,13 +62,13 @@ function ProductDetailGalleryComponent({ product }: { product: Product }) {
         ))}
       </div>
 
-      <button
-        type="button"
+      <Link
+        href={`/products/${product.slug}/edit`}
         className="inline-flex h-8 items-center gap-1.5 rounded-md border border-sky-200 bg-sky-50 px-4 text-xs font-medium text-sky-700 transition-colors hover:bg-sky-100"
       >
         <Pencil className="size-3.5" aria-hidden />
         {t('admin.products.actions.edit')}
-      </button>
+      </Link>
     </div>
   );
 }
