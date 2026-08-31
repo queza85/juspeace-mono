@@ -1,4 +1,4 @@
-import { PrismaClient, ProductStatus, UserRole } from '@prisma/client';
+import { PrismaClient, ProductStatus, SellerType, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -53,10 +53,115 @@ async function seedUsers() {
     role: UserRole.USER,
     name: 'Demo User',
   });
+
+  const distributorEmail =
+    process.env.SEED_DISTRIBUTOR_EMAIL ?? 'distributor@lomtech.net';
+  const distributorPassword =
+    process.env.SEED_DISTRIBUTOR_PASSWORD ?? DEFAULT_SEED_PASSWORD;
+
+  await upsertUser({
+    email: distributorEmail,
+    password: distributorPassword,
+    role: UserRole.DISTRIBUTOR,
+    name: 'Mexico Distributor',
+  });
+}
+
+async function seedRegistry() {
+  const market = await prisma.market.upsert({
+    where: { code: 'MX' },
+    update: { name: 'Mexico', currency: 'USD' },
+    create: { code: 'MX', name: 'Mexico', currency: 'USD' },
+  });
+
+  const distributorUser = await prisma.user.findUnique({
+    where: {
+      email: (process.env.SEED_DISTRIBUTOR_EMAIL ?? 'distributor@lomtech.net').toLowerCase(),
+    },
+  });
+
+  const onlineSeller = await prisma.authorizedSeller.upsert({
+    where: { id: 'seed-online-seller-mx' },
+    update: {
+      marketId: market.id,
+      name: 'JUSPEACE Official Online Store',
+      type: SellerType.OFFICIAL_ONLINE,
+      locationLabel: 'Online',
+      isActive: true,
+    },
+    create: {
+      id: 'seed-online-seller-mx',
+      marketId: market.id,
+      name: 'JUSPEACE Official Online Store',
+      type: SellerType.OFFICIAL_ONLINE,
+      locationLabel: 'Online',
+      isActive: true,
+    },
+  });
+
+  const retailSeller = await prisma.authorizedSeller.upsert({
+    where: { id: 'seed-retail-seller-mx' },
+    update: {
+      marketId: market.id,
+      name: 'JUSPEACE Mexico',
+      type: SellerType.RETAIL,
+      locationLabel: 'Mexico City Store',
+      isActive: true,
+      userId: distributorUser?.id,
+    },
+    create: {
+      id: 'seed-retail-seller-mx',
+      marketId: market.id,
+      name: 'JUSPEACE Mexico',
+      type: SellerType.RETAIL,
+      locationLabel: 'Mexico City Store',
+      isActive: true,
+      userId: distributorUser?.id,
+    },
+  });
+
+  const bracelet = await prisma.product.upsert({
+    where: { slug: 'juspeace-bracelet-black' },
+    update: {
+      name: 'JUSPEACE Bracelet — Black',
+      description: 'Official JUSPEACE bracelet for registry preparation seed data.',
+      priceCents: 5000,
+      stock: 1000,
+      status: ProductStatus.ACTIVE,
+    },
+    create: {
+      slug: 'juspeace-bracelet-black',
+      name: 'JUSPEACE Bracelet — Black',
+      description: 'Official JUSPEACE bracelet for registry preparation seed data.',
+      priceCents: 5000,
+      currency: 'USD',
+      stock: 1000,
+      status: ProductStatus.ACTIVE,
+    },
+  });
+
+  await prisma.inventoryAllocation.upsert({
+    where: {
+      authorizedSellerId_productId: {
+        authorizedSellerId: retailSeller.id,
+        productId: bracelet.id,
+      },
+    },
+    update: { allocatedQuantity: 10000, marketId: market.id },
+    create: {
+      marketId: market.id,
+      authorizedSellerId: retailSeller.id,
+      productId: bracelet.id,
+      allocatedQuantity: 10000,
+    },
+  });
+
+  return { market, onlineSeller, retailSeller, bracelet };
 }
 
 async function main() {
   await seedUsers();
+  await seedRegistry();
 
   const essentials = await prisma.category.upsert({
     where: { slug: 'essentials' },

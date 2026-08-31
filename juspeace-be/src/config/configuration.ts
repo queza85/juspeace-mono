@@ -74,4 +74,9 @@ export default () => ({
       process.env.TWO_FACTOR_DEV_CHALLENGE === 'true' ||
       process.env.TWO_FACTOR_DEV_CHALLENGE === '1',
   },
+  registry: {
+    registrationTokenTtlDays: Number(
+      process.env.REGISTRATION_TOKEN_TTL_DAYS ?? 30,
+    ),
+  },
 });

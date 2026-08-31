@@ -19,6 +19,53 @@ enum ProductStatus {
 enum UserRole {
   USER
   ADMIN
+  DISTRIBUTOR
+}
+
+enum SaleChannel {
+  OFFICIAL_ONLINE
+  RETAIL
+  DISTRIBUTOR
+  POPUP
+  EVENT
+  OTHER
+}
+
+enum SaleStatus {
+  PENDING
+  COMPLETED
+  VOID
+  REFUNDED
+}
+
+enum RegistrationStatus {
+  NOT_REGISTERED
+  WAITING
+  REGISTERED
+  REVOKED
+}
+
+enum CertificateStatus {
+  ACTIVE
+  RETURNED
+  REFUNDED
+  REVOKED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  ONLINE_PAYMENT
+  OTHER
+}
+
+enum SellerType {
+  OFFICIAL_ONLINE
+  DISTRIBUTOR
+  RETAIL
+  POPUP
+  EVENT
 }
 
 enum OAuthProvider {
@@ -39,6 +86,9 @@ model User {
   passwordResetSessions  PasswordResetSession[]
   twoFactorChallenges    TwoFactorChallenge[]
   twoFactorCodes         TwoFactorCode[]
+  authorizedSeller       AuthorizedSeller?
+  salesRecorded          Sale[]                 @relation("SaleRecordedBy")
+  registrations          Registration[]
   createdAt              DateTime               @default(now()) @db.Timestamptz(3)
   updatedAt              DateTime               @updatedAt @db.Timestamptz(3)
 
@@ -157,10 +207,145 @@ model Product {
   imageUrl    String?
   categoryId  String?
   category    Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  sales       Sale[]
+  inventoryAllocations InventoryAllocation[]
   createdAt   DateTime      @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime      @updatedAt @db.Timestamptz(3)
 
   @@index([status])
   @@index([categoryId])
   @@map("products")
+}
+
+model Market {
+  id          String               @id @default(cuid())
+  code        String               @unique
+  name        String
+  currency    String               @default("USD")
+  sellers     AuthorizedSeller[]
+  allocations InventoryAllocation[]
+  createdAt   DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime             @updatedAt @db.Timestamptz(3)
+
+  @@map("markets")
+}
+
+model AuthorizedSeller {
+  id            String                @id @default(cuid())
+  marketId      String
+  market        Market                @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  name          String
+  type          SellerType
+  locationLabel String?
+  isActive      Boolean               @default(true)
+  userId        String?               @unique
+  user          User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sales         Sale[]
+  allocations   InventoryAllocation[]
+  createdAt     DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime              @updatedAt @db.Timestamptz(3)
+
+  @@index([marketId])
+  @@index([isActive])
+  @@map("authorized_sellers")
+}
+
+model InventoryAllocation {
+  id                 String           @id @default(cuid())
+  marketId           String
+  market             Market           @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  authorizedSellerId String
+  authorizedSeller   AuthorizedSeller @relation(fields: [authorizedSellerId], references: [id], onDelete: Cascade)
+  productId          String
+  product            Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  allocatedQuantity  Int
+  createdAt          DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
+
+  @@unique([authorizedSellerId, productId])
+  @@index([marketId])
+  @@map("inventory_allocations")
+}
+
+model Sale {
+  id                 String             @id @default(cuid())
+  productId          String
+  product            Product            @relation(fields: [productId], references: [id], onDelete: Restrict)
+  authorizedSellerId String
+  authorizedSeller   AuthorizedSeller   @relation(fields: [authorizedSellerId], references: [id], onDelete: Restrict)
+  channel            SaleChannel
+  quantity           Int                @default(1)
+  unitPriceCents     Int
+  currency           String
+  paymentMethod      PaymentMethod
+  status             SaleStatus         @default(PENDING)
+  registrationStatus RegistrationStatus @default(NOT_REGISTERED)
+  soldAt             DateTime?          @db.Timestamptz(3)
+  soldByUserId       String?
+  soldByUser         User?              @relation("SaleRecordedBy", fields: [soldByUserId], references: [id], onDelete: SetNull)
+  orderReference     String?
+  voidedAt           DateTime?          @db.Timestamptz(3)
+  refundedAt         DateTime?          @db.Timestamptz(3)
+  registration       Registration?
+  registrationTokens RegistrationToken[]
+  createdAt          DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime           @updatedAt @db.Timestamptz(3)
+
+  @@index([status])
+  @@index([registrationStatus])
+  @@index([authorizedSellerId])
+  @@index([orderReference])
+  @@map("sales")
+}
+
+model Registration {
+  id               String              @id @default(cuid())
+  saleId           String              @unique
+  sale             Sale                @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  customerEmail    String
+  customerName     String?
+  marketingConsent Boolean             @default(false)
+  userId           String?
+  user             User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  registeredAt     DateTime            @default(now()) @db.Timestamptz(3)
+  status           RegistrationStatus  @default(REGISTERED)
+  certificate      DigitalCertificate?
+  createdAt        DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime            @updatedAt @db.Timestamptz(3)
+
+  @@index([customerEmail])
+  @@map("registrations")
+}
+
+model RegistrationToken {
+  id         String    @id @default(cuid())
+  saleId     String
+  sale       Sale      @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  tokenHash  String    @unique
+  expiresAt  DateTime  @db.Timestamptz(3)
+  consumedAt DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([saleId, consumedAt, expiresAt])
+  @@map("registration_tokens")
+}
+
+model DigitalCertificate {
+  id               String            @id @default(cuid())
+  registrationId   String            @unique
+  registration     Registration      @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  certificateNo    String            @unique
+  status           CertificateStatus @default(ACTIVE)
+  issuedAt         DateTime          @default(now()) @db.Timestamptz(3)
+  productName      String
+  collectionName   String?
+  marketCode       String
+  sellerName       String
+  purchaseChannel  SaleChannel
+  registrationDate DateTime          @db.Timestamptz(3)
+  createdAt        DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime          @updatedAt @db.Timestamptz(3)
+
+  @@index([status])
+  @@map("digital_certificates")
 }

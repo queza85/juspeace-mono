@@ -186,6 +186,11 @@ export class EnvironmentVariables {
 
   @IsBoolean()
   TWO_FACTOR_DEV_CHALLENGE: boolean = false;
+
+  @IsInt()
+  @Min(1)
+  @Max(365)
+  REGISTRATION_TOKEN_TTL_DAYS: number = 30;
 }
 
 export function validateEnv(config: Record<string, unknown>) {
