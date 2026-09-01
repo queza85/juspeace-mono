@@ -9,6 +9,8 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import configuration from './config/configuration';
 import { validateEnv } from './config/env.validation';
 import { HealthModule } from './health/health.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { OrdersModule } from './orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProductsModule } from './products/products.module';
 import { RegistryModule } from './registry/registry.module';
@@ -30,6 +32,8 @@ import { RegistryModule } from './registry/registry.module';
     AuthModule,
     HealthModule,
     ProductsModule,
+    InventoryModule,
+    OrdersModule,
     RegistryModule,
   ],
   controllers: [AppController],

@@ -37,6 +37,13 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `digitalCertificate` | Official JUSPEACE purchase certificate record | `DigitalCertificate` | Official JUSPEACE Digital Certificate |
 | `digitalCertificate.certificateNo` | Public certificate identifier (e.g. `JPC-MX-XXXXXXXX`) | `certificateNo` | Certificate No. |
 | `inventoryAllocation` | Seller-scoped allocated inventory for reporting | `InventoryAllocation` | Allocated Inventory |
+| `productVariant` | SKU-level sellable unit with stock counters | `ProductVariant` | Variation |
+| `productVariant.sku` | Unique stock-keeping unit | `sku` | SKU |
+| `stockMovement` | Append-only inventory audit entry | `StockMovement` | Stock History |
+| `order` | E-commerce purchase (separate from registry `Sale`) | `Order` | Order |
+| `order.orderNumber` | Public order identifier (e.g. `ORD-00001`) | `orderNumber` | Order Number |
+| `orderLineItem` | Snapshot line on an order | `OrderLineItem` | — |
+| `orderStatusEvent` | Fulfillment status change audit | `OrderStatusEvent` | Status History |
 
 **Datetime rule:** Persist UTC only (`TIMESTAMPTZ`). Convert to the viewer’s timezone (e.g. Korea → `Asia/Seoul`, Myanmar → `Asia/Yangon`) in the UI — never store local wall-clock times in the database. Browser clients send `X-Timezone: Asia/Seoul` (IANA) on every API request so the backend can format or log in the caller’s zone without guessing.
 

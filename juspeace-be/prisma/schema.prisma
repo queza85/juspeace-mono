@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -14,6 +15,54 @@ enum ProductStatus {
   DRAFT
   ACTIVE
   ARCHIVED
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+enum StockMovementAction {
+  STOCK_ADDED
+  SOLD
+  RETURNED
+  RESERVED
+  RELEASED
+  ADJUSTMENT
+}
+
+enum OrderPaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  PARTIAL_REFUND
+}
+
+enum OrderFulfillmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  SHIPPED
+  DELIVERED
+}
+
+enum OrderShippingStatus {
+  PENDING
+  SHIPPED
+  RETURNED
+  DELIVERED
+}
+
+enum OrderCancellationStatus {
+  NOT_CANCELLED
+  CANCELLED
+}
+
+enum OrderRefundStatus {
+  NOT_REFUNDED
+  PARTIAL
+  REFUNDED
 }
 
 enum UserRole {
@@ -196,25 +245,150 @@ model Category {
 }
 
 model Product {
-  id          String        @id @default(cuid())
-  slug        String        @unique
-  name        String
-  description String?
-  priceCents  Int
-  currency    String        @default("USD")
-  stock       Int           @default(0)
-  status      ProductStatus @default(DRAFT)
-  imageUrl    String?
-  categoryId  String?
-  category    Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  sales       Sale[]
+  id                 String           @id @default(cuid())
+  slug               String           @unique
+  name               String
+  description        String?
+  priceCents         Int
+  currency           String           @default("USD")
+  stock              Int              @default(0)
+  status             ProductStatus    @default(DRAFT)
+  imageUrl           String?
+  brand              String?
+  tags               String[]         @default([])
+  discountType       DiscountType?
+  discountValueCents Int?
+  categoryId         String?
+  category           Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  variants           ProductVariant[]
+  sales              Sale[]
   inventoryAllocations InventoryAllocation[]
-  createdAt   DateTime      @default(now()) @db.Timestamptz(3)
-  updatedAt   DateTime      @updatedAt @db.Timestamptz(3)
+  orderLineItems     OrderLineItem[]
+  createdAt          DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
 
   @@index([status])
   @@index([categoryId])
   @@map("products")
+}
+
+model ProductVariant {
+  id                String          @id @default(cuid())
+  productId         String
+  product           Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku               String          @unique
+  variationLabel    String
+  variationKey      String
+  initialStock      Int             @default(0)
+  availableStock    Int             @default(0)
+  reservedStock     Int             @default(0)
+  soldQuantity      Int             @default(0)
+  cancelledReturned Int             @default(0)
+  lowStockThreshold Int?
+  stockMovements    StockMovement[]
+  orderLineItems    OrderLineItem[]
+  createdAt         DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime        @updatedAt @db.Timestamptz(3)
+
+  @@index([productId])
+  @@map("product_variants")
+}
+
+model StockMovement {
+  id               String              @id @default(cuid())
+  productVariantId String
+  productVariant   ProductVariant      @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+  action           StockMovementAction
+  quantityDelta    Int
+  quantityBefore   Int
+  quantityAfter    Int
+  reason           String?
+  referenceType    String?
+  referenceId      String?
+  createdAt        DateTime            @default(now()) @db.Timestamptz(3)
+
+  @@index([productVariantId, createdAt])
+  @@map("stock_movements")
+}
+
+model Order {
+  id                       String                  @id @default(cuid())
+  orderNumber              String                  @unique
+  customerName             String
+  customerEmail            String
+  customerPhone            String?
+  countryCode              String
+  shippingRecipient        String?
+  shippingAddress          String?
+  paymentMethod            String?
+  paymentProvider          String?
+  paymentTransactionNumber String?
+  paymentStatus            OrderPaymentStatus      @default(PENDING)
+  fulfillmentStatus        OrderFulfillmentStatus  @default(PENDING)
+  shippingStatus           OrderShippingStatus     @default(PENDING)
+  trackingNumber           String?
+  subtotalCents            Int
+  totalCents               Int
+  currency                 String                  @default("USD")
+  internalNote             String?
+  customerNote             String?
+  cancellationStatus       OrderCancellationStatus @default(NOT_CANCELLED)
+  refundStatus             OrderRefundStatus       @default(NOT_REFUNDED)
+  refundAmountCents        Int                     @default(0)
+  pgTransactionId          String?
+  pgProvider               String?
+  pgResponse               String?
+  pgStatus                 String?
+  paidAt                   DateTime?               @db.Timestamptz(3)
+  shippedAt                DateTime?               @db.Timestamptz(3)
+  cancelledAt              DateTime?               @db.Timestamptz(3)
+  refundedAt               DateTime?               @db.Timestamptz(3)
+  pgPaidAt                 DateTime?               @db.Timestamptz(3)
+  saleId                   String?                 @unique
+  sale                     Sale?                   @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  lineItems                OrderLineItem[]
+  statusEvents             OrderStatusEvent[]
+  createdAt                DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt                DateTime                @updatedAt @db.Timestamptz(3)
+
+  @@index([paymentStatus])
+  @@index([fulfillmentStatus])
+  @@index([shippingStatus])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderLineItem {
+  id               String          @id @default(cuid())
+  orderId          String
+  order            Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId        String
+  product          Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  productVariantId String?
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id], onDelete: SetNull)
+  productName      String
+  productSlug      String
+  productBrand     String?
+  quantity         Int
+  unitPriceCents   Int
+  createdAt        DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime        @updatedAt @db.Timestamptz(3)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_line_items")
+}
+
+model OrderStatusEvent {
+  id        String                 @id @default(cuid())
+  orderId   String
+  order     Order                  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderFulfillmentStatus
+  note      String?
+  createdAt DateTime               @default(now()) @db.Timestamptz(3)
+
+  @@index([orderId, createdAt])
+  @@map("order_status_events")
 }
 
 model Market {
@@ -288,6 +462,7 @@ model Sale {
   refundedAt         DateTime?          @db.Timestamptz(3)
   registration       Registration?
   registrationTokens RegistrationToken[]
+  order              Order?
   createdAt          DateTime           @default(now()) @db.Timestamptz(3)
   updatedAt          DateTime           @updatedAt @db.Timestamptz(3)
 
