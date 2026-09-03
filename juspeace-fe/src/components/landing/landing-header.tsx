@@ -14,10 +14,10 @@ const FLAG_EN = '/header/english.png';
 const FLAG_KO = '/header/korea.png';
 
 const NAV_LINKS = [
-  { href: '#story', key: 'landing.nav.story' },
-  { href: '#collection', key: 'landing.nav.collection' },
-  { href: '#donation', key: 'landing.nav.donation' },
-  { href: '#faq', key: 'landing.nav.faq' },
+  { href: '/#story', key: 'landing.nav.story' },
+  { href: '/#collection', key: 'landing.nav.collection' },
+  { href: '/#donation', key: 'landing.nav.donation' },
+  { href: '/#faq', key: 'landing.nav.faq' },
   { href: '/account', key: 'landing.nav.trackOrder' },
 ] as const;
 
@@ -50,17 +50,20 @@ function LocaleFlagButton({ className }: { className?: string }) {
 /** Shared header row height for logo / nav / bag — one optical line. */
 const CONTROL_H = 'h-9';
 
-function HeaderUtilityCard() {
+function HeaderUtilityCard({ light }: { light?: boolean }) {
   const t = useT();
   const totalItems = useCartTotalItems();
 
   return (
     <div className={cn('flex items-stretch', CONTROL_H)}>
       <Link
-        href="#collection"
+        href="/#collection"
         className={cn(
-          'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 border-jp-border-hero px-3.5 font-serif text-[13px] leading-none tracking-[0.04em] text-white/70',
+          'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 px-3.5 font-serif text-[13px] leading-none tracking-[0.04em]',
           CONTROL_H,
+          light
+            ? 'border-black/20 text-black/70 hover:border-black hover:bg-black hover:text-white'
+            : 'border-jp-border-hero text-white/70',
         )}
       >
         <ShoppingBag className="size-3.5 shrink-0" aria-hidden />
@@ -71,34 +74,47 @@ function HeaderUtilityCard() {
 
       <LocaleFlagButton
         className={cn(
-          'box-border w-11 shrink-0 border border-jp-border-hero px-2.5',
+          'box-border w-11 shrink-0 border px-2.5',
           CONTROL_H,
+          light ? 'border-black/20' : 'border-jp-border-hero',
         )}
       />
     </div>
   );
 }
 
-export function LandingHeader() {
+export interface LandingHeaderProps {
+  /** Hero overlay (dark bg) vs inner pages (white bg, dark text). */
+  variant?: 'hero' | 'light';
+}
+
+export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
   const t = useT();
   const totalItems = useCartTotalItems();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isLight = variant === 'light';
 
   useEffect(() => {
+    if (isLight) return;
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isLight]);
 
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-300',
-        scrolled
-          ? 'border-b border-white/10 bg-black/90 text-white backdrop-blur'
-          : 'bg-transparent text-white',
+        'inset-x-0 top-0 z-50',
+        isLight
+          ? 'relative bg-white text-black'
+          : cn(
+              'fixed transition-colors duration-300',
+              scrolled
+                ? 'border-b border-white/10 bg-black/90 text-white backdrop-blur'
+                : 'bg-transparent text-white',
+            ),
       )}
     >
       {/* Single grid row — logo | nav | utilities, shared vertical center */}
@@ -132,30 +148,38 @@ export function LandingHeader() {
 
         <div className="col-start-3 flex items-center justify-end gap-2">
           <div className="hidden sm:block">
-            <HeaderUtilityCard />
+            <HeaderUtilityCard light={isLight} />
           </div>
 
           <div className={cn('flex sm:hidden', CONTROL_H)}>
             <Link
-              href="#collection"
+              href="/#collection"
               className={cn(
-                'jp-utility-link flex items-center gap-1 border border-r-0 border-jp-border-hero px-2.5 font-serif text-[12px] text-white/70',
+                'jp-utility-link flex items-center gap-1 border border-r-0 px-2.5 font-serif text-[12px]',
                 CONTROL_H,
+                isLight
+                  ? 'border-black/20 text-black/70'
+                  : 'border-jp-border-hero text-white/70',
               )}
             >
               <ShoppingBag className="size-3.5" aria-hidden />
               <span>({totalItems})</span>
             </Link>
             <LocaleFlagButton
-              className={cn('border border-jp-border-hero px-2.5', CONTROL_H)}
+              className={cn(
+                'border px-2.5',
+                CONTROL_H,
+                isLight ? 'border-black/20' : 'border-jp-border-hero',
+              )}
             />
           </div>
 
           <button
             type="button"
             className={cn(
-              'flex items-center justify-center border border-jp-border-hero lg:hidden',
+              'flex items-center justify-center border lg:hidden',
               'size-9',
+              isLight ? 'border-black/20' : 'border-jp-border-hero',
             )}
             aria-label={
               menuOpen ? t('landing.nav.closeMenu') : t('landing.nav.openMenu')
@@ -169,7 +193,14 @@ export function LandingHeader() {
       </div>
 
       {menuOpen ? (
-        <div className="border-t border-white/20 bg-black/95 px-5 py-4 lg:hidden">
+        <div
+          className={cn(
+            'border-t px-5 py-4 lg:hidden',
+            isLight
+              ? 'border-black/10 bg-white text-black'
+              : 'border-white/20 bg-black/95 text-white',
+          )}
+        >
           <nav className="flex flex-col gap-2.5 font-serif text-[14px] tracking-[1.8px]">
             {NAV_LINKS.map((link) => (
               <Link

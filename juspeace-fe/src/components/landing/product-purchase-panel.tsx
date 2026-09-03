@@ -41,7 +41,7 @@ export function ProductPurchasePanel({
       {detailsHref ? (
         <Link
           href={detailsHref}
-          className="mt-0.5 inline-block font-mono text-xs text-jp-muted underline underline-offset-4"
+          className="mt-0.5 inline-block font-mono text-xs text-jp-muted underline underline-offset-4 transition-colors hover:text-black"
         >
           {t('landing.collection.moreDetails')}
         </Link>

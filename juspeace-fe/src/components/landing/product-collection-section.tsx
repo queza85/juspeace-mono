@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { ProductPurchasePanel } from '@/components/landing/product-purchase-panel';
 import { SectionHeading } from '@/components/landing/section-heading';
@@ -6,29 +7,13 @@ import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import type { Product } from '@/lib/api/types';
 import { getTranslator } from '@/lib/i18n/server';
-
-type VariantKey = 'black' | 'white' | 'stripe';
-
-const COLLECTION_IMAGES: Record<
-  VariantKey,
-  { src: string; width: number; height: number }
-> = {
-  black: {
-    src: '/product-collection/juespeace_mar4.png',
-    width: 744,
-    height: 930,
-  },
-  white: {
-    src: '/product-collection/juspeace_mr3.png',
-    width: 726,
-    height: 920,
-  },
-  stripe: {
-    src: '/product-collection/ju_mar6.png',
-    width: 746,
-    height: 926,
-  },
-};
+import {
+  COLLECTION_VARIANTS,
+  getFallbackI18nPrefix,
+  getProductDetailHref,
+  VARIANT_MAIN_IMAGES,
+  type VariantKey,
+} from '@/lib/products/variant-images';
 
 const COLLECTION_ROW_MIN_HEIGHT: Record<VariantKey, string> = {
   black: 'min-h-[calc(360px*930/744)] xl:min-h-[calc(420px*930/744)]',
@@ -45,6 +30,7 @@ interface CollectionRow {
   variant: string;
   description: string;
   stock: number;
+  detailHref: string;
 }
 
 function matchVariant(product: Product, key: VariantKey) {
@@ -56,11 +42,10 @@ function buildRows(
   products: Product[],
   t: (key: string, values?: Record<string, string | number>) => string,
 ): CollectionRow[] {
-  const keys: VariantKey[] = ['black', 'white', 'stripe'];
   const used = new Set<string>();
 
-  return keys.map((key) => {
-    const fallbackPrefix = `landing.collection.fallback${key[0].toUpperCase()}${key.slice(1)}`;
+  return COLLECTION_VARIANTS.map((key) => {
+    const fallbackPrefix = getFallbackI18nPrefix(key);
     const matched =
       products.find((product) => {
         if (used.has(product.id)) return false;
@@ -79,6 +64,7 @@ function buildRows(
       description:
         matched?.description?.trim() || t(`${fallbackPrefix}.description`),
       stock: matched?.stock ?? 20,
+      detailHref: getProductDetailHref(key, matched),
     };
   });
 }
@@ -86,21 +72,29 @@ function buildRows(
 function CollectionProductImage({
   variantKey,
   alt,
+  href,
 }: {
   variantKey: VariantKey;
   alt: string;
+  href: string;
 }) {
-  const image = COLLECTION_IMAGES[variantKey];
+  const image = VARIANT_MAIN_IMAGES[variantKey];
 
   return (
-    <Image
-      src={image.src}
-      alt={alt}
-      width={image.width}
-      height={image.height}
-      sizes="(max-width: 1280px) 360px, 420px"
-      className="block h-auto w-full"
-    />
+    <Link
+      href={href}
+      className="group block transition-opacity hover:opacity-90"
+      aria-label={alt}
+    >
+      <Image
+        src={image.src}
+        alt={alt}
+        width={image.width}
+        height={image.height}
+        sizes="(max-width: 1280px) 360px, 420px"
+        className="block h-auto w-full"
+      />
+    </Link>
   );
 }
 
@@ -117,8 +111,10 @@ function CollectionProductCopy({
         {t('landing.collection.index')}
       </p>
       <h3 className="mt-1 font-serif text-[clamp(1rem,1.8vw,1.375rem)] leading-[1.15] text-black">
-        <span className="block whitespace-pre">{`/    ${row.category}`}</span>
-        <span className="block uppercase">{row.title}</span>
+        <Link href={row.detailHref} className="transition-opacity hover:opacity-80">
+          <span className="block whitespace-pre">{`/    ${row.category}`}</span>
+          <span className="block uppercase">{row.title}</span>
+        </Link>
       </h3>
       <p className="mt-2 max-w-[380px] font-mono text-xs leading-5 text-jp-muted sm:text-[13px] sm:leading-6">
         {row.description}
@@ -129,9 +125,7 @@ function CollectionProductCopy({
           panelName={row.panelName}
           variantLabel={row.variant}
           stock={row.stock}
-          detailsHref={
-            row.product ? `/products/${row.product.slug}` : undefined
-          }
+          detailsHref={row.detailHref}
         />
       </div>
     </div>
@@ -149,7 +143,10 @@ export async function ProductCollectionSection({
   const rows = buildRows(products, t);
 
   const imageAlt = (row: CollectionRow) =>
-    row.product?.name ?? t(`landing.collection.fallback${row.key[0].toUpperCase()}${row.key.slice(1)}.panelName`);
+    row.product?.name ??
+    t(
+      `landing.collection.fallback${row.key[0].toUpperCase()}${row.key.slice(1)}.panelName`,
+    );
 
   return (
     <SectionShell id="collection" className="bg-white pt-12 pb-28 lg:pt-20 lg:pb-40">
@@ -166,7 +163,6 @@ export async function ProductCollectionSection({
         </SectionHeading>
       </div>
 
-      {/* Mobile: image + copy per product */}
       <div data-scroll-stagger className="space-y-12 lg:hidden">
         {rows.map((row) => (
           <article
@@ -174,13 +170,16 @@ export async function ProductCollectionSection({
             data-scroll-stagger-item
             className="mx-auto flex max-w-[960px] flex-col gap-6"
           >
-            <CollectionProductImage variantKey={row.key} alt={imageAlt(row)} />
+            <CollectionProductImage
+              variantKey={row.key}
+              alt={imageAlt(row)}
+              href={row.detailHref}
+            />
             <CollectionProductCopy row={row} t={t} />
           </article>
         ))}
       </div>
 
-      {/* Desktop: flush image stack + spaced copy column (Figma) */}
       <div
         data-scroll-stagger
         className="mx-auto hidden max-w-[1080px] lg:grid lg:grid-cols-[360px_minmax(0,1fr)] lg:items-start lg:gap-10 lg:pl-10 xl:grid-cols-[420px_minmax(0,1fr)] xl:gap-12 xl:pl-14"
@@ -188,7 +187,11 @@ export async function ProductCollectionSection({
         <div className="flex flex-col gap-0">
           {rows.map((row) => (
             <div key={row.key} data-scroll-stagger-item>
-              <CollectionProductImage variantKey={row.key} alt={imageAlt(row)} />
+              <CollectionProductImage
+                variantKey={row.key}
+                alt={imageAlt(row)}
+                href={row.detailHref}
+              />
             </div>
           ))}
         </div>

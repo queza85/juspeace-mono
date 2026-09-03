@@ -21,7 +21,62 @@
   },
   "products": {
     "empty": "No products available yet.",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "detail": {
+      "breadcrumbCollection": "Product Collection",
+      "buyNow": "Buy Now",
+      "addToCart": "Add To Cart",
+      "onlyItemsLeftBefore": "Only",
+      "onlyItemsLeftHighlight": "{count} items",
+      "onlyItemsLeftAfter": "left",
+      "dontMiss": "Don't miss",
+      "reviewsCount": "({count})",
+      "deliveryTitle": "Delivery information",
+      "deliveryBody": "Enter your postal code for delivery availability.",
+      "returnTitle": "Return Delivery",
+      "returnBody": "Free 30 Days delivery returns.",
+      "returnDetails": "Details.",
+      "tabs": {
+        "description": "DESCRIPTION",
+        "closeUp": "CLOSE UP IMAGE",
+        "additionalInfo": "ADDITIONAL INFO",
+        "reviews": "REVIEWS"
+      },
+      "closeUpPlaceholder": "Close-up images coming soon.",
+      "additionalInfoPlaceholder": "Additional product information coming soon.",
+      "reviewsPlaceholder": "Reviews coming soon.",
+      "reviews": {
+        "photoAlt": "Review photo",
+        "samples": {
+          "1": {
+            "name": "Meow Meow",
+            "email": "sophia.lee@digitalshop.com",
+            "postedAt": "Yesterday 04:10 PM",
+            "title": "Great product, would buy again!",
+            "body": "These are honestly amazing! The sound quality is really impressive, with clear audio, good bass, and a nice overall balance."
+          },
+          "2": {
+            "name": "Lemon Lover",
+            "email": "alice@digitalshop.com",
+            "postedAt": "Yesterday 04:18 PM",
+            "body": "Add a touch of elegance to your everyday look with this beautiful bracelet. Its stylish design makes it easy to pair with both casual and dressy outfits. Comfortable to wear and perfect for everyday use, it's a lovely accessory for yourself or a thoughtful gift for someone special."
+          }
+        },
+        "form": {
+          "heading": "Submit your review",
+          "ratingLabel": "Add Your Rating",
+          "reviewLabel": "Write your review here",
+          "placeholder": "Write here ...",
+          "submit": "Submit Review",
+          "submitPreview": "Thank you — review submission will be available soon.",
+          "starLabel": "{count} stars"
+        }
+      },
+      "relatedLabel": "PRODUCT COLLECTION",
+      "relatedHeading": "More Like This",
+      "galleryThumbnail": "Product image {index}",
+      "ratingLabel": "{count} out of 5 stars"
+    }
   },
   "auth": {
     "login": "Log in",
