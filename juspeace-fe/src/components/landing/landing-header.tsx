@@ -57,7 +57,7 @@ function HeaderUtilityCard({ light }: { light?: boolean }) {
   return (
     <div className={cn('flex items-stretch', CONTROL_H)}>
       <Link
-        href="/#collection"
+        href="/cart"
         className={cn(
           'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 px-3.5 font-serif text-[13px] leading-none tracking-[0.04em]',
           CONTROL_H,
@@ -153,7 +153,7 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
 
           <div className={cn('flex sm:hidden', CONTROL_H)}>
             <Link
-              href="/#collection"
+              href="/cart"
               className={cn(
                 'jp-utility-link flex items-center gap-1 border border-r-0 px-2.5 font-serif text-[12px]',
                 CONTROL_H,

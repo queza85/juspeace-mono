@@ -11,12 +11,18 @@ export interface CartItem {
   quantity: number;
 }
 
+/** Flat shipping fee (USD cents) — frontend placeholder until checkout API exists. */
+export const CART_SHIPPING_CENTS = 500;
+
 interface CartState {
   items: CartItem[];
   addItem: (product: CartItem['product'], quantity?: number) => void;
   removeItem: (productId: string) => void;
+  updateItemQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   totalItems: () => number;
+  subtotalCents: () => number;
+  orderTotalCents: () => number;
 }
 
 export const useCartStore = create<CartState>()(
@@ -49,9 +55,29 @@ export const useCartStore = create<CartState>()(
           items: state.items.filter((item) => item.product.id !== productId),
         }));
       },
+      updateItemQuantity: (productId, quantity) => {
+        if (quantity <= 0) {
+          get().removeItem(productId);
+          return;
+        }
+
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === productId ? { ...item, quantity } : item,
+          ),
+        }));
+      },
       clearCart: () => set({ items: [] }),
       totalItems: () =>
         get().items.reduce((total, item) => total + item.quantity, 0),
+      subtotalCents: () =>
+        get().items.reduce(
+          (total, item) => total + item.product.priceCents * item.quantity,
+          0,
+        ),
+      orderTotalCents: () =>
+        get().subtotalCents() +
+        (get().items.length > 0 ? CART_SHIPPING_CENTS : 0),
     }),
     {
       name: 'juspeace-cart',

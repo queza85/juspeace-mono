@@ -50,7 +50,7 @@ export function SiteHeader() {
           ) : null}
 
           <Link
-            href="/"
+            href="/cart"
             className={buttonVariants({
               variant: 'outline',
               size: 'sm',

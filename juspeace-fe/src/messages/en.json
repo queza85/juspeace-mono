@@ -11,6 +11,169 @@
     "cart": "Cart",
     "items": "{count} items"
   },
+  "cart": {
+    "pageTitle": "Cart Review",
+    "breadcrumb": "Cart Review",
+    "title": "{count} items in your cart",
+    "subtitle": "Review your items before checkout.",
+    "orderSummary": "Order Summary",
+    "promoLabel": "Promo / Coupon",
+    "qtyLabel": "Qty: {count}",
+    "removeItem": "Remove {name} from cart",
+    "summaryLineQty": "Qty: {count}",
+    "promoPlaceholder": "Enter Code",
+    "promoApply": "Apply",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "taxIncluded": "Tax (Included)",
+    "total": "Total",
+    "deliveryEstimateTitle": "Estimated delivery for your order:",
+    "deliveryEstimateBody": "Delivery will take up to 3 Days",
+    "proceedToCheckout": "Proceed to Checkout",
+    "checkoutComingSoon": "Checkout coming soon",
+    "continueShopping": "Continue Shopping",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Add items from the collection to review them here."
+  },
+  "checkout": {
+    "pageTitle": "Shipping Information",
+    "breadcrumb": "Shipping Information",
+    "title": "Shipping Information",
+    "subtitle": "Enter your shipping details and choose your preferred delivery method",
+    "back": "Back",
+    "shippingDetails": "Shipping Details",
+    "shippingMethod": "Shipping Method",
+    "saveForNextTime": "Save this information for next time.",
+    "free": "FREE",
+    "nextToPayment": "Next to Payment",
+    "fields": {
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "phoneCountryCode": "Country code",
+      "address": "Address",
+      "city": "City",
+      "postalCode": "Postal Code",
+      "deliveryNote": "Delivery Note (Optional)"
+    },
+    "phoneCountries": {
+      "korea": "Korea",
+      "usa": "USA"
+    },
+    "placeholders": {
+      "name": "Enter your full name",
+      "phoneNumber": "000 000 000",
+      "address": "21, admle st.",
+      "city": "Enter your city name",
+      "postalCode": "Enter postal code",
+      "deliveryNote": "Add notes for delivery"
+    },
+    "methods": {
+      "standard": {
+        "title": "Standard Delivery",
+        "description": "Estimated delivery by September 8-10"
+      },
+      "pickup": {
+        "title": "Pick Up",
+        "description": "Ready for pickup on September 6"
+      }
+    },
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "addressRequired": "Please enter your address.",
+      "cityRequired": "Please enter your city.",
+      "postalCodeRequired": "Please enter your postal code."
+    }
+  },
+  "payment": {
+    "pageTitle": "Payment Information",
+    "breadcrumb": "Payment Information",
+    "title": "Payment Information",
+    "subtitle": "Choose your preferred payment method to complete your order securely.",
+    "back": "Back",
+    "chooseMethod": "Choose Payment Method",
+    "cardPayment": "Card / Debit Card Payment",
+    "billingAddress": "Billing Address",
+    "billingSameAsShipping": "Billing address same as shipping address",
+    "streetAddress": "Street address",
+    "saveCard": "Save this card for future purchases",
+    "nextToOrderReview": "Next to Order Review",
+    "methods": {
+      "card": "Card / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "fields": {
+      "nameOnCard": "Name on Card",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV",
+      "line1": "Line 1",
+      "line2Optional": "Line 2 ( Optional )",
+      "country": "Country",
+      "stateProvince": "State / province",
+      "zipCode": "Zip Code"
+    },
+    "placeholders": {
+      "nameOnCard": "Jamie Lar",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiryDate": "10/8/2029",
+      "cvv": "123",
+      "line1": "Line 1",
+      "line2": "Line 2 ( Optional )",
+      "zipCode": "Zip Code"
+    },
+    "countries": {
+      "unitedStates": "United State",
+      "korea": "Korea"
+    },
+    "states": {
+      "chicago": "Chicago",
+      "california": "California",
+      "newYork": "New York"
+    },
+    "validation": {
+      "nameOnCardRequired": "Please enter the name on your card.",
+      "cardNumberInvalid": "Please enter a valid card number.",
+      "expiryDateInvalid": "Please enter a valid expiry date.",
+      "cvvInvalid": "Please enter a valid CVV.",
+      "billingLine1Required": "Please enter your billing address.",
+      "billingCountryRequired": "Please select your country.",
+      "billingStateRequired": "Please select your state or province.",
+      "billingZipCodeRequired": "Please enter your zip code."
+    }
+  },
+  "review": {
+    "pageTitle": "Review Order",
+    "breadcrumb": "Review Order",
+    "title": "Review Order",
+    "subtitle": "Please review your order details carefully before placing your order.",
+    "back": "Back",
+    "shippingAddress": "Shipping Address",
+    "paymentMethod": "Payment Method",
+    "reviewItems": "Review your item",
+    "edit": "EDIT",
+    "submitOrder": "Submit your order to JUSPEACE",
+    "paymentMethods": {
+      "card": "Credit / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    }
+  },
+  "orderSuccess": {
+    "pageTitle": "Order Confirmed",
+    "title": "Thank you! Your order is confirmed.",
+    "subtitle": "We've Received your order and are getting it ready",
+    "orderNumberLabel": "Order Number",
+    "confirmationEmailPrefix": "A confirmation email has been sent to",
+    "estimatedDelivery": "Estimated Delivery",
+    "deliveryNotify": "We'll notify you when your order is on the way.",
+    "trackOrder": "Track Order",
+    "continueShopping": "Continue Shopping",
+    "guestEmail": "jamie13@gmail.com"
+  },
   "home": {
     "heroTitle": "Welcome to Juspeace",
     "heroDescription": "Discover curated products crafted for calm, sustainable living.",
