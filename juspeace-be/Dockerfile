@@ -1,16 +1,15 @@
 # syntax=docker/dockerfile:1
 
-FROM node:22-alpine AS deps
-WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@10.22.0 --activate
-COPY package.json pnpm-lock.yaml ./
-COPY prisma ./prisma
-RUN pnpm install --frozen-lockfile
-
 FROM node:22-alpine AS builder
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@10.22.0 --activate
-COPY --from=deps /app/node_modules ./node_modules
+RUN apk add --no-cache openssl \
+  && corepack enable && corepack prepare pnpm@10.22.0 --activate
+COPY package.json pnpm-lock.yaml ./
+COPY prisma ./prisma
+# Hoisted layout so generated client at node_modules/.prisma/client is
+# resolvable by @prisma/client (pnpm's default isolated linker is not).
+RUN printf 'node-linker=hoisted\n' > .npmrc \
+  && pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm exec prisma generate && pnpm run build
 
@@ -28,7 +27,8 @@ RUN apk add --no-cache openssl \
 COPY package.json pnpm-lock.yaml ./
 # prisma CLI is a devDependency. Drop postinstall (`prisma generate`) so
 # --prod install does not fail; native addons (bcrypt) still run.
-RUN pnpm pkg delete scripts.postinstall \
+RUN printf 'node-linker=hoisted\n' > .npmrc \
+  && pnpm pkg delete scripts.postinstall \
   && pnpm install --frozen-lockfile --prod
 
 COPY --from=builder /app/dist ./dist
