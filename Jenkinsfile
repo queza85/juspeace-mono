@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'dev-agent-via'
+        label 'lomtech-internal-agent'
     }
 
     environment {
