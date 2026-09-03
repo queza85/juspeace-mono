@@ -4,6 +4,7 @@ FROM node:22-alpine AS deps
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.22.0 --activate
 COPY package.json pnpm-lock.yaml ./
+COPY prisma ./prisma
 RUN pnpm install --frozen-lockfile
 
 FROM node:22-alpine AS builder
@@ -19,12 +20,16 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=7777
 
-RUN corepack enable && corepack prepare pnpm@10.22.0 --activate \
+RUN apk add --no-cache openssl \
+  && corepack enable && corepack prepare pnpm@10.22.0 --activate \
   && addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nestjs
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile --prod
+# prisma CLI is a devDependency. Drop postinstall (`prisma generate`) so
+# --prod install does not fail; native addons (bcrypt) still run.
+RUN pnpm pkg delete scripts.postinstall \
+  && pnpm install --frozen-lockfile --prod
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
