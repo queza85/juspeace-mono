@@ -4,19 +4,13 @@ pipeline {
     }
 
     environment {
-        compose_service_name = "web"
         workspace = "juspeace-mono-develop"
-        COMPOSE_CONTAINER_NAME = "${workspace}-${compose_service_name}"
         vault_cli = credentials('vault-cli')
         vault_addr = credentials('vault-addr')
         vault_path = "juspeace-mono-develop"
         vault_path_fe_env = "juspeace-mono-develop/fe"
         vault_path_be_env = "juspeace-mono-develop/be"
         vault_path_admin_fe_env = "juspeace-mono-develop/admin-fe"
-    }
-
-    tools {
-        nodejs "my-NodeJS"
     }
 
     stages {
@@ -35,25 +29,33 @@ pipeline {
                 ws("${workspace}") {
                     sh """
                         export VAULT_ADDR=${vault_addr}
-                        echo "Generating .env file from Vault secrets..."
-                        ${vault_cli} ${vault_path_fe_env} > juspeace-fe/.env
-                        ${vault_cli} ${vault_path_be_env} > juspeace-be/.env
-                        ${vault_cli} ${vault_path_admin_fe_env} > juspeace-admin-fe/.env
+                        echo "Generating .env files from Vault secrets..."
                         ${vault_cli} ${vault_path} > .env
+                        ${vault_cli} ${vault_path_be_env} > juspeace-be/.env
+                        ${vault_cli} ${vault_path_fe_env} > juspeace-fe/.env
+                        ${vault_cli} ${vault_path_admin_fe_env} > juspeace-admin-fe/.env
                     """
                 }
             }
         }
 
-        stage('Docker Compose Down & Build') {
+        stage('Docker Compose Down') {
             steps {
                 ws("${workspace}") {
                     sh """
-                        echo "Stopping existing containers if any..."
-                        docker compose down || true
+                        echo "Stopping existing Compose stack if any..."
+                        docker compose down --remove-orphans || true
+                    """
+                }
+            }
+        }
 
-                        echo "Building Docker Compose service..."
-                        docker compose build ${compose_service_name}
+        stage('Docker Compose Build') {
+            steps {
+                ws("${workspace}") {
+                    sh """
+                        echo "Building Compose services: postgres, mailpit, juspeace-be, juspeace-fe, juspeace-admin-fe..."
+                        docker compose build
                     """
                 }
             }
@@ -63,8 +65,8 @@ pipeline {
             steps {
                 ws("${workspace}") {
                     sh """
-                        echo "Starting Docker Compose service..."
-                        docker compose up -d ${compose_service_name}
+                        echo "Starting full Compose stack..."
+                        docker compose up -d
                     """
                 }
             }
@@ -78,10 +80,10 @@ pipeline {
             }
         }
         failure {
-            echo "❌ Build or Deployment failed. Please check logs."
+            echo "Build or deployment failed. Please check logs."
         }
         success {
-            echo "✅ juspeace-mono deployed successfully with Docker Compose!"
+            echo "juspeace-mono deployed successfully with Docker Compose."
         }
     }
 }
