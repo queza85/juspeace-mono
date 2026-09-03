@@ -13,7 +13,9 @@ Browser → Next.js admin (juspeace-admin-fe:3001) ─┼→ NestJS API (juspeac
 
 ## Ports and URLs
 
-| Service | Local URL |
+Defaults. Published host ports come from root `.env` (`FE_PORT`, `ADMIN_FE_PORT`, `BE_PORT`, `POSTGRES_PORT`, `MAILPIT_SMTP_PORT`, `MAILPIT_UI_PORT`). App runtime env comes from each package’s `.env` / `.env.local` via Compose `env_file`. See [`.env.example`](../.env.example).
+
+| Service | Default local URL |
 | --- | --- |
 | Storefront | http://localhost:3000 |
 | Admin console | http://localhost:3001 |
@@ -75,15 +77,21 @@ juspeace-admin-fe/docker-compose.yml
   └── juspeace-admin-fe   # port 3001; expects API via NEXT_PUBLIC_API_URL
 ```
 
-In containers, the API uses `DATABASE_URL` host `postgres`. Browsers still call the API at `http://localhost:7777/api/v1` unless you change the build arg.
+In containers, Compose `environment:` forces `DB_HOST` / `DATABASE_URL` host `postgres` and `SMTP_HOST=mailpit` (overrides package `.env` host-local values). Browsers still call the API via `NEXT_PUBLIC_API_URL` (default `http://localhost:7777/api/v1`, driven by root `BE_PORT` at build time).
 
 Backend container CMD: `node dist/main.js`. Run Prisma migrations separately when needed.
 
 ## Env alignment
 
+| Layer | Source | Purpose |
+| --- | --- | --- |
+| Root `.env` | [`.env.example`](../.env.example) | Compose interpolation: published host ports, optional `NEXT_PUBLIC_API_URL` build-arg |
+| Package `env_file` | `juspeace-be/.env`, FE `.env` / `.env.local` | App runtime (JWT, CORS, mail, API URL, DB credentials for host dev) |
+| Compose `environment:` | `docker-compose.yml` | Docker-only overrides (`postgres` / `mailpit` hosts, container listen ports) |
+
 | Concern | juspeace-fe / juspeace-admin-fe | juspeace-be |
 | --- | --- | --- |
-| API base | `NEXT_PUBLIC_API_URL` | — |
+| API base | `NEXT_PUBLIC_API_URL` (package env + FE build-arg) | — |
 | DB | — | `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE` (+ optional `DATABASE_URL`) |
 | CORS | — | `CORS_ORIGINS` (comma-separated storefront + admin origins) |
 

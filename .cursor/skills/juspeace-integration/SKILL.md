@@ -36,6 +36,16 @@ See `docs/architecture.md` for topology details.
 
 ## Environment variables
 
+Two Compose env layers:
+
+1. **Root `.env`** (copy `.env.example`) — interpolation only: `FE_PORT`, `ADMIN_FE_PORT`, `BE_PORT`, `POSTGRES_PORT`, `MAILPIT_SMTP_PORT`, `MAILPIT_UI_PORT`, optional `NEXT_PUBLIC_API_URL` build-arg.
+2. **Package `env_file`** — each service loads its own folder env (`required: false` if missing):
+   - `juspeace-be/.env`
+   - `juspeace-fe/.env` then `.env.local` (later wins)
+   - `juspeace-admin-fe/.env` then `.env.local`
+
+Compose `environment:` always wins over `env_file` for Docker networking: `DB_HOST=postgres`, `DATABASE_URL=…@postgres…`, `SMTP_HOST=mailpit`, container `PORT` / `HOSTNAME`. Keep `NEXT_PUBLIC_API_URL` and `CORS_ORIGINS` in sync when host ports change.
+
 ### Frontend (`juspeace-fe/.env.local`)
 
 ```env
@@ -61,7 +71,7 @@ DATABASE_URL=postgresql://postgres:root@127.0.0.1:5432/juspeace_develop?schema=p
 CORS_ORIGINS=http://localhost:3000,http://localhost:3001
 ```
 
-Prefer discrete `DB_*` vars. Nest builds / syncs `DATABASE_URL` for Prisma. In Docker, use `DB_HOST=postgres`.
+Prefer discrete `DB_*` vars. Nest builds / syncs `DATABASE_URL` for Prisma. Host-local `.env` may keep `127.0.0.1`; root/package Compose overrides to `postgres` / `mailpit` inside containers.
 
 ## API contract rules
 

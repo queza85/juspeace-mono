@@ -72,6 +72,9 @@ cd juspeace-fe && pnpm run docker:build
 
 ## Integration defaults
 
+Compose host ports (root `.env`, see `.env.example`): `FE_PORT=3000`, `ADMIN_FE_PORT=3001`, `BE_PORT=7777`, `POSTGRES_PORT=5432`.
+App runtime: package `env_file` (`juspeace-be/.env`, FE `.env.local`); Compose overrides `DB_HOST`/`SMTP_HOST` for containers.
+
 - Frontend API base: `NEXT_PUBLIC_API_URL=http://localhost:7777/api/v1`
 - Backend CORS: `CORS_ORIGINS=http://localhost:3000,http://localhost:3001`
 - Backend prefix: `/api/v1`
