@@ -11,7 +11,8 @@ COPY prisma ./prisma
 RUN printf 'node-linker=hoisted\n' > .npmrc \
   && pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm exec prisma generate && pnpm run build
+RUN pnpm exec prisma generate && pnpm run build \
+  && test -f dist/main.js
 
 FROM node:22-alpine AS runner
 WORKDIR /app
