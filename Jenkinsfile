@@ -50,23 +50,12 @@ pipeline {
             }
         }
 
-        stage('Docker Compose Build') {
+        stage('Docker Compose Deploy') {
             steps {
                 ws("${workspace}") {
                     sh """
-                        echo "Building Compose services: postgres, mailpit, juspeace-be, juspeace-fe, juspeace-admin-fe..."
-                        docker compose build
-                    """
-                }
-            }
-        }
-
-        stage('Docker Compose Up') {
-            steps {
-                ws("${workspace}") {
-                    sh """
-                        echo "Starting full Compose stack..."
-                        docker compose up -d
+                        echo "Building and starting stack (DB migrations run automatically when backend starts)..."
+                        docker compose up -d --build
                     """
                 }
             }

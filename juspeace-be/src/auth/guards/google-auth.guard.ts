@@ -1,12 +1,11 @@
 import {
   ExecutionContext,
   Injectable,
-  ServiceUnavailableException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@nestjs/passport';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 
 @Injectable()
 export class GoogleAuthGuard extends AuthGuard('google') {
@@ -30,10 +29,45 @@ export class GoogleAuthGuard extends AuthGuard('google') {
     );
 
     if (!clientId || !clientSecret) {
-      throw new ServiceUnavailableException('GOOGLE_OAUTH_NOT_CONFIGURED');
+      const response = context.switchToHttp().getResponse<Response>();
+      const request = context.switchToHttp().getRequest<Request>();
+
+      if (!response.headersSent) {
+        response.redirect(this.resolveFailureRedirect(request));
+      }
+
+      // Deny without throwing — GlobalExceptionFilter skips body when headersSent.
+      return false;
     }
 
     return super.canActivate(context);
+  }
+
+  private resolveFailureRedirect(request: Request): string {
+    const defaultUrl = this.configService.getOrThrow<string>(
+      'auth.oauth.failureRedirectUrl',
+    );
+    const queryRedirect =
+      typeof request.query.failureRedirect === 'string'
+        ? request.query.failureRedirect.trim()
+        : '';
+
+    if (!queryRedirect) {
+      return defaultUrl;
+    }
+
+    const allowedOrigins =
+      this.configService.get<string[]>('corsOrigins') ?? [];
+    try {
+      const parsed = new URL(queryRedirect);
+      if (allowedOrigins.includes(parsed.origin)) {
+        return queryRedirect;
+      }
+    } catch {
+      // Ignore invalid redirect URLs and fall back to the default.
+    }
+
+    return defaultUrl;
   }
 
   handleRequest<TUser>(
