@@ -11,8 +11,9 @@ COPY prisma ./prisma
 RUN printf 'node-linker=hoisted\n' > .npmrc \
   && pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm exec prisma generate && pnpm run build \
-  && test -f dist/main.js
+RUN pnpm exec prisma generate && pnpm run build && pnpm run build:seed \
+  && test -f dist/main.js \
+  && test -f dist-seed/seed.js
 
 FROM node:22-alpine AS runner
 WORKDIR /app
@@ -33,6 +34,7 @@ RUN printf 'node-linker=hoisted\n' > .npmrc \
   && pnpm install --frozen-lockfile --prod
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist-seed ./dist-seed
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma

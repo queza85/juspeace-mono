@@ -8,6 +8,7 @@
   "packageManager": "pnpm@10.22.0",
   "scripts": {
     "build": "nest build",
+    "build:seed": "tsc -p tsconfig.seed.json",
     "postinstall": "prisma generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

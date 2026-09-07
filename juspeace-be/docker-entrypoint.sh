@@ -21,6 +21,12 @@ if [ -n "${DATABASE_URL}" ] || [ -n "${DB_HOST}" ]; then
     sleep 3
     attempt=$((attempt + 1))
   done
+
+  if [ -f dist-seed/seed.js ]; then
+    echo "Running database seed..."
+    node dist-seed/seed.js
+    echo "Database seed completed."
+  fi
 fi
 
 exec "$@"

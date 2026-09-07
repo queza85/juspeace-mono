@@ -55,7 +55,7 @@ cp juspeace-admin-fe/.env.example juspeace-admin-fe/.env.local
 docker compose up --build -d
 ```
 
-This starts Postgres, Mailpit, the NestJS API, the Next.js storefront, and the admin console. **Database migrations run automatically** when the backend container starts (no separate migrate step).
+This starts Postgres, Mailpit, the NestJS API, the Next.js storefront, and the admin console. **Database migrations and seeding run automatically** when the backend container starts (no separate migrate/seed step).
 
 ## Quick start — local development
 

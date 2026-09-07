@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2022",
+    "outDir": "./dist-seed",
+    "rootDir": "./prisma",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "types": ["node"]
+  },
+  "include": ["prisma/seed.ts"]
+}

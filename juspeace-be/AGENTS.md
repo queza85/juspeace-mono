@@ -44,7 +44,7 @@ Controller → Service → Repository interface → Prisma implementation
 ## Docker
 
 - Compose in this package runs **postgres + API**.
-- Container entrypoint: `prisma migrate deploy` then `node dist/main.js`.
+- Container entrypoint: `prisma migrate deploy`, seed (`dist-seed/seed.js`), then `node dist/main.js`.
 - Local DB: `DB_HOST=127.0.0.1`, user `postgres`, password `root`, database `juspeace_develop`.
 - In containers, set `DB_HOST=postgres` (Compose service name).
 

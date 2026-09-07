@@ -78,7 +78,7 @@ pnpm run docker:up
 pnpm run docker:down
 ```
 
-On container start the API runs migrations with `prisma migrate deploy`, then `node dist/main.js`. Seed separately when needed (`pnpm run prisma:seed` or `pnpm run db:setup` locally).
+On container start the API runs migrations with `prisma migrate deploy`, seeds the default admin via `dist-seed/seed.js`, then `node dist/main.js`. Seed locally with `pnpm run prisma:seed` or `pnpm run db:setup`.
 
 For full stack (including frontend), use the monorepo root:
 
