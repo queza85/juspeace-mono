@@ -78,11 +78,11 @@ export function HeroAnimatedCopy({
       ref={rootRef}
       className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16"
     >
-      <h1 className="-mt-8 max-w-[684px] shrink-0 font-serif text-[40px] leading-[43px] font-normal tracking-normal sm:-mt-10 sm:text-[56px] sm:leading-[60px] lg:-mt-14 lg:text-[72px] lg:leading-[78px] xl:-mt-16 xl:text-[88px] xl:leading-[95px]">
-        <span data-hero-line className="block overflow-hidden pb-1">
+      <h1 className="jp-hero-title -mt-8 shrink-0 sm:-mt-10 lg:-mt-14 xl:-mt-16">
+        <span data-hero-line className="block overflow-hidden">
           <span className="jp-hero-title-line">{titleLine1}</span>
         </span>
-        <span data-hero-line className="block overflow-hidden pb-1">
+        <span data-hero-line className="block overflow-hidden">
           <span className="jp-hero-title-line">{titleLine2}</span>
         </span>
       </h1>

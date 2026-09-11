@@ -51,7 +51,7 @@ Nav anchors should map to in-page sections (`#story`, `#collection`, etc.).
 ### Hero
 
 - Full-width background image with **55% black overlay** (`rgba(0,0,0,0.55)`)
-- Headline (2 lines): **“Love Together.” / “Change Together.”** — 88px Instrument Serif, white
+- Headline (2 lines): **“Love Together.” / “Change Together.”** — Satoshi Bold 88px / 95px line-height, −2% letter-spacing, white
 - Sub-copy top-right: JUSPEACE origin story (~433px wide, Fragment Mono 18px)
 - Tag: `[ WHITE | PURE HOPE ]`
 - CTAs: **BUY NOW** (white filled button, 54px tall) + **EXPLORE COLLECTION** (underlined text link)
@@ -60,9 +60,9 @@ Nav anchors should map to in-page sections (`#story`, `#collection`, etc.).
 
 ### Brand Story
 
-- Section label: `Brand Story` (32px Instrument Serif)
-- Hero quote: **“In 2024, G-Dragon suggested finding small justices in everyday life”** — Satoshi Bold 58px, centered
-- Subtext: “that acknowledge differences…” — Fragment Mono 22px
+- Flower icon: `gd-flower.png` centered above headline
+- Hero quote (4 lines): **“JUSPEACE is more / than a bracelet. / It is a message we / choose to carry.”** — Satoshi Bold 58px, centered, −2% letter-spacing
+- Subtext (2 lines, Korean): “JUSPEACE는 단순한 팔찌가 아닙니다. / 우리가 선택해 지니는 하나의 메시지입니다.” — Satoshi Regular ~18px
 - **3-column photo grid** (511×696 each): left / center / right editorial images
 
 ### The Relationship
