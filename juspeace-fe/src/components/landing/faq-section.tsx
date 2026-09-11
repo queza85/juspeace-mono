@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Plus } from 'lucide-react';
 import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
@@ -8,6 +9,7 @@ import { SectionShell } from '@/components/landing/section-shell';
 import { useT } from '@/lib/i18n/locale-context';
 import { cn } from '@/lib/utils';
 
+const FAQ_LOGO = '/header/juspeace_header.png';
 const FAQ_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 export function FaqSection() {
@@ -18,13 +20,25 @@ export function FaqSection() {
   const right = FAQ_IDS.filter((_, index) => index % 2 === 1);
 
   return (
-    <SectionShell id="faq" className="bg-white py-16 lg:py-28">
+    <SectionShell id="faq" className="bg-white pt-12 pb-16 lg:pt-16 lg:pb-28">
       <div
         data-scroll-reveal
         className="mx-auto mb-12 flex max-w-[1116px] flex-col items-center text-center lg:mb-16"
       >
-        <SectionLabel>{t('landing.faq.sectionLabel')}</SectionLabel>
-        <SectionHeading className="mt-4">{t('landing.faq.heading')}</SectionHeading>
+        <Image
+          src={FAQ_LOGO}
+          alt="JUSPEACE"
+          width={48}
+          height={48}
+          className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+        />
+        <SectionLabel className="mt-6 text-base sm:text-lg lg:text-xl">
+          {t('landing.faq.sectionLabel')}
+        </SectionLabel>
+        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
+          <span className="block">{t('landing.faq.headingLine1')}</span>
+          <span className="block">{t('landing.faq.headingLine2')}</span>
+        </SectionHeading>
       </div>
 
       <div data-scroll-stagger className="grid gap-3 lg:grid-cols-2 lg:gap-4">

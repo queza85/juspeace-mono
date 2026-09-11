@@ -347,17 +347,18 @@
       "slidePinkPosterAlt": "G-Dragon 핑크 포스터",
       "slidePortraitAlt": "G-Dragon 초상과 서명"
     },
-    "relationship": {
-      "label": "관계",
-      "statementLine1": "juspeace",
-      "statementLine2": "브레이슬릿은 그 다짐을",
-      "statementLine3": "손목에 새깁니다."
-    },
     "collection": {
+      "taglineLine1": "메시지를 착용하세요.",
+      "taglineLine2": "임팩트를 나누세요.",
       "label": "제품 컬렉션",
-      "headingLine1": "제품",
-      "headingLine2": "컬렉션",
-      "index": "[1]",
+      "headingLine1": "당신이 믿는 가치를",
+      "headingLine2": "선택하세요.",
+      "introLine1": "단순한 구매를 넘어,",
+      "introLine2": "JUSPEACE의 일부가 되는 방식.",
+      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
+      "introKoLine2": "방식.",
+      "cta": "This represent me",
+      "stockSuffix": "pieces still carry this message",
       "moreDetails": "자세히 보기",
       "buyNow": "구매하기",
       "stocks": "{count}개 재고",
@@ -365,43 +366,38 @@
       "qtyIncrease": "수량 늘리기",
       "imagePlaceholder": "제품 이미지",
       "fallbackBlack": {
-        "category": "BLACK",
-        "title": "강한 다짐",
-        "panelName": "BLACK _ 강한 다짐",
-        "variant": "Black",
-        "description": "책임과 정의 — 흔들리지 않는 믿음과 책임. 세상을 바꾸는 힘은 굳건한 마음에서 시작됩니다."
+        "title": "Strong Commitment",
+        "description": "A symbol of unwavering belief and strength."
       },
       "fallbackWhite": {
-        "category": "WHITE",
-        "title": "순수한 희망",
-        "panelName": "White_순수한 희망",
-        "variant": "White",
-        "description": "희망과 치유 — 세상을 바꾸는 가장 순수한 시작. 당신의 작은 나눔이 누군가의 새로운 내일이 됩니다."
+        "title": "Pure Hope",
+        "description": "A reflection of clarity, sincerity, and new beginnings."
       },
       "fallbackStripe": {
-        "category": "STRIPE",
-        "title": "조화와 평화",
-        "panelName": "Stripe_조화와 평화",
-        "variant": "Stripe",
-        "description": "다양성, 조화, 평화 — 진정한 평화는 차이를 존중할 때 시작됩니다."
+        "title": "Harmony & Peace",
+        "description": "Where differences meet in balance and unity."
       }
     },
     "features": {
-      "label": "특징",
-      "headingLine1": "제품",
-      "headingLine2": "특징",
+      "label": "제품 컬렉션",
+      "headingLine1": "목적을 담아 만들었습니다.",
+      "headingLine2": "불필요한 것은 없고,",
+      "headingLine3": "필요한 것은 빠짐없이.",
+      "heroAlt": "JUSPEACE 브레이슬릿",
       "items": {
-        "bracelet": "브레이슬릿",
-        "lettering": "앤티크 실버 각인",
-        "adjustment": "손목에 맞게 조절되는 사이드",
-        "endTip": "견고한 메탈 엔드 팁",
-        "bead": "JUSPEACE 각인 비드"
-      }
+        "lettering": "Antique Silver Lettering",
+        "bead": "Engraved Bead",
+        "endTip": "Metal End Tips",
+        "adjustment": "Adjustable Fit"
+      },
+      "subtext": "Not just made to wear , made to carry something with you.",
+      "closingPrefix": "Wear it as part of",
+      "closingBrand": "JUSPEACE.",
+      "tapHint": "Tap each image for closer view"
     },
     "gallery": {
-      "label": "갤러리",
-      "headingLine1": "제품",
-      "headingLine2": "갤러리",
+      "label": "제품 갤러리",
+      "heading": "JUSPEACE를 자세히 살펴보세요.",
       "count": "26",
       "categories": {
         "productOnly": "제품 단독 이미지",
@@ -412,19 +408,35 @@
         "desktopThumbnails": "데스크톱 썸네일"
       }
     },
+    "video": {
+      "mediaLabel": "브랜드 영상",
+      "playLabel": "영상 재생"
+    },
     "donation": {
       "label": "기부",
-      "headlineLine1": "당신의 평화로운 행동이",
-      "headlineLine2": "누군가에게는",
-      "headlineLine3": "삶의 기회가 됩니다.",
-      "body": "판매된 모든 브레이슬릿은 JUSPEACE의 핵심인 청소년 재활 프로그램과 예술 치료 활동에 직접 기부됩니다.",
-      "priceTag": "₩ 150,000 - 기부 브레이슬릿",
-      "mediaLabel": "기부 비주얼",
-      "playLabel": "기부 영상 재생"
+      "headline": "작은 행동이 진짜 변화를 만듭니다.",
+      "body": "Every bracelet is a direct contribution to youth rehabilitation and art therapy initiatives at the heart of JUSPEACE.",
+      "statCount": "128,540",
+      "statSuffix": "people have already chosen peace.",
+      "introKoLine1": "이 팔찌 하나가 누군가의 회복 여정을 돕습니다",
+      "introKoLine2": "청소년 재활과 예술 치료를 통해.",
+      "cta": "I want to be part of this",
+      "floatingOneAlt": "데이지 조명",
+      "floatingTwoAlt": "청소년 예술 치료",
+      "floatingThreeAlt": "커뮤니티 활동",
+      "floatingFourAlt": "함께하는 손",
+      "avatarAlt": "커뮤니티 멤버 {index}"
+    },
+    "aboveFaq": {
+      "imageAlt": "브레이슬릿과 캠페인 아트워크가 담긴 JUSPEACE 전시",
+      "carouselLabel": "쇼케이스 갤러리",
+      "prevAria": "이전 쇼케이스 이미지",
+      "nextAria": "다음 쇼케이스 이미지"
     },
     "faq": {
-      "sectionLabel": "갤러리",
-      "heading": "자주 묻는 질문",
+      "sectionLabel": "FAQ",
+      "headingLine1": "더 깊은",
+      "headingLine2": "이해.",
       "answerSoon": "답변 준비 중입니다.",
       "q1": "공식 JUSPEACE 제품인가요?",
       "a1": "답변 준비 중입니다.",

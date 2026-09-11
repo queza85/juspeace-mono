@@ -1,7 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { ProductPurchasePanel } from '@/components/landing/product-purchase-panel';
 import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
@@ -10,27 +8,18 @@ import { getTranslator } from '@/lib/i18n/server';
 import {
   COLLECTION_VARIANTS,
   getFallbackI18nPrefix,
-  getProductDetailHref,
   VARIANT_MAIN_IMAGES,
   type VariantKey,
 } from '@/lib/products/variant-images';
 
-const COLLECTION_ROW_MIN_HEIGHT: Record<VariantKey, string> = {
-  black: 'min-h-[calc(360px*930/744)] xl:min-h-[calc(420px*930/744)]',
-  white: 'min-h-[calc(360px*920/726)] xl:min-h-[calc(420px*920/726)]',
-  stripe: 'min-h-[calc(360px*926/746)] xl:min-h-[calc(420px*926/746)]',
-};
+const COLLECTION_LOGO = '/header/juspeace_header.png';
 
-interface CollectionRow {
+interface CollectionCard {
   key: VariantKey;
-  product: Product | null;
-  category: string;
   title: string;
-  panelName: string;
-  variant: string;
   description: string;
   stock: number;
-  detailHref: string;
+  imageAlt: string;
 }
 
 function matchVariant(product: Product, key: VariantKey) {
@@ -38,10 +27,10 @@ function matchVariant(product: Product, key: VariantKey) {
   return haystack.includes(key);
 }
 
-function buildRows(
+function buildCards(
   products: Product[],
   t: (key: string, values?: Record<string, string | number>) => string,
-): CollectionRow[] {
+): CollectionCard[] {
   const used = new Set<string>();
 
   return COLLECTION_VARIANTS.map((key) => {
@@ -56,79 +45,56 @@ function buildRows(
 
     return {
       key,
-      product: matched,
-      category: t(`${fallbackPrefix}.category`),
-      title: t(`${fallbackPrefix}.title`),
-      panelName: matched?.name ?? t(`${fallbackPrefix}.panelName`),
-      variant: t(`${fallbackPrefix}.variant`),
+      title: matched?.name ?? t(`${fallbackPrefix}.title`),
       description:
         matched?.description?.trim() || t(`${fallbackPrefix}.description`),
       stock: matched?.stock ?? 20,
-      detailHref: getProductDetailHref(key, matched),
+      imageAlt: matched?.name ?? t(`${fallbackPrefix}.title`),
     };
   });
 }
 
-function CollectionProductImage({
-  variantKey,
-  alt,
-  href,
+function CollectionProductCard({
+  card,
+  ctaLabel,
+  stockSuffix,
 }: {
-  variantKey: VariantKey;
-  alt: string;
-  href: string;
+  card: CollectionCard;
+  ctaLabel: string;
+  stockSuffix: string;
 }) {
-  const image = VARIANT_MAIN_IMAGES[variantKey];
+  const image = VARIANT_MAIN_IMAGES[card.key];
+  const stockCount = Math.round(card.stock);
 
   return (
-    <Link
-      href={href}
-      className="group block transition-opacity hover:opacity-90"
-      aria-label={alt}
+    <article
+      data-scroll-stagger-item
+      className="flex flex-col items-center text-center"
     >
       <Image
         src={image.src}
-        alt={alt}
+        alt={card.imageAlt}
         width={image.width}
         height={image.height}
-        sizes="(max-width: 1280px) 360px, 420px"
-        className="block h-auto w-full"
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="h-auto w-full max-w-[360px]"
       />
-    </Link>
-  );
-}
-
-function CollectionProductCopy({
-  row,
-  t,
-}: {
-  row: CollectionRow;
-  t: (key: string, values?: Record<string, string | number>) => string;
-}) {
-  return (
-    <div className="flex flex-col">
-      <p className="font-mono text-xs text-jp-accent-teal sm:text-sm">
-        {t('landing.collection.index')}
-      </p>
-      <h3 className="mt-1 font-serif text-[clamp(1rem,1.8vw,1.375rem)] leading-[1.15] text-black">
-        <Link href={row.detailHref} className="transition-opacity hover:opacity-80">
-          <span className="block whitespace-pre">{`/    ${row.category}`}</span>
-          <span className="block uppercase">{row.title}</span>
-        </Link>
+      <h3 className="mt-6 font-display text-[clamp(1.125rem,2vw,1.5rem)] font-bold leading-snug text-black">
+        {card.title}
       </h3>
-      <p className="mt-2 max-w-[380px] font-mono text-xs leading-5 text-jp-muted sm:text-[13px] sm:leading-6">
-        {row.description}
+      <p className="mt-2 max-w-[280px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-base">
+        {card.description}
       </p>
-      <div className="mt-6 lg:mt-8">
-        <ProductPurchasePanel
-          product={row.product}
-          panelName={row.panelName}
-          variantLabel={row.variant}
-          stock={row.stock}
-          detailsHref={row.detailHref}
-        />
-      </div>
-    </div>
+      <p className="mt-4 font-serif text-sm text-black sm:text-base">
+        <span className="font-bold">{stockCount}</span> {stockSuffix}
+      </p>
+      <button
+        type="button"
+        className="mt-5 min-w-[180px] bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90"
+      >
+        {ctaLabel}
+      </button>
+    </article>
   );
 }
 
@@ -140,73 +106,62 @@ export async function ProductCollectionSection({
   products,
 }: ProductCollectionSectionProps) {
   const { t } = await getTranslator();
-  const rows = buildRows(products, t);
-
-  const imageAlt = (row: CollectionRow) =>
-    row.product?.name ??
-    t(
-      `landing.collection.fallback${row.key[0].toUpperCase()}${row.key.slice(1)}.panelName`,
-    );
+  const cards = buildCards(products, t);
 
   return (
-    <SectionShell id="collection" className="bg-white pt-12 pb-28 lg:pt-20 lg:pb-40">
+    <SectionShell id="collection" className="bg-white pt-16 pb-28 lg:pt-24 lg:pb-40">
       <div
         data-scroll-reveal
-        className="mx-auto mb-10 flex max-w-[1116px] flex-col items-center text-center lg:mb-14"
+        className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
       >
-        <SectionLabel className="text-sm sm:text-base lg:text-lg">
+        <p className="font-display text-[clamp(2.25rem,6vw,5rem)] font-bold leading-[1.08] tracking-[-0.02em] text-black">
+          {t('landing.collection.taglineLine1')}
+        </p>
+        <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
+          {t('landing.collection.taglineLine2')}
+        </p>
+        <Image
+          src={COLLECTION_LOGO}
+          alt="JUSPEACE"
+          width={48}
+          height={48}
+          className="mt-8 h-10 w-10 object-contain sm:mt-10 sm:h-12 sm:w-12"
+        />
+      </div>
+
+      <div
+        data-scroll-reveal
+        className="mx-auto mt-16 flex max-w-[900px] flex-col items-center text-center lg:mt-24"
+      >
+        <SectionLabel className="text-base sm:text-lg lg:text-xl">
           {t('landing.collection.label')}
         </SectionLabel>
-        <SectionHeading className="mt-2 text-[clamp(1.75rem,4vw,3.5rem)] leading-[1.08]">
+        <SectionHeading className="mt-4 text-[clamp(2.25rem,6vw,5rem)] leading-[1.08]">
           <span className="block">{t('landing.collection.headingLine1')}</span>
           <span className="block">{t('landing.collection.headingLine2')}</span>
         </SectionHeading>
-      </div>
-
-      <div data-scroll-stagger className="space-y-12 lg:hidden">
-        {rows.map((row) => (
-          <article
-            key={row.key}
-            data-scroll-stagger-item
-            className="mx-auto flex max-w-[960px] flex-col gap-6"
-          >
-            <CollectionProductImage
-              variantKey={row.key}
-              alt={imageAlt(row)}
-              href={row.detailHref}
-            />
-            <CollectionProductCopy row={row} t={t} />
-          </article>
-        ))}
+        <p className="mt-6 font-sans text-base leading-relaxed text-black sm:text-lg">
+          <span className="block">{t('landing.collection.introLine1')}</span>
+          <span className="block">{t('landing.collection.introLine2')}</span>
+        </p>
+        <p className="mt-4 font-sans text-base leading-relaxed text-black sm:text-lg">
+          <span className="block">{t('landing.collection.introKoLine1')}</span>
+          <span className="block">{t('landing.collection.introKoLine2')}</span>
+        </p>
       </div>
 
       <div
         data-scroll-stagger
-        className="mx-auto hidden max-w-[1080px] lg:grid lg:grid-cols-[360px_minmax(0,1fr)] lg:items-start lg:gap-10 lg:pl-10 xl:grid-cols-[420px_minmax(0,1fr)] xl:gap-12 xl:pl-14"
+        className="mx-auto mt-16 grid max-w-[1200px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-8 lg:gap-10"
       >
-        <div className="flex flex-col gap-0">
-          {rows.map((row) => (
-            <div key={row.key} data-scroll-stagger-item>
-              <CollectionProductImage
-                variantKey={row.key}
-                alt={imageAlt(row)}
-                href={row.detailHref}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-0 lg:pl-6 xl:pl-10">
-          {rows.map((row) => (
-            <div
-              key={row.key}
-              data-scroll-stagger-item
-              className={`flex flex-col justify-center ${COLLECTION_ROW_MIN_HEIGHT[row.key]}`}
-            >
-              <CollectionProductCopy row={row} t={t} />
-            </div>
-          ))}
-        </div>
+        {cards.map((card) => (
+          <CollectionProductCard
+            key={card.key}
+            card={card}
+            ctaLabel={t('landing.collection.cta')}
+            stockSuffix={t('landing.collection.stockSuffix')}
+          />
+        ))}
       </div>
     </SectionShell>
   );

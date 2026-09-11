@@ -1,52 +1,183 @@
-import { Play } from 'lucide-react';
-import { BracketLabel } from '@/components/landing/bracket-label';
-import { MediaPlaceholder } from '@/components/landing/media-placeholder';
+import Image from 'next/image';
+
 import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
+import { cn } from '@/lib/utils';
+
+const COLLECTION_LOGO = '/header/juspeace_header.png';
+const DAISY_ICON = '/gd-flower.png';
+
+const CIRCLE_SIZE =
+  'h-[52px] w-[52px] sm:h-[58px] sm:w-[58px] lg:h-[64px] lg:w-[64px]';
+
+/** Orbital positions tuned to Figma: top pair flanks "Donation", bottom pair frames headline/body. */
+const FLOATING_IMAGES = [
+  {
+    src: '/donation-one.png',
+    width: 1142,
+    height: 738,
+    altKey: 'floatingOne',
+    className:
+      'left-[14%] top-[19%] sm:left-[16%] sm:top-[18%] lg:left-[18%] lg:top-[17%]',
+  },
+  {
+    src: '/donation-two.png',
+    width: 1020,
+    height: 1294,
+    altKey: 'floatingTwo',
+    className:
+      'right-[14%] top-[19%] sm:right-[16%] sm:top-[18%] lg:right-[18%] lg:top-[17%]',
+  },
+  {
+    src: '/donation-three.png',
+    width: 1060,
+    height: 796,
+    altKey: 'floatingThree',
+    className:
+      'left-[6%] top-[44%] sm:left-[7%] sm:top-[43%] lg:left-[8%] lg:top-[42%]',
+  },
+  {
+    src: '/donation-four.png',
+    width: 1054,
+    height: 820,
+    altKey: 'floatingFour',
+    className:
+      'right-[6%] top-[50%] sm:right-[7%] sm:top-[49%] lg:right-[8%] lg:top-[48%]',
+  },
+] as const;
+
+const AVATAR_IMAGES = [
+  '/donation-one.png',
+  '/donation-two.png',
+  '/donation-three.png',
+  '/donation-four.png',
+  '/donation-two.png',
+] as const;
+
+function DonationCirclePhoto({
+  src,
+  width,
+  height,
+  alt,
+  className,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        'absolute overflow-hidden rounded-full border-2 border-white shadow-[0_4px_14px_rgba(0,0,0,0.07)]',
+        CIRCLE_SIZE,
+        className,
+      )}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className="h-full w-full object-cover"
+      />
+    </div>
+  );
+}
 
 export async function DonationSection() {
   const { t } = await getTranslator();
 
   return (
-    <>
-      <SectionShell fullWidth className="bg-black">
-        <div className="relative mx-auto flex min-h-[520px] w-full max-w-[1920px] items-center justify-center lg:min-h-[1044px]">
-          <MediaPlaceholder
-            className="absolute inset-0 h-full rounded-none bg-neutral-900"
-            aspectRatio="auto"
-            label={t('landing.donation.mediaLabel')}
-          />
-          <button
-            type="button"
-            className="relative z-10 flex size-20 items-center justify-center rounded-full border border-white/40 bg-black/30 text-white backdrop-blur-sm"
-            aria-label={t('landing.donation.playLabel')}
-          >
-            <Play className="size-8 fill-white" aria-hidden />
-          </button>
-        </div>
-      </SectionShell>
+    <SectionShell id="donation" className="bg-white pt-16 pb-10 lg:pt-24 lg:pb-12">
+      <div data-scroll-reveal className="mx-auto max-w-[1116px]">
+        <div className="relative mx-auto min-h-[320px] max-w-[720px] sm:min-h-[340px] lg:min-h-[360px] lg:max-w-[800px]">
+          {FLOATING_IMAGES.map((item) => (
+            <DonationCirclePhoto
+              key={item.src}
+              src={item.src}
+              width={item.width}
+              height={item.height}
+              alt={t(`landing.donation.${item.altKey}Alt`)}
+              className={item.className}
+            />
+          ))}
 
-      <SectionShell id="donation" className="bg-white py-16 lg:py-24">
+          <div className="relative z-10 mx-auto flex max-w-[480px] flex-col items-center px-8 text-center sm:px-10 lg:px-12">
+            <Image
+              src={COLLECTION_LOGO}
+              alt="JUSPEACE"
+              width={48}
+              height={48}
+              className="h-10 w-10 object-contain sm:h-11 sm:w-11"
+            />
+            <SectionLabel className="mt-5 text-base sm:text-lg">
+              {t('landing.donation.label')}
+            </SectionLabel>
+            <SectionHeading className="mt-8 text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12]">
+              {t('landing.donation.headline')}
+            </SectionHeading>
+            <p className="mt-5 font-sans text-base leading-relaxed text-black sm:text-lg">
+              {t('landing.donation.body')}
+            </p>
+          </div>
+        </div>
+
         <div
           data-scroll-reveal
-          className="mx-auto flex max-w-[583px] flex-col items-center text-center"
+          className="mx-auto mt-14 flex max-w-[900px] flex-col items-center text-center lg:mt-16"
         >
-          <SectionLabel>{t('landing.donation.label')}</SectionLabel>
-          <SectionHeading className="mt-6 text-[clamp(2rem,5vw,3.625rem)] leading-[1.12] tracking-[-0.02em]">
-            <span className="block">{t('landing.donation.headlineLine1')}</span>
-            <span className="block">{t('landing.donation.headlineLine2')}</span>
-            <span className="block">{t('landing.donation.headlineLine3')}</span>
-          </SectionHeading>
-          <p className="mt-8 font-mono text-lg leading-8 text-black sm:text-[22px]">
-            {t('landing.donation.body')}
+          <div className="relative px-4">
+            <Image
+              src={DAISY_ICON}
+              alt=""
+              width={128}
+              height={128}
+              aria-hidden
+              className="absolute left-[calc(50%-7.5rem)] top-[-0.5rem] h-8 w-8 object-contain sm:left-[calc(50%-8.5rem)] sm:h-10 sm:w-10 lg:left-[calc(50%-10rem)]"
+            />
+            <p className="font-serif text-[clamp(2rem,5.5vw,4.5rem)] leading-[1.05] text-black">
+              {t('landing.donation.statCount')}
+            </p>
+            <p className="mt-2 font-display text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.12] tracking-[-0.02em] text-black">
+              {t('landing.donation.statSuffix')}
+            </p>
+          </div>
+
+          <div className="mt-8 flex items-center justify-center pl-3">
+            {AVATAR_IMAGES.map((src, index) => (
+              <div
+                key={`${src}-${index}`}
+                className="relative -ml-3 h-11 w-11 overflow-hidden rounded-full border-2 border-white shadow-sm first:ml-0 sm:h-12 sm:w-12"
+              >
+                <Image
+                  src={src}
+                  alt={t('landing.donation.avatarAlt', { index: index + 1 })}
+                  width={120}
+                  height={120}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-10 font-sans text-base leading-relaxed text-black sm:text-lg">
+            <span className="block">{t('landing.donation.introKoLine1')}</span>
+            <span className="my-3 block h-px w-10 bg-black/30" aria-hidden />
+            <span className="block">{t('landing.donation.introKoLine2')}</span>
           </p>
-          <BracketLabel className="mt-8">
-            {t('landing.donation.priceTag')}
-          </BracketLabel>
+
+          <button
+            type="button"
+            className="mt-10 bg-black px-8 py-3.5 font-sans text-sm text-white transition-opacity hover:opacity-90 sm:text-base"
+          >
+            {t('landing.donation.cta')}
+          </button>
         </div>
-      </SectionShell>
-    </>
+      </div>
+    </SectionShell>
   );
 }

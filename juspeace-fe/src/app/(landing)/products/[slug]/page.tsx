@@ -33,7 +33,7 @@ function fallbackLabels(
     (acc, variantKey) => {
       const prefix = getFallbackI18nPrefix(variantKey);
       acc[variantKey] = {
-        name: t(`${prefix}.panelName`),
+        name: t(`${prefix}.title`),
         description: t(`${prefix}.description`),
       };
       return acc;
@@ -59,7 +59,7 @@ async function resolveProduct(
     const variantKey = detectVariantKeyFromSlug(slug);
     const prefix = getFallbackI18nPrefix(variantKey);
     return createFallbackProduct(slug, variantKey, {
-      name: t(`${prefix}.panelName`),
+      name: t(`${prefix}.title`),
       description: t(`${prefix}.description`),
     });
   }
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
     const variantKey = detectVariantKeyFromSlug(slug);
     const prefix = getFallbackI18nPrefix(variantKey);
     return {
-      title: t(`${prefix}.panelName`),
+      title: t(`${prefix}.title`),
       description: t(`${prefix}.description`),
     };
   }
@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const variantKey = detectVariantKey(product);
   const fallbackPrefix = getFallbackI18nPrefix(variantKey);
   const displayName =
-    product.name.trim() || t(`${fallbackPrefix}.panelName`);
+    product.name.trim() || t(`${fallbackPrefix}.title`);
   const tagline =
     product.description?.trim() || t(`${fallbackPrefix}.description`);
   const tabDescription =

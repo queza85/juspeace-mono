@@ -347,17 +347,18 @@
       "slidePinkPosterAlt": "G-Dragon pink poster",
       "slidePortraitAlt": "G-Dragon portrait and signature"
     },
-    "relationship": {
-      "label": "THE RELATIONSHIP",
-      "statementLine1": "The juspeace",
-      "statementLine2": "bracelet - embodies that pledge",
-      "statementLine3": "on the wrist."
-    },
     "collection": {
-      "label": "PRODUCT COLLECTION",
-      "headingLine1": "Product",
-      "headingLine2": "Collection",
-      "index": "[1]",
+      "taglineLine1": "Wear the message.",
+      "taglineLine2": "Share the impact.",
+      "label": "Product Collection",
+      "headingLine1": "Choose what you",
+      "headingLine2": "stand for.",
+      "introLine1": "More than a purchase.",
+      "introLine2": "A way to be part of JUSPEACE.",
+      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
+      "introKoLine2": "방식.",
+      "cta": "This represent me",
+      "stockSuffix": "pieces still carry this message",
       "moreDetails": "More Details",
       "buyNow": "BUY NOW",
       "stocks": "{count} stocks",
@@ -365,43 +366,38 @@
       "qtyIncrease": "Increase quantity",
       "imagePlaceholder": "Product image",
       "fallbackBlack": {
-        "category": "BLACK",
-        "title": "STRONG COMMIMENT",
-        "panelName": "BLACK _ Strong commitment",
-        "variant": "Black",
-        "description": "Responsibility, Justice - Unwavering faith and responsibility. The power to change the world begins with unshakable heart."
+        "title": "Strong Commitment",
+        "description": "A symbol of unwavering belief and strength."
       },
       "fallbackWhite": {
-        "category": "WHITE",
-        "title": "PURE HOPE",
-        "panelName": "White_Pure hope",
-        "variant": "White",
-        "description": "Hope and healing - the purest beginning to change the world. Your small act of sharing becomes someone's new tomorrow."
+        "title": "Pure Hope",
+        "description": "A reflection of clarity, sincerity, and new beginnings."
       },
       "fallbackStripe": {
-        "category": "STRIPE",
-        "title": "HARMONY & PEACE",
-        "panelName": "Stripe_Harmony & Peace",
-        "variant": "Stripe",
-        "description": "Diversity, harmony peace - true peace begins when we respect differences."
+        "title": "Harmony & Peace",
+        "description": "Where differences meet in balance and unity."
       }
     },
     "features": {
-      "label": "FEATURES",
-      "headingLine1": "Product",
-      "headingLine2": "Features",
+      "label": "Product Collection",
+      "headingLine1": "Built with purpose.",
+      "headingLine2": "Nothing extra,",
+      "headingLine3": "nothing missing.",
+      "heroAlt": "JUSPEACE bracelet",
       "items": {
-        "bracelet": "The bracelet",
-        "lettering": "Antique silver lettering",
-        "adjustment": "Side adjustment to fit the wrist",
-        "endTip": "Sturdy metal end tip",
-        "bead": "JUSPEACE engraved bead"
-      }
+        "lettering": "Antique Silver Lettering",
+        "bead": "Engraved Bead",
+        "endTip": "Metal End Tips",
+        "adjustment": "Adjustable Fit"
+      },
+      "subtext": "Not just made to wear , made to carry something with you.",
+      "closingPrefix": "Wear it as part of",
+      "closingBrand": "JUSPEACE.",
+      "tapHint": "Tap each image for closer view"
     },
     "gallery": {
-      "label": "GALLERY",
-      "headingLine1": "Product",
-      "headingLine2": "Gallery",
+      "label": "Product Gallery",
+      "heading": "A Closer Look at JUSPEACE.",
       "count": "26",
       "categories": {
         "productOnly": "Product only images",
@@ -412,19 +408,35 @@
         "desktopThumbnails": "Desktop Thumbnails"
       }
     },
+    "video": {
+      "mediaLabel": "Brand video",
+      "playLabel": "Play video"
+    },
     "donation": {
       "label": "Donation",
-      "headlineLine1": "Your act of peace",
-      "headlineLine2": "become someone's",
-      "headlineLine3": "chance at life.",
-      "body": "Every bracelet sold is direct contribution to youth rehabilitation programs and art therapy initiatives at the heart of JUSPEACE.",
-      "priceTag": "₩ 150,000 - Donation Bracelet",
-      "mediaLabel": "Donation visual",
-      "playLabel": "Play donation video"
+      "headline": "Your small action creates real change.",
+      "body": "Every bracelet is a direct contribution to youth rehabilitation and art therapy initiatives at the heart of JUSPEACE.",
+      "statCount": "128,540",
+      "statSuffix": "people have already chosen peace.",
+      "introKoLine1": "이 팔찌 하나가 누군가의 회복 여정을 돕습니다",
+      "introKoLine2": "청소년 재활과 예술 치료를 통해.",
+      "cta": "I want to be part of this",
+      "floatingOneAlt": "Daisy light",
+      "floatingTwoAlt": "Youth art therapy",
+      "floatingThreeAlt": "Community outreach",
+      "floatingFourAlt": "Hands reaching together",
+      "avatarAlt": "Community member {index}"
+    },
+    "aboveFaq": {
+      "imageAlt": "JUSPEACE retail display with bracelets and campaign artwork",
+      "carouselLabel": "Showcase gallery",
+      "prevAria": "Previous showcase image",
+      "nextAria": "Next showcase image"
     },
     "faq": {
-      "sectionLabel": "GALLERY",
-      "heading": "FAQs",
+      "sectionLabel": "FAQs",
+      "headingLine1": "A Deeper",
+      "headingLine2": "Understanding.",
       "answerSoon": "Answer coming soon.",
       "q1": "Is this an official JUSPEACE product ?",
       "a1": "Answer coming soon.",

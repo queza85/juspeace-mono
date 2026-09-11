@@ -5,6 +5,10 @@ import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
+import { cn } from '@/lib/utils';
+
+const COLLECTION_LOGO = '/header/juspeace_header.png';
+const PAPER_CLIP = '/paper-clip.png';
 
 const CATEGORIES = [
   'productOnly',
@@ -33,9 +37,9 @@ const GALLERY_IMAGE_POOL = [
   '/product-feature/pf3.png',
   '/product-feature/pf5.png',
   '/product-feature/pf6.png',
-  '/product-collection/juespeace_mar4.png',
-  '/product-collection/juspeace_mr3.png',
-  '/product-collection/ju_mar6.png',
+  '/product-collection-one.png',
+  '/product-collection-two.png',
+  '/product-collection-three.png',
   '/landing/landing_love.png',
   '/landing/juspeace_just_hand.png',
   '/landing/intro.png',
@@ -62,6 +66,23 @@ const GALLERY_STACKS = Object.fromEntries(
   CATEGORIES.map((key, index) => [key, getStackImages(index)]),
 ) as Record<(typeof CATEGORIES)[number], [string, string, string]>;
 
+function GalleryPaperClip() {
+  return (
+    <div
+      className="pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-[calc(50%+6px)] -translate-y-[48%]"
+      aria-hidden
+    >
+      <Image
+        src={PAPER_CLIP}
+        alt=""
+        width={804}
+        height={1134}
+        className="h-[52px] w-auto origin-bottom rotate-[-14deg] object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] sm:h-[58px]"
+      />
+    </div>
+  );
+}
+
 function GalleryCard({
   src,
   alt,
@@ -77,7 +98,7 @@ function GalleryCard({
 
   return (
     <div
-      className="relative overflow-hidden rounded-[21px] border-2 border-jp-light-gray"
+      className="relative overflow-hidden rounded-[21px] border-2 border-jp-light-gray bg-white"
       style={{ aspectRatio }}
     >
       <Image
@@ -112,13 +133,50 @@ function GalleryStack({
       </div>
       <div className="absolute left-1/2 top-0 z-10 w-[168px] -translate-x-1/2">
         <GalleryCard src={centerSrc} alt={label} aspectRatio="168 / 217" />
+        <GalleryPaperClip />
       </div>
     </div>
   );
 }
 
+function GalleryCategory({
+  label,
+  count,
+  leftSrc,
+  rightSrc,
+  centerSrc,
+  className,
+}: {
+  label: string;
+  count: string;
+  leftSrc: string;
+  rightSrc: string;
+  centerSrc: string;
+  className?: string;
+}) {
+  return (
+    <figure className={cn('flex flex-col items-center gap-4', className)}>
+      <GalleryStack
+        label={label}
+        leftSrc={leftSrc}
+        rightSrc={rightSrc}
+        centerSrc={centerSrc}
+      />
+      <div className="flex items-center gap-2">
+        <BracketLabel className="text-xs sm:text-sm lg:text-base">
+          {label}
+        </BracketLabel>
+        <span className="inline-flex h-7 min-w-[52px] items-center justify-center rounded-full bg-jp-light-gray px-2.5 font-mono text-sm text-black">
+          {count}
+        </span>
+      </div>
+    </figure>
+  );
+}
+
 export async function GallerySection() {
   const { t } = await getTranslator();
+  const count = t('landing.gallery.count');
 
   return (
     <SectionShell id="gallery" className="bg-white py-16 lg:py-28">
@@ -126,73 +184,58 @@ export async function GallerySection() {
         data-scroll-reveal
         className="mx-auto mb-16 flex max-w-[1116px] flex-col items-center text-center lg:mb-24"
       >
-        <SectionLabel className="text-sm lg:text-base">
+        <Image
+          src={COLLECTION_LOGO}
+          alt="JUSPEACE"
+          width={48}
+          height={48}
+          className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+        />
+        <SectionLabel className="mt-6 text-base sm:text-lg lg:text-xl">
           {t('landing.gallery.label')}
         </SectionLabel>
-        <SectionHeading className="mt-3 text-[clamp(1.85rem,3.5vw,3rem)] leading-[1.08]">
-          <span className="block">{t('landing.gallery.headingLine1')}</span>
-          <span className="block">{t('landing.gallery.headingLine2')}</span>
+        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
+          {t('landing.gallery.heading')}
         </SectionHeading>
       </div>
 
       <div
         data-scroll-stagger
-        className="hidden gap-x-12 gap-y-16 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-x-20 lg:gap-y-20"
+        className="mx-auto hidden max-w-[1200px] gap-x-10 gap-y-16 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-20"
       >
         {CATEGORIES.map((key) => {
           const [leftSrc, rightSrc, centerSrc] = GALLERY_STACKS[key];
           const label = t(`landing.gallery.categories.${key}`);
 
           return (
-          <figure
-            key={key}
-            data-scroll-stagger-item
-            className="flex flex-col items-center gap-4"
-          >
-            <GalleryStack
-              label={label}
-              leftSrc={leftSrc}
-              rightSrc={rightSrc}
-              centerSrc={centerSrc}
-            />
-            <div className="flex items-center gap-2">
-              <BracketLabel className="text-xs sm:text-sm lg:text-base">
-                {label}
-              </BracketLabel>
-              <span className="inline-flex h-7 min-w-[52px] items-center justify-center rounded-full bg-jp-light-gray px-2.5 font-mono text-sm">
-                {t('landing.gallery.count')}
-              </span>
+            <div key={key} data-scroll-stagger-item>
+              <GalleryCategory
+                label={label}
+                count={count}
+                leftSrc={leftSrc}
+                rightSrc={rightSrc}
+                centerSrc={centerSrc}
+              />
             </div>
-          </figure>
           );
         })}
       </div>
 
-      <div className="flex snap-x snap-mandatory gap-10 overflow-x-auto pb-4 md:hidden">
+      <div className="flex snap-x snap-mandatory gap-10 overflow-x-auto px-5 pb-4 md:hidden">
         {CATEGORIES.map((key) => {
           const [leftSrc, rightSrc, centerSrc] = GALLERY_STACKS[key];
           const label = t(`landing.gallery.categories.${key}`);
 
           return (
-          <figure
-            key={key}
-            className="flex w-[263px] shrink-0 snap-center flex-col items-center gap-4"
-          >
-            <GalleryStack
+            <GalleryCategory
+              key={key}
               label={label}
+              count={count}
               leftSrc={leftSrc}
               rightSrc={rightSrc}
               centerSrc={centerSrc}
+              className="w-[263px] shrink-0 snap-center"
             />
-            <div className="flex items-center gap-2">
-              <BracketLabel className="text-xs sm:text-sm">
-                {label}
-              </BracketLabel>
-              <span className="inline-flex h-7 min-w-[44px] items-center justify-center rounded-full bg-jp-light-gray px-2 font-mono text-xs">
-                {t('landing.gallery.count')}
-              </span>
-            </div>
-          </figure>
           );
         })}
       </div>

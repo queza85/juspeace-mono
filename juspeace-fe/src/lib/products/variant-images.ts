@@ -16,37 +16,37 @@ export const VARIANT_MAIN_IMAGES: Record<
   { src: string; width: number; height: number }
 > = {
   black: {
-    src: '/product-collection/juespeace_mar4.png',
-    width: 744,
-    height: 930,
+    src: '/product-collection-one.png',
+    width: 1080,
+    height: 1350,
   },
   white: {
-    src: '/product-collection/juspeace_mr3.png',
-    width: 726,
-    height: 920,
+    src: '/product-collection-two.png',
+    width: 1080,
+    height: 1350,
   },
   stripe: {
-    src: '/product-collection/ju_mar6.png',
-    width: 746,
-    height: 926,
+    src: '/product-collection-three.png',
+    width: 1080,
+    height: 1350,
   },
 };
 
 export const VARIANT_GALLERY_IMAGES: Record<VariantKey, string[]> = {
   black: [
-    '/product-collection/juespeace_mar4.png',
+    '/product-collection-one.png',
     '/product-feature/pf1.png',
     '/product-feature/pf2.png',
     '/product-feature/pf3.png',
   ],
   white: [
-    '/product-collection/juspeace_mr3.png',
+    '/product-collection-two.png',
     '/product-feature/pf2.png',
     '/product-feature/pf5.png',
     '/product-feature/pf6.png',
   ],
   stripe: [
-    '/product-collection/ju_mar6.png',
+    '/product-collection-three.png',
     '/product-feature/pf1.png',
     '/product-feature/pf3.png',
     '/product-feature/pf5.png',
