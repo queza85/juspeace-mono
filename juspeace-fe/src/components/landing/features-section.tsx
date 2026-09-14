@@ -9,10 +9,10 @@ import { cn } from '@/lib/utils';
 const COLLECTION_LOGO = '/header/juspeace_header.png';
 
 const FEATURE_HUB = {
-  hero: { src: '/pd-coll-one.png', width: 1254, height: 1254 },
+  hero: { src: '/features/bracelet-hero.png', width: 722, height: 419 },
   lettering: { src: '/pd-coll-two.png', width: 1254, height: 1254 },
   endTip: { src: '/pd-coll-three.png', width: 484, height: 478 },
-  adjustment: { src: '/pd-coll-four.png', width: 1254, height: 1254 },
+  adjustment: { src: '/pd-coll-five.png', width: 488, height: 488 },
   bead: { src: '/pd-coll-five.png', width: 488, height: 488 },
 } as const;
 
@@ -20,23 +20,29 @@ type DetailKey = 'lettering' | 'endTip' | 'bead' | 'adjustment';
 
 const DETAIL_GRID: Record<
   DetailKey,
-  { gridClass: string; imageClass: string }
+  {
+    frameClass: string;
+    imageClass: string;
+    crop?: { scale: number; origin: string };
+  }
 > = {
   lettering: {
-    gridClass: 'lg:col-start-1 lg:row-start-1 lg:justify-self-end',
-    imageClass: 'max-w-[200px] sm:max-w-[220px] lg:max-w-[240px]',
+    frameClass: 'h-[88px] w-[160px] sm:h-[96px] sm:w-[176px] lg:h-[104px] lg:w-[188px]',
+    imageClass: 'object-cover',
+    crop: { scale: 3.1, origin: 'center 60%' },
   },
   endTip: {
-    gridClass: 'lg:col-start-3 lg:row-start-1 lg:justify-self-start',
-    imageClass: 'max-w-[180px] sm:max-w-[200px] lg:max-w-[220px]',
+    frameClass: 'h-[108px] w-[132px] sm:h-[116px] sm:w-[140px] lg:h-[124px] lg:w-[148px]',
+    imageClass: 'object-contain',
   },
   bead: {
-    gridClass: 'lg:col-start-1 lg:row-start-3 lg:justify-self-end',
-    imageClass: 'max-w-[180px] sm:max-w-[200px] lg:max-w-[220px]',
+    frameClass: 'h-[124px] w-[124px] sm:h-[132px] sm:w-[132px] lg:h-[140px] lg:w-[140px]',
+    imageClass: 'object-contain',
   },
   adjustment: {
-    gridClass: 'lg:col-start-3 lg:row-start-3 lg:justify-self-start',
-    imageClass: 'max-w-[200px] sm:max-w-[220px] lg:max-w-[240px]',
+    frameClass: 'h-[120px] w-[120px] sm:h-[128px] sm:w-[128px] lg:h-[140px] lg:w-[140px]',
+    imageClass: 'object-cover',
+    crop: { scale: 1.35, origin: 'center center' },
   },
 };
 
@@ -51,12 +57,16 @@ const MOBILE_ORDER: Array<DetailKey | 'hero'> = [
 function FeatureDetailCard({
   label,
   image,
+  frameClassName,
   imageClassName,
+  crop,
   className,
 }: {
   label: string;
   image: { src: string; width: number; height: number };
+  frameClassName: string;
   imageClassName?: string;
+  crop?: { scale: number; origin: string };
   className?: string;
 }) {
   return (
@@ -66,16 +76,26 @@ function FeatureDetailCard({
         className="transition-opacity hover:opacity-90"
         aria-label={label}
       >
-        <Image
-          src={image.src}
-          alt={label}
-          width={image.width}
-          height={image.height}
-          sizes="(max-width: 1024px) 45vw, 240px"
-          className={cn('h-auto w-full', imageClassName)}
-        />
+        <span className={cn('relative block overflow-hidden', frameClassName)}>
+          <Image
+            src={image.src}
+            alt={label}
+            width={image.width}
+            height={image.height}
+            sizes="188px"
+            className={cn(
+              'h-full w-full origin-center',
+              imageClassName,
+            )}
+            style={
+              crop
+                ? { transform: `scale(${crop.scale})`, transformOrigin: crop.origin }
+                : undefined
+            }
+          />
+        </span>
       </button>
-      <figcaption className="font-serif text-sm text-black sm:text-base">
+      <figcaption className="max-w-[11rem] font-serif text-sm leading-snug text-black sm:text-base">
         {label}
       </figcaption>
     </figure>
@@ -92,12 +112,10 @@ function FeatureHero({
   const image = FEATURE_HUB.hero;
 
   return (
-    <figure
-      className={cn('flex flex-col items-center text-center', className)}
-    >
+    <figure className={cn('mx-auto flex flex-col items-center text-center', className)}>
       <button
         type="button"
-        className="transition-opacity hover:opacity-90"
+        className="relative w-[280px] transition-opacity hover:opacity-90 sm:w-[400px] lg:w-[560px]"
         aria-label={label}
       >
         <Image
@@ -105,8 +123,8 @@ function FeatureHero({
           alt={label}
           width={image.width}
           height={image.height}
-          sizes="(max-width: 1024px) 70vw, 360px"
-          className="h-auto w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[360px]"
+          sizes="(max-width: 1024px) 70vw, 560px"
+          className="h-auto w-full object-contain"
         />
       </button>
     </figure>
@@ -160,7 +178,9 @@ export async function FeaturesSection() {
               <FeatureDetailCard
                 label={detailLabel(key)}
                 image={FEATURE_HUB[key]}
+                frameClassName={DETAIL_GRID[key].frameClass}
                 imageClassName={DETAIL_GRID[key].imageClass}
+                crop={DETAIL_GRID[key].crop}
               />
             </div>
           ),
@@ -170,27 +190,41 @@ export async function FeaturesSection() {
       {/* Desktop hub */}
       <div
         data-scroll-stagger
-        className="mx-auto mt-14 hidden max-w-[920px] lg:grid lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-[auto_auto_auto] lg:items-center lg:gap-x-8 lg:gap-y-6 xl:gap-x-12"
+        className="mx-auto mt-14 hidden min-h-[32rem] max-w-[1100px] lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-stretch lg:gap-x-10 xl:gap-x-16"
       >
-        {(Object.keys(DETAIL_GRID) as DetailKey[]).map((key) => (
-          <div
-            key={key}
-            data-scroll-stagger-item
-            className={cn('flex justify-center', DETAIL_GRID[key].gridClass)}
-          >
-            <FeatureDetailCard
-              label={detailLabel(key)}
-              image={FEATURE_HUB[key]}
-              imageClassName={DETAIL_GRID[key].imageClass}
-            />
-          </div>
-        ))}
+        <div className="flex h-full flex-col items-start justify-between self-stretch py-2">
+          {(['lettering', 'bead'] as const).map((key) => (
+            <div key={key} data-scroll-stagger-item>
+              <FeatureDetailCard
+                label={detailLabel(key)}
+                image={FEATURE_HUB[key]}
+                frameClassName={DETAIL_GRID[key].frameClass}
+                imageClassName={DETAIL_GRID[key].imageClass}
+                crop={DETAIL_GRID[key].crop}
+              />
+            </div>
+          ))}
+        </div>
 
         <div
           data-scroll-stagger-item
-          className="lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:flex lg:items-center lg:justify-center"
+          className="flex items-center justify-center self-center"
         >
           <FeatureHero label={heroAlt} />
+        </div>
+
+        <div className="flex h-full flex-col items-end justify-between self-stretch py-2">
+          {(['endTip', 'adjustment'] as const).map((key) => (
+            <div key={key} data-scroll-stagger-item>
+              <FeatureDetailCard
+                label={detailLabel(key)}
+                image={FEATURE_HUB[key]}
+                frameClassName={DETAIL_GRID[key].frameClass}
+                imageClassName={DETAIL_GRID[key].imageClass}
+                crop={DETAIL_GRID[key].crop}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
