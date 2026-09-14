@@ -14,6 +14,18 @@ import {
 
 const COLLECTION_LOGO = '/header/juspeace_header.png';
 
+/** Envelope PNGs are 1080×1350 with transparent padding around a 753×953 subject. */
+const ENVELOPE_CONTENT_WIDTH = 753;
+const ENVELOPE_CONTENT_HEIGHT = 953;
+const ENVELOPE_CONTENT_LEFT = 169;
+const ENVELOPE_CONTENT_TOP = 172;
+const ENVELOPE_IMAGE_STYLE = {
+  width: `${(1080 / ENVELOPE_CONTENT_WIDTH) * 100}%`,
+  height: 'auto',
+  left: `${(-ENVELOPE_CONTENT_LEFT / ENVELOPE_CONTENT_WIDTH) * 100}%`,
+  top: `${(-ENVELOPE_CONTENT_TOP / ENVELOPE_CONTENT_HEIGHT) * 100}%`,
+} as const;
+
 interface CollectionCard {
   key: VariantKey;
   title: string;
@@ -71,26 +83,29 @@ function CollectionProductCard({
       data-scroll-stagger-item
       className="flex flex-col items-center text-center"
     >
-      <Image
-        src={image.src}
-        alt={card.imageAlt}
-        width={image.width}
-        height={image.height}
-        sizes="(max-width: 768px) 70vw, 260px"
-        className="h-auto w-full max-w-[260px]"
-      />
-      <h3 className="mt-5 font-display text-[clamp(1.0625rem,1.5vw,1.25rem)] font-bold leading-snug text-black">
+      <div className="relative aspect-[753/953] w-full overflow-hidden">
+        <Image
+          src={image.src}
+          alt={card.imageAlt}
+          width={image.width}
+          height={image.height}
+          sizes="(max-width: 768px) 90vw, 400px"
+          className="absolute max-w-none"
+          style={ENVELOPE_IMAGE_STYLE}
+        />
+      </div>
+      <h3 className="mt-8 font-display text-[clamp(1.125rem,2vw,1.5rem)] font-bold leading-snug text-black">
         {card.title}
       </h3>
-      <p className="mt-2 max-w-[240px] font-sans text-sm italic leading-relaxed text-black/80">
+      <p className="mt-2 max-w-[340px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-[0.9375rem]">
         {card.description}
       </p>
-      <p className="mt-3 font-serif text-sm text-black">
+      <p className="mt-4 font-serif text-sm text-black">
         <span className="font-bold">{stockCount}</span> {stockSuffix}
       </p>
       <button
         type="button"
-        className="mt-4 min-w-[160px] bg-black px-5 py-2.5 font-sans text-sm text-white transition-opacity hover:opacity-90"
+        className="mt-5 min-w-[180px] bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90"
       >
         {ctaLabel}
       </button>
@@ -152,7 +167,7 @@ export async function ProductCollectionSection({
 
       <div
         data-scroll-stagger
-        className="mx-auto mt-16 grid max-w-[960px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-8 lg:gap-10"
+        className="mx-auto mt-16 grid max-w-[1280px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-12"
       >
         {cards.map((card) => (
           <CollectionProductCard
