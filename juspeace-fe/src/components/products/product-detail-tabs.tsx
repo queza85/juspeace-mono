@@ -3,53 +3,33 @@
 import Image from 'next/image';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useT } from '@/lib/i18n/locale-context';
+import { ProductDetailRegistrationTab } from '@/components/products/product-detail-registration-tab';
 import { ProductDetailReviewsTab } from '@/components/products/product-detail-reviews-tab';
-import { CLOSE_UP_IMAGES, type VariantKey } from '@/lib/products/variant-images';
+import { ProductDetailStoryTab } from '@/components/products/product-detail-story-tab';
+import { CLOSE_UP_IMAGES } from '@/lib/products/variant-images';
 import { cn } from '@/lib/utils';
 
-type TabKey = 'description' | 'closeUp' | 'additionalInfo' | 'reviews';
+type TabKey = 'story' | 'closeUp' | 'productRegistration' | 'reviews';
 
 interface ProductDetailTabsProps {
-  description: string;
-  variantKey: VariantKey;
+  variantName: string;
 }
 
 const TAB_KEYS: TabKey[] = [
-  'description',
+  'story',
   'closeUp',
-  'additionalInfo',
+  'productRegistration',
   'reviews',
 ];
 
-function descriptionColumnText(description: string) {
-  const trimmed = description.trim();
-  if (!trimmed) return '';
-  return `${trimmed} ${trimmed}`;
-}
-
-function TabTwoColumnBody({ text }: { text: string }) {
-  return (
-    <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-20">
-      <p className="font-mono text-xs leading-[1.85] text-black/80 sm:text-[13px] sm:leading-[1.9]">
-        {text}
-      </p>
-      <p className="font-mono text-xs leading-[1.85] text-black/80 sm:text-[13px] sm:leading-[1.9]">
-        {text}
-      </p>
-    </div>
-  );
-}
-
 export function ProductDetailTabs({
-  description,
-  variantKey: _variantKey,
+  variantName,
 }: ProductDetailTabsProps) {
   const t = useT();
-  const [activeTab, setActiveTab] = useState<TabKey>('description');
+  const [activeTab, setActiveTab] = useState<TabKey>('story');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
   const tabListRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Partial<Record<TabKey, HTMLButtonElement | null>>>({});
-  const columnText = descriptionColumnText(description);
 
   const updateIndicator = useCallback(() => {
     const tabList = tabListRef.current;
@@ -85,8 +65,8 @@ export function ProductDetailTabs({
 
   const renderTabPanel = () => {
     switch (activeTab) {
-      case 'description':
-        return <TabTwoColumnBody text={columnText} />;
+      case 'story':
+        return <ProductDetailStoryTab variantName={variantName} />;
       case 'closeUp':
         return (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:gap-5">
@@ -108,8 +88,8 @@ export function ProductDetailTabs({
             ))}
           </div>
         );
-      case 'additionalInfo':
-        return <TabTwoColumnBody text={columnText} />;
+      case 'productRegistration':
+        return <ProductDetailRegistrationTab />;
       case 'reviews':
         return <ProductDetailReviewsTab />;
       default:
@@ -123,7 +103,7 @@ export function ProductDetailTabs({
         <div
           ref={tabListRef}
           role="tablist"
-          aria-label={t('products.detail.tabs.description')}
+          aria-label={t('products.detail.tabsLabel')}
           className="grid w-full grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-4 sm:gap-x-4"
         >
           {TAB_KEYS.map((key) => (

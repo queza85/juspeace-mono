@@ -1,7 +1,8 @@
 'use client';
 
-import { Minus, Package, Plus, Star, Truck } from 'lucide-react';
+import { Minus, Plus, Star } from 'lucide-react';
 import { useState } from 'react';
+import { ProductDetailPurchaseInfo } from '@/components/products/product-detail-purchase-info';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import type { Product } from '@/lib/api/types';
 import { useCartStore } from '@/stores/cart-store';
@@ -79,7 +80,7 @@ export function ProductDetailPurchase({
   };
 
   return (
-    <div className={cn('flex min-h-0 min-w-0 flex-col lg:min-h-[564px]', className)}>
+    <div className={cn('flex min-h-0 min-w-0 flex-col', className)}>
       <h1 className="font-display text-[clamp(1.875rem,3vw,2.5rem)] font-black leading-[1.15] tracking-tight text-black">
         {displayName}
       </h1>
@@ -158,40 +159,7 @@ export function ProductDetailPurchase({
         </button>
       </div>
 
-      <div className="mt-10 flex flex-1 flex-col overflow-hidden border border-black/15">
-        <div className="flex gap-4 border-b border-black/15 px-5 py-6">
-          <Truck className="mt-0.5 size-[18px] shrink-0 text-black" aria-hidden />
-          <div className="min-w-0">
-            <p className="font-display text-sm font-semibold text-black">
-              {t('products.detail.deliveryTitle')}
-            </p>
-            <button
-              type="button"
-              className="mt-1.5 text-left font-mono text-xs leading-relaxed text-black underline underline-offset-4 sm:text-[13px]"
-            >
-              {t('products.detail.deliveryBody')}
-            </button>
-          </div>
-        </div>
-
-        <div className="flex gap-4 px-5 py-6">
-          <Package className="mt-0.5 size-[18px] shrink-0 text-black" aria-hidden />
-          <div className="min-w-0">
-            <p className="font-display text-sm font-semibold text-black">
-              {t('products.detail.returnTitle')}
-            </p>
-            <p className="mt-1.5 font-mono text-xs leading-relaxed text-black sm:text-[13px]">
-              {t('products.detail.returnBody')}{' '}
-              <button
-                type="button"
-                className="underline underline-offset-4"
-              >
-                {t('products.detail.returnDetails')}
-              </button>
-            </p>
-          </div>
-        </div>
-      </div>
+      <ProductDetailPurchaseInfo />
     </div>
   );
 }

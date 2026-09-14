@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useT } from '@/lib/i18n/locale-context';
 import {
   VARIANT_GALLERY_IMAGES,
-  VARIANT_MAIN_IMAGES,
+  VARIANT_PRODUCT_IMAGES,
   type VariantKey,
 } from '@/lib/products/variant-images';
 import { cn } from '@/lib/utils';
@@ -24,7 +24,7 @@ export function ProductDetailGallery({
 }: ProductDetailGalleryProps) {
   const t = useT();
   const images = VARIANT_GALLERY_IMAGES[variantKey];
-  const mainMeta = VARIANT_MAIN_IMAGES[variantKey];
+  const mainMeta = VARIANT_PRODUCT_IMAGES[variantKey];
   const [activeIndex, setActiveIndex] = useState(0);
   const activeSrc = images[activeIndex] ?? mainMeta.src;
   const thumbnails = images.slice(0, PDP_THUMBNAIL_COUNT);

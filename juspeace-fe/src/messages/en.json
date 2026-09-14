@@ -187,6 +187,8 @@
     "viewDetails": "View details",
     "detail": {
       "breadcrumbCollection": "Product Collection",
+      "breadcrumbBack": "Back to product collection",
+      "registrationBanner": "Every purchase can be officially registered and linked to you.",
       "buyNow": "Buy Now",
       "addToCart": "Add To Cart",
       "onlyItemsLeftBefore": "Only",
@@ -195,18 +197,43 @@
       "dontMiss": "Don't miss",
       "reviewsCount": "({count})",
       "deliveryTitle": "Delivery information",
-      "deliveryBody": "Enter your postal code for delivery availability.",
+      "deliveryBody": "Can track your delivery.",
       "returnTitle": "Return Delivery",
       "returnBody": "Free 30 Days delivery returns.",
-      "returnDetails": "Details.",
+      "authenticity": {
+        "title": "Authenticity & Recognition",
+        "badge": "Official. Verified. Yours.",
+        "body": "JUSPEACE is the only official and authorized source for every JUSPEACE piece. Each bracelet is individually recorded in the JUSPEACE Global Registry marking it as authentic, verified, and uniquely yours within the JUSPEACE movement.",
+        "authentic": "Authentic product",
+        "record": "Official JUSPEACE Record",
+        "registry": "14,678 part of the JUSPEACE registry"
+      },
+      "shipping": {
+        "title": "Shipping & Delivery"
+      },
+      "tabsLabel": "Product details",
       "tabs": {
-        "description": "DESCRIPTION",
+        "story": "STORY",
         "closeUp": "CLOSE UP IMAGE",
-        "additionalInfo": "ADDITIONAL INFO",
+        "productRegistration": "PRODUCT REGISTRATION",
         "reviews": "REVIEWS"
       },
+      "story": {
+        "logoAlt": "JUSPEACE",
+        "headlineLine1": "A Small Act.",
+        "headlineLine2": "A New Tomorrow.",
+        "subLine1": "Hope is where change begins.",
+        "subLine2": "Healing is how it continues.",
+        "body": "With every JUSPEACE bracelet, your small act of sharing\nbecomes someone's new tomorrow —\nsupporting youth rehabilitation and art therapy that rebuild\nlives from within.",
+        "closing": "If this is what you believe in, you can\nchoose to carry it with you.",
+        "flowerAlt": "JUSPEACE flower"
+      },
       "closeUpPlaceholder": "Close-up images coming soon.",
-      "additionalInfoPlaceholder": "Additional product information coming soon.",
+      "registration": {
+        "title": "Official JUSPEACE Registration",
+        "body1": "Every JUSPEACE purchase can be officially registered through our global system. When you buy from JUSPEACE or an authorized seller, your purchase is securely recorded and recognized as an official JUSPEACE piece.",
+        "body2": "Registration is optional, but it allows you to receive your official certificate and be part of the JUSPEACE journey."
+      },
       "reviewsPlaceholder": "Reviews coming soon.",
       "reviews": {
         "photoAlt": "Review photo",

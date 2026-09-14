@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LandingFooter } from '@/components/landing/landing-footer';
 import { LandingHeader } from '@/components/landing/landing-header';
 import { ProductDetailGallery } from '@/components/products/product-detail-gallery';
+import { ProductDetailPageIntro } from '@/components/products/product-detail-page-intro';
 import { ProductDetailPurchase } from '@/components/products/product-detail-purchase';
 import { ProductDetailTabs } from '@/components/products/product-detail-tabs';
 import { ProductRelatedSection } from '@/components/products/product-related-section';
@@ -107,51 +107,37 @@ export default async function ProductPage({ params }: ProductPageProps) {
     product.name.trim() || t(`${fallbackPrefix}.title`);
   const tagline =
     product.description?.trim() || t(`${fallbackPrefix}.description`);
-  const tabDescription =
-    product.description?.trim() || t(`${fallbackPrefix}.description`);
 
   return (
     <>
       <LandingHeader variant="light" />
       <article className="bg-white">
         <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-8 font-mono text-xs text-jp-muted sm:text-sm"
-          >
-            <ol className="flex flex-wrap items-center gap-1.5">
-              <li>
-                <Link
-                  href="/#collection"
-                  className="transition-colors hover:text-black"
-                >
-                  {t('products.detail.breadcrumbCollection')}
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-black">{displayName}</li>
-            </ol>
-          </nav>
-
-          <section className="mx-auto grid max-w-[1080px] grid-cols-1 gap-8 lg:grid-cols-[480px_520px] lg:items-stretch lg:gap-x-20">
-            <div className="lg:self-start">
-              <ProductDetailGallery
-                variantKey={variantKey}
-                productName={displayName}
-              />
-            </div>
-            <ProductDetailPurchase
-              product={product}
-              displayName={displayName}
-              tagline={tagline}
-              reviewCount={3}
+          <div className="mx-auto max-w-[1080px]">
+            <ProductDetailPageIntro
+              collectionLabel={t('products.detail.breadcrumbCollection')}
+              productName={displayName}
+              backAria={t('products.detail.breadcrumbBack')}
+              bannerText={t('products.detail.registrationBanner')}
             />
-          </section>
 
-          <ProductDetailTabs
-            description={tabDescription}
-            variantKey={variantKey}
-          />
+            <section className="grid grid-cols-1 gap-8 lg:grid-cols-[480px_520px] lg:items-stretch lg:gap-x-20">
+              <div className="lg:self-start">
+                <ProductDetailGallery
+                  variantKey={variantKey}
+                  productName={displayName}
+                />
+              </div>
+              <ProductDetailPurchase
+                product={product}
+                displayName={displayName}
+                tagline={tagline}
+                reviewCount={3}
+              />
+            </section>
+
+            <ProductDetailTabs variantName={displayName} />
+          </div>
         </div>
 
         <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 lg:px-12 xl:px-[75px]">

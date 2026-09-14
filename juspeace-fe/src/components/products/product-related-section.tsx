@@ -6,7 +6,7 @@ import type { Product } from '@/lib/api/types';
 import {
   detectVariantKey,
   getFallbackI18nPrefix,
-  VARIANT_MAIN_IMAGES,
+  VARIANT_PRODUCT_IMAGES,
 } from '@/lib/products/variant-images';
 import { getTranslator } from '@/lib/i18n/server';
 
@@ -39,7 +39,7 @@ export async function ProductRelatedSection({
         {related.map((product) => {
           const variantKey = detectVariantKey(product);
           const fallbackPrefix = getFallbackI18nPrefix(variantKey);
-          const image = VARIANT_MAIN_IMAGES[variantKey];
+          const image = VARIANT_PRODUCT_IMAGES[variantKey];
           const title = t(`${fallbackPrefix}.category`);
           const subtitle = t(`${fallbackPrefix}.variant`);
 

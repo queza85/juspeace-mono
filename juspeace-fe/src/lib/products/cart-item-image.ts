@@ -1,6 +1,6 @@
 import {
   detectVariantKeyFromSlug,
-  VARIANT_MAIN_IMAGES,
+  VARIANT_PRODUCT_IMAGES,
 } from '@/lib/products/variant-images';
 import type { CartItem } from '@/stores/cart-store';
 
@@ -11,5 +11,5 @@ export function resolveCartItemImage(item: CartItem): string {
   }
 
   const variantKey = detectVariantKeyFromSlug(item.product.slug);
-  return VARIANT_MAIN_IMAGES[variantKey].src;
+  return VARIANT_PRODUCT_IMAGES[variantKey].src;
 }

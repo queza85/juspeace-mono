@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
+import { CollectionCtaButton } from '@/components/landing/collection-cta-button';
 import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
@@ -7,8 +9,12 @@ import type { Product } from '@/lib/api/types';
 import { getTranslator } from '@/lib/i18n/server';
 import {
   COLLECTION_VARIANTS,
+  createFallbackProduct,
   getFallbackI18nPrefix,
+  getProductDetailHref,
+  VARIANT_DETAIL_SLUGS,
   VARIANT_MAIN_IMAGES,
+  VARIANT_PRODUCT_IMAGES,
   type VariantKey,
 } from '@/lib/products/variant-images';
 
@@ -32,6 +38,7 @@ interface CollectionCard {
   description: string;
   stock: number;
   imageAlt: string;
+  product: Product;
 }
 
 function matchVariant(product: Product, key: VariantKey) {
@@ -55,13 +62,24 @@ function buildCards(
 
     if (matched) used.add(matched.id);
 
+    const product =
+      matched ??
+      createFallbackProduct(VARIANT_DETAIL_SLUGS[key], key, {
+        name: t(`${fallbackPrefix}.title`),
+        description: t(`${fallbackPrefix}.description`),
+      });
+
     return {
       key,
-      title: matched?.name ?? t(`${fallbackPrefix}.title`),
+      title: product.name,
       description:
-        matched?.description?.trim() || t(`${fallbackPrefix}.description`),
-      stock: matched?.stock ?? 20,
-      imageAlt: matched?.name ?? t(`${fallbackPrefix}.title`),
+        product.description?.trim() || t(`${fallbackPrefix}.description`),
+      stock: product.stock,
+      imageAlt: product.name,
+      product: {
+        ...product,
+        imageUrl: product.imageUrl ?? VARIANT_PRODUCT_IMAGES[key].src,
+      },
     };
   });
 }
@@ -77,38 +95,39 @@ function CollectionProductCard({
 }) {
   const image = VARIANT_MAIN_IMAGES[card.key];
   const stockCount = Math.round(card.stock);
+  const detailHref = getProductDetailHref(card.key, card.product);
 
   return (
     <article
       data-scroll-stagger-item
       className="flex flex-col items-center text-center"
     >
-      <div className="relative aspect-[753/953] w-full overflow-hidden">
-        <Image
-          src={image.src}
-          alt={card.imageAlt}
-          width={image.width}
-          height={image.height}
-          sizes="(max-width: 768px) 90vw, 400px"
-          className="absolute max-w-none"
-          style={ENVELOPE_IMAGE_STYLE}
-        />
-      </div>
-      <h3 className="mt-8 font-display text-[clamp(1.125rem,2vw,1.5rem)] font-bold leading-snug text-black">
-        {card.title}
-      </h3>
+      <Link
+        href={detailHref}
+        className="group flex w-full flex-col items-center"
+      >
+        <div className="relative aspect-[753/953] w-full overflow-hidden">
+          <Image
+            src={image.src}
+            alt={card.imageAlt}
+            width={image.width}
+            height={image.height}
+            sizes="(max-width: 768px) 90vw, 400px"
+            className="absolute max-w-none transition-opacity group-hover:opacity-90"
+            style={ENVELOPE_IMAGE_STYLE}
+          />
+        </div>
+        <h3 className="mt-8 font-display text-[clamp(1.125rem,2vw,1.5rem)] font-bold leading-snug text-black">
+          {card.title}
+        </h3>
+      </Link>
       <p className="mt-2 max-w-[340px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-[0.9375rem]">
         {card.description}
       </p>
       <p className="mt-4 font-serif text-sm text-black">
         <span className="font-bold">{stockCount}</span> {stockSuffix}
       </p>
-      <button
-        type="button"
-        className="mt-5 min-w-[180px] bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90"
-      >
-        {ctaLabel}
-      </button>
+      <CollectionCtaButton product={card.product} label={ctaLabel} />
     </article>
   );
 }

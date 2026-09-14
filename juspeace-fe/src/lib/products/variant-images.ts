@@ -11,6 +11,7 @@ export const VARIANT_DETAIL_SLUGS: Record<VariantKey, string> = {
   stripe: 'stripe-harmony-peace',
 };
 
+/** Envelope packaging shots for the landing collection cards. */
 export const VARIANT_MAIN_IMAGES: Record<
   VariantKey,
   { src: string; width: number; height: number }
@@ -32,21 +33,43 @@ export const VARIANT_MAIN_IMAGES: Record<
   },
 };
 
+/** Bracelet product photography for PDP, cart, and related items. */
+export const VARIANT_PRODUCT_IMAGES: Record<
+  VariantKey,
+  { src: string; width: number; height: number }
+> = {
+  black: {
+    src: '/product-collection/juespeace_mar4.png',
+    width: 744,
+    height: 930,
+  },
+  white: {
+    src: '/product-collection/juspeace_mr3.png',
+    width: 726,
+    height: 920,
+  },
+  stripe: {
+    src: '/product-collection/ju_mar6.png',
+    width: 746,
+    height: 926,
+  },
+};
+
 export const VARIANT_GALLERY_IMAGES: Record<VariantKey, string[]> = {
   black: [
-    '/product-collection-one.png',
+    VARIANT_PRODUCT_IMAGES.black.src,
     '/product-feature/pf1.png',
     '/product-feature/pf2.png',
     '/product-feature/pf3.png',
   ],
   white: [
-    '/product-collection-two.png',
+    VARIANT_PRODUCT_IMAGES.white.src,
     '/product-feature/pf2.png',
     '/product-feature/pf5.png',
     '/product-feature/pf6.png',
   ],
   stripe: [
-    '/product-collection-three.png',
+    VARIANT_PRODUCT_IMAGES.stripe.src,
     '/product-feature/pf1.png',
     '/product-feature/pf3.png',
     '/product-feature/pf5.png',
@@ -101,7 +124,7 @@ export function createFallbackProduct(
     currency: 'USD',
     stock: 20,
     status: 'ACTIVE',
-    imageUrl: VARIANT_MAIN_IMAGES[variantKey].src,
+    imageUrl: VARIANT_PRODUCT_IMAGES[variantKey].src,
   };
 }
 
