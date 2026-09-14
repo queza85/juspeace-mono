@@ -101,4 +101,5 @@ Local Postgres defaults: `postgres` / `root` / `juspeace_develop` on `127.0.0.1:
 
 - [glossary.md](glossary.md)
 - [agent-harness.md](agent-harness.md)
+- [serialization-architecture-migration.md](serialization-architecture-migration.md) — planned serial-first registry migration (not yet implemented)
 - Root [AGENTS.md](../AGENTS.md)

@@ -1,78 +1,82 @@
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+import {
+  brandStoryPeekCount,
+  listBrandStorySlides,
+  type BrandStorySlideItem,
+} from '@/lib/api/brand-story';
 import { getTranslator } from '@/lib/i18n/server';
 
 const SLIDE_ASSETS = {
   paperclip: '/papper_click.png',
-  koreanText: '/korean-text-beside-gd-pink-image.png',
+  koreanHandwriting: '/brand-story/korean-handwriting.png',
   pinkPoster: '/gd-pick-photo.jpg',
-  portraitSignature: '/gd-image-beside-pink.jpg',
-  flower: '/gd-flower.png',
+  besidePink: '/gd-image-beside-pink.jpg',
+  signature: '/brand-story/signature.png',
+  loveTogether: '/brand-story/love-together.png',
+  changeTogether: '/story/love_together.png',
+  arrowLeft: '/brand-story/arrow-left.svg',
+  arrowRight: '/brand-story/arrow-right.svg',
 } as const;
+
+const PEEK_X_REM = 1.15;
+const PEEK_Y_REM = 1;
+
+type Translate = (key: string) => string;
 
 export async function BrandStorySlide() {
   const { t } = await getTranslator();
+  const slides = await listBrandStorySlides();
+  const currentSlide = slides[0];
+  const peekCount = brandStoryPeekCount(slides.length);
+  const peekLayers = Array.from(
+    { length: peekCount },
+    (_, index) => peekCount - index,
+  );
 
   return (
-    <div className="jp-brand-story-slide-stack mt-16 lg:mt-24">
-      <div aria-hidden className="jp-brand-story-slide-layer jp-brand-story-slide-layer--back" />
-      <div aria-hidden className="jp-brand-story-slide-layer jp-brand-story-slide-layer--mid" />
+    <div className="jp-brand-story-slide-stack">
+      <div
+        className="jp-brand-story-slide-folder"
+        style={{ paddingTop: `${peekCount * PEEK_Y_REM}rem` }}
+      >
+        {peekLayers.map((depth) => (
+          <div
+            key={`peek-${depth}`}
+            aria-hidden
+            className="jp-brand-story-slide-layer"
+            style={{
+              backgroundColor: '#e6e6e6',
+              top: `${(peekCount - depth) * PEEK_Y_REM}rem`,
+              right: `${depth * PEEK_X_REM}rem`,
+              bottom: 0,
+              left: `${depth * PEEK_X_REM}rem`,
+              zIndex: peekCount - depth,
+            }}
+          />
+        ))}
 
-      <Image
-        src={SLIDE_ASSETS.paperclip}
-        alt=""
-        width={88}
-        height={88}
-        aria-hidden
-        className="pointer-events-none absolute -left-2 top-[-18px] z-40 h-[72px] w-[72px] -rotate-[22deg] object-contain sm:-left-3 sm:top-[-22px] sm:h-20 sm:w-20 lg:h-[88px] lg:w-[88px]"
-      />
+        <Image
+          src={SLIDE_ASSETS.paperclip}
+          alt=""
+          width={828}
+          height={1158}
+          aria-hidden
+          className="jp-brand-story-slide-paperclip"
+        />
 
-      <div className="jp-brand-story-slide-paper">
-        <div className="flex flex-col gap-10 px-6 py-10 sm:px-10 sm:py-12 lg:flex-row lg:items-stretch lg:gap-14 lg:px-12 lg:py-14 xl:gap-20 xl:px-16 xl:py-16">
-          <div className="jp-brand-story-slide-visual mx-auto lg:mx-0">
-            <Image
-              src={SLIDE_ASSETS.koreanText}
-              alt={t('landing.brandStory.slideKoreanTextAlt')}
-              width={1171}
-              height={606}
-              className="jp-brand-story-slide-korean absolute left-[-2%] top-[16%] z-10 w-[26%] object-contain"
-            />
-            <Image
-              src={SLIDE_ASSETS.pinkPoster}
-              alt={t('landing.brandStory.slidePinkPosterAlt')}
-              width={480}
-              height={640}
-              className="jp-brand-story-slide-pink absolute left-[14%] top-[2%] z-20 w-[36%] -rotate-[9deg] object-cover shadow-[0_6px_20px_rgba(0,0,0,0.14)]"
-            />
-            <Image
-              src={SLIDE_ASSETS.portraitSignature}
-              alt={t('landing.brandStory.slidePortraitAlt')}
-              width={520}
-              height={720}
-              className="jp-brand-story-slide-portrait absolute left-[38%] top-[0%] z-30 w-[44%] rotate-[6deg] object-cover shadow-[0_6px_20px_rgba(0,0,0,0.14)]"
-            />
-            <Image
-              src={SLIDE_ASSETS.flower}
-              alt={t('landing.brandStory.flowerAlt')}
-              width={64}
-              height={64}
-              className="absolute bottom-[10%] left-[12%] z-40 h-9 w-9 object-contain sm:h-10 sm:w-10"
-            />
-          </div>
+        <div className="jp-brand-story-slide-paper">
+          <BrandStorySlideVisual slide={currentSlide} t={t} />
 
-          <div className="flex flex-1 flex-col justify-between gap-12 lg:max-w-[520px] lg:py-4 xl:max-w-[560px]">
-            <div className="jp-brand-story-slide-copy space-y-6 lg:space-y-8">
-              <p>{t('landing.brandStory.slide1Paragraph1')}</p>
-              <p>{t('landing.brandStory.slide1Paragraph2')}</p>
-            </div>
+          <div className="jp-brand-story-slide-copy-wrap">
+            <BrandStorySlideCopy slide={currentSlide} t={t} />
 
-            <div className="flex items-end justify-between gap-6">
-              <p className="font-mono text-[13px] leading-none text-black sm:text-[14px]">
+            <div className="jp-brand-story-slide-nav">
+              <p className="jp-brand-story-slide-nav-label">
                 [ {t('landing.brandStory.nextStory')} ]
               </p>
               <div
-                className="flex items-center gap-2 text-black/60"
+                className="jp-brand-story-slide-nav-arrows"
                 aria-label={t('landing.brandStory.slideNavLabel')}
               >
                 <button
@@ -80,24 +84,186 @@ export async function BrandStorySlide() {
                   disabled
                   aria-disabled="true"
                   aria-label={t('landing.brandStory.prevStoryAria')}
-                  className="inline-flex size-7 items-center justify-center opacity-50"
                 >
-                  <ChevronLeft className="size-[18px]" strokeWidth={1.25} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={SLIDE_ASSETS.arrowLeft}
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden
+                  />
                 </button>
                 <button
                   type="button"
                   disabled
                   aria-disabled="true"
                   aria-label={t('landing.brandStory.nextStoryAria')}
-                  className="inline-flex size-7 items-center justify-center opacity-50"
                 >
-                  <ChevronRight className="size-[18px]" strokeWidth={1.25} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={SLIDE_ASSETS.arrowRight}
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden
+                  />
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BrandStorySlideVisual({
+  slide,
+  t,
+}: {
+  slide: BrandStorySlideItem | undefined;
+  t: Translate;
+}) {
+  if (slide?.id === 'change-together') {
+    return (
+      <div className="jp-brand-story-slide-visual">
+        <div className="jp-brand-story-slide-korean">
+          <Image
+            src={SLIDE_ASSETS.koreanHandwriting}
+            alt={t('landing.brandStory.slideKoreanTextAlt')}
+            width={1171}
+            height={606}
+            className="jp-brand-story-slide-korean-img"
+          />
+        </div>
+        <Image
+          src={SLIDE_ASSETS.loveTogether}
+          alt={t('landing.brandStory.slideLoveTogetherAlt')}
+          width={1238}
+          height={1550}
+          className="jp-brand-story-slide-photo-left jp-brand-story-slide-love"
+        />
+        <Image
+          src={SLIDE_ASSETS.changeTogether}
+          alt={t('landing.brandStory.slideChangeTogetherAlt')}
+          width={1240}
+          height={1544}
+          className="jp-brand-story-slide-photo-right jp-brand-story-slide-change"
+        />
+        <div className="jp-brand-story-slide-sign">
+          <Image
+            src={SLIDE_ASSETS.signature}
+            alt={t('landing.brandStory.slideSignatureAlt')}
+            width={736}
+            height={1308}
+            className="jp-brand-story-slide-sign-img"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="jp-brand-story-slide-visual jp-brand-story-slide-visual--origin">
+      <div className="jp-brand-story-slide-korean">
+        <Image
+          src={SLIDE_ASSETS.koreanHandwriting}
+          alt={t('landing.brandStory.slideKoreanTextAlt')}
+          width={1171}
+          height={606}
+          className="jp-brand-story-slide-korean-img"
+        />
+      </div>
+      <Image
+        src={SLIDE_ASSETS.pinkPoster}
+        alt={t('landing.brandStory.slidePinkPosterAlt')}
+        width={620}
+        height={875}
+        className="jp-brand-story-slide-photo-left jp-brand-story-slide-pink h-auto"
+      />
+      <Image
+        src={SLIDE_ASSETS.besidePink}
+        alt={t('landing.brandStory.slidePortraitAlt')}
+        width={1200}
+        height={1511}
+        className="jp-brand-story-slide-photo-right jp-brand-story-slide-beside h-auto"
+      />
+      <div className="jp-brand-story-slide-sign">
+        <Image
+          src={SLIDE_ASSETS.signature}
+          alt={t('landing.brandStory.slideSignatureAlt')}
+          width={736}
+          height={1308}
+          className="jp-brand-story-slide-sign-img"
+        />
+      </div>
+    </div>
+  );
+}
+
+function BrandStorySlideCopy({
+  slide,
+  t,
+}: {
+  slide: BrandStorySlideItem | undefined;
+  t: Translate;
+}) {
+  if (slide?.id === 'change-together') {
+    return (
+      <div className="jp-brand-story-slide-copy">
+        <p>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph1Line1')}
+          </span>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph1Line2')}
+          </span>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph1Lead')}
+            <em>{t('landing.brandStory.slideParagraph1Emphasis')}</em>
+          </span>
+        </p>
+        <p>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph2Line1')}
+          </span>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph2Lead')}
+            <em>{t('landing.brandStory.slideParagraph2Emphasis')}</em>
+          </span>
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slideParagraph2Tail')}
+          </span>
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="jp-brand-story-slide-copy">
+      <p>
+        <span className="jp-brand-story-slide-copy-line">
+          {t('landing.brandStory.slide1Paragraph1Line1')}
+        </span>
+        <span className="jp-brand-story-slide-copy-line">
+          {t('landing.brandStory.slide1Paragraph1Line2')}
+        </span>
+        <span className="jp-brand-story-slide-copy-line">
+          {t('landing.brandStory.slide1Paragraph1Line3')}
+        </span>
+      </p>
+      <p>
+        <span className="jp-brand-story-slide-copy-line">
+          {t('landing.brandStory.slide1Paragraph2Lead')}
+          <em>{t('landing.brandStory.slide1Paragraph2Emphasis')}</em>
+          {t('landing.brandStory.slide1Paragraph2Tail')}
+        </span>
+        <span className="jp-brand-story-slide-copy-line">
+          {t('landing.brandStory.slide1Paragraph2Line2Lead')}
+          <em>{t('landing.brandStory.slide1Paragraph2Line2Emphasis')}</em>
+        </span>
+      </p>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export async function BrandStorySection() {
   const { t } = await getTranslator();
 
   return (
-    <SectionShell id="story" className="bg-white py-20 lg:py-28">
+    <SectionShell id="story" className="bg-white pt-4 pb-20 lg:pt-6 lg:pb-28">
       <div
         data-scroll-reveal
         className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
@@ -20,7 +20,7 @@ export async function BrandStorySection() {
           alt={t('landing.brandStory.flowerAlt')}
           width={128}
           height={128}
-          className="mb-8 h-20 w-20 object-contain sm:mb-10 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
+          className="mb-6 h-20 w-20 object-contain sm:mb-8 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
         />
         <h2 className="jp-brand-story-quote">
           <span className="jp-brand-story-quote-line">

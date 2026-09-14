@@ -76,21 +76,21 @@ function CollectionProductCard({
         alt={card.imageAlt}
         width={image.width}
         height={image.height}
-        sizes="(max-width: 768px) 100vw, 33vw"
-        className="h-auto w-full max-w-[360px]"
+        sizes="(max-width: 768px) 70vw, 260px"
+        className="h-auto w-full max-w-[260px]"
       />
-      <h3 className="mt-6 font-display text-[clamp(1.125rem,2vw,1.5rem)] font-bold leading-snug text-black">
+      <h3 className="mt-5 font-display text-[clamp(1.0625rem,1.5vw,1.25rem)] font-bold leading-snug text-black">
         {card.title}
       </h3>
-      <p className="mt-2 max-w-[280px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-base">
+      <p className="mt-2 max-w-[240px] font-sans text-sm italic leading-relaxed text-black/80">
         {card.description}
       </p>
-      <p className="mt-4 font-serif text-sm text-black sm:text-base">
+      <p className="mt-3 font-serif text-sm text-black">
         <span className="font-bold">{stockCount}</span> {stockSuffix}
       </p>
       <button
         type="button"
-        className="mt-5 min-w-[180px] bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90"
+        className="mt-4 min-w-[160px] bg-black px-5 py-2.5 font-sans text-sm text-white transition-opacity hover:opacity-90"
       >
         {ctaLabel}
       </button>
@@ -152,7 +152,7 @@ export async function ProductCollectionSection({
 
       <div
         data-scroll-stagger
-        className="mx-auto mt-16 grid max-w-[1200px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-8 lg:gap-10"
+        className="mx-auto mt-16 grid max-w-[960px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-8 lg:gap-10"
       >
         {cards.map((card) => (
           <CollectionProductCard
