@@ -829,6 +829,352 @@
     }
   }
 
+  .jp-product-verification-intro-logo {
+    margin-top: clamp(2.75rem, 9vw, 6rem);
+  }
+
+  .jp-product-verification-intro-label {
+    margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .jp-product-verification-intro-headline {
+    margin-top: clamp(0.375rem, 1.2vw, 0.75rem);
+  }
+
+  .jp-product-verification-intro-headlines {
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .jp-product-verification-collage {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  .jp-product-verification-closing {
+    width: 100%;
+    max-width: none;
+    padding-top: clamp(2.5rem, 6vw, 5rem);
+    padding-bottom: clamp(5rem, 12vw, 7rem);
+    padding-inline: clamp(1rem, 4vw, 2rem);
+    text-align: center;
+  }
+
+  .jp-product-verification-closing-line {
+    display: block;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4.5vw, 3.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #000;
+  }
+
+  .jp-product-verification-closing-line--bold {
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .jp-product-verification-closing-line--italic {
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @media (min-width: 640px) {
+    .jp-product-verification-closing-line {
+      white-space: nowrap;
+    }
+  }
+
+  .jp-product-verification-stage {
+    --jp-pv-phone-top-crop: 0.175;
+    --jp-pv-phone-visible-height: 987;
+    --jp-pv-paper-top-offset: 0.42;
+    --jp-pv-paper-width: 70%;
+    --jp-pv-paper-width-ratio: 0.7;
+    --jp-pv-torn-edge-offset: 0.13;
+    --jp-pv-daisy-down-offset: clamp(1.25rem, 3.5vw, 2.5rem);
+    --jp-pv-paper-aspect: 1080 / 987;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .jp-product-verification-phone-layer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .jp-product-verification-phone-crop {
+    width: 100%;
+    aspect-ratio: 1080 / 987;
+    overflow: hidden;
+  }
+
+  .jp-product-verification-phone-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    transform: translateY(calc(-1 * var(--jp-pv-phone-top-crop) * 100%));
+  }
+
+  .jp-product-verification-daisy-layer {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 30;
+    width: clamp(7rem, 28vw, 18rem);
+    height: clamp(7rem, 28vw, 18rem);
+    margin-top: calc(
+      (
+          var(--jp-pv-paper-top-offset) +
+          var(--jp-pv-paper-width-ratio) * var(--jp-pv-torn-edge-offset)
+        ) * 100% * var(--jp-pv-phone-visible-height) / 1080 +
+        var(--jp-pv-daisy-down-offset)
+    );
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .jp-product-verification-paper-layer {
+    position: relative;
+    z-index: 20;
+    width: var(--jp-pv-paper-width);
+    margin-inline: auto;
+    margin-top: calc(
+      -1 * (1 - var(--jp-pv-paper-top-offset)) * 100% * var(--jp-pv-phone-visible-height) / 1080
+    );
+  }
+
+  .jp-product-verification-daisy {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .jp-product-verification-paper-frame {
+    position: relative;
+    width: 100%;
+    container-type: inline-size;
+    container-name: pv-paper;
+  }
+
+  .jp-product-verification-paper-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+
+  .jp-product-verification-paper-copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24% 8% 7%;
+    text-align: center;
+  }
+
+  .jp-product-verification-paper-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: clamp(1.25rem, 5.5cqi, 2.75rem);
+  }
+
+  .jp-product-verification-paper-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(88%, 36rem);
+    margin: 0 0 clamp(2.25rem, 12cqi, 5rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 9.67cqi, 3.625rem);
+    font-weight: 700;
+    font-style: normal;
+    line-height: clamp(1.6875rem, 10.83cqi, 4.0625rem);
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #000;
+  }
+
+  .jp-product-verification-paper-heading span {
+    display: block;
+  }
+
+  .jp-product-verification-paper-passage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(88%, 34rem);
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(0.8125rem, 3.75cqi, 1.25rem);
+    font-weight: 400;
+    font-style: normal;
+    line-height: clamp(1.25rem, 6cqi, 2rem);
+    letter-spacing: 0;
+    text-align: center;
+    color: #000;
+  }
+
+  .jp-product-verification-paper-passage + .jp-product-verification-paper-passage {
+    margin-top: clamp(1.375rem, 6.5cqi, 2.5rem);
+  }
+
+  .jp-product-verification-paper-passage p {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .jp-product-verification-paper-cta {
+    flex-shrink: 0;
+    margin-top: clamp(1rem, 4cqi, 1.75rem);
+    background: #000;
+    padding: clamp(0.5rem, 1.8cqi, 0.75rem) clamp(1.25rem, 5cqi, 2rem);
+    font-family: var(--font-sans);
+    font-size: clamp(0.6875rem, 2.8cqi, 0.875rem);
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    transition: opacity 0.2s ease;
+  }
+
+  .jp-product-verification-paper-cta:hover {
+    opacity: 0.9;
+  }
+
+  .jp-product-verification-note {
+    --jp-pv-note-height: clamp(5.25rem, 21vw, 9rem);
+    position: absolute;
+    z-index: 12;
+    width: clamp(6.5rem, 28vw, 11.5rem);
+  }
+
+  .jp-product-verification-note--left {
+    left: 22%;
+    top: 7%;
+    transform: rotate(-10deg);
+    transform-origin: 0% 0%;
+  }
+
+  .jp-product-verification-note--right {
+    right: 22%;
+    top: 13%;
+    transform: rotate(10deg);
+    transform-origin: 0% 0%;
+  }
+
+  .jp-product-verification-note-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--jp-pv-note-height);
+    border-radius: 2px;
+    background: #fff;
+    padding: 1.125rem 0.625rem 0.625rem;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    container-type: inline-size;
+    container-name: pv-note;
+  }
+
+  .jp-product-verification-note-clip {
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    width: auto;
+    height: clamp(1.625rem, 5.25vw, 2.875rem);
+    pointer-events: none;
+    object-fit: contain;
+  }
+
+  .jp-product-verification-note--left .jp-product-verification-note-clip {
+    right: 0.125rem;
+    left: auto;
+    transform: translate(18%, -54%) rotate(8deg);
+    transform-origin: bottom center;
+  }
+
+  .jp-product-verification-note--right .jp-product-verification-note-clip {
+    left: 0.125rem;
+    right: auto;
+    transform: translate(-18%, -54%) rotate(-8deg);
+    transform-origin: bottom center;
+  }
+
+  .jp-product-verification-note-lead {
+    font-family: var(--font-serif);
+    font-size: clamp(0.625rem, 2.5vw, 0.875rem);
+    line-height: 1.35;
+    color: #000;
+  }
+
+  .jp-product-verification-note-quote {
+    margin-top: 0.375rem;
+    font-family: var(--font-display);
+    font-size: clamp(0.6875rem, 10.6cqi, 2.5rem);
+    font-weight: 700;
+    font-style: normal;
+    line-height: clamp(1.125rem, 17.2cqi, 4.0625rem);
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #000;
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .jp-product-verification-stage {
+      --jp-pv-paper-top-offset: 0.41;
+      --jp-pv-paper-width: 68%;
+      --jp-pv-paper-width-ratio: 0.68;
+    }
+
+    .jp-product-verification-paper-copy {
+      padding: 23% 9% 6.5%;
+    }
+
+    .jp-product-verification-note--left {
+      left: 23%;
+      top: 8%;
+    }
+
+    .jp-product-verification-note--right {
+      right: 23%;
+      top: 14%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-product-verification-stage {
+      --jp-pv-paper-top-offset: 0.4;
+      --jp-pv-paper-width: 66%;
+      --jp-pv-paper-width-ratio: 0.66;
+    }
+
+    .jp-product-verification-paper-copy {
+      padding: 22% 10% 6%;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .jp-nav-link,
     .jp-nav-link::after,
@@ -857,6 +1203,10 @@
 
     .jp-pdp-tab-panel {
       animation: none;
+    }
+
+    .jp-product-verification-paper-cta {
+      transition: none;
     }
   }
 }

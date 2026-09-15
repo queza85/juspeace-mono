@@ -3,6 +3,7 @@ import { BrandStorySection } from '@/components/landing/brand-story-section';
 import { DonationSection } from '@/components/landing/donation-section';
 import { FaqSection } from '@/components/landing/faq-section';
 import { FeaturesSection } from '@/components/landing/features-section';
+import { ProductVerificationSection } from '@/components/landing/product-verification-section';
 import { GallerySection } from '@/components/landing/gallery-section';
 import { HeroSection } from '@/components/landing/hero-section';
 import { LandingFooter } from '@/components/landing/landing-footer';
@@ -23,6 +24,7 @@ export default async function LandingPage() {
       <BrandStorySection />
       <ProductCollectionSection products={productsResponse?.items ?? []} />
       <FeaturesSection />
+      <ProductVerificationSection />
       <LandingVideoSection />
       <GallerySection />
       <DonationSection />

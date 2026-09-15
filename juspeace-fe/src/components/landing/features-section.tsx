@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { BracketLabel } from '@/components/landing/bracket-label';
 import { SectionHeading } from '@/components/landing/section-heading';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
@@ -233,15 +234,12 @@ export async function FeaturesSection() {
         className="mx-auto mt-16 flex max-w-[720px] flex-col items-center text-center lg:mt-20"
       >
         <p className="font-sans text-base leading-relaxed text-black sm:text-lg">
-          {t('landing.features.subtext')}
+          <span className="block">{t('landing.features.subtextLine1')}</span>
+          <span className="block">{t('landing.features.subtextLine2')}</span>
         </p>
-        <p className="mt-8 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-black">
-          {t('landing.features.closingPrefix')}{' '}
-          <span className="italic">{t('landing.features.closingBrand')}</span>
-        </p>
-        <p className="mt-6 font-mono text-xs text-black/70 sm:text-sm">
-          [ {t('landing.features.tapHint')} ]
-        </p>
+        <BracketLabel className="mt-6 text-black/70">
+          {t('landing.features.tapHint')}
+        </BracketLabel>
       </div>
     </SectionShell>
   );
