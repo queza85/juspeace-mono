@@ -47,9 +47,22 @@ node_major() {
   node -p "process.versions.node.split('.')[0]"
 }
 
+ensure_cmd() {
+  local cmd="$1"
+  shift
+  if command -v "${cmd}" >/dev/null 2>&1; then
+    return
+  fi
+  dnf install -y "$@"
+}
+
 install_base() {
   log "Installing base packages"
-  dnf install -y ca-certificates curl gnupg2 git tar
+  # AL2023 AMIs ship curl-minimal / gnupg2-minimal. Requesting curl / gnupg2
+  # conflicts with those packages; keep the minimal variants.
+  dnf install -y ca-certificates git tar
+  ensure_cmd curl curl-minimal
+  ensure_cmd gpg gnupg2-minimal
 }
 
 compose_available() {
