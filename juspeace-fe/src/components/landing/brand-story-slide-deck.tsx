@@ -13,6 +13,18 @@ import {
   type BrandStorySlideItem,
 } from '@/lib/api/brand-story';
 import { useT } from '@/lib/i18n/locale-context';
+import {
+  SCATTER_DURATION,
+  SCATTER_EASE,
+  SETTLE_DURATION,
+  SETTLE_EASE,
+  paperBackground,
+  scatterRotation,
+  scatterShadow,
+  scatterY,
+  stackSlotMetrics,
+  type SlideDirection,
+} from '@/lib/motion/brand-story-slide-motion';
 import { ensureGsapPlugins, gsap } from '@/lib/motion/gsap-client';
 import { prefersReducedMotion } from '@/lib/motion/prefers-reduced-motion';
 
@@ -34,11 +46,10 @@ export const PEEK_X_REM = 1.15;
 export const PEEK_Y_REM = 1;
 
 type Translate = (key: string) => string;
-type Direction = 'next' | 'prev';
 
 function rotateOrder(
   order: BrandStorySlideItem[],
-  direction: Direction,
+  direction: SlideDirection,
 ): BrandStorySlideItem[] {
   if (order.length < 2) return order;
   if (direction === 'next') {
@@ -60,15 +71,6 @@ function slotStyle(depth: number, peekCount: number): CSSProperties {
     ['--depth' as string]: String(depth),
     zIndex: peekCount + 1 - depth,
   };
-}
-
-const STACK_DEPTH_BACKGROUNDS = ['#FBFBFB', '#F2F2F2', '#EAEAEAFA'] as const;
-
-function paperBackground(depth: number): string {
-  return (
-    STACK_DEPTH_BACKGROUNDS[depth] ??
-    STACK_DEPTH_BACKGROUNDS[STACK_DEPTH_BACKGROUNDS.length - 1]
-  );
 }
 
 interface BrandStorySlideDeckProps {
@@ -113,16 +115,236 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
         paper.style.zIndex = String(peekCount + 1 - depth);
         gsap.set(paper, {
           clearProps:
-            'x,y,rotation,transform,width,marginTop,marginLeft,marginRight,backgroundColor',
+            'x,y,rotation,scale,opacity,transform,boxShadow,width,marginTop,marginLeft,marginRight,backgroundColor',
         });
         paper.style.backgroundColor = paperBackground(depth);
+        paper.classList.remove('jp-brand-story-slide-paper--scattering');
       });
     },
     [peekCount],
   );
 
+  const buildNextTimeline = useCallback(
+    (
+      tl: gsap.core.Timeline,
+      paperById: Map<string, HTMLElement>,
+      nextOrder: BrandStorySlideItem[],
+      peekX: number,
+      peekY: number,
+      folderWidth: number,
+    ) => {
+      const outgoingId = order[0]?.id ?? '';
+
+      order.forEach((slide, fromDepth) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        const fromMetrics = stackSlotMetrics(
+          fromDepth,
+          peekCount,
+          peekX,
+          peekY,
+          folderWidth,
+        );
+        gsap.set(paper, {
+          width: fromMetrics.width,
+          marginTop: fromMetrics.marginTop,
+          marginLeft: fromMetrics.inset,
+          marginRight: fromMetrics.inset,
+          transformOrigin: 'center center',
+        });
+        paper.classList.add(
+          'jp-brand-story-slide-paper--animating',
+          'jp-brand-story-slide-paper--scattering',
+        );
+      });
+
+      // Phase 1: scatter fan
+      order.forEach((slide, fromDepth) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        tl.to(
+          paper,
+          {
+            y: scatterY(fromDepth),
+            rotation: scatterRotation(fromDepth, 'next'),
+            boxShadow: scatterShadow('scatter'),
+            duration: SCATTER_DURATION,
+            ease: SCATTER_EASE,
+            zIndex:
+              fromDepth === 0 ? peekCount + 5 : peekCount + 1 - fromDepth,
+          },
+          0,
+        );
+      });
+
+      // Phase 2: settle into new stack order
+      const settleAt = SCATTER_DURATION - 0.05;
+      order.forEach((slide) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        const toDepth = nextOrder.findIndex((item) => item.id === slide.id);
+        if (toDepth < 0) return;
+        const toMetrics = stackSlotMetrics(
+          toDepth,
+          peekCount,
+          peekX,
+          peekY,
+          folderWidth,
+        );
+        const isOutgoing = slide.id === outgoingId;
+
+        tl.to(
+          paper,
+          {
+            y: 0,
+            rotation: 0,
+            width: toMetrics.width,
+            marginTop: toMetrics.marginTop,
+            marginLeft: toMetrics.inset,
+            marginRight: toMetrics.inset,
+            backgroundColor: paperBackground(toDepth),
+            boxShadow: scatterShadow('flat'),
+            duration: SETTLE_DURATION,
+            ease: SETTLE_EASE,
+            zIndex: peekCount + 1 - toDepth,
+          },
+          settleAt,
+        );
+
+        if (isOutgoing) {
+          tl.set(
+            paper,
+            { zIndex: peekCount + 1 - toDepth },
+            settleAt + SETTLE_DURATION * 0.4,
+          );
+        }
+      });
+    },
+    [order, peekCount],
+  );
+
+  const buildPrevTimeline = useCallback(
+    (
+      tl: gsap.core.Timeline,
+      paperById: Map<string, HTMLElement>,
+      nextOrder: BrandStorySlideItem[],
+      peekX: number,
+      peekY: number,
+      folderWidth: number,
+    ) => {
+      const incomingId = nextOrder[0]?.id ?? '';
+      const incomingFromDepth = order.length - 1;
+
+      order.forEach((slide, fromDepth) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        const fromMetrics = stackSlotMetrics(
+          fromDepth,
+          peekCount,
+          peekX,
+          peekY,
+          folderWidth,
+        );
+        gsap.set(paper, {
+          width: fromMetrics.width,
+          marginTop: fromMetrics.marginTop,
+          marginLeft: fromMetrics.inset,
+          marginRight: fromMetrics.inset,
+          transformOrigin: 'center center',
+        });
+        paper.classList.add(
+          'jp-brand-story-slide-paper--animating',
+          'jp-brand-story-slide-paper--scattering',
+        );
+      });
+
+      // Phase 1: scatter fan (mirrored)
+      order.forEach((slide, fromDepth) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        const liftY =
+          fromDepth === incomingFromDepth
+            ? scatterY(0) - 6
+            : scatterY(fromDepth);
+        tl.to(
+          paper,
+          {
+            y: liftY,
+            rotation: scatterRotation(fromDepth, 'prev'),
+            boxShadow: scatterShadow('scatter'),
+            duration: SCATTER_DURATION,
+            ease: SCATTER_EASE,
+            zIndex:
+              fromDepth === incomingFromDepth
+                ? peekCount + 6
+                : peekCount + 1 - fromDepth,
+          },
+          0,
+        );
+      });
+
+      // Phase 2: settle — incoming rises to front
+      const settleAt = SCATTER_DURATION - 0.05;
+      order.forEach((slide) => {
+        const paper = paperById.get(slide.id);
+        if (!paper) return;
+        const toDepth = nextOrder.findIndex((item) => item.id === slide.id);
+        if (toDepth < 0) return;
+        const toMetrics = stackSlotMetrics(
+          toDepth,
+          peekCount,
+          peekX,
+          peekY,
+          folderWidth,
+        );
+        const isIncoming = slide.id === incomingId;
+
+        if (isIncoming) {
+          // Ensure incoming uses front slot metrics during settle
+          tl.to(
+            paper,
+            {
+              y: 0,
+              rotation: 0,
+              width: toMetrics.width,
+              marginTop: toMetrics.marginTop,
+              marginLeft: toMetrics.inset,
+              marginRight: toMetrics.inset,
+              backgroundColor: paperBackground(0),
+              boxShadow: scatterShadow('flat'),
+              duration: SETTLE_DURATION,
+              ease: SETTLE_EASE,
+              zIndex: peekCount + 1,
+            },
+            settleAt,
+          );
+          return;
+        }
+
+        tl.to(
+          paper,
+          {
+            y: 0,
+            rotation: 0,
+            width: toMetrics.width,
+            marginTop: toMetrics.marginTop,
+            marginLeft: toMetrics.inset,
+            marginRight: toMetrics.inset,
+            backgroundColor: paperBackground(toDepth),
+            boxShadow: scatterShadow('flat'),
+            duration: SETTLE_DURATION,
+            ease: SETTLE_EASE,
+            zIndex: peekCount + 1 - toDepth,
+          },
+          settleAt,
+        );
+      });
+    },
+    [order, peekCount],
+  );
+
   const restack = useCallback(
-    (direction: Direction) => {
+    (direction: SlideDirection) => {
       if (isAnimating || order.length < 2) return;
 
       const nextOrder = rotateOrder(order, direction);
@@ -156,8 +378,13 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
       setIsAnimating(true);
 
       const tl = gsap.timeline({
-        defaults: { ease: 'power2.inOut' },
         onComplete: () => {
+          papers.forEach((paper) => {
+            paper.classList.remove(
+              'jp-brand-story-slide-paper--animating',
+              'jp-brand-story-slide-paper--scattering',
+            );
+          });
           setOrder(nextOrder);
           applyDepthStyles(nextOrder);
           announceFront(nextOrder[0]);
@@ -167,91 +394,33 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
       });
       timelineRef.current = tl;
 
-      const outgoing = paperById.get(order[0]?.id ?? '');
-      if (outgoing) {
-        tl.to(
-          outgoing,
-          {
-            y: -12,
-            x: direction === 'next' ? 10 : -10,
-            rotation: direction === 'next' ? 2 : -2,
-            duration: 0.18,
-            ease: 'power2.out',
-            zIndex: peekCount + 3,
-          },
-          0,
+      if (direction === 'next') {
+        buildNextTimeline(
+          tl,
+          paperById,
+          nextOrder,
+          peekX,
+          peekY,
+          folderWidth,
+        );
+      } else {
+        buildPrevTimeline(
+          tl,
+          paperById,
+          nextOrder,
+          peekX,
+          peekY,
+          folderWidth,
         );
       }
-
-      order.forEach((slide, fromDepth) => {
-        const paper = paperById.get(slide.id);
-        if (!paper) return;
-        const toDepth = nextOrder.findIndex((item) => item.id === slide.id);
-        if (toDepth < 0) return;
-
-        const fromInset = fromDepth * peekX;
-        const toInset = toDepth * peekX;
-        const fromMarginTop = (peekCount - fromDepth) * peekY;
-        const toMarginTop = (peekCount - toDepth) * peekY;
-        const fromWidth = folderWidth - fromDepth * 2 * peekX;
-        const toWidth = folderWidth - toDepth * 2 * peekX;
-        const isOutgoing = fromDepth === 0;
-
-        gsap.set(paper, {
-          width: fromWidth,
-          marginTop: fromMarginTop,
-          marginLeft: fromInset,
-          marginRight: fromInset,
-        });
-
-        if (isOutgoing) {
-          tl.to(
-            paper,
-            {
-              width: toWidth,
-              marginTop: toMarginTop,
-              marginLeft: toInset,
-              marginRight: toInset,
-              x: 0,
-              y: 0,
-              rotation: 0,
-              duration: 0.42,
-              ease: 'power2.inOut',
-            },
-            0.14,
-          );
-          tl.set(
-            paper,
-            {
-              zIndex: peekCount + 1 - toDepth,
-              backgroundColor: paperBackground(toDepth),
-            },
-            0.14 + 0.21,
-          );
-        } else {
-          tl.to(
-            paper,
-            {
-              width: toWidth,
-              marginTop: toMarginTop,
-              marginLeft: toInset,
-              marginRight: toInset,
-              backgroundColor: paperBackground(toDepth),
-              duration: 0.5,
-              ease: 'power2.inOut',
-              zIndex: peekCount + 1 - toDepth,
-            },
-            0.12,
-          );
-        }
-      });
     },
     [
       announceFront,
       applyDepthStyles,
+      buildNextTimeline,
+      buildPrevTimeline,
       isAnimating,
       order,
-      peekCount,
     ],
   );
 
@@ -277,6 +446,9 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
           className="jp-brand-story-slide-paperclip"
         />
 
+        <div
+          className={`jp-brand-story-slide-deck${isAnimating ? ' jp-brand-story-slide-deck--animating' : ''}`}
+        >
         {order.map((slide, depth) => {
           const isFront = depth === 0;
           return (
@@ -349,6 +521,7 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
             </article>
           );
         })}
+        </div>
       </div>
 
       <p className="sr-only" aria-live="polite">

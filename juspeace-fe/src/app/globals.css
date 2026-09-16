@@ -255,10 +255,19 @@
     --peek-y: 1rem;
     --peek-count: 2;
     position: relative;
-    display: grid;
     width: min(94.8%, calc((100svh - 6.75rem) * 1.9));
     margin-inline: auto;
     overflow: visible;
+  }
+
+  .jp-brand-story-slide-deck {
+    display: grid;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .jp-brand-story-slide-deck--animating {
+    overflow: hidden;
   }
 
   @media (min-width: 1024px) {
@@ -304,7 +313,16 @@
     overflow: hidden;
     background: #fbfbfb;
     border-radius: 10px;
+    transform-origin: center center;
+    touch-action: manipulation;
+  }
+
+  .jp-brand-story-slide-paper--animating {
     will-change: transform;
+  }
+
+  .jp-brand-story-slide-paper--scattering {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   /* Stack-position backgrounds (front → mid → back), not per-story. */
