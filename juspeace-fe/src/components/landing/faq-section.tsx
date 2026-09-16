@@ -20,19 +20,21 @@ export function FaqSection() {
   const right = FAQ_IDS.filter((_, index) => index % 2 === 1);
 
   return (
-    <SectionShell id="faq" className="bg-white pt-12 pb-16 lg:pt-16 lg:pb-28">
+    <SectionShell id="faq" className="bg-white pt-6 pb-16 lg:pt-8 lg:pb-28">
       <div
         data-scroll-reveal
         className="mx-auto mb-12 flex max-w-[1116px] flex-col items-center text-center lg:mb-16"
       >
-        <Image
-          src={FAQ_LOGO}
-          alt="JUSPEACE"
-          width={48}
-          height={48}
-          className="h-10 w-10 object-contain sm:h-12 sm:w-12"
-        />
-        <SectionLabel className="mt-6 text-base sm:text-lg lg:text-xl">
+        <div className="relative -mt-6 mb-2 size-20 shrink-0 overflow-hidden rounded-full sm:-mt-8 sm:mb-3 sm:size-24 lg:-mt-10 lg:mb-4 lg:size-28">
+          <Image
+            src={FAQ_LOGO}
+            alt="JUSPEACE"
+            width={112}
+            height={112}
+            className="size-full object-cover"
+          />
+        </div>
+        <SectionLabel className="mt-10 text-base sm:mt-12 sm:text-lg lg:mt-14 lg:text-xl">
           {t('landing.faq.sectionLabel')}
         </SectionLabel>
         <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">

@@ -148,19 +148,21 @@ export async function ProductCollectionSection({
         data-scroll-reveal
         className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
       >
-        <p className="font-display text-[clamp(2.25rem,6vw,5rem)] font-bold leading-[1.08] tracking-[-0.02em] text-black">
+        <p className="font-display text-[clamp(2.25rem,6.25vw,7.5rem)] font-bold leading-[clamp(2.4rem,6.67vw,8rem)] tracking-[-0.02em] text-black">
           {t('landing.collection.taglineLine1')}
         </p>
         <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
           {t('landing.collection.taglineLine2')}
         </p>
-        <Image
-          src={COLLECTION_LOGO}
-          alt="JUSPEACE"
-          width={48}
-          height={48}
-          className="mt-8 h-10 w-10 object-contain sm:mt-10 sm:h-12 sm:w-12"
-        />
+        <div className="relative mt-12 size-20 shrink-0 overflow-hidden rounded-full sm:mt-16 sm:size-24 lg:mt-20 lg:size-28">
+          <Image
+            src={COLLECTION_LOGO}
+            alt="JUSPEACE"
+            width={112}
+            height={112}
+            className="size-full object-cover"
+          />
+        </div>
       </div>
 
       <div

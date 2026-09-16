@@ -48,7 +48,7 @@ function LocaleFlagButton({ className }: { className?: string }) {
 }
 
 /** Shared header row height for logo / nav / bag — one optical line. */
-const CONTROL_H = 'h-9';
+const CONTROL_H = 'h-10';
 
 function HeaderUtilityCard({ light }: { light?: boolean }) {
   const t = useT();
@@ -118,10 +118,10 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
       )}
     >
       {/* Single grid row — logo | nav | utilities, shared vertical center */}
-      <div className="relative mx-auto grid h-[72px] max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-20 sm:gap-6 sm:px-8 lg:px-12 xl:px-[75px] [@media(max-height:1000px)]:h-16">
+      <div className="relative mx-auto grid h-20 max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-[92px] sm:gap-6 sm:px-8 lg:px-12 xl:px-[75px] [@media(max-height:1000px)]:h-[72px]">
         <Link
           href="/"
-          className="relative block size-9 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-10 [@media(max-height:1000px)]:size-9"
+          className="relative block size-10 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-11 [@media(max-height:1000px)]:size-10"
           aria-label={t('common.brand')}
         >
           <Image
@@ -178,7 +178,7 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
             type="button"
             className={cn(
               'flex items-center justify-center border lg:hidden',
-              'size-9',
+              'size-10',
               isLight ? 'border-black/20' : 'border-jp-border-hero',
             )}
             aria-label={

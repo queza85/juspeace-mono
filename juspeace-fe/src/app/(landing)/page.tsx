@@ -26,9 +26,9 @@ export default async function LandingPage() {
       <FeaturesSection />
       <ProductVerificationSection />
       <LandingVideoSection />
-      <GallerySection />
       <DonationSection />
       <AboveFaqSection />
+      <GallerySection />
       <FaqSection />
       <LandingFooter />
     </>

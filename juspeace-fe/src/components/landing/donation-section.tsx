@@ -10,7 +10,7 @@ const COLLECTION_LOGO = '/header/juspeace_header.png';
 const DAISY_ICON = '/brand/gd-flower.png';
 
 const CIRCLE_SIZE =
-  'h-[52px] w-[52px] sm:h-[58px] sm:w-[58px] lg:h-[64px] lg:w-[64px]';
+  'h-[60px] w-[60px] sm:h-[68px] sm:w-[68px] lg:h-[76px] lg:w-[76px]';
 
 /** Orbital positions tuned to Figma: top pair flanks "Donation", bottom pair frames headline/body. */
 const FLOATING_IMAGES = [
@@ -107,13 +107,15 @@ export async function DonationSection() {
           ))}
 
           <div className="relative z-10 mx-auto flex max-w-[480px] flex-col items-center px-8 text-center sm:px-10 lg:px-12">
-            <Image
-              src={COLLECTION_LOGO}
-              alt="JUSPEACE"
-              width={48}
-              height={48}
-              className="h-10 w-10 object-contain sm:h-11 sm:w-11"
-            />
+            <div className="relative size-16 shrink-0 overflow-hidden rounded-full sm:size-20 lg:size-24">
+              <Image
+                src={COLLECTION_LOGO}
+                alt="JUSPEACE"
+                width={96}
+                height={96}
+                className="size-full object-cover"
+              />
+            </div>
             <SectionLabel className="mt-5 text-base sm:text-lg">
               {t('landing.donation.label')}
             </SectionLabel>

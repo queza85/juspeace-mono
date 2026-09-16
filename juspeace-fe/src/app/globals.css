@@ -848,11 +848,12 @@
   }
 
   .jp-product-verification-intro-logo {
-    margin-top: clamp(2.75rem, 9vw, 6rem);
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: clamp(3rem, 8vw, 5.5rem);
   }
 
   .jp-product-verification-intro-label {
-    margin-top: clamp(1.25rem, 3vw, 1.75rem);
+    margin-top: 0;
   }
 
   .jp-product-verification-intro-headline {
