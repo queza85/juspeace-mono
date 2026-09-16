@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: juspeace-postgres
+    restart: unless-stopped
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: juspeace_develop
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      - juspeace_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d juspeace_develop']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: juspeace-mailpit
+    restart: unless-stopped
+    ports:
+      - '${MAILPIT_SMTP_PORT:-1025}:1025'
+      - '${MAILPIT_UI_PORT:-8025}:8025'
+
+  juspeace-be:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juspeace-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    ports:
+      - '${BE_PORT:-7777}:7777'
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Docker network / listen overrides (win over env_file host-local values)
+      NODE_ENV: production
+      PORT: 7777
+      TZ: UTC
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DATABASE_URL: postgresql://postgres:root@postgres:5432/juspeace_develop?schema=public
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_SECURE: 'false'
+
+volumes:
+  juspeace_postgres_data:

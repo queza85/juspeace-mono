@@ -1,0 +1,564 @@
+{
+  "common": {
+    "brand": "Juspeace",
+    "tagline": "일상의 평화를 위한 마인드풀 에센셜",
+    "loading": "로딩 중...",
+    "error": "문제가 발생했습니다",
+    "retry": "다시 시도",
+    "addToCart": "장바구니에 담기",
+    "inStock": "재고 있음",
+    "outOfStock": "품절",
+    "cart": "장바구니",
+    "items": "{count}개"
+  },
+  "cart": {
+    "pageTitle": "장바구니",
+    "breadcrumb": "장바구니 확인",
+    "title": "장바구니에 {count}개",
+    "subtitle": "결제 전에 상품을 확인해 주세요.",
+    "orderSummary": "주문 요약",
+    "promoLabel": "프로모 / 쿠폰",
+    "qtyLabel": "수량: {count}",
+    "removeItem": "장바구니에서 {name} 제거",
+    "summaryLineQty": "수량: {count}",
+    "promoPlaceholder": "코드 입력",
+    "promoApply": "적용",
+    "subtotal": "소계",
+    "shipping": "배송",
+    "taxIncluded": "세금 (포함)",
+    "total": "합계",
+    "deliveryEstimateTitle": "예상 배송일:",
+    "deliveryEstimateBody": "배송은 최대 3일 소요됩니다",
+    "proceedToCheckout": "결제하기",
+    "checkoutComingSoon": "결제 기능 준비 중",
+    "continueShopping": "쇼핑 계속하기",
+    "emptyTitle": "장바구니가 비어 있습니다",
+    "emptyDescription": "컬렉션에서 상품을 담아 확인해 보세요."
+  },
+  "checkout": {
+    "pageTitle": "배송 정보",
+    "breadcrumb": "배송 정보",
+    "title": "배송 정보",
+    "subtitle": "배송 정보를 입력하고 배송 방법을 선택해 주세요",
+    "back": "뒤로",
+    "shippingDetails": "배송 상세",
+    "shippingMethod": "배송 방법",
+    "saveForNextTime": "다음에도 이 정보 사용",
+    "free": "무료",
+    "nextToPayment": "결제로 이동",
+    "fields": {
+      "name": "이름",
+      "phoneNumber": "전화번호",
+      "phoneCountryCode": "국가 코드",
+      "address": "주소",
+      "city": "도시",
+      "postalCode": "우편번호",
+      "deliveryNote": "배송 메모 (선택)"
+    },
+    "phoneCountries": {
+      "korea": "한국",
+      "usa": "미국"
+    },
+    "placeholders": {
+      "name": "이름을 입력해 주세요",
+      "phoneNumber": "000 000 000",
+      "address": "주소를 입력해 주세요",
+      "city": "도시명을 입력해 주세요",
+      "postalCode": "우편번호를 입력해 주세요",
+      "deliveryNote": "배송 메모를 입력해 주세요"
+    },
+    "methods": {
+      "standard": {
+        "title": "일반 배송",
+        "description": "9월 8–10일경 배송 예정"
+      },
+      "pickup": {
+        "title": "픽업",
+        "description": "9월 6일 픽업 가능"
+      }
+    },
+    "validation": {
+      "nameRequired": "이름을 입력해 주세요.",
+      "phoneInvalid": "올바른 전화번호를 입력해 주세요.",
+      "addressRequired": "주소를 입력해 주세요.",
+      "cityRequired": "도시를 입력해 주세요.",
+      "postalCodeRequired": "우편번호를 입력해 주세요."
+    }
+  },
+  "payment": {
+    "pageTitle": "결제 정보",
+    "breadcrumb": "결제 정보",
+    "title": "결제 정보",
+    "subtitle": "주문을 안전하게 완료하려면 결제 방법을 선택해 주세요.",
+    "back": "뒤로",
+    "chooseMethod": "결제 방법 선택",
+    "cardPayment": "카드 / 직불카드 결제",
+    "billingAddress": "청구지 주소",
+    "billingSameAsShipping": "청구지 주소를 배송지와 동일하게 사용",
+    "streetAddress": "Street Address",
+    "saveCard": "다음 구매를 위해 이 카드 저장",
+    "nextToOrderReview": "주문 검토로 이동",
+    "methods": {
+      "card": "Card / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "fields": {
+      "nameOnCard": "Name on Card",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV",
+      "line1": "Line 1",
+      "line2Optional": "Line 2 ( Optional )",
+      "country": "Country",
+      "stateProvince": "State / province",
+      "zipCode": "Zip Code"
+    },
+    "placeholders": {
+      "nameOnCard": "Jamie Lar",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiryDate": "10/8/2029",
+      "cvv": "123",
+      "line1": "Line 1",
+      "line2": "Line 2 ( Optional )",
+      "zipCode": "우편번호를 입력해 주세요"
+    },
+    "countries": {
+      "unitedStates": "United States",
+      "korea": "Korea"
+    },
+    "states": {
+      "chicago": "Chicago",
+      "california": "California",
+      "newYork": "New York"
+    },
+    "validation": {
+      "nameOnCardRequired": "카드 명의를 입력해 주세요.",
+      "cardNumberInvalid": "올바른 카드 번호를 입력해 주세요.",
+      "expiryDateInvalid": "올바른 만료일을 입력해 주세요.",
+      "cvvInvalid": "올바른 CVV를 입력해 주세요.",
+      "billingLine1Required": "청구지 주소를 입력해 주세요.",
+      "billingCountryRequired": "국가를 선택해 주세요.",
+      "billingStateRequired": "주/도를 선택해 주세요.",
+      "billingZipCodeRequired": "우편번호를 입력해 주세요."
+    }
+  },
+  "review": {
+    "pageTitle": "주문 검토",
+    "breadcrumb": "주문 검토",
+    "title": "주문 검토",
+    "subtitle": "주문을 확정하기 전에 주문 정보를 다시 확인해 주세요.",
+    "back": "뒤로",
+    "shippingAddress": "배송 주소",
+    "paymentMethod": "결제 방법",
+    "reviewItems": "상품 확인",
+    "edit": "수정",
+    "submitOrder": "JUSPEACE에 주문 제출",
+    "paymentMethods": {
+      "card": "Credit / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    }
+  },
+  "orderSuccess": {
+    "pageTitle": "주문 완료",
+    "title": "감사합니다! 주문이 확인되었습니다.",
+    "subtitle": "주문을 접수했으며 준비 중입니다",
+    "orderNumberLabel": "주문 번호",
+    "confirmationEmailPrefix": "확인 이메일이 다음 주소로 발송되었습니다",
+    "estimatedDelivery": "예상 배송일",
+    "deliveryNotify": "배송이 시작되면 알려 드리겠습니다.",
+    "trackOrder": "주문 조회",
+    "continueShopping": "쇼핑 계속하기",
+    "guestEmail": "jamie13@gmail.com"
+  },
+  "home": {
+    "heroTitle": "Juspeace에 오신 것을 환영합니다",
+    "heroDescription": "차분하고 지속 가능한 생활을 위한 엄선된 제품을 만나보세요.",
+    "featuredProducts": "추천 상품",
+    "apiStatus": "API 상태",
+    "apiConnected": "백엔드에 연결됨",
+    "apiDisconnected": "백엔드를 사용할 수 없음"
+  },
+  "products": {
+    "empty": "아직 등록된 상품이 없습니다.",
+    "viewDetails": "상세 보기",
+    "detail": {
+      "breadcrumbCollection": "제품 컬렉션",
+      "breadcrumbBack": "제품 컬렉션으로 돌아가기",
+      "registrationBanner": "모든 구매는 공식적으로 등록되어 구매자와 연결될 수 있습니다.",
+      "buyNow": "구매하기",
+      "addToCart": "장바구니 담기",
+      "onlyItemsLeftBefore": "남은 수량",
+      "onlyItemsLeftHighlight": "{count}개",
+      "onlyItemsLeftAfter": "",
+      "dontMiss": "놓치지 마세요",
+      "reviewsCount": "({count})",
+      "deliveryTitle": "배송 안내",
+      "deliveryBody": "배송을 추적할 수 있습니다.",
+      "returnTitle": "반품 안내",
+      "returnBody": "30일 무료 반품이 가능합니다.",
+      "authenticity": {
+        "title": "진품 인증",
+        "badge": "공식. 인증. 당신 것.",
+        "body": "JUSPEACE는 모든 JUSPEACE 제품의 유일한 공식·인증 판매처입니다. 각 브레이슬릿은 JUSPEACE 글로벌 레지스트리에 개별 기록되어 진품이자 인증된, 당신만의 제품으로 JUSPEACE 무브먼트 안에서 인정됩니다.",
+        "authentic": "정품",
+        "record": "공식 JUSPEACE 기록",
+        "registry": "JUSPEACE 레지스트리 14,678번째"
+      },
+      "shipping": {
+        "title": "배송 안내"
+      },
+      "tabsLabel": "제품 상세",
+      "tabs": {
+        "story": "STORY",
+        "closeUp": "CLOSE UP IMAGE",
+        "productRegistration": "PRODUCT REGISTRATION",
+        "reviews": "REVIEWS"
+      },
+      "story": {
+        "logoAlt": "JUSPEACE",
+        "headlineLine1": "작은 실천.",
+        "headlineLine2": "새로운 내일.",
+        "subLine1": "희망은 변화가 시작되는 곳입니다.",
+        "subLine2": "치유는 그 변화가 이어지는 방식입니다.",
+        "body": "JUSPEACE 브레이슬릿을 찰 때마다, 당신의 작은 나눔은\n누군가의 새로운 내일이 됩니다 —\n청소년 재활과 예술 치료를 통해\n삶을 안에서부터 다시 세웁니다.",
+        "closing": "이것이 당신이 믿는 마음이라면,\n함께 지니고 갈 수 있습니다.",
+        "flowerAlt": "JUSPEACE 꽃"
+      },
+      "closeUpPlaceholder": "클로즈업 이미지 준비 중입니다.",
+      "registration": {
+        "title": "공식 JUSPEACE 등록",
+        "body1": "모든 JUSPEACE 구매는 글로벌 시스템을 통해 공식적으로 등록할 수 있습니다. JUSPEACE 또는 공식 판매처에서 구매하면, 해당 구매는 안전하게 기록되며 공식 JUSPEACE 제품으로 인정됩니다.",
+        "body2": "등록은 선택 사항이지만, 공식 인증서를 받고 JUSPEACE 여정의 일부가 될 수 있습니다."
+      },
+      "reviewsPlaceholder": "리뷰 준비 중입니다.",
+      "reviews": {
+        "photoAlt": "리뷰 사진",
+        "samples": {
+          "1": {
+            "name": "Meow Meow",
+            "email": "sophia.lee@digitalshop.com",
+            "postedAt": "어제 04:10 PM",
+            "title": "정말 좋은 제품, 다시 구매할게요!",
+            "body": "정말 놀랍습니다! 음질이 인상적이고, 선명한 오디오와 좋은 베이스, 균형 잡힌 사운드를 제공합니다."
+          },
+          "2": {
+            "name": "Lemon Lover",
+            "email": "alice@digitalshop.com",
+            "postedAt": "어제 04:18 PM",
+            "body": "일상에 우아함을 더해 주는 아름다운 팔찌입니다. 캐주얼과 드레스룩 모두에 잘 어울리는 스타일리시한 디자인이에요. 착용감도 편하고 데일리 액세서리로, 또는 소중한 사람에게 선물하기에도 좋습니다."
+          }
+        },
+        "form": {
+          "heading": "리뷰 작성",
+          "ratingLabel": "별점을 선택해 주세요",
+          "reviewLabel": "리뷰를 작성해 주세요",
+          "placeholder": "여기에 작성해 주세요 ...",
+          "submit": "리뷰 등록",
+          "submitPreview": "감사합니다 — 리뷰 등록 기능은 곧 제공될 예정입니다.",
+          "starLabel": "{count}점"
+        }
+      },
+      "relatedLabel": "제품 컬렉션",
+      "relatedHeading": "비슷한 제품",
+      "galleryThumbnail": "제품 이미지 {index}",
+      "ratingLabel": "5점 만점에 {count}점"
+    }
+  },
+  "auth": {
+    "login": "로그인",
+    "logout": "로그아웃",
+    "account": "계정",
+    "accountTitle": "내 계정",
+    "loginTitle": "로그인",
+    "loginSubtitle": "Juspeace 계정으로 로그인해 주세요.",
+    "loginFailed": "로그인에 실패했습니다. 다시 시도해 주세요.",
+    "loginWithGoogle": "Google로 계속하기",
+    "orDivider": "또는",
+    "oauthCallbackLoading": "로그인 완료 중…",
+    "oauthCallbackFailed": "Google 로그인에 실패했습니다. 다시 시도해 주세요.",
+    "email": "이메일",
+    "password": "비밀번호",
+    "name": "이름",
+    "role": "역할",
+    "noName": "—",
+    "backHome": "쇼핑으로 돌아가기",
+    "validation": {
+      "emailRequired": "이메일을 입력해 주세요",
+      "emailInvalid": "올바른 이메일 주소를 입력해 주세요",
+      "passwordMin": "비밀번호는 최소 8자 이상이어야 합니다"
+    }
+  },
+  "apiMessages": {
+    "LOGIN_SUCCESSFULLY": "로그인되었습니다",
+    "LOGOUT_SUCCESSFULLY": "로그아웃되었습니다",
+    "LOGOUT_ALL_SUCCESSFULLY": "모든 기기에서 로그아웃되었습니다",
+    "REFRESH_SUCCESSFULLY": "세션이 갱신되었습니다",
+    "USER_RETRIEVED_SUCCESSFULLY": "사용자 정보를 불러왔습니다",
+    "PRODUCTS_RETRIEVED_SUCCESSFULLY": "상품 목록을 불러왔습니다",
+    "PRODUCT_RETRIEVED_SUCCESSFULLY": "상품 정보를 불러왔습니다",
+    "PRODUCT_CREATED_SUCCESSFULLY": "상품이 생성되었습니다",
+    "PRODUCT_UPDATED_SUCCESSFULLY": "상품이 수정되었습니다",
+    "PRODUCT_DELETED_SUCCESSFULLY": "상품이 삭제되었습니다",
+    "PRODUCT_NOT_FOUND": "상품을 찾을 수 없습니다",
+    "HEALTH_CHECKED_SUCCESSFULLY": "상태 확인에 성공했습니다",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "관리자 상태를 불러왔습니다",
+    "API_METADATA_RETRIEVED_SUCCESSFULLY": "API 메타데이터를 불러왔습니다",
+    "INVALID_CREDENTIALS": "이메일 또는 비밀번호가 올바르지 않습니다",
+    "INVALID_REFRESH_TOKEN": "세션이 만료되었습니다. 다시 로그인해 주세요",
+    "INSUFFICIENT_PERMISSIONS": "이 작업을 수행할 권한이 없습니다",
+    "VALIDATION_FAILED": "입력값을 확인하고 다시 시도해 주세요",
+    "UNAUTHORIZED": "계속하려면 로그인해 주세요",
+    "FORBIDDEN": "접근이 거부되었습니다",
+    "NOT_FOUND": "요청한 리소스를 찾을 수 없습니다",
+    "TOO_MANY_REQUESTS": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요",
+    "INTERNAL_SERVER_ERROR": "문제가 발생했습니다. 다시 시도해 주세요"
+  },
+  "language": {
+    "label": "언어",
+    "en": "English",
+    "ko": "한국어"
+  },
+  "landing": {
+    "nav": {
+      "story": "스토리",
+      "collection": "컬렉션",
+      "donation": "기부",
+      "faq": "FAQ",
+      "trackOrder": "주문 조회",
+      "bag": "BAG ( {count} )",
+      "openMenu": "메뉴 열기",
+      "closeMenu": "메뉴 닫기"
+    },
+    "hero": {
+      "titleLine1": "함께 사랑하다.",
+      "titleLine2": "함께 바꾸다.",
+      "description": "JUSPEACE는 Justice와 Peace를\n합친 이름입니다. G-Dragon의\n저작권 기부로 설립된 재단이\n만든 브레이슬릿입니다.",
+      "tag": "WHITE | 순수한 희망",
+      "buyNow": "구매하기",
+      "exploreCollection": "컬렉션 살펴보기",
+      "scroll": "스크롤",
+      "thumbnail": "히어로 썸네일 {index}",
+      "marquee": {
+        "ariaLabel": "히어로 컬렉션 미리보기",
+        "item1": "BLACK | 강한 다짐",
+        "item2": "STRIPE | 조화와 평화",
+        "item3": "WHITE | 순수한 희망",
+        "item4": "JUSTICE | 평화",
+        "item5": "LOVE | 함께",
+        "item6": "HOPE | 치유",
+        "item7": "CAMPAIGN | 마음",
+        "item8": "PLEDGE | 손목",
+        "item9": "JUSPEACE | 영원히"
+      }
+    },
+    "brandStory": {
+      "label": "브랜드 스토리",
+      "flowerAlt": "JUSPEACE 꽃",
+      "quoteLine1": "JUSPEACE는 단순한",
+      "quoteLine2": "팔찌가 아닙니다.",
+      "quoteLine3": "우리가 선택해",
+      "quoteLine4": "지니는 하나의 메시지입니다.",
+      "subtextLine1": "JUSPEACE is more than a bracelet.",
+      "subtextLine2": "It is a message we choose to carry.",
+      "slide1Paragraph1Line1": "2024년, G-Dragon은 일상의 작은 정의들을",
+      "slide1Paragraph1Line2": "찾아가자고 제안했습니다. 차이를 인정하고",
+      "slide1Paragraph1Line3": "편견 없는 세상을 만듭니다.",
+      "slide1Paragraph2Lead": "JUSPEACE는 ",
+      "slide1Paragraph2Emphasis": "더 나은 세상에 대한 믿음",
+      "slide1Paragraph2Tail": "을 나타냅니다 —",
+      "slide1Paragraph2Line2Lead": "",
+      "slide1Paragraph2Line2Emphasis": "인식, 연민, 행동으로 만들어집니다.",
+      "slideParagraph1Line1": "각각의 팔찌는 의도의 상징으로 디자인되었습니다.",
+      "slideParagraph1Line2": "더 큰 의미를 담은 작은 오브제입니다.",
+      "slideParagraph1Lead": "",
+      "slideParagraph1Emphasis": "우리가 매일 지향하는 바를 상기시켜 줍니다.",
+      "slideParagraph2Line1": "JUSPEACE를 착용하면,",
+      "slideParagraph2Lead": "당신은 ",
+      "slideParagraph2Emphasis": "자신보다 더 큰 무언가의 일부가 됩니다.",
+      "slideParagraph2Tail": "목적으로 연결된 성장하는 커뮤니티입니다.",
+      "nextStory": "다음 스토리로 이동",
+      "prevStoryAria": "이전 스토리",
+      "nextStoryAria": "다음 스토리",
+      "slideNavLabel": "스토리 탐색",
+      "slideKoreanTextAlt": "지드래곤 한글 필기",
+      "slidePinkPosterAlt": "지드래곤 핑크 포스터",
+      "slidePortraitAlt": "지드래곤 초상과 서명",
+      "slideLoveTogetherAlt": "Love Together 손 제스처",
+      "slideChangeTogetherAlt": "Change Together 피스 사인과 JUSPEACE 테이프",
+      "slideSignatureAlt": "G-Dragon 서명",
+      "slide3Paragraph1Line1": "모든 구매는 의미 있는 원인과",
+      "slide3Paragraph1Line2": "긍정적인 변화를 지원하는 활동에 기여합니다.",
+      "slide3Paragraph2": "메시지를 착용하세요. 임팩트를 나누세요.",
+      "slide3FlowerWallAlt": "종이꽃으로 가득한 JUSPEACE 메시지 벽",
+      "slide3EventHallAlt": "JUSPEACE 커뮤니티 이벤트 홀"
+    },
+    "collection": {
+      "taglineLine1": "메시지를 착용하세요.",
+      "taglineLine2": "임팩트를 나누세요.",
+      "label": "제품 컬렉션",
+      "headingLine1": "당신이 믿는 가치를",
+      "headingLine2": "선택하세요.",
+      "introLine1": "단순한 구매를 넘어,",
+      "introLine2": "JUSPEACE의 일부가 되는 방식.",
+      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
+      "introKoLine2": "방식.",
+      "cta": "This represent me",
+      "stockSuffix": "pieces still carry this message",
+      "moreDetails": "자세히 보기",
+      "buyNow": "구매하기",
+      "stocks": "{count}개 재고",
+      "qtyDecrease": "수량 줄이기",
+      "qtyIncrease": "수량 늘리기",
+      "imagePlaceholder": "제품 이미지",
+      "fallbackBlack": {
+        "title": "Strong Commitment",
+        "description": "A symbol of unwavering belief and strength."
+      },
+      "fallbackWhite": {
+        "title": "Pure Hope",
+        "description": "A reflection of clarity, sincerity, and new beginnings."
+      },
+      "fallbackStripe": {
+        "title": "Harmony & Peace",
+        "description": "Where differences meet in balance and unity."
+      }
+    },
+    "features": {
+      "label": "제품 컬렉션",
+      "headingLine1": "목적을 담아 만들었습니다.",
+      "headingLine2": "불필요한 것은 없고,",
+      "headingLine3": "필요한 것은 빠짐없이.",
+      "heroAlt": "JUSPEACE 브레이슬릿",
+      "items": {
+        "lettering": "Antique Silver Lettering",
+        "bead": "Engraved Bead",
+        "endTip": "Metal End Tips",
+        "adjustment": "Adjustable Fit"
+      },
+      "subtextLine1": "Not just made to wear , made to carry",
+      "subtextLine2": "something with you.",
+      "tapHint": "Tap each image for closer view"
+    },
+    "productVerification": {
+      "introLine1": "Wear it as a part of",
+      "introBrand": "JUSPEACE.",
+      "label": "Product Verification",
+      "headlineLine1": "Make It Official.",
+      "headlineLine2": "This Is Belonging.",
+      "noteLeftLead": "People think....",
+      "noteLeftQuote": "Is mine real?",
+      "noteRightLead": "And might doubt....",
+      "noteRightQuote": "Did I buy from the right place?",
+      "journeyHeadingLine1": "Your Journey,",
+      "journeyHeadingLine2": "Officially Recorded.",
+      "journeyBody1Line1": "A JUSPEACE bracelet is more than something you wear.",
+      "journeyBody1Line2": "It is something you choose to stand for.",
+      "journeyBody2Line1": "When you purchase through an official JUSPEACE",
+      "journeyBody2Line2": "channel, your bracelet can be recorded as part of our",
+      "journeyBody2Line3": "global movement.",
+      "cta": "Make it Official",
+      "closingLine1": "You're not just purchasing.",
+      "closingLine2": "You're becoming part of JUSPEACE.",
+      "phoneAlt": "Smartphone showing JUSPEACE bracelets held by illustrated hands",
+      "paperAlt": "Torn paper note with product verification message",
+      "daisyAlt": "JUSPEACE flower"
+    },
+    "gallery": {
+      "label": "제품 갤러리",
+      "heading": "JUSPEACE를 자세히 살펴보세요.",
+      "count": "26",
+      "categories": {
+        "productOnly": "제품 단독 이미지",
+        "lifestyle": "라이프스타일 이미지",
+        "closeUp": "클로즈업 이미지",
+        "packaging": "패키징 이미지",
+        "mobileSwipe": "모바일 스와이프 갤러리",
+        "desktopThumbnails": "데스크톱 썸네일"
+      }
+    },
+    "video": {
+      "mediaLabel": "브랜드 영상",
+      "playLabel": "영상 재생"
+    },
+    "donation": {
+      "label": "기부",
+      "headline": "작은 행동이 진짜 변화를 만듭니다.",
+      "body": "Every bracelet is a direct contribution to youth rehabilitation and art therapy initiatives at the heart of JUSPEACE.",
+      "statCount": "128,540",
+      "statSuffix": "people have already chosen peace.",
+      "introKoLine1": "이 팔찌 하나가 누군가의 회복 여정을 돕습니다",
+      "introKoLine2": "청소년 재활과 예술 치료를 통해.",
+      "cta": "I want to be part of this",
+      "floatingOneAlt": "데이지 조명",
+      "floatingTwoAlt": "청소년 예술 치료",
+      "floatingThreeAlt": "커뮤니티 활동",
+      "floatingFourAlt": "함께하는 손",
+      "avatarAlt": "커뮤니티 멤버 {index}"
+    },
+    "aboveFaq": {
+      "imageAlt": "브레이슬릿과 캠페인 아트워크가 담긴 JUSPEACE 전시",
+      "carouselLabel": "쇼케이스 갤러리",
+      "prevAria": "이전 쇼케이스 이미지",
+      "nextAria": "다음 쇼케이스 이미지"
+    },
+    "faq": {
+      "sectionLabel": "FAQ",
+      "headingLine1": "더 깊은",
+      "headingLine2": "이해.",
+      "answerSoon": "답변 준비 중입니다.",
+      "q1": "공식 JUSPEACE 제품인가요?",
+      "a1": "답변 준비 중입니다.",
+      "q2": "어떤 제품이 있나요?",
+      "a2": "답변 준비 중입니다.",
+      "q3": "어느 국가에서 주문할 수 있나요?",
+      "a3": "답변 준비 중입니다.",
+      "q4": "어느 국가에서 주문할 수 있나요?",
+      "a4": "답변 준비 중입니다.",
+      "q5": "어떤 결제 수단을 지원하나요?",
+      "a5": "답변 준비 중입니다.",
+      "q6": "배송은 얼마나 걸리나요?",
+      "a6": "답변 준비 중입니다.",
+      "q7": "주문은 어떻게 조회하나요?",
+      "a7": "답변 준비 중입니다.",
+      "q8": "취소 및 환불은 어떻게 처리되나요?",
+      "a8": "답변 준비 중입니다.",
+      "q9": "수익금은 어디에 기부되나요?",
+      "a9": "답변 준비 중입니다.",
+      "q10": "고객 지원은 어떻게 연락하나요?",
+      "a10": "답변 준비 중입니다."
+    },
+    "footer": {
+      "newsletterLabel": "뉴스레터",
+      "newsletterHeadline": "새로운 소식을 가장 먼저 받아보세요.",
+      "emailPlaceholder": "이메일",
+      "subscribe": "구독하기",
+      "newsletterHint": "소음 없이, 엄선된 소식만.",
+      "newsletterHintLead": "소음 없이, ",
+      "newsletterHintTail": "엄선된 소식만.",
+      "pagesLabel": "페이지",
+      "aboutCompany": "회사 소개",
+      "aboutFoundation": "재단 소개",
+      "customerSupport": "고객 지원",
+      "cancellationPolicy": "취소 및 환불",
+      "donationNotice": "기부 안내",
+      "privacyPolicy": "개인정보 처리방침",
+      "shippingPolicy": "배송 정책",
+      "terms": "이용약관",
+      "contactLabel": "문의 / 사업자",
+      "contactEmail": "love@juspeace.ai",
+      "businessInfo": "233-82-01129 (사업자 정보 확인)",
+      "locationLabel": "위치",
+      "location": "대한민국 서울특별시 영등포구 국제금융로 10, 쓰리 IFC 36층",
+      "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
+      "tagline": "정의와 평화, 하나로 엮다",
+      "foundation": "JUSPEACE FOUNDATION",
+      "socialX": "X",
+      "socialInstagram": "Instagram",
+      "socialYoutube": "YouTube"
+    }
+  }
+}

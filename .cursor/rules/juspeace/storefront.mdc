@@ -1,0 +1,45 @@
+---
+description: Juspeace storefront (Next.js) conventions when editing juspeace-fe
+globs: juspeace-fe/**
+alwaysApply: false
+---
+
+# Juspeace FE (`juspeace-fe`)
+
+## Before Next.js APIs
+
+Read version-matched docs under `juspeace-fe/node_modules/next/dist/docs/` (prefer retrieval over training data). Preserve the managed block in `juspeace-fe/AGENTS.md`.
+
+## Stack
+
+- App Router, TypeScript, `output: 'standalone'`
+- Tailwind v4 + shadcn/ui
+- TanStack Query + Form (+ Table when needed); Zustand for **cart only**
+- API via `src/lib/api/*` — never hardcode base URLs in components
+
+## Do
+
+- Fetch catalog in Server Components
+- TanStack Form + Zod for forms; TanStack Query for client server-state / mutations
+- `'use client'` only for cart / forms / local UI state
+- All UI strings via `t()` / `useT()` and `src/messages/en.json` + `src/messages/ko.json` (locales: `en`, `ko`)
+
+## Don't
+
+- Hardcode UI copy in JSX
+- Store secrets/JWTs in Zustand or localStorage
+- Initialize git in this package
+
+## Skills to apply
+
+- `juspeace-frontend` (primary)
+- `next-best-practices`, `vercel-react-best-practices` when relevant
+- `juspeace-integration` when changing API contracts
+
+## Verify
+
+```bash
+cd juspeace-fe && pnpm run build && pnpm run lint
+```
+
+@juspeace-fe/AGENTS.md

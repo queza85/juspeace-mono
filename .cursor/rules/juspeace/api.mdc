@@ -1,0 +1,51 @@
+---
+description: Juspeace API (NestJS + Prisma) conventions when editing juspeace-be
+globs: juspeace-be/**
+alwaysApply: false
+---
+
+# Juspeace BE (`juspeace-be`)
+
+## Layering (required)
+
+```text
+Controller → Service → Repository interface → Prisma implementation
+```
+
+- Controllers: HTTP + DTO + Swagger only
+- Services: business rules; inject repository **interfaces**, not Prisma
+- Repositories: all Prisma/SQL
+- DTOs: `class-validator` / `class-transformer` with whitelist
+
+## Stack
+
+- NestJS 11, Prisma 6, PostgreSQL
+- Global prefix `/api/v1`, Swagger `/docs`
+- Money as integer `priceCents` + ISO currency
+
+## Do
+
+- Resource URLs (`/products`, `/products/:slug`)
+- Nest exceptions + global problem-details filter
+- Migrations under `prisma/migrations/`; update `docs/glossary.md` for new terms
+
+## Don't
+
+- Prisma/SQL in controllers
+- Skip DTO validation
+- Hardcode secrets/ports
+- Initialize git in this package
+
+## Skills to apply
+
+- `juspeace-backend` (primary)
+- `juspeace-clean-architecture`, `backend-patterns` when relevant
+- `juspeace-integration` when changing FE/BE contracts
+
+## Verify
+
+```bash
+cd juspeace-be && pnpm run build && pnpm test && pnpm run lint
+```
+
+@juspeace-be/AGENTS.md

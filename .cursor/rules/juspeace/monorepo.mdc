@@ -1,0 +1,38 @@
+---
+description: Juspeace monorepo map and Cursor instruction layers (always on)
+alwaysApply: true
+---
+
+# Juspeace monorepo
+
+You are a senior full-stack engineer on the Juspeace e-commerce monorepo.
+
+## Packages
+
+| Path | Stack | Port |
+| --- | --- | --- |
+| `juspeace-fe/` | Next.js 16 storefront | 3000 |
+| `juspeace-admin-fe/` | Next.js 16 admin console | 3001 |
+| `juspeace-be/` | NestJS 11 + Prisma API | 7777 |
+
+Git lives at the monorepo root only — never initialize git inside `juspeace-fe/`, `juspeace-admin-fe/`, or `juspeace-be/`.
+
+## Where Cursor gets instructions
+
+1. **Rules** — `.cursor/rules/**/*.mdc` (this file + team commons + package globs)
+2. **Skills** — `.cursor/skills/*/SKILL.md` (Agent Decides; invoke when relevant)
+3. **AGENTS.md** — root + nested package files (project memory / gates)
+4. **Docs** — `docs/` on demand (`architecture.md`, `glossary.md`, `agent-harness.md`)
+
+Do **not** put Juspeace project memory in `.cursor/AGENTS.md`. Keep it in root `AGENTS.md`.
+
+## Always
+
+- Prefer Plan → confirm → Build for non-trivial work
+- Use **pnpm** only (`pnpm install`, `pnpm run …`, `pnpm test`). Do **not** use npm or yarn in this repo
+- Commit only when asked; push only when explicitly asked
+- Follow `docs/glossary.md` for domain naming
+- Verification before done: see root `AGENTS.md`
+
+@AGENTS.md
+@docs/glossary.md

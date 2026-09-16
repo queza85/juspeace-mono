@@ -1,0 +1,1096 @@
+{
+  "common": {
+    "brand": "Juspeace Admin",
+    "tagline": "Juspeace 운영 콘솔",
+    "loading": "로딩 중...",
+    "error": "문제가 발생했습니다",
+    "retry": "다시 시도",
+    "notFound": "페이지를 찾을 수 없습니다",
+    "pagination": {
+      "showing": "{total}개 중 {from}–{to} {itemLabel}",
+      "previous": "이전 페이지",
+      "next": "다음 페이지",
+      "navigation": "테이블 페이지네이션",
+      "currentPage": "{totalPages}페이지 중 {page}페이지",
+      "pageSize": "페이지당 행 수",
+      "products": "상품",
+      "orders": "주문",
+      "items": "항목"
+    }
+  },
+  "auth": {
+    "login": "로그인",
+    "logout": "로그아웃",
+    "loginTitle": "로그인",
+    "loginSubtitle": "이메일과 비밀번호를 입력해 주세요.",
+    "loginFailed": "로그인에 실패했습니다. 다시 시도해 주세요.",
+    "sessionExpired": {
+      "title": "세션이 만료되었습니다!",
+      "subtitle": "세션이 만료되었습니다. 다시 로그인해 주세요."
+    },
+    "loginWithGoogle": "Google로 계속하기",
+    "loginWithFacebook": "Facebook으로 계속하기",
+    "orDivider": "또는",
+    "oauthCallbackLoading": "로그인 완료 중…",
+    "oauthCallbackFailed": "Google 로그인에 실패했습니다. 다시 시도해 주세요.",
+    "email": "이메일 주소",
+    "emailPlaceholder": "이메일 주소를 입력해 주세요",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호를 입력해 주세요",
+    "rememberMe": "로그인 상태 유지",
+    "forgotPassword": "비밀번호를 잊으셨나요?",
+    "twoFactorFlow": {
+      "title": "2단계 인증",
+      "subtitle": "등록된 이메일 주소로 6자리 인증 코드를 보냈습니다.",
+      "codeExpiredTitle": "코드가 만료되었습니다!",
+      "codeExpiredSubtitle": "이메일로 받은 최신 인증 코드를 입력해 주세요.",
+      "codeExpiredHint": "인증 코드가 만료되었습니다. 새 코드를 요청해 주세요.",
+      "verificationCode": "인증 코드",
+      "verificationCodePlaceholder": "일회용 코드를 입력해 주세요",
+      "submitCode": "코드 제출",
+      "resendCode": "코드 재전송",
+      "verifyFailed": "코드를 확인할 수 없습니다. 다시 시도해 주세요.",
+      "resendFailed": "코드를 다시 보낼 수 없습니다. 다시 시도해 주세요.",
+      "invalidCode": "인증 코드가 올바르지 않습니다. 다시 시도해 주세요.",
+      "missingToken": "2단계 인증 세션이 만료되었습니다. 다시 로그인해 주세요.",
+      "validation": {
+        "codeRequired": "인증 코드는 필수입니다",
+        "codeInvalid": "6자리 인증 코드를 입력해 주세요"
+      }
+    },
+    "forgotPasswordFlow": {
+      "title": "비밀번호를 잊으셨나요?",
+      "requestSubtitle": "6자리 인증 코드를 받을 이메일을 입력해 주세요.",
+      "verifySubtitle": "받은 편지함에서 인증 코드를 확인해 주세요.",
+      "resetSubtitle": "새 비밀번호는 기존 비밀번호와 달라야 합니다.",
+      "codeExpiredTitle": "코드가 만료되었습니다!",
+      "codeExpiredSubtitle": "이메일로 받은 최신 인증 코드를 입력해 주세요.",
+      "codeExpiredHint": "인증 코드가 만료되었습니다. 새 코드를 요청해 주세요.",
+      "verificationCode": "인증 코드",
+      "verificationCodePlaceholder": "일회용 코드를 입력해 주세요",
+      "newPassword": "새 비밀번호",
+      "newPasswordPlaceholder": "새 비밀번호를 입력해 주세요",
+      "confirmNewPassword": "새 비밀번호 확인",
+      "confirmNewPasswordPlaceholder": "새 비밀번호를 다시 입력해 주세요",
+      "sendRequest": "요청 보내기",
+      "submitCode": "코드 제출",
+      "resendCode": "코드 재전송",
+      "update": "업데이트",
+      "returnTo": "돌아가기:",
+      "loginLink": "로그인",
+      "requestFailed": "인증 코드를 보낼 수 없습니다. 다시 시도해 주세요.",
+      "emailNotFound": "이 이메일로 등록된 계정을 찾을 수 없습니다.",
+      "accountInactive": "비활성화된 계정입니다. 지원팀에 문의해 주세요.",
+      "resetUnavailable": "이 계정은 비밀번호 재설정을 사용할 수 없습니다.",
+      "verifyFailed": "코드를 확인할 수 없습니다. 다시 시도해 주세요.",
+      "resendFailed": "코드를 다시 보낼 수 없습니다. 다시 시도해 주세요.",
+      "resetFailed": "비밀번호를 변경할 수 없습니다. 다시 시도해 주세요.",
+      "invalidCode": "인증 코드가 올바르지 않습니다. 다시 시도해 주세요.",
+      "passwordReuse": "새 비밀번호는 기존 비밀번호와 달라야 합니다.",
+      "missingEmail": "이메일이 없습니다. 비밀번호 재설정을 다시 시작해 주세요.",
+      "missingToken": "재설정 세션이 만료되었습니다. 다시 시작해 주세요.",
+      "resetSuccessMessage": "비밀번호가 변경되었습니다. 새 비밀번호로 로그인해 주세요.",
+      "validation": {
+        "codeRequired": "인증 코드를 입력해 주세요",
+        "codeInvalid": "6자리 인증 코드를 입력해 주세요"
+      }
+    },
+    "noAccount": "계정이 없으신가요?",
+    "signUpHere": "회원가입",
+    "signUpTitle": "회원가입",
+    "signUpSubtitle": "아래 정보를 입력해 계정을 만드세요.",
+    "signUp": "회원가입",
+    "signUpFailed": "계정을 만들 수 없습니다. 다시 시도해 주세요.",
+    "signUpSuccessMessage": "계정이 생성되었습니다. 로그인 정보를 입력해 주세요.",
+    "alreadyHaveAccount": "이미 계정이 있으신가요?",
+    "loginHere": "로그인",
+    "namePlaceholder": "이름을 입력해 주세요",
+    "confirmPassword": "비밀번호 확인",
+    "confirmPasswordPlaceholder": "비밀번호를 다시 입력해 주세요",
+    "acceptTermsPrefix": "다음에 동의합니다:",
+    "termsAndPrivacyPolicy": "이용약관 및 개인정보 처리방침.",
+    "showPassword": "비밀번호 표시",
+    "hidePassword": "비밀번호 숨기기",
+    "facebookUnavailable": "Facebook 로그인은 아직 사용할 수 없습니다",
+    "name": "이름",
+    "role": "역할",
+    "noName": "—",
+    "validation": {
+      "emailRequired": "이메일을 입력해 주세요",
+      "emailInvalid": "올바른 이메일 주소를 입력해 주세요",
+      "passwordMin": "비밀번호는 최소 8자 이상이어야 합니다",
+      "nameRequired": "이름을 입력해 주세요",
+      "confirmPasswordRequired": "비밀번호 확인을 입력해 주세요",
+      "passwordMismatch": "비밀번호가 일치하지 않습니다",
+      "termsRequired": "이용약관 및 개인정보 처리방침에 동의해 주세요",
+      "emailTaken": "이미 사용 중인 이메일입니다"
+    }
+  },
+  "admin": {
+    "accessDenied": "관리자 권한이 없는 계정입니다.",
+    "shell": {
+      "title": "Admin Site",
+      "subtitle": "운영 콘솔"
+    },
+    "header": {
+      "searchPlaceholder": "검색어를 입력하세요...",
+      "toggleSidebar": "내비게이션 토글",
+      "messages": "메시지",
+      "notifications": "알림",
+      "settings": "설정",
+      "darkMode": "다크 모드로 전환",
+      "lightMode": "라이트 모드로 전환",
+      "defaultUser": "관리자"
+    },
+    "nav": {
+      "dashboard": "대시보드",
+      "orders": "주문",
+      "inventory": "재고",
+      "products": "상품",
+      "customers": "고객",
+      "shipping": "배송 및 추적",
+      "payments": "결제",
+      "reports": "리포트",
+      "content": "콘텐츠",
+      "adminManagement": "관리자 관리",
+      "settings": "설정",
+      "sections": {
+        "menu": "메뉴",
+        "apps": "앱",
+        "others": "기타"
+      }
+    },
+    "dashboard": {
+      "title": "대시보드",
+      "welcome": "다시 오신 것을 환영합니다, {name}님.",
+      "welcomeFallback": "다시 오신 것을 환영합니다.",
+      "description": "카탈로그, 주문, 플랫폼 설정을 이곳에서 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 데이터",
+      "apiStatus": "API 상태",
+      "apiConnected": "백엔드에 연결됨",
+      "apiDisconnected": "백엔드를 사용할 수 없음",
+      "empty": {
+        "noData": "데이터 없음",
+        "sales": "주문 데이터가 연결되면 매출 차트가 표시됩니다.",
+        "salesDescription": "주간 매출 개요",
+        "alerts": "현재 운영 알림이 없습니다.",
+        "alertsDescription": "확인이 필요한 항목",
+        "orders": "주문 API 연결 후 최근 주문이 여기에 표시됩니다.",
+        "ordersDescription": "스토어 최근 거래"
+      },
+      "kpi": {
+        "totalOrders": "총 주문",
+        "paidOrders": "결제 완료",
+        "awaitingShipment": "출고 대기",
+        "shippedOrders": "배송 중",
+        "completedOrders": "완료된 주문",
+        "cancelledRefunded": "취소 / 환불",
+        "totalSales": "총 매출",
+        "remainingInventory": "잔여 재고",
+        "lowStockAlert": "재고 부족 알림",
+        "todaysOrders": "오늘 주문",
+        "todaysPaidOrders": "오늘 결제 완료",
+        "todayAwaitingShipment": "오늘 출고 대기",
+        "todaysShippedOrders": "오늘 배송 중",
+        "todayCompletedOrders": "오늘 완료된 주문",
+        "todaysCancelledRefunded": "오늘 취소 / 환불",
+        "todaysSales": "오늘 매출",
+        "lastMonthRemainingInventory": "지난달 잔여 재고",
+        "todaysLowStockAlert": "오늘 재고 부족 알림",
+        "viewDetails": "상세 보기"
+      },
+      "charts": {
+        "dailySales": "일별 매출",
+        "dateLabel": "2026년 8월 28일",
+        "productBreakdown": "상품별 매출 비중",
+        "totalSales": "총 매출",
+        "sales": "매출",
+        "filters": {
+          "month": "월",
+          "year": "년",
+          "week": "주",
+          "monthValue": "8월",
+          "yearValue": "2026",
+          "weekValue": "4주차"
+        },
+        "days": {
+          "mon": "월",
+          "tue": "화",
+          "wed": "수",
+          "thu": "목",
+          "fri": "금",
+          "sat": "토",
+          "sun": "일"
+        },
+        "products": {
+          "wirelessHeadphones": "무선 헤드폰",
+          "smartWatch": "스마트 워치",
+          "bluetoothSpeaker": "블루투스 스피커",
+          "smartphone": "스마트폰",
+          "laptop": "노트북",
+          "other": "기타 상품"
+        }
+      },
+      "alerts": {
+        "title": "중요 운영 알림",
+        "review": "검토",
+        "viewAll": "모든 알림 보기",
+        "awaitingShipment": "출고 대기 주문 {count}건",
+        "failedPayments": "결제 실패 {count}건",
+        "missingTracking": "운송장 미등록 주문 {count}건",
+        "lowStock": "최소 재고 미달 상품 {count}개",
+        "pendingRefunds": "환불 요청 대기 {count}건"
+      },
+      "orders": {
+        "title": "최근 주문",
+        "viewAll": "전체 주문 보기",
+        "view": "주문 보기",
+        "delete": "주문 삭제",
+        "columns": {
+          "orderNumber": "주문 번호",
+          "orderDate": "주문 일시",
+          "customer": "고객명",
+          "product": "상품",
+          "quantity": "수량",
+          "paymentAmount": "결제 금액",
+          "paymentStatus": "결제 상태",
+          "orderStatus": "주문 상태",
+          "shippingStatus": "배송 상태",
+          "action": "작업"
+        },
+        "status": {
+          "paid": "결제 완료",
+          "failed": "실패",
+          "pending": "대기",
+          "refunded": "환불",
+          "confirmed": "확인됨",
+          "cancelled": "취소",
+          "shipped": "배송 중",
+          "returned": "반품"
+        }
+      }
+    },
+    "products": {
+      "title": "상품",
+      "description": "상품 카탈로그를 검색, 필터링 및 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 KPI 및 주문 수",
+      "byBrand": "{brand} 제작",
+      "kpi": {
+        "products": "상품",
+        "orders": "주문",
+        "sales": "매출",
+        "customers": "고객",
+        "revenue": "수익",
+        "activeListings": "활성 등록",
+        "totalOrders": "총 주문",
+        "todaysSales": "오늘 매출",
+        "totalCustomers": "총 고객",
+        "totalRevenue": "총 수익"
+      },
+      "filters": {
+        "category": "카테고리",
+        "status": "상태",
+        "priceRange": "가격 범위",
+        "allCategories": "카테고리",
+        "allStatuses": "상태",
+        "allPrices": "가격 범위",
+        "priceUnder50": "$50 미만",
+        "price50to100": "$50 – $100",
+        "priceOver100": "$100 초과",
+        "categories": {
+          "essentials": "에센셜",
+          "bracelet": "팔찌",
+          "home": "홈",
+          "general": "일반"
+        }
+      },
+      "columns": {
+        "product": "상품",
+        "sku": "SKU",
+        "category": "카테고리",
+        "stock": "재고",
+        "price": "가격",
+        "orders": "주문",
+        "status": "상태",
+        "published": "게시일",
+        "actions": "작업"
+      },
+      "status": {
+        "DRAFT": "초안",
+        "ACTIVE": "게시됨",
+        "ARCHIVED": "보관됨"
+      },
+      "table": {
+        "title": "상품 목록",
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "addProduct": "상품 추가",
+        "moreFilters": "추가 필터",
+        "pageSize": "페이지당 행 수",
+        "selectAll": "이 페이지의 모든 상품 선택",
+        "selectProduct": "{name} 선택",
+        "loadError": "상품을 불러올 수 없습니다. 다시 시도해 주세요.",
+        "empty": "필터와 일치하는 상품이 없습니다.",
+        "publishedPlaceholder": "—",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경"
+      },
+      "pagination": {
+        "itemLabel": "상품"
+      },
+      "actions": {
+        "view": "상품 보기",
+        "edit": "상품 수정",
+        "delete": "상품 삭제"
+      },
+      "detail": {
+        "pageTitle": "상품 상세",
+        "breadcrumbLabel": "경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "상품 상세",
+        "mockDataNotice": "미리보기 — 샘플 리뷰 및 성과 데이터",
+        "backToProducts": "상품 목록으로",
+        "loadError": "상품을 불러올 수 없습니다. 다시 시도해 주세요.",
+        "notFound": "상품을 찾을 수 없습니다.",
+        "selectImage": "상품 이미지 {index} 선택",
+        "inStock": "재고 있음",
+        "outOfStock": "품절",
+        "reviewCount": "({count}개 리뷰)",
+        "productInfoTitle": "상품 정보:",
+        "detailsTitle": "상세 :",
+        "readMore": "더 보기...",
+        "readLess": "접기",
+        "sampleDescriptionParagraph1": "이 제품은 일상 착용을 위해 설계되었으며, 깔끔한 실루엣, 내구성 있는 코드 구조, 장시간 착용에도 편안한 잠금장치를 갖추고 있습니다.",
+        "sampleDescriptionParagraph2": "캐주얼 착용과 선물용 모두에 어울리도록 마감을 정교하게 처리했으며, 출고 전 품질 검수를 거치고 Juspeace 브랜드 톤에 맞는 미니멀하고 보호적인 패키징을 사용합니다.",
+        "fields": {
+          "sku": "SKU:",
+          "category": "카테고리:",
+          "price": "가격:",
+          "stock": "재고:",
+          "orders": "주문:",
+          "published": "게시일:",
+          "status": "상태:"
+        },
+        "bullets": {
+          "1": "오래 사용할 수 있도록 엄선된 프리미엄 소재.",
+          "2": "재활용 가능한 포장재와 최소한의 패키징.",
+          "3": "출고 전 품질 검수를 거친 제품.",
+          "4": "일반 배송 가능 및 선물용 포장에 적합."
+        },
+        "reviews": {
+          "title": "리뷰 관리",
+          "newThisWeek": "이번 주 +{count}건",
+          "summaryDescription": "고밀도 폼 시트와 등받이로 뛰어난 편안함을 제공합니다.",
+          "starLabel": "{count}점",
+          "columns": {
+            "reviewer": "리뷰어",
+            "review": "리뷰",
+            "date": "날짜",
+            "status": "상태",
+            "action": "작업"
+          },
+          "status": {
+            "published": "게시됨",
+            "pending": "대기"
+          },
+          "actions": {
+            "view": "리뷰 보기",
+            "edit": "리뷰 수정",
+            "delete": "리뷰 삭제"
+          },
+          "detailDialog": {
+            "title": "리뷰 상세",
+            "close": "리뷰 상세 닫기",
+            "orderId": "주문 ID",
+            "reviewDate": "리뷰 날짜",
+            "reviewStatus": "리뷰 상태",
+            "product": "상품",
+            "rating": "평점",
+            "ratingOutOf": "5점 중 {rating}점",
+            "productSku": "SKU: {sku} · {category}",
+            "reviewTitle": "리뷰 제목",
+            "reviewContent": "리뷰 내용",
+            "photo": "사진"
+          },
+          "editDialog": {
+            "title": "리뷰 수정",
+            "close": "리뷰 수정 닫기",
+            "cancel": "취소",
+            "saveChanges": "변경 사항 저장",
+            "ratingSelect": "평점 선택",
+            "ratingOptions": {
+              "1": "1. 매우 나쁨",
+              "2": "2. 나쁨",
+              "3": "3. 보통",
+              "4": "4. 좋음",
+              "5": "5. 매우 좋음"
+            },
+            "characterCount": "{current}/{max}",
+            "photoHint": "최대 5장까지 사진을 추가할 수 있습니다.",
+            "addPhoto": "사진 추가",
+            "removePhoto": "사진 제거",
+            "savePreview": "리뷰 변경 사항이 저장되었습니다 (미리보기)."
+          },
+          "deleteDialog": {
+            "title": "리뷰를 삭제할까요?",
+            "description": "이 리뷰를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            "cancel": "취소",
+            "delete": "삭제",
+            "close": "리뷰 삭제 닫기",
+            "deletePreview": "리뷰가 삭제되었습니다 (미리보기)."
+          },
+          "samples": {
+            "1": {
+              "title": "좋은 상품, 다시 구매할 의향 있어요!",
+              "excerpt": "팔찌가 튼튼하고 사진과 동일합니다. 배송도 빠르고 포장이 고급스러웠습니다.",
+              "content": "이 팔찌 정말 마음에 들어요! 흰색 끈과 세련된 다크 하드웨어가 깔끔하고, 'JUSTICE / PEACE' 디테일이 의미 있는 스타일을 줍니다. 품질도 훌륭하고 착용감도 매우 편해요."
+            },
+            "2": {
+              "title": "아름다운 장인 정신",
+              "excerpt": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다.",
+              "content": "선물용으로 구매했는데 받는 분이 매우 좋아했습니다. 잠금장치가 단단하고 끈의 질감도 좋습니다. 포장을 열자마자 고급스러운 느낌이었습니다."
+            },
+            "3": {
+              "title": "전반적으로 좋지만 사이즈 참고",
+              "excerpt": "구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠습니다.",
+              "content": "전반적으로 구매에 만족합니다. 상품 설명에 사이즈 안내가 조금 더 있으면 좋겠지만, 가격 대비 품질과 마감은 기대 이상이었습니다."
+            },
+            "4": {
+              "title": "기대 이상이에요",
+              "excerpt": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다.",
+              "content": "실물이 훨씬 고급스럽고 품질도 좋습니다. 컬렉션을 보는 분들께 추천하고 싶습니다. 디테일이 은은하지만 의미 있고, 하루 종일 편하게 착용할 수 있어요."
+            }
+          }
+        }
+      },
+      "add": {
+        "pageTitle": "새 상품 추가",
+        "breadcrumbCurrent": "새 상품 추가",
+        "optional": "선택",
+        "submitPreview": "상품 양식이 확인되었습니다. 생성 API는 아직 연결되지 않았습니다.",
+        "sections": {
+          "information": {
+            "title": "상품 정보",
+            "description": "새 상품을 추가하려면 아래 필드에 필요한 정보를 입력하세요."
+          },
+          "image": {
+            "title": "상품 이미지",
+            "description": "상품 이미지를 업로드하려면 아래 옵션을 사용해 파일을 선택하세요."
+          },
+          "pricing": {
+            "title": "가격",
+            "description": "아래 옵션을 사용해 기본 가격과 적용 가능한 할인을 설정하세요."
+          },
+          "organize": {
+            "title": "분류",
+            "description": "브랜드, 카테고리, 하위 카테고리, 상태, 태그를 선택해 상품을 분류하세요."
+          }
+        },
+        "fields": {
+          "name": "상품명",
+          "sku": "SKU",
+          "stock": "재고",
+          "description": "상품 설명",
+          "basePrice": "기본 가격",
+          "discountType": "할인 유형",
+          "discountValue": "할인 값",
+          "brand": "브랜드",
+          "category": "카테고리",
+          "status": "상태",
+          "tags": "태그"
+        },
+        "placeholders": {
+          "name": "상품명 입력",
+          "sku": "SOFA-10058",
+          "stock": "250",
+          "description": "상품 설명 입력...",
+          "basePrice": "기본 가격 입력 (예: 199.99)",
+          "discountType": "할인 선택",
+          "discountValue": "할인 또는 퍼센트 입력",
+          "brand": "브랜드명 입력",
+          "category": "카테고리 선택",
+          "status": "상태 선택",
+          "tags": "쉼표로 구분된 태그 입력"
+        },
+        "discountTypes": {
+          "PERCENTAGE": "퍼센트",
+          "FIXED": "고정 금액"
+        },
+        "validation": {
+          "nameRequired": "상품명은 필수입니다.",
+          "skuRequired": "SKU는 필수입니다.",
+          "stockRequired": "재고는 필수입니다.",
+          "stockInvalid": "올바른 재고 수량을 입력하세요.",
+          "basePriceRequired": "기본 가격은 필수입니다.",
+          "basePriceInvalid": "올바른 가격을 입력하세요.",
+          "brandRequired": "브랜드는 필수입니다.",
+          "categoryRequired": "카테고리는 필수입니다.",
+          "statusRequired": "상태는 필수입니다."
+        },
+        "image": {
+          "dropTitle": "파일을 여기에 놓거나 클릭하여 업로드하세요.",
+          "dropHint": "이미지를 드래그하거나 아래 버튼으로 파일을 선택할 수 있습니다.",
+          "browse": "이미지 찾아보기",
+          "remove": "{name} 제거",
+          "removeExisting": "이미지 제거"
+        },
+        "actions": {
+          "discard": "취소",
+          "saveDraft": "임시 저장",
+          "publish": "게시"
+        }
+      },
+      "edit": {
+        "pageTitle": "상품 수정",
+        "breadcrumbCurrent": "상품 수정",
+        "backToProduct": "상품 상세로 돌아가기",
+        "submitPreview": "상품 변경 사항이 확인되었습니다. 수정 API는 아직 연결되지 않았습니다.",
+        "sections": {
+          "information": {
+            "title": "상품 정보",
+            "description": "아래 필드에서 상품 정보를 수정하세요."
+          },
+          "image": {
+            "title": "상품 이미지",
+            "description": "새 파일을 업로드하거나 기존 이미지를 제거하여 상품 이미지를 관리하세요."
+          },
+          "pricing": {
+            "title": "가격",
+            "description": "이 상품의 기본 가격과 적용 가능한 할인을 수정하세요."
+          },
+          "organize": {
+            "title": "분류",
+            "description": "브랜드, 카테고리, 상태, 태그를 수정하세요."
+          }
+        },
+        "actions": {
+          "cancel": "취소",
+          "saveChanges": "변경 사항 저장"
+        }
+      }
+    },
+    "orders": {
+      "title": "주문",
+      "description": "고객 주문을 검색, 필터링 및 관리합니다.",
+      "mockDataNotice": "미리보기 — 샘플 주문 데이터",
+      "kpi": {
+        "todayOrders": "오늘 주문",
+        "cancelledOrders": "취소된 주문",
+        "todaysCancelledOrders": "오늘 취소된 주문"
+      },
+      "filters": {
+        "dateRange": "기간",
+        "orderStatus": "주문 상태",
+        "paymentStatus": "결제 상태",
+        "shippingStatus": "배송 상태",
+        "country": "국가",
+        "product": "상품",
+        "trackingStatus": "운송장 등록 상태",
+        "trackingRegistered": "등록됨",
+        "trackingMissing": "미등록",
+        "today": "오늘",
+        "thisWeek": "이번 주",
+        "thisMonth": "이번 달"
+      },
+      "columns": {
+        "orderNumber": "주문 번호",
+        "orderDate": "주문일",
+        "customer": "고객명",
+        "country": "국가",
+        "product": "상품",
+        "quantity": "수량",
+        "paymentAmount": "결제 금액",
+        "paymentStatus": "결제 상태",
+        "orderStatus": "주문 상태",
+        "shippingStatus": "배송 상태",
+        "trackingNumber": "운송장 번호",
+        "actions": "작업"
+      },
+      "paymentStatus": {
+        "paid": "결제 완료",
+        "failed": "결제 실패",
+        "pending": "대기",
+        "refunded": "환불됨"
+      },
+      "orderStatus": {
+        "pending": "대기",
+        "confirmed": "확인됨",
+        "shipped": "배송됨",
+        "cancelled": "취소됨"
+      },
+      "shippingStatus": {
+        "pending": "대기",
+        "shipped": "배송됨",
+        "returned": "반품됨"
+      },
+      "countries": {
+        "myanmar": "미얀마",
+        "singapore": "싱가포르",
+        "thailand": "태국",
+        "malaysia": "말레이시아",
+        "vietnam": "베트남"
+      },
+      "table": {
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "selectAll": "이 페이지의 모든 주문 선택",
+        "selectOrder": "{orderNumber} 선택",
+        "empty": "필터와 일치하는 주문이 없습니다.",
+        "noTracking": "-",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경"
+      },
+      "pagination": {
+        "itemLabel": "주문"
+      },
+      "actions": {
+        "view": "주문 보기",
+        "delete": "주문 삭제"
+      },
+      "bulkActions": {
+        "selectedCount": "주문 {count}건 선택됨",
+        "hint": "일괄 작업은 선택한 주문에만 적용됩니다.",
+        "changeOrderStatus": "주문 상태 변경",
+        "registerTracking": "운송장 번호 등록",
+        "markAsShipped": "배송 완료 처리",
+        "export": "내보내기",
+        "printDocument": "문서 인쇄",
+        "clearSelection": "선택 해제"
+      },
+      "changeStatusDialog": {
+        "title": "주문 상태 변경",
+        "description": "선택한 주문의 상태를 업데이트합니다. 변경 사항은 선택한 모든 주문에 적용됩니다.",
+        "orderStatusLabel": "주문 상태",
+        "cancel": "취소",
+        "confirm": "변경",
+        "close": "주문 상태 변경 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건의 상태 변경이 예약되었습니다(미리보기)."
+      },
+      "registerTrackingDialog": {
+        "title": "운송장 번호 등록",
+        "description": "선택한 주문에 유효한 배송사 및 운송장 정보를 등록합니다.",
+        "trackingNumberLabel": "운송장 번호",
+        "carrierLabel": "배송사",
+        "trackingPlaceholder": "운송장 번호 입력",
+        "cancel": "취소",
+        "confirm": "등록",
+        "close": "운송장 등록 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건에 운송장이 등록되었습니다(미리보기)."
+      },
+      "markShippedDialog": {
+        "title": "주문 배송 완료 처리",
+        "description": "선택한 주문 {count}건을 배송 완료로 표시하시겠습니까? 배송 상태가 업데이트되고 고객에게 알림이 전송됩니다.",
+        "cancel": "취소",
+        "confirm": "확인",
+        "close": "배송 완료 처리 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건이 배송 완료로 표시되었습니다(미리보기)."
+      },
+      "exportDialog": {
+        "title": "선택 주문 내보내기",
+        "description": "선택한 주문 {count}건의 데이터를 내보냅니다. 다운로드 전 파일 형식과 데이터 필드를 선택하세요.",
+        "formatLegend": "내보내기 파일 형식",
+        "formats": {
+          "csv": "CSV",
+          "xlsx": "Excel (.xlsx)"
+        },
+        "cancel": "취소",
+        "confirm": "내보내기",
+        "close": "주문 내보내기 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건을 {format} 형식으로 내보내기 시작(미리보기)."
+      },
+      "printDocumentsDialog": {
+        "title": "문서 인쇄",
+        "description": "선택한 주문 {count}건의 문서를 인쇄하려고 합니다. 계속하려면 확인하세요.",
+        "cancel": "취소",
+        "confirm": "계속",
+        "close": "문서 인쇄 대화상자 닫기",
+        "successPreview": "선택한 주문 {count}건의 인쇄 작업이 예약되었습니다(미리보기)."
+      },
+      "deleteOrderDialog": {
+        "title": "주문 삭제?",
+        "description": "이 주문을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+        "cancel": "취소",
+        "confirm": "삭제",
+        "close": "주문 삭제 대화상자 닫기",
+        "successPreview": "주문 {orderNumber}이(가) 삭제되었습니다(미리보기)."
+      },
+      "detail": {
+        "pageTitle": "주문 관리 상세",
+        "breadcrumbLabel": "경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "주문 관리 상세",
+        "backToOrders": "주문 목록으로",
+        "heading": "주문 관리 상세",
+        "notFound": "주문을 찾을 수 없습니다.",
+        "noImage": "이미지 없음",
+        "noTrackingEntries": "등록된 운송장 번호가 없습니다.",
+        "sections": {
+          "orderSummary": "주문 요약",
+          "productInformation": "상품 정보",
+          "customerInformation": "고객 정보",
+          "shippingInformation": "배송 정보",
+          "paymentInformation": "결제 정보",
+          "pgTransactionInformation": "PG 거래 정보",
+          "orderStatusHistory": "주문 상태 이력",
+          "trackingNumber": "운송장 번호",
+          "internalNotes": "내부 메모",
+          "customerFacingNotes": "고객용 메모",
+          "cancellationAndRefund": "취소 및 환불 정보"
+        },
+        "fields": {
+          "orderNumber": "주문 번호",
+          "orderDate": "주문 일시",
+          "customer": "고객",
+          "country": "국가",
+          "orderStatus": "주문 상태",
+          "paymentStatus": "결제 상태",
+          "shippingStatus": "배송 상태",
+          "totalAmount": "총 금액",
+          "category": "카테고리",
+          "sku": "SKU",
+          "quantity": "수량",
+          "price": "가격",
+          "subtotal": "소계",
+          "customerName": "고객명",
+          "email": "이메일",
+          "phone": "연락처",
+          "recipient": "수령인",
+          "shippingAddress": "배송 주소",
+          "trackingNumber": "운송장 번호",
+          "paymentMethod": "결제 수단",
+          "paymentProvider": "결제 제공업체",
+          "transactionNumber": "거래 번호",
+          "paymentAmount": "결제 금액",
+          "transactionId": "거래 ID",
+          "provider": "제공업체",
+          "paymentTime": "결제 시간",
+          "response": "응답",
+          "status": "상태",
+          "cancellationStatus": "취소 상태",
+          "refundStatus": "환불 상태",
+          "refundAmount": "환불 금액",
+          "refundHistory": "환불 이력"
+        },
+        "paymentMethods": {
+          "card": "카드"
+        },
+        "pgResponses": {
+          "success": "성공",
+          "failed": "실패"
+        },
+        "pgStatus": {
+          "completed": "완료",
+          "pending": "대기",
+          "failed": "실패"
+        },
+        "cancellationStatus": {
+          "notCancelled": "취소되지 않음",
+          "cancelled": "취소됨"
+        },
+        "refundStatus": {
+          "notRefund": "환불 없음",
+          "refunded": "환불됨",
+          "partial": "부분 환불"
+        },
+        "refundHistory": {
+          "none": "환불 내역 없음",
+          "refunded": "환불 처리됨"
+        },
+        "notes": {
+          "internalPlaceholder": "내부 메모를 입력하세요…",
+          "customerPlaceholder": "고객용 메모를 입력하세요…",
+          "addNote": "메모 추가",
+          "saveNote": "메모 저장",
+          "internalSavedPreview": "내부 메모가 저장되었습니다(미리보기).",
+          "customerSavedPreview": "고객용 메모가 저장되었습니다(미리보기)."
+        },
+        "actions": {
+          "updateOrderStatus": "주문 상태 변경",
+          "registerTracking": "운송장 등록/수정",
+          "markAsShipped": "배송 완료 처리",
+          "refund": "환불",
+          "download": "주문 정보 다운로드",
+          "print": "주문 정보 인쇄",
+          "cancelOrder": "주문 취소"
+        },
+        "dialogs": {
+          "updateStatus": {
+            "title": "주문 상태 변경",
+            "description": "주문 진행 및 이행 워크플로를 최신 상태로 유지하기 위해 주문 상태를 변경합니다.",
+            "orderStatusLabel": "주문 상태",
+            "cancel": "취소",
+            "confirm": "변경",
+            "close": "주문 상태 변경 대화상자 닫기",
+            "successPreview": "주문 상태가 변경되었습니다(미리보기)."
+          },
+          "registerTracking": {
+            "title": "운송장 번호 등록",
+            "description": "배송 완료 전에 새 운송장 번호와 배송사 정보를 추가합니다.",
+            "trackingStatusLabel": "운송장 상태",
+            "trackingStatusNotRegistered": "미등록",
+            "trackingStatusRegistered": "등록됨",
+            "trackingNumberLabel": "운송장 번호",
+            "carrierLabel": "배송사",
+            "trackingPlaceholder": "운송장 번호 입력",
+            "cancel": "취소",
+            "confirm": "등록",
+            "close": "운송장 등록 대화상자 닫기",
+            "successPreview": "운송장 번호가 등록되었습니다(미리보기)."
+          },
+          "markShipped": {
+            "title": "주문 배송 완료 처리",
+            "description": "이 주문을 배송 완료로 표시하시겠습니까? 배송 상태가 업데이트되고 고객에게 알림이 전송됩니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "배송 완료 처리 대화상자 닫기",
+            "successPreview": "주문이 배송 완료로 표시되었습니다(미리보기)."
+          },
+          "refund": {
+            "title": "환불",
+            "description": "이 주문에 대한 환불을 처리하시겠습니까? 환불 상태 및 결제 정보가 업데이트됩니다.",
+            "amountLabel": "환불 금액",
+            "typeLabel": "환불 유형",
+            "types": {
+              "full": "전액 환불",
+              "partial": "부분 환불"
+            },
+            "reasonLabel": "환불 사유",
+            "reasonPlaceholder": "환불 사유를 입력하세요…",
+            "cancel": "취소",
+            "confirm": "환불",
+            "close": "환불 대화상자 닫기",
+            "successPreview": "환불이 처리되었습니다(미리보기)."
+          },
+          "download": {
+            "title": "주문 정보 다운로드",
+            "description": "이 주문의 정보를 다운로드합니다. 다운로드 전 파일 형식을 선택하세요.",
+            "formatLegend": "다운로드 파일 형식",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "취소",
+            "confirm": "내보내기",
+            "close": "주문 다운로드 대화상자 닫기",
+            "successPreview": "{format} 형식으로 다운로드를 시작했습니다(미리보기)."
+          },
+          "print": {
+            "title": "주문 정보 인쇄",
+            "description": "이 주문의 정보를 인쇄하려고 합니다. 계속하려면 확인하세요.",
+            "cancel": "취소",
+            "confirm": "계속",
+            "close": "주문 인쇄 대화상자 닫기",
+            "successPreview": "인쇄 작업이 예약되었습니다(미리보기)."
+          },
+          "cancel": {
+            "title": "주문 취소",
+            "description": "이 주문을 취소하시겠습니까? 주문 상태가 업데이트되고 취소 내역이 기록됩니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "주문 취소 대화상자 닫기",
+            "successPreview": "주문 취소가 예약되었습니다(미리보기)."
+          }
+        }
+      }
+    },
+    "inventory": {
+      "title": "재고",
+      "description": "상품 변형별 재고 수준, 예약 및 가용 재고를 모니터링합니다.",
+      "mockDataNotice": "미리보기 — 샘플 재고 데이터",
+      "kpi": {
+        "totalStock": "총 재고",
+        "availableStock": "가용 재고",
+        "reservedStock": "예약 재고",
+        "soldQuantity": "판매 수량",
+        "lowStockItems": "재고 부족 품목",
+        "soldOutItems": "품절 품목",
+        "todayTotalStock": "오늘 총 재고 변동",
+        "todayAvailableStock": "오늘 가용 재고",
+        "todayReservedStock": "오늘 예약 재고",
+        "todaySoldQuantity": "오늘 판매 수량",
+        "todayLowStockItems": "오늘 재고 부족 품목",
+        "todaySoldOutItems": "오늘 품절 품목"
+      },
+      "filters": {
+        "variation": "변형",
+        "stockStatus": "재고 상태"
+      },
+      "columns": {
+        "product": "상품",
+        "variation": "변형",
+        "sku": "SKU",
+        "initialStock": "초기 재고",
+        "availableStock": "가용 재고",
+        "reservedStock": "예약 재고",
+        "soldQuantity": "판매 수량",
+        "cancelledReturned": "취소 / 반품",
+        "stockStatus": "재고 상태",
+        "actions": "작업"
+      },
+      "stockStatus": {
+        "in_stock": "재고 있음",
+        "low_stock": "재고 부족",
+        "sold_out": "품절"
+      },
+      "table": {
+        "searchPlaceholder": "검색어를 입력하세요...",
+        "filterBy": "필터:",
+        "selectAll": "이 페이지의 모든 재고 항목 선택",
+        "selectItem": "{name} 선택",
+        "empty": "필터와 일치하는 재고 항목이 없습니다.",
+        "sortBy": "{column} 기준 정렬",
+        "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경하려면 활성화",
+        "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경하려면 활성화"
+      },
+      "pagination": {
+        "itemLabel": "상품"
+      },
+      "actions": {
+        "view": "재고 항목 보기"
+      },
+      "detail": {
+        "pageTitle": "재고 관리 상세",
+        "breadcrumbLabel": "탐색 경로",
+        "breadcrumbEcommerce": "이커머스",
+        "breadcrumbCurrent": "재고 관리 상세",
+        "backToInventory": "재고 목록으로",
+        "heading": "재고 관리 상세",
+        "notFound": "재고 항목을 찾을 수 없습니다.",
+        "noImage": "이미지 없음",
+        "sections": {
+          "productSummary": "상품 요약",
+          "stockHistory": "재고 이력"
+        },
+        "fields": {
+          "productName": "상품명",
+          "productVariation": "상품 변형",
+          "sku": "SKU",
+          "initialStock": "초기 재고",
+          "availableStock": "가용 재고",
+          "reservedStock": "예약 재고",
+          "soldQuantity": "판매 수량",
+          "cancelledReturnedQuantity": "취소 / 반품 수량",
+          "stockStatus": "재고 상태"
+        },
+        "actions": {
+          "adjustStock": "재고 조정",
+          "markSoldOut": "품절 처리",
+          "setLowStockThreshold": "재고 부족 임계값 설정",
+          "exportData": "재고 데이터 내보내기"
+        },
+        "dialogs": {
+          "stockQuantityLabel": "재고 수량",
+          "adjustStock": {
+            "title": "재고 조정",
+            "description": "이 상품의 재고를 업데이트할 새 재고 수량을 입력하세요.",
+            "cancel": "취소",
+            "confirm": "업데이트",
+            "close": "재고 조정 대화상자 닫기",
+            "successPreview": "재고가 {quantity}(으)로 업데이트되었습니다(미리보기)."
+          },
+          "setThreshold": {
+            "title": "재고 부족 임계값 설정",
+            "description": "이 상품이 재고 부족으로 표시될 재고 수준을 입력하세요.",
+            "cancel": "취소",
+            "confirm": "업데이트",
+            "close": "재고 부족 임계값 설정 대화상자 닫기",
+            "successPreview": "재고 부족 임계값이 {quantity}(으)로 설정되었습니다(미리보기)."
+          },
+          "markSoldOut": {
+            "title": "품절 처리",
+            "description": "이 상품을 품절 처리하시겠습니까? 재고가 업데이트될 때까지 구매할 수 없습니다.",
+            "cancel": "취소",
+            "confirm": "확인",
+            "close": "품절 처리 대화상자 닫기",
+            "successPreview": "품절 처리되었습니다(미리보기)."
+          },
+          "export": {
+            "title": "재고 데이터 내보내기",
+            "description": "현재 재고 정보를 내보냅니다. 다운로드할 파일 형식을 선택하세요.",
+            "formatLegend": "내보내기 파일 형식",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "취소",
+            "confirm": "내보내기",
+            "close": "재고 내보내기 대화상자 닫기",
+            "successPreview": "{format} 형식으로 재고 내보내기가 시작되었습니다(미리보기)."
+          }
+        },
+        "history": {
+          "searchPlaceholder": "검색어를 입력하세요...",
+          "filterBy": "필터:",
+          "empty": "필터와 일치하는 재고 이력이 없습니다.",
+          "sortBy": "{column} 기준 정렬",
+          "sortAscending": "{column} 오름차순 정렬됨. 내림차순으로 변경하려면 활성화",
+          "sortDescending": "{column} 내림차순 정렬됨. 오름차순으로 변경하려면 활성화",
+          "filters": {
+            "action": "작업"
+          },
+          "actions": {
+            "stock_added": "재고 추가",
+            "sold": "판매",
+            "returned": "반품",
+            "reserved": "예약"
+          },
+          "columns": {
+            "date": "날짜",
+            "action": "작업",
+            "quantity": "수량",
+            "before": "이전",
+            "after": "이후",
+            "reason": "사유"
+          },
+          "pagination": {
+            "itemLabel": "재고 이력"
+          }
+        }
+      }
+    }
+  },
+  "apiMessages": {
+    "REGISTER_SUCCESSFULLY": "계정이 생성되었습니다",
+    "EMAIL_ALREADY_EXISTS": "이미 사용 중인 이메일입니다",
+    "PASSWORD_RESET_REQUESTED": "인증 코드를 이메일로 보냈습니다",
+    "PASSWORD_RESET_CODE_SENT": "인증 코드를 이메일로 보냈습니다",
+    "PASSWORD_RESET_CODE_VERIFIED": "인증 코드가 확인되었습니다",
+    "PASSWORD_RESET_SUCCESSFULLY": "비밀번호가 변경되었습니다",
+    "EMAIL_NOT_FOUND": "이 이메일로 등록된 계정을 찾을 수 없습니다",
+    "ACCOUNT_INACTIVE": "비활성화된 계정입니다",
+    "PASSWORD_RESET_UNAVAILABLE": "이 계정은 비밀번호 재설정을 사용할 수 없습니다",
+    "INVALID_RESET_CODE": "인증 코드가 올바르지 않습니다",
+    "RESET_CODE_EXPIRED": "인증 코드가 만료되었습니다",
+    "INVALID_RESET_TOKEN": "재설정 세션이 유효하지 않습니다",
+    "RESET_TOKEN_EXPIRED": "재설정 세션이 만료되었습니다",
+    "PASSWORD_REUSE_NOT_ALLOWED": "새 비밀번호는 기존 비밀번호와 달라야 합니다",
+    "TWO_FACTOR_CODE_SENT": "인증 코드를 이메일로 보냈습니다",
+    "TWO_FACTOR_VERIFIED": "2단계 인증이 완료되었습니다",
+    "TWO_FACTOR_CODE_EXPIRED": "인증 코드가 만료되었습니다",
+    "INVALID_TWO_FACTOR_CODE": "인증 코드가 올바르지 않습니다",
+    "INVALID_TWO_FACTOR_CHALLENGE": "2단계 인증 세션이 유효하지 않습니다",
+    "LOGIN_SUCCESSFULLY": "로그인되었습니다",
+    "LOGOUT_SUCCESSFULLY": "로그아웃되었습니다",
+    "LOGOUT_ALL_SUCCESSFULLY": "모든 기기에서 로그아웃되었습니다",
+    "REFRESH_SUCCESSFULLY": "세션이 갱신되었습니다",
+    "USER_RETRIEVED_SUCCESSFULLY": "사용자 정보를 불러왔습니다",
+    "HEALTH_CHECKED_SUCCESSFULLY": "상태 확인에 성공했습니다",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "관리자 상태를 불러왔습니다",
+    "INVALID_CREDENTIALS": "이메일 또는 비밀번호가 올바르지 않습니다",
+    "INVALID_REFRESH_TOKEN": "세션이 만료되었습니다. 다시 로그인해 주세요",
+    "INSUFFICIENT_PERMISSIONS": "이 작업을 수행할 권한이 없습니다",
+    "VALIDATION_FAILED": "입력값을 확인하고 다시 시도해 주세요",
+    "UNAUTHORIZED": "계속하려면 로그인해 주세요",
+    "FORBIDDEN": "접근이 거부되었습니다",
+    "NOT_FOUND": "요청한 리소스를 찾을 수 없습니다",
+    "TOO_MANY_REQUESTS": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요",
+    "INTERNAL_SERVER_ERROR": "문제가 발생했습니다. 다시 시도해 주세요"
+  },
+  "language": {
+    "label": "언어",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

@@ -1,0 +1,526 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Datetime policy: all DateTime columns use TIMESTAMPTZ and are stored as UTC.
+// Clients convert to the viewer's local zone (e.g. Asia/Seoul, Asia/Yangon) for display only.
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+enum StockMovementAction {
+  STOCK_ADDED
+  SOLD
+  RETURNED
+  RESERVED
+  RELEASED
+  ADJUSTMENT
+}
+
+enum OrderPaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  PARTIAL_REFUND
+}
+
+enum OrderFulfillmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  SHIPPED
+  DELIVERED
+}
+
+enum OrderShippingStatus {
+  PENDING
+  SHIPPED
+  RETURNED
+  DELIVERED
+}
+
+enum OrderCancellationStatus {
+  NOT_CANCELLED
+  CANCELLED
+}
+
+enum OrderRefundStatus {
+  NOT_REFUNDED
+  PARTIAL
+  REFUNDED
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  DISTRIBUTOR
+}
+
+enum SaleChannel {
+  OFFICIAL_ONLINE
+  RETAIL
+  DISTRIBUTOR
+  POPUP
+  EVENT
+  OTHER
+}
+
+enum SaleStatus {
+  PENDING
+  COMPLETED
+  VOID
+  REFUNDED
+}
+
+enum RegistrationStatus {
+  NOT_REGISTERED
+  WAITING
+  REGISTERED
+  REVOKED
+}
+
+enum CertificateStatus {
+  ACTIVE
+  RETURNED
+  REFUNDED
+  REVOKED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  ONLINE_PAYMENT
+  OTHER
+}
+
+enum SellerType {
+  OFFICIAL_ONLINE
+  DISTRIBUTOR
+  RETAIL
+  POPUP
+  EVENT
+}
+
+enum OAuthProvider {
+  GOOGLE
+}
+
+model User {
+  id                     String                 @id @default(cuid())
+  email                  String                 @unique
+  passwordHash           String?
+  role                   UserRole               @default(USER)
+  name                   String?
+  isActive               Boolean                @default(true)
+  twoFactorEnabled       Boolean                @default(false)
+  refreshTokens          RefreshToken[]
+  oauthAccounts          OAuthAccount[]
+  passwordResetCodes     PasswordResetCode[]
+  passwordResetSessions  PasswordResetSession[]
+  twoFactorChallenges    TwoFactorChallenge[]
+  twoFactorCodes         TwoFactorCode[]
+  authorizedSeller       AuthorizedSeller?
+  salesRecorded          Sale[]                 @relation("SaleRecordedBy")
+  registrations          Registration[]
+  createdAt              DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt              DateTime               @updatedAt @db.Timestamptz(3)
+
+  @@map("users")
+}
+
+model PasswordResetCode {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash     String
+  expiresAt    DateTime  @db.Timestamptz(3)
+  consumedAt   DateTime? @db.Timestamptz(3)
+  attemptCount Int       @default(0)
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([userId, consumedAt, expiresAt])
+  @@map("password_reset_codes")
+}
+
+model PasswordResetSession {
+  id         String    @id @default(cuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash  String    @unique
+  expiresAt  DateTime  @db.Timestamptz(3)
+  consumedAt DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([userId, consumedAt, expiresAt])
+  @@map("password_reset_sessions")
+}
+
+model TwoFactorChallenge {
+  id         String    @id @default(cuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash  String    @unique
+  rememberMe Boolean   @default(false)
+  userAgent  String?
+  ipAddress  String?
+  expiresAt  DateTime  @db.Timestamptz(3)
+  consumedAt DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([userId, consumedAt, expiresAt])
+  @@map("two_factor_challenges")
+}
+
+model TwoFactorCode {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash     String
+  expiresAt    DateTime  @db.Timestamptz(3)
+  consumedAt   DateTime? @db.Timestamptz(3)
+  attemptCount Int       @default(0)
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([userId, consumedAt, expiresAt])
+  @@map("two_factor_codes")
+}
+
+model OAuthAccount {
+  id             String        @id @default(cuid())
+  provider       OAuthProvider
+  providerUserId String
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime      @updatedAt @db.Timestamptz(3)
+
+  @@unique([provider, providerUserId])
+  @@index([userId])
+  @@map("oauth_accounts")
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  familyId  String
+  expiresAt DateTime  @db.Timestamptz(3)
+  revokedAt DateTime? @db.Timestamptz(3)
+  userAgent String?
+  ipAddress String?
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([userId])
+  @@index([familyId])
+  @@map("refresh_tokens")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @db.Timestamptz(3)
+
+  @@map("categories")
+}
+
+model Product {
+  id                 String           @id @default(cuid())
+  slug               String           @unique
+  name               String
+  description        String?
+  priceCents         Int
+  currency           String           @default("USD")
+  stock              Int              @default(0)
+  status             ProductStatus    @default(DRAFT)
+  imageUrl           String?
+  brand              String?
+  tags               String[]         @default([])
+  discountType       DiscountType?
+  discountValueCents Int?
+  categoryId         String?
+  category           Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  variants           ProductVariant[]
+  sales              Sale[]
+  inventoryAllocations InventoryAllocation[]
+  orderLineItems     OrderLineItem[]
+  createdAt          DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
+
+  @@index([status])
+  @@index([categoryId])
+  @@map("products")
+}
+
+model ProductVariant {
+  id                String          @id @default(cuid())
+  productId         String
+  product           Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku               String          @unique
+  variationLabel    String
+  variationKey      String
+  initialStock      Int             @default(0)
+  availableStock    Int             @default(0)
+  reservedStock     Int             @default(0)
+  soldQuantity      Int             @default(0)
+  cancelledReturned Int             @default(0)
+  lowStockThreshold Int?
+  stockMovements    StockMovement[]
+  orderLineItems    OrderLineItem[]
+  createdAt         DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime        @updatedAt @db.Timestamptz(3)
+
+  @@index([productId])
+  @@map("product_variants")
+}
+
+model StockMovement {
+  id               String              @id @default(cuid())
+  productVariantId String
+  productVariant   ProductVariant      @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+  action           StockMovementAction
+  quantityDelta    Int
+  quantityBefore   Int
+  quantityAfter    Int
+  reason           String?
+  referenceType    String?
+  referenceId      String?
+  createdAt        DateTime            @default(now()) @db.Timestamptz(3)
+
+  @@index([productVariantId, createdAt])
+  @@map("stock_movements")
+}
+
+model Order {
+  id                       String                  @id @default(cuid())
+  orderNumber              String                  @unique
+  customerName             String
+  customerEmail            String
+  customerPhone            String?
+  countryCode              String
+  shippingRecipient        String?
+  shippingAddress          String?
+  paymentMethod            String?
+  paymentProvider          String?
+  paymentTransactionNumber String?
+  paymentStatus            OrderPaymentStatus      @default(PENDING)
+  fulfillmentStatus        OrderFulfillmentStatus  @default(PENDING)
+  shippingStatus           OrderShippingStatus     @default(PENDING)
+  trackingNumber           String?
+  subtotalCents            Int
+  totalCents               Int
+  currency                 String                  @default("USD")
+  internalNote             String?
+  customerNote             String?
+  cancellationStatus       OrderCancellationStatus @default(NOT_CANCELLED)
+  refundStatus             OrderRefundStatus       @default(NOT_REFUNDED)
+  refundAmountCents        Int                     @default(0)
+  pgTransactionId          String?
+  pgProvider               String?
+  pgResponse               String?
+  pgStatus                 String?
+  paidAt                   DateTime?               @db.Timestamptz(3)
+  shippedAt                DateTime?               @db.Timestamptz(3)
+  cancelledAt              DateTime?               @db.Timestamptz(3)
+  refundedAt               DateTime?               @db.Timestamptz(3)
+  pgPaidAt                 DateTime?               @db.Timestamptz(3)
+  saleId                   String?                 @unique
+  sale                     Sale?                   @relation(fields: [saleId], references: [id], onDelete: SetNull)
+  lineItems                OrderLineItem[]
+  statusEvents             OrderStatusEvent[]
+  createdAt                DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt                DateTime                @updatedAt @db.Timestamptz(3)
+
+  @@index([paymentStatus])
+  @@index([fulfillmentStatus])
+  @@index([shippingStatus])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderLineItem {
+  id               String          @id @default(cuid())
+  orderId          String
+  order            Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId        String
+  product          Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  productVariantId String?
+  productVariant   ProductVariant? @relation(fields: [productVariantId], references: [id], onDelete: SetNull)
+  productName      String
+  productSlug      String
+  productBrand     String?
+  quantity         Int
+  unitPriceCents   Int
+  createdAt        DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime        @updatedAt @db.Timestamptz(3)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_line_items")
+}
+
+model OrderStatusEvent {
+  id        String                 @id @default(cuid())
+  orderId   String
+  order     Order                  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderFulfillmentStatus
+  note      String?
+  createdAt DateTime               @default(now()) @db.Timestamptz(3)
+
+  @@index([orderId, createdAt])
+  @@map("order_status_events")
+}
+
+model Market {
+  id          String               @id @default(cuid())
+  code        String               @unique
+  name        String
+  currency    String               @default("USD")
+  sellers     AuthorizedSeller[]
+  allocations InventoryAllocation[]
+  createdAt   DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime             @updatedAt @db.Timestamptz(3)
+
+  @@map("markets")
+}
+
+model AuthorizedSeller {
+  id            String                @id @default(cuid())
+  marketId      String
+  market        Market                @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  name          String
+  type          SellerType
+  locationLabel String?
+  isActive      Boolean               @default(true)
+  userId        String?               @unique
+  user          User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sales         Sale[]
+  allocations   InventoryAllocation[]
+  createdAt     DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime              @updatedAt @db.Timestamptz(3)
+
+  @@index([marketId])
+  @@index([isActive])
+  @@map("authorized_sellers")
+}
+
+model InventoryAllocation {
+  id                 String           @id @default(cuid())
+  marketId           String
+  market             Market           @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  authorizedSellerId String
+  authorizedSeller   AuthorizedSeller @relation(fields: [authorizedSellerId], references: [id], onDelete: Cascade)
+  productId          String
+  product            Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  allocatedQuantity  Int
+  createdAt          DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
+
+  @@unique([authorizedSellerId, productId])
+  @@index([marketId])
+  @@map("inventory_allocations")
+}
+
+model Sale {
+  id                 String             @id @default(cuid())
+  productId          String
+  product            Product            @relation(fields: [productId], references: [id], onDelete: Restrict)
+  authorizedSellerId String
+  authorizedSeller   AuthorizedSeller   @relation(fields: [authorizedSellerId], references: [id], onDelete: Restrict)
+  channel            SaleChannel
+  quantity           Int                @default(1)
+  unitPriceCents     Int
+  currency           String
+  paymentMethod      PaymentMethod
+  status             SaleStatus         @default(PENDING)
+  registrationStatus RegistrationStatus @default(NOT_REGISTERED)
+  soldAt             DateTime?          @db.Timestamptz(3)
+  soldByUserId       String?
+  soldByUser         User?              @relation("SaleRecordedBy", fields: [soldByUserId], references: [id], onDelete: SetNull)
+  orderReference     String?
+  voidedAt           DateTime?          @db.Timestamptz(3)
+  refundedAt         DateTime?          @db.Timestamptz(3)
+  registration       Registration?
+  registrationTokens RegistrationToken[]
+  order              Order?
+  createdAt          DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime           @updatedAt @db.Timestamptz(3)
+
+  @@index([status])
+  @@index([registrationStatus])
+  @@index([authorizedSellerId])
+  @@index([orderReference])
+  @@map("sales")
+}
+
+model Registration {
+  id               String              @id @default(cuid())
+  saleId           String              @unique
+  sale             Sale                @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  customerEmail    String
+  customerName     String?
+  marketingConsent Boolean             @default(false)
+  userId           String?
+  user             User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  registeredAt     DateTime            @default(now()) @db.Timestamptz(3)
+  status           RegistrationStatus  @default(REGISTERED)
+  certificate      DigitalCertificate?
+  createdAt        DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime            @updatedAt @db.Timestamptz(3)
+
+  @@index([customerEmail])
+  @@map("registrations")
+}
+
+model RegistrationToken {
+  id         String    @id @default(cuid())
+  saleId     String
+  sale       Sale      @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  tokenHash  String    @unique
+  expiresAt  DateTime  @db.Timestamptz(3)
+  consumedAt DateTime? @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@index([saleId, consumedAt, expiresAt])
+  @@map("registration_tokens")
+}
+
+model DigitalCertificate {
+  id               String            @id @default(cuid())
+  registrationId   String            @unique
+  registration     Registration      @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  certificateNo    String            @unique
+  status           CertificateStatus @default(ACTIVE)
+  issuedAt         DateTime          @default(now()) @db.Timestamptz(3)
+  productName      String
+  collectionName   String?
+  marketCode       String
+  sellerName       String
+  purchaseChannel  SaleChannel
+  registrationDate DateTime          @db.Timestamptz(3)
+  createdAt        DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime          @updatedAt @db.Timestamptz(3)
+
+  @@index([status])
+  @@map("digital_certificates")
+}

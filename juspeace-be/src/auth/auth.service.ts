@@ -1,0 +1,335 @@
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { OAuthProvider, User, UserRole } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+import { createHash, randomBytes, timingSafeEqual } from 'crypto';
+import { AUTH_REPOSITORY } from './auth.repository.interface';
+import type { AuthUser, IAuthRepository } from './auth.repository.interface';
+import {
+  AccessTokenResponseDto,
+  AuthTokensResponseDto,
+  UserResponseDto,
+} from './dto/auth.dto';
+import type { GoogleOAuthProfile } from './strategies/google.strategy';
+import { JwtPayload } from './strategies/jwt.strategy';
+
+const REFRESH_TOKEN_BYTES = 32;
+const BCRYPT_ROUNDS = 12;
+
+export interface SessionMeta {
+  userAgent?: string;
+  ipAddress?: string;
+}
+
+export interface IssuedSession {
+  accessToken: string;
+  refreshToken: string;
+  user: UserResponseDto;
+  /** null = browser session cookie (cleared when the browser closes) */
+  refreshMaxAgeMs: number | null;
+}
+
+export interface LoginOptions {
+  rememberMe?: boolean;
+}
+
+@Injectable()
+export class AuthService {
+  private readonly sessionTtlMs: number;
+  private readonly rememberTtlMs: number;
+  private readonly jwtAccessTtl: string;
+
+  constructor(
+    @Inject(AUTH_REPOSITORY)
+    private readonly authRepository: IAuthRepository,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {
+    this.sessionTtlMs =
+      this.configService.getOrThrow<number>('auth.refreshTokenSessionTtlDays') *
+      24 *
+      60 *
+      60 *
+      1000;
+    this.rememberTtlMs =
+      this.configService.getOrThrow<number>(
+        'auth.refreshTokenRememberTtlDays',
+      ) *
+      24 *
+      60 *
+      60 *
+      1000;
+    this.jwtAccessTtl =
+      this.configService.getOrThrow<string>('auth.jwtAccessTtl');
+  }
+
+  async register(
+    name: string,
+    email: string,
+    password: string,
+  ): Promise<UserResponseDto> {
+    const normalizedEmail = email.toLowerCase();
+    const existingUser =
+      await this.authRepository.findUserByEmail(normalizedEmail);
+
+    if (existingUser) {
+      throw new ConflictException('EMAIL_ALREADY_EXISTS');
+    }
+
+    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    const user = await this.authRepository.createUserWithPassword({
+      email: normalizedEmail,
+      passwordHash,
+      name: name.trim(),
+      role: UserRole.ADMIN,
+    });
+
+    return this.toUserResponse(user);
+  }
+
+  async login(
+    email: string,
+    password: string,
+    meta: SessionMeta = {},
+    options: LoginOptions = {},
+  ): Promise<IssuedSession> {
+    const user = await this.authRepository.findUserByEmail(email);
+
+    if (!user || !user.isActive || !user.passwordHash) {
+      throw new UnauthorizedException('INVALID_CREDENTIALS');
+    }
+
+    const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+    if (!passwordMatches) {
+      throw new UnauthorizedException('INVALID_CREDENTIALS');
+    }
+
+    // Future 2FA: if (user.twoFactorEnabled) return twoFactorService.createChallenge(...)
+    return this.issueSession(user, meta, this.createFamilyId(), {
+      rememberMe: options.rememberMe ?? false,
+    });
+  }
+
+  async loginWithGoogle(
+    profile: GoogleOAuthProfile,
+    meta: SessionMeta = {},
+  ): Promise<IssuedSession> {
+    if (!profile.emailVerified) {
+      throw new UnauthorizedException('OAUTH_EMAIL_NOT_VERIFIED');
+    }
+
+    const existingAccount = await this.authRepository.findOAuthAccount(
+      OAuthProvider.GOOGLE,
+      profile.providerUserId,
+    );
+
+    if (existingAccount) {
+      if (!existingAccount.user.isActive) {
+        throw new UnauthorizedException('INVALID_CREDENTIALS');
+      }
+      return this.issueSession(
+        existingAccount.user,
+        meta,
+        this.createFamilyId(),
+        {
+          rememberMe: true,
+        },
+      );
+    }
+
+    const existingUser = await this.authRepository.findUserByEmail(
+      profile.email,
+    );
+
+    if (existingUser) {
+      if (!existingUser.isActive) {
+        throw new UnauthorizedException('INVALID_CREDENTIALS');
+      }
+
+      await this.authRepository.createOAuthAccount({
+        userId: existingUser.id,
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: profile.providerUserId,
+      });
+
+      return this.issueSession(existingUser, meta, this.createFamilyId(), {
+        rememberMe: true,
+      });
+    }
+
+    const user = await this.authRepository.createUserWithOAuthAccount(
+      { email: profile.email, name: profile.name },
+      {
+        provider: OAuthProvider.GOOGLE,
+        providerUserId: profile.providerUserId,
+      },
+    );
+
+    return this.issueSession(user, meta, this.createFamilyId(), {
+      rememberMe: true,
+    });
+  }
+
+  async refresh(
+    rawRefreshToken: string | undefined,
+    meta: SessionMeta = {},
+  ): Promise<IssuedSession> {
+    if (!rawRefreshToken) {
+      throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+    }
+
+    const tokenHash = this.hashToken(rawRefreshToken);
+    const stored = await this.authRepository.findRefreshTokenByHash(tokenHash);
+
+    if (!stored) {
+      throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+    }
+
+    if (stored.revokedAt) {
+      await this.authRepository.revokeRefreshTokenFamily(stored.familyId);
+      throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+    }
+
+    if (stored.expiresAt.getTime() <= Date.now()) {
+      await this.authRepository.revokeRefreshToken(stored.id);
+      throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+    }
+
+    if (!stored.user.isActive) {
+      await this.authRepository.revokeRefreshTokenFamily(stored.familyId);
+      throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+    }
+
+    await this.authRepository.revokeRefreshToken(stored.id);
+
+    const rememberMe = this.isPersistentRefreshToken(stored);
+    return this.issueSession(stored.user, meta, stored.familyId, {
+      rememberMe,
+    });
+  }
+
+  async logout(rawRefreshToken: string | undefined): Promise<void> {
+    if (!rawRefreshToken) {
+      return;
+    }
+
+    const tokenHash = this.hashToken(rawRefreshToken);
+    const stored = await this.authRepository.findRefreshTokenByHash(tokenHash);
+
+    if (stored && !stored.revokedAt) {
+      await this.authRepository.revokeRefreshToken(stored.id);
+    }
+  }
+
+  async logoutAll(userId: string): Promise<void> {
+    await this.authRepository.revokeAllUserRefreshTokens(userId);
+  }
+
+  async getMe(userId: string): Promise<UserResponseDto> {
+    const user = await this.authRepository.findUserById(userId);
+
+    if (!user || !user.isActive) {
+      throw new UnauthorizedException('INVALID_CREDENTIALS');
+    }
+
+    return this.toUserResponse(user);
+  }
+
+  toAuthTokensResponse(session: IssuedSession): AuthTokensResponseDto {
+    return {
+      accessToken: session.accessToken,
+      user: session.user,
+    };
+  }
+
+  toAccessTokenResponse(session: IssuedSession): AccessTokenResponseDto {
+    return { accessToken: session.accessToken };
+  }
+
+  hashToken(rawToken: string): string {
+    return createHash('sha256').update(rawToken).digest('hex');
+  }
+
+  /** Constant-time compare for hex digests (defense in depth). */
+  tokensEqual(a: string, b: string): boolean {
+    const left = Buffer.from(a);
+    const right = Buffer.from(b);
+    if (left.length !== right.length) {
+      return false;
+    }
+    return timingSafeEqual(left, right);
+  }
+
+  async issueSession(
+    user: User,
+    meta: SessionMeta,
+    familyId = this.createFamilyId(),
+    options: { rememberMe?: boolean } = {},
+  ): Promise<IssuedSession> {
+    const rememberMe = options.rememberMe ?? false;
+    const refreshTtlMs = rememberMe ? this.rememberTtlMs : this.sessionTtlMs;
+    const accessToken = await this.signAccessToken(user);
+    const rawRefreshToken =
+      randomBytes(REFRESH_TOKEN_BYTES).toString('base64url');
+    const expiresAt = new Date(Date.now() + refreshTtlMs);
+
+    await this.authRepository.createRefreshToken({
+      userId: user.id,
+      tokenHash: this.hashToken(rawRefreshToken),
+      familyId,
+      expiresAt,
+      userAgent: meta.userAgent,
+      ipAddress: meta.ipAddress,
+    });
+
+    return {
+      accessToken,
+      refreshToken: rawRefreshToken,
+      user: this.toUserResponse(user),
+      refreshMaxAgeMs: rememberMe ? refreshTtlMs : null,
+    };
+  }
+
+  private isPersistentRefreshToken(stored: {
+    createdAt: Date;
+    expiresAt: Date;
+  }): boolean {
+    const issuedTtlMs = stored.expiresAt.getTime() - stored.createdAt.getTime();
+    return issuedTtlMs > (this.sessionTtlMs + this.rememberTtlMs) / 2;
+  }
+
+  private async signAccessToken(user: User): Promise<string> {
+    const payload: JwtPayload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
+    return this.jwtService.signAsync(payload, {
+      expiresIn: this.jwtAccessTtl as `${number}${'s' | 'm' | 'h' | 'd'}`,
+      algorithm: 'HS256',
+    });
+  }
+
+  private createFamilyId(): string {
+    return randomBytes(16).toString('hex');
+  }
+
+  private toUserResponse(user: User | AuthUser): UserResponseDto {
+    return {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name,
+      isActive: user.isActive,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+  }
+}

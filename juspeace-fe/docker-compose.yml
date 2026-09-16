@@ -1,0 +1,19 @@
+services:
+  juspeace-fe:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:${BE_PORT:-7777}/api/v1}
+    container_name: juspeace-frontend
+    restart: unless-stopped
+    ports:
+      - '${FE_PORT:-3000}:3000'
+    env_file:
+      - path: .env
+        required: false
+      - path: .env.local
+        required: false
+    environment:
+      PORT: 3000
+      HOSTNAME: 0.0.0.0

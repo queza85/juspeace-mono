@@ -1,0 +1,1096 @@
+{
+  "common": {
+    "brand": "Juspeace Admin",
+    "tagline": "Operations console for Juspeace",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "notFound": "Page not found",
+    "pagination": {
+      "showing": "Showing {from} to {to} of {total} {itemLabel}",
+      "previous": "Previous page",
+      "next": "Next page",
+      "navigation": "Table pagination",
+      "currentPage": "Page {page} of {totalPages}",
+      "pageSize": "Rows per page",
+      "products": "products",
+      "orders": "orders",
+      "items": "items"
+    }
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "loginTitle": "Login Account",
+    "loginSubtitle": "Please enter your email and password to log in.",
+    "loginFailed": "Unable to sign in. Please try again.",
+    "sessionExpired": {
+      "title": "Session Expired!",
+      "subtitle": "Your session has expired. Please log in again."
+    },
+    "loginWithGoogle": "Continue with Google",
+    "loginWithFacebook": "Continue with Facebook",
+    "orDivider": "OR",
+    "oauthCallbackLoading": "Completing sign-in…",
+    "oauthCallbackFailed": "Google sign-in failed. Please try again.",
+    "email": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "twoFactorFlow": {
+      "title": "Two-factor authentication.",
+      "subtitle": "We've sent a 6-digit verification code to your registered email address.",
+      "codeExpiredTitle": "Code Expired!",
+      "codeExpiredSubtitle": "Enter the latest verification code from your email.",
+      "codeExpiredHint": "This verification code has expired. Please request a new one.",
+      "verificationCode": "Verification Code",
+      "verificationCodePlaceholder": "Enter your one-time code",
+      "submitCode": "Submit Code",
+      "resendCode": "Resend Code",
+      "verifyFailed": "Unable to verify the code. Please try again.",
+      "resendFailed": "Unable to resend the code. Please try again.",
+      "invalidCode": "Invalid verification code. Please try again.",
+      "missingToken": "Two-factor session expired. Please sign in again.",
+      "validation": {
+        "codeRequired": "Verification code is required",
+        "codeInvalid": "Enter the 6-digit verification code"
+      }
+    },
+    "forgotPasswordFlow": {
+      "title": "Forgot Password?",
+      "requestSubtitle": "Enter your email to receive a 6-digit code.",
+      "verifySubtitle": "Check your inbox for the code we sent.",
+      "resetSubtitle": "Your new password must differ from your old one.",
+      "codeExpiredTitle": "Code Expired!",
+      "codeExpiredSubtitle": "Enter the latest verification code from your email.",
+      "codeExpiredHint": "This verification code has expired. Please request a new one.",
+      "verificationCode": "Verification Code",
+      "verificationCodePlaceholder": "Enter your one-time code",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmNewPassword": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Retype your new password",
+      "sendRequest": "Send Request",
+      "submitCode": "Submit Code",
+      "resendCode": "Resend Code",
+      "update": "Update",
+      "returnTo": "Return to",
+      "loginLink": "Login",
+      "requestFailed": "Unable to send a reset code. Please try again.",
+      "emailNotFound": "No account was found with this email address.",
+      "accountInactive": "This account is inactive. Please contact support.",
+      "resetUnavailable": "Password reset is not available for this account.",
+      "verifyFailed": "Unable to verify the code. Please try again.",
+      "resendFailed": "Unable to resend the code. Please try again.",
+      "resetFailed": "Unable to update your password. Please try again.",
+      "invalidCode": "Invalid verification code. Please try again.",
+      "passwordReuse": "Your new password must differ from your old one.",
+      "missingEmail": "Email is missing. Please start the reset flow again.",
+      "missingToken": "Reset session expired. Please start again.",
+      "resetSuccessMessage": "Password updated successfully. Please sign in with your new password.",
+      "validation": {
+        "codeRequired": "Verification code is required",
+        "codeInvalid": "Enter the 6-digit verification code"
+      }
+    },
+    "noAccount": "Don't you have an account?",
+    "signUpHere": "Sign Up Here",
+    "signUpTitle": "Signup Account",
+    "signUpSubtitle": "Start by creating your account with the information below.",
+    "signUp": "Sign Up",
+    "signUpFailed": "Unable to create your account. Please try again.",
+    "signUpSuccessMessage": "Account created successfully. Please sign in with your credentials.",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "namePlaceholder": "Enter your name",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "acceptTermsPrefix": "I accept the",
+    "termsAndPrivacyPolicy": "Terms & Privacy Policy.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "facebookUnavailable": "Facebook sign-in is not available yet",
+    "name": "Name",
+    "role": "Role",
+    "noName": "—",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "passwordMin": "Password must be at least 8 characters",
+      "nameRequired": "Name is required",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordMismatch": "Passwords do not match",
+      "termsRequired": "You must accept the Terms & Privacy Policy",
+      "emailTaken": "An account with this email already exists"
+    }
+  },
+  "admin": {
+    "accessDenied": "This account does not have administrator access.",
+    "shell": {
+      "title": "Admin Site",
+      "subtitle": "Operations console"
+    },
+    "header": {
+      "searchPlaceholder": "Search for something...",
+      "toggleSidebar": "Toggle navigation",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "settings": "Settings",
+      "darkMode": "Switch to dark mode",
+      "lightMode": "Switch to light mode",
+      "defaultUser": "Admin"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "inventory": "Inventory",
+      "products": "Products",
+      "customers": "Customers",
+      "shipping": "Shipping and Tracking",
+      "payments": "Payments",
+      "reports": "Reports",
+      "content": "Content",
+      "adminManagement": "Admin Management",
+      "settings": "Settings",
+      "sections": {
+        "menu": "Menu",
+        "apps": "Apps",
+        "others": "Others"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome back, {name}.",
+      "welcomeFallback": "Welcome back.",
+      "description": "Manage catalog, orders, and platform settings from here.",
+      "mockDataNotice": "Preview — sample data",
+      "apiStatus": "API status",
+      "apiConnected": "Connected to backend",
+      "apiDisconnected": "Backend unavailable",
+      "empty": {
+        "noData": "No data yet",
+        "sales": "Sales charts will appear once order data is connected.",
+        "salesDescription": "Weekly revenue overview",
+        "alerts": "No operational alerts right now.",
+        "alertsDescription": "Items that need your attention",
+        "orders": "Recent orders will show here after the orders API is connected.",
+        "ordersDescription": "Latest transactions across the store"
+      },
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "paidOrders": "Paid Orders",
+        "awaitingShipment": "Awaiting Shipment",
+        "shippedOrders": "Shipped Orders",
+        "completedOrders": "Completed Orders",
+        "cancelledRefunded": "Cancelled / Refunded Orders",
+        "totalSales": "Total Sales",
+        "remainingInventory": "Remaining Inventory",
+        "lowStockAlert": "Low Stock Alert",
+        "todaysOrders": "Today's Orders",
+        "todaysPaidOrders": "Today's Paid Orders",
+        "todayAwaitingShipment": "Today awaiting shipment",
+        "todaysShippedOrders": "Today's Shipped Orders",
+        "todayCompletedOrders": "Today Completed Orders",
+        "todaysCancelledRefunded": "Today's Cancelled / Refunded Orders",
+        "todaysSales": "Today's Sales",
+        "lastMonthRemainingInventory": "Last month's remaining inventory",
+        "todaysLowStockAlert": "Today's low stock alert",
+        "viewDetails": "View details"
+      },
+      "charts": {
+        "dailySales": "Daily Sales",
+        "dateLabel": "28 Aug, 2026",
+        "productBreakdown": "Product Sales Breakdown",
+        "totalSales": "Total Sales",
+        "sales": "Sales",
+        "filters": {
+          "month": "Month",
+          "year": "Year",
+          "week": "Week",
+          "monthValue": "August",
+          "yearValue": "2026",
+          "weekValue": "Week 4"
+        },
+        "days": {
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "Fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        },
+        "products": {
+          "wirelessHeadphones": "Wireless Headphones",
+          "smartWatch": "Smart Watch",
+          "bluetoothSpeaker": "Bluetooth Speaker",
+          "smartphone": "Smartphone",
+          "laptop": "Laptop",
+          "other": "Other Products"
+        }
+      },
+      "alerts": {
+        "title": "Important Operational Alerts",
+        "review": "Review",
+        "viewAll": "View All Alerts",
+        "awaitingShipment": "{count} orders waiting for shipment",
+        "failedPayments": "{count} payments failed",
+        "missingTracking": "{count} orders missing tracking numbers",
+        "lowStock": "{count} products below minimum stock",
+        "pendingRefunds": "{count} refund requests pending"
+      },
+      "orders": {
+        "title": "Recent Orders",
+        "viewAll": "View All Orders",
+        "view": "View order",
+        "delete": "Delete order",
+        "columns": {
+          "orderNumber": "Order Number",
+          "orderDate": "Order Date",
+          "customer": "Customer Name",
+          "product": "Product",
+          "quantity": "Quantity",
+          "paymentAmount": "Payment Amount",
+          "paymentStatus": "Payment Status",
+          "orderStatus": "Order Status",
+          "shippingStatus": "Shipping Status",
+          "action": "Action"
+        },
+        "status": {
+          "paid": "Paid",
+          "failed": "Failed",
+          "pending": "Pending",
+          "refunded": "Refunded",
+          "confirmed": "Confirmed",
+          "cancelled": "Cancelled",
+          "shipped": "Shipped",
+          "returned": "Returned"
+        }
+      }
+    },
+    "products": {
+      "title": "Products",
+      "description": "Browse, filter, and manage your product catalog.",
+      "mockDataNotice": "Preview — sample KPI and order counts",
+      "byBrand": "by: {brand}",
+      "kpi": {
+        "products": "Products",
+        "orders": "Orders",
+        "sales": "Sales",
+        "customers": "Customers",
+        "revenue": "Revenue",
+        "activeListings": "Active Listings",
+        "totalOrders": "Total Orders",
+        "todaysSales": "Today's Sales",
+        "totalCustomers": "Total Customers",
+        "totalRevenue": "Total Revenue"
+      },
+      "filters": {
+        "category": "Category",
+        "status": "Status",
+        "priceRange": "Price range",
+        "allCategories": "Category",
+        "allStatuses": "Status",
+        "allPrices": "Price Range",
+        "priceUnder50": "Under $50",
+        "price50to100": "$50 – $100",
+        "priceOver100": "Over $100",
+        "categories": {
+          "essentials": "Essentials",
+          "bracelet": "Bracelet",
+          "home": "Home",
+          "general": "General"
+        }
+      },
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "category": "Category",
+        "stock": "Stock",
+        "price": "Price",
+        "orders": "Orders",
+        "status": "Status",
+        "published": "Published",
+        "actions": "Actions"
+      },
+      "status": {
+        "DRAFT": "Draft",
+        "ACTIVE": "Published",
+        "ARCHIVED": "Archived"
+      },
+      "table": {
+        "title": "Product List",
+        "searchPlaceholder": "Search for something...",
+        "filterBy": "Filter By:",
+        "addProduct": "Add Product",
+        "moreFilters": "More filters",
+        "pageSize": "Rows per page",
+        "selectAll": "Select all products on this page",
+        "selectProduct": "Select {name}",
+        "loadError": "Unable to load products. Please try again.",
+        "empty": "No products match your filters.",
+        "publishedPlaceholder": "—",
+        "sortBy": "Sort by {column}",
+        "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+        "sortDescending": "Sorted by {column}, descending. Activate to sort ascending"
+      },
+      "pagination": {
+        "itemLabel": "products"
+      },
+      "actions": {
+        "view": "View product",
+        "edit": "Edit product",
+        "delete": "Delete product"
+      },
+      "detail": {
+        "pageTitle": "Product Details",
+        "breadcrumbLabel": "Breadcrumb",
+        "breadcrumbEcommerce": "Ecommerce",
+        "breadcrumbCurrent": "Product Details",
+        "mockDataNotice": "Preview — sample review and performance data",
+        "backToProducts": "Back Products",
+        "loadError": "Unable to load this product. Please try again.",
+        "notFound": "Product not found.",
+        "selectImage": "Select product image {index}",
+        "inStock": "In Stock",
+        "outOfStock": "Out of Stock",
+        "reviewCount": "({count} Reviews)",
+        "productInfoTitle": "Product Info:",
+        "detailsTitle": "Details :",
+        "readMore": "Read More...",
+        "readLess": "Read Less",
+        "sampleDescriptionParagraph1": "This piece is designed for everyday wear with a clean silhouette, durable cord construction, and a secure clasp that keeps the fit comfortable through long hours of use.",
+        "sampleDescriptionParagraph2": "The finish is refined for both casual and gift-ready presentation, with quality checks completed before dispatch and packaging kept minimal, protective, and aligned with the Juspeace brand tone.",
+        "fields": {
+          "sku": "SKU:",
+          "category": "Category:",
+          "price": "Price:",
+          "stock": "Stock:",
+          "orders": "Orders:",
+          "published": "Published:",
+          "status": "Status:"
+        },
+        "bullets": {
+          "1": "Premium materials selected for long-term daily use.",
+          "2": "Packaged with recyclable materials and minimal waste.",
+          "3": "Quality-checked before dispatch from the fulfillment center.",
+          "4": "Eligible for standard shipping and gift-ready presentation."
+        },
+        "reviews": {
+          "title": "Manage Reviews",
+          "newThisWeek": "+{count} new this week",
+          "summaryDescription": "High-density foam seat and back for exceptional comfort.",
+          "starLabel": "{count} Star",
+          "columns": {
+            "reviewer": "Reviewer",
+            "review": "Review",
+            "date": "Date",
+            "status": "Status",
+            "action": "Action"
+          },
+          "status": {
+            "published": "Published",
+            "pending": "Pending"
+          },
+          "actions": {
+            "view": "View review",
+            "edit": "Edit review",
+            "delete": "Delete review"
+          },
+          "detailDialog": {
+            "title": "Review Details",
+            "close": "Close review details",
+            "orderId": "Order ID",
+            "reviewDate": "Review Date",
+            "reviewStatus": "Review Status",
+            "product": "Product",
+            "rating": "Rating",
+            "ratingOutOf": "{rating} out of 5",
+            "productSku": "SKU: {sku} · {category}",
+            "reviewTitle": "Review Title",
+            "reviewContent": "Review Content",
+            "photo": "Photo"
+          },
+          "editDialog": {
+            "title": "Edit Review",
+            "close": "Close edit review dialog",
+            "cancel": "Cancel",
+            "saveChanges": "Save Changes",
+            "ratingSelect": "Select rating",
+            "ratingOptions": {
+              "1": "1. Poor",
+              "2": "2. Fair",
+              "3": "3. Average",
+              "4": "4. Good",
+              "5": "5. Excellent"
+            },
+            "characterCount": "{current}/{max}",
+            "photoHint": "You can add up to 5 photos.",
+            "addPhoto": "Add photo",
+            "removePhoto": "Remove photo",
+            "savePreview": "Review changes saved (preview)."
+          },
+          "deleteDialog": {
+            "title": "Delete Review?",
+            "description": "Are you sure you want to delete this review ? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "close": "Close delete review dialog",
+            "deletePreview": "Review deleted (preview)."
+          },
+          "samples": {
+            "1": {
+              "title": "Great product, would buy again!",
+              "excerpt": "The bracelet feels sturdy and looks exactly like the photos. Shipping was fast and the packaging felt premium.",
+              "content": "Obsessed with this bracelet! The white cord and sleek dark hardware look so clean, and the 'JUSTICE / PEACE' detail gives it meaningful style. Fantastic quality and super comfortable"
+            },
+            "2": {
+              "title": "Beautiful craftsmanship",
+              "excerpt": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it.",
+              "content": "I bought this as a gift and the recipient loved it. The clasp is secure and the cord has a nice weight to it. The presentation felt premium from the moment we opened the package."
+            },
+            "3": {
+              "title": "Mostly great, sizing note",
+              "excerpt": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description.",
+              "content": "Overall happy with the purchase. Would love slightly more sizing guidance in the product description, but the quality and finish still exceeded what I expected for the price."
+            },
+            "4": {
+              "title": "Exceeded expectations",
+              "excerpt": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection.",
+              "content": "Looks premium in person and feels well made. Would definitely recommend it to anyone browsing the collection. The details are subtle but meaningful, and it wears comfortably all day."
+            }
+          }
+        }
+      },
+      "add": {
+        "pageTitle": "Add New Product",
+        "breadcrumbCurrent": "Add New Product",
+        "optional": "Optional",
+        "submitPreview": "Product form validated. API create endpoint is not connected yet.",
+        "sections": {
+          "information": {
+            "title": "Product Information",
+            "description": "To add a new product, please provide the necessary details in the fields below."
+          },
+          "image": {
+            "title": "Product Image",
+            "description": "To upload a product image, please use the option below to select and upload the relevant file."
+          },
+          "pricing": {
+            "title": "Pricing",
+            "description": "Set the base price and applicable discount for the product using the options below."
+          },
+          "organize": {
+            "title": "Organize",
+            "description": "Organize your product by selecting the appropriate brand, category, sub-category, status, and tags."
+          }
+        },
+        "fields": {
+          "name": "Product Name",
+          "sku": "SKU",
+          "stock": "Stock",
+          "description": "Product Description",
+          "basePrice": "Base Price",
+          "discountType": "Discount Type",
+          "discountValue": "Discount Value",
+          "brand": "Brand",
+          "category": "Category",
+          "status": "Status",
+          "tags": "Tags"
+        },
+        "placeholders": {
+          "name": "Enter product name",
+          "sku": "SOFA-10058",
+          "stock": "250",
+          "description": "Enter product description...",
+          "basePrice": "Enter base price (e.g., 199.99)",
+          "discountType": "Choose Discount",
+          "discountValue": "Enter discount or percentage",
+          "brand": "Enter brand name",
+          "category": "Choose Category",
+          "status": "Choose Status",
+          "tags": "Enter tags separated by commas"
+        },
+        "discountTypes": {
+          "PERCENTAGE": "Percentage",
+          "FIXED": "Fixed amount"
+        },
+        "validation": {
+          "nameRequired": "Product name is required.",
+          "skuRequired": "SKU is required.",
+          "stockRequired": "Stock is required.",
+          "stockInvalid": "Enter a valid stock quantity.",
+          "basePriceRequired": "Base price is required.",
+          "basePriceInvalid": "Enter a valid price.",
+          "brandRequired": "Brand is required.",
+          "categoryRequired": "Category is required.",
+          "statusRequired": "Status is required."
+        },
+        "image": {
+          "dropTitle": "Drop files here or click to upload.",
+          "dropHint": "You can drag images here, or browse files via the button below.",
+          "browse": "Browse Images",
+          "remove": "Remove {name}",
+          "removeExisting": "Remove image"
+        },
+        "actions": {
+          "discard": "Discard",
+          "saveDraft": "Save as Draft",
+          "publish": "Publish"
+        }
+      },
+      "edit": {
+        "pageTitle": "Edit Product",
+        "breadcrumbCurrent": "Edit Product",
+        "backToProduct": "Back to Product Details",
+        "submitPreview": "Product changes validated. API update endpoint is not connected yet.",
+        "sections": {
+          "information": {
+            "title": "Product Information",
+            "description": "Update the product details in the fields below."
+          },
+          "image": {
+            "title": "Product Image",
+            "description": "Manage product images by uploading new files or removing existing ones."
+          },
+          "pricing": {
+            "title": "Pricing",
+            "description": "Update the base price and applicable discount for this product."
+          },
+          "organize": {
+            "title": "Organize",
+            "description": "Update brand, category, status, and tags for this product."
+          }
+        },
+        "actions": {
+          "cancel": "Cancel",
+          "saveChanges": "Save Changes"
+        }
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Browse, filter, and manage customer orders.",
+      "mockDataNotice": "Preview — sample order data",
+      "kpi": {
+        "todayOrders": "Today Orders",
+        "cancelledOrders": "Cancelled Orders",
+        "todaysCancelledOrders": "Today Cancelled Orders"
+      },
+      "filters": {
+        "dateRange": "Date Range",
+        "orderStatus": "Order Status",
+        "paymentStatus": "Payment Status",
+        "shippingStatus": "Shipping Status",
+        "country": "Country",
+        "product": "Product",
+        "trackingStatus": "Tracking Registration Status",
+        "trackingRegistered": "Registered",
+        "trackingMissing": "Missing",
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month"
+      },
+      "columns": {
+        "orderNumber": "Order Number",
+        "orderDate": "Order Date",
+        "customer": "Customer Name",
+        "country": "Country",
+        "product": "Product",
+        "quantity": "Quantity",
+        "paymentAmount": "Payment Amount",
+        "paymentStatus": "Payment Status",
+        "orderStatus": "Order Status",
+        "shippingStatus": "Shipping Status",
+        "trackingNumber": "Tracking Number",
+        "actions": "Actions"
+      },
+      "paymentStatus": {
+        "paid": "Paid",
+        "failed": "Failed",
+        "pending": "Pending",
+        "refunded": "Refunded"
+      },
+      "orderStatus": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "shipped": "Shipped",
+        "cancelled": "Cancelled"
+      },
+      "shippingStatus": {
+        "pending": "Pending",
+        "shipped": "Shipped",
+        "returned": "Returned"
+      },
+      "countries": {
+        "myanmar": "Myanmar",
+        "singapore": "Singapore",
+        "thailand": "Thailand",
+        "malaysia": "Malaysia",
+        "vietnam": "Vietnam"
+      },
+      "table": {
+        "searchPlaceholder": "Search for something...",
+        "filterBy": "Filter By:",
+        "selectAll": "Select all orders on this page",
+        "selectOrder": "Select {orderNumber}",
+        "empty": "No orders match your filters.",
+        "noTracking": "-",
+        "sortBy": "Sort by {column}",
+        "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+        "sortDescending": "Sorted by {column}, descending. Activate to sort ascending"
+      },
+      "pagination": {
+        "itemLabel": "orders"
+      },
+      "actions": {
+        "view": "View order",
+        "delete": "Delete order"
+      },
+      "bulkActions": {
+        "selectedCount": "{count} Orders Selected",
+        "hint": "Bulk actions apply to selected orders only.",
+        "changeOrderStatus": "Change Order Status",
+        "registerTracking": "Register Tracking Numbers",
+        "markAsShipped": "Mark As Shipped",
+        "export": "Export",
+        "printDocument": "Print Document",
+        "clearSelection": "Clear Selection"
+      },
+      "changeStatusDialog": {
+        "title": "Change Order Status",
+        "description": "Update the status of selected orders. The status change will be applied to all selected orders.",
+        "orderStatusLabel": "Order status",
+        "cancel": "Cancel",
+        "confirm": "Change",
+        "close": "Close change order status dialog",
+        "successPreview": "Order status update queued for {count} selected orders (preview)."
+      },
+      "registerTrackingDialog": {
+        "title": "Register Tracking Numbers",
+        "description": "Register valid carrier and tracking information for selected orders.",
+        "trackingNumberLabel": "Tracking Number",
+        "carrierLabel": "Carrier",
+        "trackingPlaceholder": "Enter tracking number",
+        "cancel": "Cancel",
+        "confirm": "Register",
+        "close": "Close register tracking dialog",
+        "successPreview": "Tracking numbers registered for {count} selected orders (preview)."
+      },
+      "markShippedDialog": {
+        "title": "Mark Orders as Shipped",
+        "description": "Are you sure you want to mark these {count} selected orders as shipped? The shipping status will be updated and customers will be notified.",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "close": "Close mark as shipped dialog",
+        "successPreview": "Marked {count} selected orders as shipped (preview)."
+      },
+      "exportDialog": {
+        "title": "Export Selected Orders",
+        "description": "You are exporting data for {count} selected orders. Select the file format and data fields before downloading.",
+        "formatLegend": "Export file format",
+        "formats": {
+          "csv": "CSV",
+          "xlsx": "Excel (.xlsx)"
+        },
+        "cancel": "Cancel",
+        "confirm": "Export",
+        "close": "Close export orders dialog",
+        "successPreview": "Export started for {count} orders as {format} (preview)."
+      },
+      "printDocumentsDialog": {
+        "title": "Print Documents",
+        "description": "You are about to print documents for {count} selected orders. Please confirm to continue.",
+        "cancel": "Cancel",
+        "confirm": "Continue",
+        "close": "Close print documents dialog",
+        "successPreview": "Print job queued for {count} selected orders (preview)."
+      },
+      "deleteOrderDialog": {
+        "title": "Delete Order?",
+        "description": "Are you sure you want to delete this Order ? This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "close": "Close delete order dialog",
+        "successPreview": "Order {orderNumber} deleted (preview)."
+      },
+      "detail": {
+        "pageTitle": "Order Management Details",
+        "breadcrumbLabel": "Breadcrumb",
+        "breadcrumbEcommerce": "Ecommerce",
+        "breadcrumbCurrent": "Order Management Details",
+        "backToOrders": "Back Orders",
+        "heading": "Order Management Details",
+        "notFound": "Order not found.",
+        "noImage": "No image",
+        "noTrackingEntries": "No tracking numbers registered yet.",
+        "sections": {
+          "orderSummary": "Order Summary",
+          "productInformation": "Product Information",
+          "customerInformation": "Customer Information",
+          "shippingInformation": "Shipping Information",
+          "paymentInformation": "Payment Information",
+          "pgTransactionInformation": "PG Transaction Information",
+          "orderStatusHistory": "Order Status History",
+          "trackingNumber": "Tracking Number",
+          "internalNotes": "Internal notes",
+          "customerFacingNotes": "Customer-facing notes",
+          "cancellationAndRefund": "Cancellation and refund information"
+        },
+        "fields": {
+          "orderNumber": "Order Number",
+          "orderDate": "Order Date",
+          "customer": "Customer",
+          "country": "Country",
+          "orderStatus": "Order Status",
+          "paymentStatus": "Payment Status",
+          "shippingStatus": "Shipping Status",
+          "totalAmount": "Total Amount",
+          "category": "Category",
+          "sku": "SKU",
+          "quantity": "Quantity",
+          "price": "Price",
+          "subtotal": "Subtotal",
+          "customerName": "Customer Name",
+          "email": "Email",
+          "phone": "Number",
+          "recipient": "Recipient",
+          "shippingAddress": "Shipping Address",
+          "trackingNumber": "Tracking Number",
+          "paymentMethod": "Payment Method",
+          "paymentProvider": "Payment Provider",
+          "transactionNumber": "Transaction Number",
+          "paymentAmount": "Payment Amount",
+          "transactionId": "Transaction ID",
+          "provider": "Provider",
+          "paymentTime": "Payment Time",
+          "response": "Response",
+          "status": "Status",
+          "cancellationStatus": "Cancellation Status",
+          "refundStatus": "Refund Status",
+          "refundAmount": "Refund Amount",
+          "refundHistory": "Refund History"
+        },
+        "paymentMethods": {
+          "card": "Card"
+        },
+        "pgResponses": {
+          "success": "Success",
+          "failed": "Failed"
+        },
+        "pgStatus": {
+          "completed": "Completed",
+          "pending": "Pending",
+          "failed": "Failed"
+        },
+        "cancellationStatus": {
+          "notCancelled": "Not Cancelled",
+          "cancelled": "Cancelled"
+        },
+        "refundStatus": {
+          "notRefund": "Not Refund",
+          "refunded": "Refunded",
+          "partial": "Partial Refund"
+        },
+        "refundHistory": {
+          "none": "No refund activity yet",
+          "refunded": "Refund processed"
+        },
+        "notes": {
+          "internalPlaceholder": "Add an internal note for this order…",
+          "customerPlaceholder": "Add a customer-facing note…",
+          "addNote": "Add Note",
+          "saveNote": "Save Note",
+          "internalSavedPreview": "Internal note saved (preview).",
+          "customerSavedPreview": "Customer-facing note saved (preview)."
+        },
+        "actions": {
+          "updateOrderStatus": "Update Order Status",
+          "registerTracking": "Register Or Edit Tracking Number",
+          "markAsShipped": "Mark As Shipped",
+          "refund": "Refund",
+          "download": "Download Order Information",
+          "print": "Print Order Information",
+          "cancelOrder": "Cancel Order"
+        },
+        "dialogs": {
+          "updateStatus": {
+            "title": "Update Order Status",
+            "description": "Change the order status to keep the order progress and fulfillment workflow up to date.",
+            "orderStatusLabel": "Order status",
+            "cancel": "Cancel",
+            "confirm": "Change",
+            "close": "Close update order status dialog",
+            "successPreview": "Order status updated (preview)."
+          },
+          "registerTracking": {
+            "title": "Register Tracking Numbers",
+            "description": "Add a new tracking number and shipping carrier information before completing the shipment process.",
+            "trackingStatusLabel": "Tracking Status",
+            "trackingStatusNotRegistered": "Not Registered",
+            "trackingStatusRegistered": "Registered",
+            "trackingNumberLabel": "Tracking Number",
+            "carrierLabel": "Carrier",
+            "trackingPlaceholder": "Enter tracking number",
+            "cancel": "Cancel",
+            "confirm": "Register",
+            "close": "Close register tracking dialog",
+            "successPreview": "Tracking number registered (preview)."
+          },
+          "markShipped": {
+            "title": "Mark Orders as Shipped",
+            "description": "Are you sure you want to mark this order as shipped? The shipping status will be updated and the customer will be notified.",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "close": "Close mark as shipped dialog",
+            "successPreview": "Order marked as shipped (preview)."
+          },
+          "refund": {
+            "title": "Refund",
+            "description": "Are you sure you want to process a refund for this order? The refund status and payment information will be updated.",
+            "amountLabel": "Refund Amount",
+            "typeLabel": "Refund Type",
+            "types": {
+              "full": "Full Refund",
+              "partial": "Partial Refund"
+            },
+            "reasonLabel": "Refund Reason",
+            "reasonPlaceholder": "Enter refund reason…",
+            "cancel": "Cancel",
+            "confirm": "Refund",
+            "close": "Close refund dialog",
+            "successPreview": "Refund processed (preview)."
+          },
+          "download": {
+            "title": "Download Order Information",
+            "description": "Download order information for this order. Select the file format before downloading.",
+            "formatLegend": "Download file format",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "Cancel",
+            "confirm": "Export",
+            "close": "Close download order dialog",
+            "successPreview": "Download started as {format} (preview)."
+          },
+          "print": {
+            "title": "Print Order Information",
+            "description": "You are about to print order information for this order. Please confirm to continue.",
+            "cancel": "Cancel",
+            "confirm": "Continue",
+            "close": "Close print order dialog",
+            "successPreview": "Print job queued (preview)."
+          },
+          "cancel": {
+            "title": "Cancel Order",
+            "description": "Are you sure you want to cancel this order? The order status will be updated and the cancellation will be recorded.",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "close": "Close cancel order dialog",
+            "successPreview": "Order cancellation queued (preview)."
+          }
+        }
+      }
+    },
+    "inventory": {
+      "title": "Inventory",
+      "description": "Monitor stock levels, reservations, and availability across product variations.",
+      "mockDataNotice": "Preview — sample inventory data",
+      "kpi": {
+        "totalStock": "Total Stock",
+        "availableStock": "Available Stock",
+        "reservedStock": "Reserved Stock",
+        "soldQuantity": "Sold Quantity",
+        "lowStockItems": "Low Stock Items",
+        "soldOutItems": "Sold Out Items",
+        "todayTotalStock": "Today's total stock change",
+        "todayAvailableStock": "Today's available stock",
+        "todayReservedStock": "Today's reserved stock",
+        "todaySoldQuantity": "Today's sold quantity",
+        "todayLowStockItems": "Today's low stock items",
+        "todaySoldOutItems": "Today's sold out items"
+      },
+      "filters": {
+        "variation": "Variation",
+        "stockStatus": "Stock Status"
+      },
+      "columns": {
+        "product": "Product",
+        "variation": "Variation",
+        "sku": "SKU",
+        "initialStock": "Initial Stock",
+        "availableStock": "Available Stock",
+        "reservedStock": "Reserved Stock",
+        "soldQuantity": "Sold Quantity",
+        "cancelledReturned": "Cancelled / Returned",
+        "stockStatus": "Stock Status",
+        "actions": "Action"
+      },
+      "stockStatus": {
+        "in_stock": "In Stock",
+        "low_stock": "Low Stock",
+        "sold_out": "Sold Out"
+      },
+      "table": {
+        "searchPlaceholder": "Search for something...",
+        "filterBy": "Filter By:",
+        "selectAll": "Select all inventory items on this page",
+        "selectItem": "Select {name}",
+        "empty": "No inventory items match your filters.",
+        "sortBy": "Sort by {column}",
+        "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+        "sortDescending": "Sorted by {column}, descending. Activate to sort ascending"
+      },
+      "pagination": {
+        "itemLabel": "products"
+      },
+      "actions": {
+        "view": "View inventory item"
+      },
+      "detail": {
+        "pageTitle": "Inventory Management Details",
+        "breadcrumbLabel": "Breadcrumb",
+        "breadcrumbEcommerce": "Ecommerce",
+        "breadcrumbCurrent": "Inventory Management Details",
+        "backToInventory": "Back Inventory",
+        "heading": "Inventory Management Details",
+        "notFound": "Inventory item not found.",
+        "noImage": "No image",
+        "sections": {
+          "productSummary": "Product Summary",
+          "stockHistory": "Stock History"
+        },
+        "fields": {
+          "productName": "Product Name",
+          "productVariation": "Product Variation",
+          "sku": "SKU",
+          "initialStock": "Initial Stock",
+          "availableStock": "Available Stock",
+          "reservedStock": "Reserved Stock",
+          "soldQuantity": "Sold Quantity",
+          "cancelledReturnedQuantity": "Cancelled / Returned Quantity",
+          "stockStatus": "Stock Status"
+        },
+        "actions": {
+          "adjustStock": "Adjust Stock",
+          "markSoldOut": "Mark As Sold out",
+          "setLowStockThreshold": "Set Low-Stock Threshold",
+          "exportData": "Export Inventory data"
+        },
+        "dialogs": {
+          "stockQuantityLabel": "Stock Quantity",
+          "adjustStock": {
+            "title": "Adjust Stock",
+            "description": "Enter the new stock quantity to update the inventory for this product.",
+            "cancel": "Cancel",
+            "confirm": "Update",
+            "close": "Close adjust stock dialog",
+            "successPreview": "Stock updated to {quantity} (preview)."
+          },
+          "setThreshold": {
+            "title": "Set Low-Stock Threshold",
+            "description": "Enter the stock level at which this product should be marked as low stock.",
+            "cancel": "Cancel",
+            "confirm": "Update",
+            "close": "Close set low-stock threshold dialog",
+            "successPreview": "Low-stock threshold set to {quantity} (preview)."
+          },
+          "markSoldOut": {
+            "title": "Mark As Sold Out",
+            "description": "Are you sure you want to mark this product as sold out? The product will no longer be available for purchase until stock is updated.",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "close": "Close mark as sold out dialog",
+            "successPreview": "Item marked as sold out (preview)."
+          },
+          "export": {
+            "title": "Export Inventory Data",
+            "description": "Export the current inventory information. Select a file format to download the data.",
+            "formatLegend": "Export file format",
+            "formats": {
+              "csv": "CSV",
+              "xlsx": "Excel (.xlsx)"
+            },
+            "cancel": "Cancel",
+            "confirm": "Export",
+            "close": "Close export inventory dialog",
+            "successPreview": "Inventory export started as {format} (preview)."
+          }
+        },
+        "history": {
+          "searchPlaceholder": "Search for something...",
+          "filterBy": "Filter By:",
+          "empty": "No stock history entries match your filters.",
+          "sortBy": "Sort by {column}",
+          "sortAscending": "Sorted by {column}, ascending. Activate to sort descending",
+          "sortDescending": "Sorted by {column}, descending. Activate to sort ascending",
+          "filters": {
+            "action": "Action"
+          },
+          "actions": {
+            "stock_added": "Stock Added",
+            "sold": "Sold",
+            "returned": "Returned",
+            "reserved": "Reserved"
+          },
+          "columns": {
+            "date": "Date",
+            "action": "Action",
+            "quantity": "Quantity",
+            "before": "Before",
+            "after": "After",
+            "reason": "Reason"
+          },
+          "pagination": {
+            "itemLabel": "stock histories"
+          }
+        }
+      }
+    }
+  },
+  "apiMessages": {
+    "REGISTER_SUCCESSFULLY": "Account created successfully",
+    "EMAIL_ALREADY_EXISTS": "An account with this email already exists",
+    "PASSWORD_RESET_REQUESTED": "Reset code sent to your email",
+    "PASSWORD_RESET_CODE_SENT": "Reset code sent to your email",
+    "PASSWORD_RESET_CODE_VERIFIED": "Verification code accepted",
+    "PASSWORD_RESET_SUCCESSFULLY": "Password updated successfully",
+    "EMAIL_NOT_FOUND": "No account was found with this email address",
+    "ACCOUNT_INACTIVE": "This account is inactive",
+    "PASSWORD_RESET_UNAVAILABLE": "Password reset is not available for this account",
+    "INVALID_RESET_CODE": "Invalid verification code",
+    "RESET_CODE_EXPIRED": "Verification code expired",
+    "INVALID_RESET_TOKEN": "Reset session is invalid",
+    "RESET_TOKEN_EXPIRED": "Reset session expired",
+    "PASSWORD_REUSE_NOT_ALLOWED": "Your new password must differ from your old one",
+    "TWO_FACTOR_CODE_SENT": "Verification code sent to your email",
+    "TWO_FACTOR_VERIFIED": "Two-factor authentication successful",
+    "TWO_FACTOR_CODE_EXPIRED": "Verification code expired",
+    "INVALID_TWO_FACTOR_CODE": "Invalid verification code",
+    "INVALID_TWO_FACTOR_CHALLENGE": "Two-factor session is invalid",
+    "LOGIN_SUCCESSFULLY": "Login successful",
+    "LOGOUT_SUCCESSFULLY": "Logged out successfully",
+    "LOGOUT_ALL_SUCCESSFULLY": "Logged out from all devices",
+    "REFRESH_SUCCESSFULLY": "Session refreshed",
+    "USER_RETRIEVED_SUCCESSFULLY": "User retrieved successfully",
+    "HEALTH_CHECKED_SUCCESSFULLY": "Health check successful",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "Admin health retrieved successfully",
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "INVALID_REFRESH_TOKEN": "Session expired. Please sign in again",
+    "INSUFFICIENT_PERMISSIONS": "You do not have permission to do that",
+    "VALIDATION_FAILED": "Please check your input and try again",
+    "UNAUTHORIZED": "Please sign in to continue",
+    "FORBIDDEN": "Access denied",
+    "NOT_FOUND": "Resource not found",
+    "TOO_MANY_REQUESTS": "Too many attempts. Please wait and try again",
+    "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

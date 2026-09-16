@@ -1,0 +1,564 @@
+{
+  "common": {
+    "brand": "Juspeace",
+    "tagline": "Mindful essentials for everyday peace",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "addToCart": "Add to cart",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "cart": "Cart",
+    "items": "{count} items"
+  },
+  "cart": {
+    "pageTitle": "Cart Review",
+    "breadcrumb": "Cart Review",
+    "title": "{count} items in your cart",
+    "subtitle": "Review your items before checkout.",
+    "orderSummary": "Order Summary",
+    "promoLabel": "Promo / Coupon",
+    "qtyLabel": "Qty: {count}",
+    "removeItem": "Remove {name} from cart",
+    "summaryLineQty": "Qty: {count}",
+    "promoPlaceholder": "Enter Code",
+    "promoApply": "Apply",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "taxIncluded": "Tax (Included)",
+    "total": "Total",
+    "deliveryEstimateTitle": "Estimated delivery for your order:",
+    "deliveryEstimateBody": "Delivery will take up to 3 Days",
+    "proceedToCheckout": "Proceed to Checkout",
+    "checkoutComingSoon": "Checkout coming soon",
+    "continueShopping": "Continue Shopping",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Add items from the collection to review them here."
+  },
+  "checkout": {
+    "pageTitle": "Shipping Information",
+    "breadcrumb": "Shipping Information",
+    "title": "Shipping Information",
+    "subtitle": "Enter your shipping details and choose your preferred delivery method",
+    "back": "Back",
+    "shippingDetails": "Shipping Details",
+    "shippingMethod": "Shipping Method",
+    "saveForNextTime": "Save this information for next time.",
+    "free": "FREE",
+    "nextToPayment": "Next to Payment",
+    "fields": {
+      "name": "Name",
+      "phoneNumber": "Phone Number",
+      "phoneCountryCode": "Country code",
+      "address": "Address",
+      "city": "City",
+      "postalCode": "Postal Code",
+      "deliveryNote": "Delivery Note (Optional)"
+    },
+    "phoneCountries": {
+      "korea": "Korea",
+      "usa": "USA"
+    },
+    "placeholders": {
+      "name": "Enter your full name",
+      "phoneNumber": "000 000 000",
+      "address": "21, admle st.",
+      "city": "Enter your city name",
+      "postalCode": "Enter postal code",
+      "deliveryNote": "Add notes for delivery"
+    },
+    "methods": {
+      "standard": {
+        "title": "Standard Delivery",
+        "description": "Estimated delivery by September 8-10"
+      },
+      "pickup": {
+        "title": "Pick Up",
+        "description": "Ready for pickup on September 6"
+      }
+    },
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "addressRequired": "Please enter your address.",
+      "cityRequired": "Please enter your city.",
+      "postalCodeRequired": "Please enter your postal code."
+    }
+  },
+  "payment": {
+    "pageTitle": "Payment Information",
+    "breadcrumb": "Payment Information",
+    "title": "Payment Information",
+    "subtitle": "Choose your preferred payment method to complete your order securely.",
+    "back": "Back",
+    "chooseMethod": "Choose Payment Method",
+    "cardPayment": "Card / Debit Card Payment",
+    "billingAddress": "Billing Address",
+    "billingSameAsShipping": "Billing address same as shipping address",
+    "streetAddress": "Street address",
+    "saveCard": "Save this card for future purchases",
+    "nextToOrderReview": "Next to Order Review",
+    "methods": {
+      "card": "Card / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    },
+    "fields": {
+      "nameOnCard": "Name on Card",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV",
+      "line1": "Line 1",
+      "line2Optional": "Line 2 ( Optional )",
+      "country": "Country",
+      "stateProvince": "State / province",
+      "zipCode": "Zip Code"
+    },
+    "placeholders": {
+      "nameOnCard": "Jamie Lar",
+      "cardNumber": "4242 4242 4242 4242",
+      "expiryDate": "10/8/2029",
+      "cvv": "123",
+      "line1": "Line 1",
+      "line2": "Line 2 ( Optional )",
+      "zipCode": "Zip Code"
+    },
+    "countries": {
+      "unitedStates": "United State",
+      "korea": "Korea"
+    },
+    "states": {
+      "chicago": "Chicago",
+      "california": "California",
+      "newYork": "New York"
+    },
+    "validation": {
+      "nameOnCardRequired": "Please enter the name on your card.",
+      "cardNumberInvalid": "Please enter a valid card number.",
+      "expiryDateInvalid": "Please enter a valid expiry date.",
+      "cvvInvalid": "Please enter a valid CVV.",
+      "billingLine1Required": "Please enter your billing address.",
+      "billingCountryRequired": "Please select your country.",
+      "billingStateRequired": "Please select your state or province.",
+      "billingZipCodeRequired": "Please enter your zip code."
+    }
+  },
+  "review": {
+    "pageTitle": "Review Order",
+    "breadcrumb": "Review Order",
+    "title": "Review Order",
+    "subtitle": "Please review your order details carefully before placing your order.",
+    "back": "Back",
+    "shippingAddress": "Shipping Address",
+    "paymentMethod": "Payment Method",
+    "reviewItems": "Review your item",
+    "edit": "EDIT",
+    "submitOrder": "Submit your order to JUSPEACE",
+    "paymentMethods": {
+      "card": "Credit / Debit Card",
+      "applePay": "Apple Pay",
+      "googlePay": "Google Pay",
+      "paypal": "PayPal"
+    }
+  },
+  "orderSuccess": {
+    "pageTitle": "Order Confirmed",
+    "title": "Thank you! Your order is confirmed.",
+    "subtitle": "We've Received your order and are getting it ready",
+    "orderNumberLabel": "Order Number",
+    "confirmationEmailPrefix": "A confirmation email has been sent to",
+    "estimatedDelivery": "Estimated Delivery",
+    "deliveryNotify": "We'll notify you when your order is on the way.",
+    "trackOrder": "Track Order",
+    "continueShopping": "Continue Shopping",
+    "guestEmail": "jamie13@gmail.com"
+  },
+  "home": {
+    "heroTitle": "Welcome to Juspeace",
+    "heroDescription": "Discover curated products crafted for calm, sustainable living.",
+    "featuredProducts": "Featured products",
+    "apiStatus": "API status",
+    "apiConnected": "Connected to backend",
+    "apiDisconnected": "Backend unavailable"
+  },
+  "products": {
+    "empty": "No products available yet.",
+    "viewDetails": "View details",
+    "detail": {
+      "breadcrumbCollection": "Product Collection",
+      "breadcrumbBack": "Back to product collection",
+      "registrationBanner": "Every purchase can be officially registered and linked to you.",
+      "buyNow": "Buy Now",
+      "addToCart": "Add To Cart",
+      "onlyItemsLeftBefore": "Only",
+      "onlyItemsLeftHighlight": "{count} items",
+      "onlyItemsLeftAfter": "left",
+      "dontMiss": "Don't miss",
+      "reviewsCount": "({count})",
+      "deliveryTitle": "Delivery information",
+      "deliveryBody": "Can track your delivery.",
+      "returnTitle": "Return Delivery",
+      "returnBody": "Free 30 Days delivery returns.",
+      "authenticity": {
+        "title": "Authenticity & Recognition",
+        "badge": "Official. Verified. Yours.",
+        "body": "JUSPEACE is the only official and authorized source for every JUSPEACE piece. Each bracelet is individually recorded in the JUSPEACE Global Registry marking it as authentic, verified, and uniquely yours within the JUSPEACE movement.",
+        "authentic": "Authentic product",
+        "record": "Official JUSPEACE Record",
+        "registry": "14,678 part of the JUSPEACE registry"
+      },
+      "shipping": {
+        "title": "Shipping & Delivery"
+      },
+      "tabsLabel": "Product details",
+      "tabs": {
+        "story": "STORY",
+        "closeUp": "CLOSE UP IMAGE",
+        "productRegistration": "PRODUCT REGISTRATION",
+        "reviews": "REVIEWS"
+      },
+      "story": {
+        "logoAlt": "JUSPEACE",
+        "headlineLine1": "A Small Act.",
+        "headlineLine2": "A New Tomorrow.",
+        "subLine1": "Hope is where change begins.",
+        "subLine2": "Healing is how it continues.",
+        "body": "With every JUSPEACE bracelet, your small act of sharing\nbecomes someone's new tomorrow —\nsupporting youth rehabilitation and art therapy that rebuild\nlives from within.",
+        "closing": "If this is what you believe in, you can\nchoose to carry it with you.",
+        "flowerAlt": "JUSPEACE flower"
+      },
+      "closeUpPlaceholder": "Close-up images coming soon.",
+      "registration": {
+        "title": "Official JUSPEACE Registration",
+        "body1": "Every JUSPEACE purchase can be officially registered through our global system. When you buy from JUSPEACE or an authorized seller, your purchase is securely recorded and recognized as an official JUSPEACE piece.",
+        "body2": "Registration is optional, but it allows you to receive your official certificate and be part of the JUSPEACE journey."
+      },
+      "reviewsPlaceholder": "Reviews coming soon.",
+      "reviews": {
+        "photoAlt": "Review photo",
+        "samples": {
+          "1": {
+            "name": "Meow Meow",
+            "email": "sophia.lee@digitalshop.com",
+            "postedAt": "Yesterday 04:10 PM",
+            "title": "Great product, would buy again!",
+            "body": "These are honestly amazing! The sound quality is really impressive, with clear audio, good bass, and a nice overall balance."
+          },
+          "2": {
+            "name": "Lemon Lover",
+            "email": "alice@digitalshop.com",
+            "postedAt": "Yesterday 04:18 PM",
+            "body": "Add a touch of elegance to your everyday look with this beautiful bracelet. Its stylish design makes it easy to pair with both casual and dressy outfits. Comfortable to wear and perfect for everyday use, it's a lovely accessory for yourself or a thoughtful gift for someone special."
+          }
+        },
+        "form": {
+          "heading": "Submit your review",
+          "ratingLabel": "Add Your Rating",
+          "reviewLabel": "Write your review here",
+          "placeholder": "Write here ...",
+          "submit": "Submit Review",
+          "submitPreview": "Thank you — review submission will be available soon.",
+          "starLabel": "{count} stars"
+        }
+      },
+      "relatedLabel": "PRODUCT COLLECTION",
+      "relatedHeading": "More Like This",
+      "galleryThumbnail": "Product image {index}",
+      "ratingLabel": "{count} out of 5 stars"
+    }
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "account": "Account",
+    "accountTitle": "Your account",
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Use your Juspeace account credentials.",
+    "loginFailed": "Unable to sign in. Please try again.",
+    "loginWithGoogle": "Continue with Google",
+    "orDivider": "or",
+    "oauthCallbackLoading": "Completing sign-in…",
+    "oauthCallbackFailed": "Google sign-in failed. Please try again.",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "role": "Role",
+    "noName": "—",
+    "backHome": "Back to shop",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "passwordMin": "Password must be at least 8 characters"
+    }
+  },
+  "apiMessages": {
+    "LOGIN_SUCCESSFULLY": "Login successful",
+    "LOGOUT_SUCCESSFULLY": "Logged out successfully",
+    "LOGOUT_ALL_SUCCESSFULLY": "Logged out from all devices",
+    "REFRESH_SUCCESSFULLY": "Session refreshed",
+    "USER_RETRIEVED_SUCCESSFULLY": "User retrieved successfully",
+    "PRODUCTS_RETRIEVED_SUCCESSFULLY": "Products retrieved successfully",
+    "PRODUCT_RETRIEVED_SUCCESSFULLY": "Product retrieved successfully",
+    "PRODUCT_CREATED_SUCCESSFULLY": "Product created successfully",
+    "PRODUCT_UPDATED_SUCCESSFULLY": "Product updated successfully",
+    "PRODUCT_DELETED_SUCCESSFULLY": "Product deleted successfully",
+    "PRODUCT_NOT_FOUND": "Product not found",
+    "HEALTH_CHECKED_SUCCESSFULLY": "Health check successful",
+    "ADMIN_HEALTH_RETRIEVED_SUCCESSFULLY": "Admin health retrieved successfully",
+    "API_METADATA_RETRIEVED_SUCCESSFULLY": "API metadata retrieved successfully",
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "INVALID_REFRESH_TOKEN": "Session expired. Please sign in again",
+    "INSUFFICIENT_PERMISSIONS": "You do not have permission to do that",
+    "VALIDATION_FAILED": "Please check your input and try again",
+    "UNAUTHORIZED": "Please sign in to continue",
+    "FORBIDDEN": "Access denied",
+    "NOT_FOUND": "Resource not found",
+    "TOO_MANY_REQUESTS": "Too many attempts. Please wait and try again",
+    "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ko": "한국어"
+  },
+  "landing": {
+    "nav": {
+      "story": "STORY",
+      "collection": "COLLECTION",
+      "donation": "DONATION",
+      "faq": "FAQ",
+      "trackOrder": "TRACK ORDER",
+      "bag": "BAG ( {count} )",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "hero": {
+      "titleLine1": "Love Together.",
+      "titleLine2": "Change Together.",
+      "description": "JUSPEACE, a name combining Justice &\nPeace. This is a\nbracelet created by a foundation\nestablished through G-Dragon's\ncopyright donation .",
+      "tag": "WHITE | PURE HOPE",
+      "buyNow": "BUY NOW",
+      "exploreCollection": "EXPLORE COLLECTION",
+      "scroll": "Scroll",
+      "thumbnail": "Hero thumbnail {index}",
+      "marquee": {
+        "ariaLabel": "Hero collection preview",
+        "item1": "BLACK | STRONG COMMITMENT",
+        "item2": "STRIPE | HARMONY & PEACE",
+        "item3": "WHITE | PURE HOPE",
+        "item4": "JUSTICE | PEACE",
+        "item5": "LOVE | TOGETHER",
+        "item6": "HOPE | HEALING",
+        "item7": "CAMPAIGN | HEART",
+        "item8": "PLEDGE | WRIST",
+        "item9": "JUSPEACE | FOREVER"
+      }
+    },
+    "brandStory": {
+      "label": "Brand Story",
+      "flowerAlt": "JUSPEACE flower",
+      "quoteLine1": "JUSPEACE is more",
+      "quoteLine2": "than a bracelet.",
+      "quoteLine3": "It is a message we",
+      "quoteLine4": "choose to carry.",
+      "subtextLine1": "JUSPEACE는 단순한 팔찌가 아닙니다.",
+      "subtextLine2": "우리가 선택해 지니는 하나의 메시지입니다.",
+      "slide1Paragraph1Line1": "In 2024, G-Dragon suggested finding small justices",
+      "slide1Paragraph1Line2": "in everyday life. That acknowledge differences and",
+      "slide1Paragraph1Line3": "create a world without prejudice.",
+      "slide1Paragraph2Lead": "JUSPEACE represents a ",
+      "slide1Paragraph2Emphasis": "belief in a better world",
+      "slide1Paragraph2Tail": " —",
+      "slide1Paragraph2Line2Lead": "one shaped by ",
+      "slide1Paragraph2Line2Emphasis": "awareness, compassion, and action.",
+      "slideParagraph1Line1": "Each bracelet is designed as a symbol of intention.",
+      "slideParagraph1Line2": "A small object that carries a larger meaning.",
+      "slideParagraph1Lead": "A reminder of ",
+      "slideParagraph1Emphasis": "what we stand for, every day.",
+      "slideParagraph2Line1": "When you wear JUSPEACE,",
+      "slideParagraph2Lead": "you ",
+      "slideParagraph2Emphasis": "become part of something beyond yourself",
+      "slideParagraph2Tail": "a growing community connected by purpose.",
+      "nextStory": "Move to next story",
+      "prevStoryAria": "Previous story",
+      "nextStoryAria": "Next story",
+      "slideNavLabel": "Story navigation",
+      "slideKoreanTextAlt": "G-Dragon in Korean handwriting",
+      "slidePinkPosterAlt": "G-Dragon pink poster",
+      "slidePortraitAlt": "G-Dragon portrait and signature",
+      "slideLoveTogetherAlt": "Love Together hand gesture",
+      "slideChangeTogetherAlt": "Change Together peace sign with JUSPEACE tape",
+      "slideSignatureAlt": "G-Dragon signature",
+      "slide3Paragraph1Line1": "Every purchase contributes to initiatives",
+      "slide3Paragraph1Line2": "that support meaningful causes and positive change.",
+      "slide3Paragraph2": "Wear the message. Share the impact.",
+      "slide3FlowerWallAlt": "JUSPEACE message wall of paper flowers",
+      "slide3EventHallAlt": "JUSPEACE community event hall"
+    },
+    "collection": {
+      "taglineLine1": "Wear the message.",
+      "taglineLine2": "Share the impact.",
+      "label": "Product Collection",
+      "headingLine1": "Choose what you",
+      "headingLine2": "stand for.",
+      "introLine1": "More than a purchase.",
+      "introLine2": "A way to be part of JUSPEACE.",
+      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
+      "introKoLine2": "방식.",
+      "cta": "This represent me",
+      "stockSuffix": "pieces still carry this message",
+      "moreDetails": "More Details",
+      "buyNow": "BUY NOW",
+      "stocks": "{count} stocks",
+      "qtyDecrease": "Decrease quantity",
+      "qtyIncrease": "Increase quantity",
+      "imagePlaceholder": "Product image",
+      "fallbackBlack": {
+        "title": "Strong Commitment",
+        "description": "A symbol of unwavering belief and strength."
+      },
+      "fallbackWhite": {
+        "title": "Pure Hope",
+        "description": "A reflection of clarity, sincerity, and new beginnings."
+      },
+      "fallbackStripe": {
+        "title": "Harmony & Peace",
+        "description": "Where differences meet in balance and unity."
+      }
+    },
+    "features": {
+      "label": "Product Collection",
+      "headingLine1": "Built with purpose.",
+      "headingLine2": "Nothing extra,",
+      "headingLine3": "nothing missing.",
+      "heroAlt": "JUSPEACE bracelet",
+      "items": {
+        "lettering": "Antique Silver Lettering",
+        "bead": "Engraved Bead",
+        "endTip": "Metal End Tips",
+        "adjustment": "Adjustable Fit"
+      },
+      "subtextLine1": "Not just made to wear , made to carry",
+      "subtextLine2": "something with you.",
+      "tapHint": "Tap each image for closer view"
+    },
+    "productVerification": {
+      "introLine1": "Wear it as a part of",
+      "introBrand": "JUSPEACE.",
+      "label": "Product Verification",
+      "headlineLine1": "Make It Official.",
+      "headlineLine2": "This Is Belonging.",
+      "noteLeftLead": "People think....",
+      "noteLeftQuote": "Is mine real?",
+      "noteRightLead": "And might doubt....",
+      "noteRightQuote": "Did I buy from the right place?",
+      "journeyHeadingLine1": "Your Journey,",
+      "journeyHeadingLine2": "Officially Recorded.",
+      "journeyBody1Line1": "A JUSPEACE bracelet is more than something you wear.",
+      "journeyBody1Line2": "It is something you choose to stand for.",
+      "journeyBody2Line1": "When you purchase through an official JUSPEACE",
+      "journeyBody2Line2": "channel, your bracelet can be recorded as part of our",
+      "journeyBody2Line3": "global movement.",
+      "cta": "Make it Official",
+      "closingLine1": "You're not just purchasing.",
+      "closingLine2": "You're becoming part of JUSPEACE.",
+      "phoneAlt": "Smartphone showing JUSPEACE bracelets held by illustrated hands",
+      "paperAlt": "Torn paper note with product verification message",
+      "daisyAlt": "JUSPEACE flower"
+    },
+    "gallery": {
+      "label": "Product Gallery",
+      "heading": "A Closer Look at JUSPEACE.",
+      "count": "26",
+      "categories": {
+        "productOnly": "Product only images",
+        "lifestyle": "Life Style Images",
+        "closeUp": "Close Up Images",
+        "packaging": "Packaging Images",
+        "mobileSwipe": "Mobile Swipe Gallery",
+        "desktopThumbnails": "Desktop Thumbnails"
+      }
+    },
+    "video": {
+      "mediaLabel": "Brand video",
+      "playLabel": "Play video"
+    },
+    "donation": {
+      "label": "Donation",
+      "headline": "Your small action creates real change.",
+      "body": "Every bracelet is a direct contribution to youth rehabilitation and art therapy initiatives at the heart of JUSPEACE.",
+      "statCount": "128,540",
+      "statSuffix": "people have already chosen peace.",
+      "introKoLine1": "이 팔찌 하나가 누군가의 회복 여정을 돕습니다",
+      "introKoLine2": "청소년 재활과 예술 치료를 통해.",
+      "cta": "I want to be part of this",
+      "floatingOneAlt": "Daisy light",
+      "floatingTwoAlt": "Youth art therapy",
+      "floatingThreeAlt": "Community outreach",
+      "floatingFourAlt": "Hands reaching together",
+      "avatarAlt": "Community member {index}"
+    },
+    "aboveFaq": {
+      "imageAlt": "JUSPEACE retail display with bracelets and campaign artwork",
+      "carouselLabel": "Showcase gallery",
+      "prevAria": "Previous showcase image",
+      "nextAria": "Next showcase image"
+    },
+    "faq": {
+      "sectionLabel": "FAQs",
+      "headingLine1": "A Deeper",
+      "headingLine2": "Understanding.",
+      "answerSoon": "Answer coming soon.",
+      "q1": "Is this an official JUSPEACE product ?",
+      "a1": "Answer coming soon.",
+      "q2": "What products are available ?",
+      "a2": "Answer coming soon.",
+      "q3": "Which countries can place orders ?",
+      "a3": "Answer coming soon.",
+      "q4": "Which countries can place orders ?",
+      "a4": "Answer coming soon.",
+      "q5": "Which payment methods are supported ?",
+      "a5": "Answer coming soon.",
+      "q6": "How long does the delivery take ?",
+      "a6": "Answer coming soon.",
+      "q7": "How can customers track their orders?",
+      "a7": "Answer coming soon.",
+      "q8": "How are cancellation and refund requests handled?",
+      "a8": "Answer coming soon.",
+      "q9": "Where will the proceeds be donated ?",
+      "a9": "Answer coming soon.",
+      "q10": "How can customers contact support?",
+      "a10": "Answer coming soon."
+    },
+    "footer": {
+      "newsletterLabel": "Newsletter",
+      "newsletterHeadline": "Be the first to know what's new.",
+      "emailPlaceholder": "Email",
+      "subscribe": "Subscribe",
+      "newsletterHint": "No noise , just curated updates.",
+      "newsletterHintLead": "No noise , ",
+      "newsletterHintTail": "just curated updates.",
+      "pagesLabel": "Pages",
+      "aboutCompany": "About Company",
+      "aboutFoundation": "About Foundation",
+      "customerSupport": "Customer Support",
+      "cancellationPolicy": "Cancellation and Refund",
+      "donationNotice": "Donation Notice",
+      "privacyPolicy": "Privacy Policy",
+      "shippingPolicy": "Shipping Policy",
+      "terms": "Terms & Conditions",
+      "contactLabel": "Contact / business",
+      "contactEmail": "love@juspeace.ai",
+      "businessInfo": "233-82-01129 ( verify business info )",
+      "locationLabel": "Location",
+      "location": "36F , Three IFC , 10 Gukjegeumung-ro, Yeongdeungpo-gu, Seoul , South Korea",
+      "copyright": "@ 2026 RED ENTERTECH CO., LTD.",
+      "tagline": "JUSTICE & PEACE , WOVEN AS ONE",
+      "foundation": "JUSPEACE FOUNDATION",
+      "socialX": "X",
+      "socialInstagram": "Instagram",
+      "socialYoutube": "YouTube"
+    }
+  }
+}
