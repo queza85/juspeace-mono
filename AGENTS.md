@@ -125,3 +125,18 @@ Cursor discovers these automatically. Apply when the task fits:
 - Hardcode UI strings in JSX.
 - Use `npm` / `yarn` / `package-lock.json` — this repo is **pnpm** + `pnpm-lock.yaml` only.
 - Force-push to `main` / `develop` or use `--no-verify` without explicit user approval.
+
+## Learned User Preferences
+
+- When changing Jenkins deploy, run the full root Docker Compose stack (postgres, mailpit, juspeace-be, juspeace-fe, juspeace-admin-fe), not a leftover single service.
+- Store HashiCorp Vault env as four flat string maps matching Jenkins paths (`juspeace-mono-develop`, `.../be`, `.../fe`, `.../admin-fe`).
+
+## Learned Workspace Facts
+
+- Develop public hosts are `juspeace-fe.lomtech.net`, `juspeace-admin-fe.lomtech.net`, and `juspeace-be.lomtech.net` behind Cloudflare Flexible SSL; origin nginx listens on port 80 only and must not redirect HTTP to HTTPS.
+- Develop host publishes storefront `3188`, admin `3189`, and API `3190` (containers stay `3000` / `3001` / `7777`).
+- Jenkins `develop` runs on agent `lomtech-internal-agent` in workspace `juspeace-mono-develop` and deploys with root `docker compose` after writing Vault env files.
+- Vault KV paths: `juspeace-mono-develop` → root `.env`; `juspeace-mono-develop/be` → `juspeace-be/.env`; `juspeace-mono-develop/fe` → `juspeace-fe/.env`; `juspeace-mono-develop/admin-fe` → `juspeace-admin-fe/.env`.
+- `NEXT_PUBLIC_API_URL` is baked into FE/admin images at build time; Vault changes require rebuilding those images.
+- Amazon Linux 2023 host bootstrap is `scripts/bootstrap-amazon-linux.sh` (Git + Docker from Amazon repos + Compose v2 plugin). Node 22, pnpm 10.22.0, and Postgres 16 run inside Compose images.
+- Backend image entry is `node dist/main.js`. Exclude `prisma/` from Nest `tsconfig.build.json` so output is not `dist/src/main.js`. The Prisma CLI is a devDependency; the runner `--prod` install must not run `postinstall` `prisma generate`.

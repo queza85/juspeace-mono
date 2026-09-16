@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
-# bootstrap-ubuntu.sh — Juspeace Ubuntu host prerequisites
+# bootstrap-amazon-linux.sh — Juspeace Amazon Linux 2023 host prerequisites
 #
 # Installs what the host needs before `docker compose up --build`.
 # Postgres, Mailpit, Node 22, and pnpm 10.22.0 run inside Compose images;
 # they are not required on the host unless MODE=native or MODE=all.
 #
 # Usage:
-#   sudo ./scripts/bootstrap-ubuntu.sh
-#   sudo MODE=native ./scripts/bootstrap-ubuntu.sh
-#   sudo MODE=all ./scripts/bootstrap-ubuntu.sh
+#   sudo ./scripts/bootstrap-amazon-linux.sh
+#   sudo MODE=native ./scripts/bootstrap-amazon-linux.sh
+#   sudo MODE=all ./scripts/bootstrap-amazon-linux.sh
 set -euo pipefail
 
 MODE="${MODE:-docker}"
 NODE_MAJOR="22"
 PNPM_VERSION="10.22.0"
+COMPOSE_PLUGIN_DIR="/usr/libexec/docker/cli-plugins"
 
 log() { printf '\n[%s] %s\n' "$(date +%H:%M:%S)" "$*"; }
 
@@ -24,14 +25,18 @@ need_root() {
   fi
 }
 
-assert_ubuntu() {
+assert_amazon_linux_2023() {
   # shellcheck source=/dev/null
   . /etc/os-release
-  if [[ "${ID}" != "ubuntu" ]]; then
-    echo "This script supports Ubuntu only (found: ${ID})" >&2
+  if [[ "${ID}" != "amzn" ]]; then
+    echo "This script supports Amazon Linux only (found: ${ID})" >&2
     exit 1
   fi
-  log "Ubuntu ${VERSION_ID} (${VERSION_CODENAME})"
+  if [[ "${VERSION_ID}" != 2023* ]]; then
+    echo "This script supports Amazon Linux 2023 (found: ${PRETTY_NAME:-Amazon Linux ${VERSION_ID}})" >&2
+    exit 1
+  fi
+  log "${PRETTY_NAME:-Amazon Linux ${VERSION_ID}}"
 }
 
 node_major() {
@@ -44,36 +49,43 @@ node_major() {
 
 install_base() {
   log "Installing base packages"
-  apt-get update -y
-  DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    ca-certificates curl gnupg git \
-    apt-transport-https software-properties-common
+  dnf install -y ca-certificates curl gnupg2 git tar
+}
+
+compose_available() {
+  command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1
+}
+
+install_compose_plugin() {
+  if dnf install -y docker-compose-plugin >/dev/null 2>&1 && compose_available; then
+    log "Installed docker-compose-plugin from Amazon Linux repos"
+    return
+  fi
+
+  log "Installing Docker Compose v2 plugin from GitHub (not in Amazon Linux repos)"
+  mkdir -p "${COMPOSE_PLUGIN_DIR}"
+  local arch
+  arch="$(uname -m)"
+  curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-${arch}" \
+    -o "${COMPOSE_PLUGIN_DIR}/docker-compose"
+  chmod +x "${COMPOSE_PLUGIN_DIR}/docker-compose"
 }
 
 install_docker() {
-  if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+  if compose_available; then
     log "Docker + Compose already installed: $(docker --version)"
   else
-    log "Installing Docker Engine + Compose plugin"
-    apt-get remove -y docker.io docker-doc docker-compose docker-compose-v2 \
-      podman-docker containerd runc || true
-
-    install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    chmod a+r /etc/apt/keyrings/docker.asc
-
-    # shellcheck source=/dev/null
-    . /etc/os-release
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu ${VERSION_CODENAME} stable" \
-      > /etc/apt/sources.list.d/docker.list
-
-    apt-get update -y
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      docker-ce docker-ce-cli containerd.io \
-      docker-buildx-plugin docker-compose-plugin
+    log "Installing Docker from Amazon Linux repos"
+    dnf install -y docker
+    install_compose_plugin
   fi
 
   systemctl enable --now docker
+
+  if ! compose_available; then
+    echo "docker compose is not available after install" >&2
+    exit 1
+  fi
 
   local target_user="${SUDO_USER:-}"
   if [[ -n "${target_user}" && "${target_user}" != "root" ]]; then
@@ -87,8 +99,8 @@ install_node_pnpm() {
   major="$(node_major)"
   if [[ "${major}" -lt "${NODE_MAJOR}" ]]; then
     log "Installing Node.js ${NODE_MAJOR} from NodeSource"
-    curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash -
-    DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+    curl -fsSL "https://rpm.nodesource.com/setup_${NODE_MAJOR}.x" | bash -
+    dnf install -y nodejs
   else
     log "Node already installed: $(node -v)"
   fi
@@ -100,7 +112,7 @@ install_node_pnpm() {
 
 install_native_build_deps() {
   log "Installing native module build deps (bcrypt / Prisma)"
-  DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential python3 openssl
+  dnf install -y gcc gcc-c++ make python3 openssl openssl-devel
 }
 
 print_next_steps() {
@@ -136,7 +148,7 @@ EOF
 }
 
 need_root
-assert_ubuntu
+assert_amazon_linux_2023
 install_base
 
 case "${MODE}" in
