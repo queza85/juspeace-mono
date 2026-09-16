@@ -6,10 +6,10 @@ import { getTranslator } from '@/lib/i18n/server';
 import { cn } from '@/lib/utils';
 
 const COLLECTION_LOGO = '/header/juspeace_header.png';
-const PHONE_COLLAGE = '/product-verification-one.png';
-const TORN_PAPER = '/product-verification-two.png';
-const DAISY_ICON = '/gd-flower.png';
-const PAPERCLIP = '/papper_click.png';
+const PHONE_COLLAGE = '/product-verification/product-verification-one.png';
+const TORN_PAPER = '/product-verification/product-verification-two.png';
+const DAISY_ICON = '/brand/gd-flower.png';
+const PAPERCLIP = '/brand/papper_click.png';
 
 const PHONE_WIDTH = 1080;
 const PHONE_COLLAGE_HEIGHT = 1197;

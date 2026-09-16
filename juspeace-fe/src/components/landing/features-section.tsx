@@ -11,10 +11,10 @@ const COLLECTION_LOGO = '/header/juspeace_header.png';
 
 const FEATURE_HUB = {
   hero: { src: '/features/bracelet-hero.png', width: 722, height: 419 },
-  lettering: { src: '/pd-coll-two.png', width: 1254, height: 1254 },
-  endTip: { src: '/pd-coll-three.png', width: 484, height: 478 },
-  adjustment: { src: '/pd-coll-five.png', width: 488, height: 488 },
-  bead: { src: '/pd-coll-five.png', width: 488, height: 488 },
+  lettering: { src: '/features/pd-coll-two.png', width: 1254, height: 1254 },
+  endTip: { src: '/features/pd-coll-three.png', width: 484, height: 478 },
+  adjustment: { src: '/features/pd-coll-five.png', width: 488, height: 488 },
+  bead: { src: '/features/pd-coll-five.png', width: 488, height: 488 },
 } as const;
 
 type DetailKey = 'lettering' | 'endTip' | 'bead' | 'adjustment';

@@ -4,7 +4,7 @@ import { BrandStorySlide } from '@/components/landing/brand-story-slide';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
 
-const BRAND_STORY_FLOWER = '/gd-flower.png';
+const BRAND_STORY_FLOWER = '/brand/gd-flower.png';
 
 export async function BrandStorySection() {
   const { t } = await getTranslator();

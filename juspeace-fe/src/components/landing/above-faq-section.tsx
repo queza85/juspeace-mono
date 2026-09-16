@@ -4,7 +4,7 @@ import { ChevronLeft } from 'lucide-react';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
 
-const SHOWCASE_IMAGE = '/above-FAQs.png';
+const SHOWCASE_IMAGE = '/faq/above-FAQs.png';
 
 export async function AboveFaqSection() {
   const { t } = await getTranslator();

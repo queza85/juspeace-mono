@@ -8,7 +8,7 @@ import { getTranslator } from '@/lib/i18n/server';
 import { cn } from '@/lib/utils';
 
 const COLLECTION_LOGO = '/header/juspeace_header.png';
-const PAPER_CLIP = '/paper-clip.png';
+const PAPER_CLIP = '/brand/paper-clip.png';
 
 const CATEGORIES = [
   'productOnly',
@@ -37,9 +37,9 @@ const GALLERY_IMAGE_POOL = [
   '/product-feature/pf3.png',
   '/product-feature/pf5.png',
   '/product-feature/pf6.png',
-  '/product-collection-one.png',
-  '/product-collection-two.png',
-  '/product-collection-three.png',
+  '/product-collection/product-collection-one.png',
+  '/product-collection/product-collection-two.png',
+  '/product-collection/product-collection-three.png',
   '/landing/landing_love.png',
   '/landing/juspeace_just_hand.png',
   '/landing/intro.png',

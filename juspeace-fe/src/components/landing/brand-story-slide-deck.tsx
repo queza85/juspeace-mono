@@ -29,15 +29,15 @@ import { ensureGsapPlugins, gsap } from '@/lib/motion/gsap-client';
 import { prefersReducedMotion } from '@/lib/motion/prefers-reduced-motion';
 
 const SLIDE_ASSETS = {
-  paperclip: '/papper_click.png',
+  paperclip: '/brand/papper_click.png',
   koreanHandwriting: '/brand-story/korean-handwriting.png',
-  pinkPoster: '/gd-pick-photo.jpg',
-  besidePink: '/gd-image-beside-pink.jpg',
+  pinkPoster: '/brand-story/gd-pick-photo.jpg',
+  besidePink: '/brand-story/gd-image-beside-pink.jpg',
   signature: '/brand-story/signature.png',
   loveTogether: '/brand-story/love-together.png',
   changeTogether: '/story/love_together.png',
-  thirdSlideOne: '/third-slide-one.png',
-  thirdSlideTwo: '/third-slide-two.png',
+  thirdSlideOne: '/brand-story/third-slide-one.png',
+  thirdSlideTwo: '/brand-story/third-slide-two.png',
   arrowLeft: '/brand-story/arrow-left.svg',
   arrowRight: '/brand-story/arrow-right.svg',
 } as const;

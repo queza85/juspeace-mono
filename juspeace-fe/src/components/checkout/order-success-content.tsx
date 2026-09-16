@@ -10,7 +10,7 @@ import { useT } from '@/lib/i18n/locale-context';
 import { useCartStore } from '@/stores/cart-store';
 import { useCheckoutStore } from '@/stores/checkout-store';
 
-const SUCCESS_ILLUSTRATION = '/success_order.png';
+const SUCCESS_ILLUSTRATION = '/checkout/success_order.png';
 
 export function OrderSuccessContent() {
   const t = useT();

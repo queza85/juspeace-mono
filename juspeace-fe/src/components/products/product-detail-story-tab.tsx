@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useT } from '@/lib/i18n/locale-context';
 
 const STORY_LOGO = '/header/juspeace_header.png';
-const STORY_FLOWER = '/gd-flower.png';
+const STORY_FLOWER = '/brand/gd-flower.png';
 
 interface ProductDetailStoryTabProps {
   variantName: string;

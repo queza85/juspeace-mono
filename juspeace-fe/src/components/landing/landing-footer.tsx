@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { InstagramIcon, XIcon, YoutubeIcon } from '@/components/icons';
 import { getTranslator } from '@/lib/i18n/server';
 
-const FOOTER_LOGO = '/footer_logo.png';
+const FOOTER_LOGO = '/brand/footer_logo.png';
 const FOUNDATION_LOGO = '/landing/intro.png';
 
 const SOCIAL_LINKS = [

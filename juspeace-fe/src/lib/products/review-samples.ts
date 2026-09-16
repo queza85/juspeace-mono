@@ -23,7 +23,7 @@ export const PRODUCT_REVIEW_SAMPLES: ProductReviewSample[] = [
     postedAtKey: 'products.detail.reviews.samples.1.postedAt',
     titleKey: 'products.detail.reviews.samples.1.title',
     bodyKey: 'products.detail.reviews.samples.1.body',
-    photoSrc: '/product-collection/juespeace_mar4.png',
+    photoSrc: '/marque/juespeace_mar4.png',
   },
   {
     id: '2',

@@ -7,7 +7,7 @@ import { getTranslator } from '@/lib/i18n/server';
 import { cn } from '@/lib/utils';
 
 const COLLECTION_LOGO = '/header/juspeace_header.png';
-const DAISY_ICON = '/gd-flower.png';
+const DAISY_ICON = '/brand/gd-flower.png';
 
 const CIRCLE_SIZE =
   'h-[52px] w-[52px] sm:h-[58px] sm:w-[58px] lg:h-[64px] lg:w-[64px]';
@@ -15,7 +15,7 @@ const CIRCLE_SIZE =
 /** Orbital positions tuned to Figma: top pair flanks "Donation", bottom pair frames headline/body. */
 const FLOATING_IMAGES = [
   {
-    src: '/donation-one.png',
+    src: '/donation/donation-one.png',
     width: 1142,
     height: 738,
     altKey: 'floatingOne',
@@ -23,7 +23,7 @@ const FLOATING_IMAGES = [
       'left-[14%] top-[19%] sm:left-[16%] sm:top-[18%] lg:left-[18%] lg:top-[17%]',
   },
   {
-    src: '/donation-two.png',
+    src: '/donation/donation-two.png',
     width: 1020,
     height: 1294,
     altKey: 'floatingTwo',
@@ -31,7 +31,7 @@ const FLOATING_IMAGES = [
       'right-[14%] top-[19%] sm:right-[16%] sm:top-[18%] lg:right-[18%] lg:top-[17%]',
   },
   {
-    src: '/donation-three.png',
+    src: '/donation/donation-three.png',
     width: 1060,
     height: 796,
     altKey: 'floatingThree',
@@ -39,7 +39,7 @@ const FLOATING_IMAGES = [
       'left-[6%] top-[44%] sm:left-[7%] sm:top-[43%] lg:left-[8%] lg:top-[42%]',
   },
   {
-    src: '/donation-four.png',
+    src: '/donation/donation-four.png',
     width: 1054,
     height: 820,
     altKey: 'floatingFour',
@@ -49,11 +49,11 @@ const FLOATING_IMAGES = [
 ] as const;
 
 const AVATAR_IMAGES = [
-  '/donation-one.png',
-  '/donation-two.png',
-  '/donation-three.png',
-  '/donation-four.png',
-  '/donation-two.png',
+  '/donation/donation-one.png',
+  '/donation/donation-two.png',
+  '/donation/donation-three.png',
+  '/donation/donation-four.png',
+  '/donation/donation-two.png',
 ] as const;
 
 function DonationCirclePhoto({

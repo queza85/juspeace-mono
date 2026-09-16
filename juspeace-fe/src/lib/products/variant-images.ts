@@ -17,17 +17,17 @@ export const VARIANT_MAIN_IMAGES: Record<
   { src: string; width: number; height: number }
 > = {
   black: {
-    src: '/product-collection-one.png',
+    src: '/product-collection/product-collection-one.png',
     width: 1080,
     height: 1350,
   },
   white: {
-    src: '/product-collection-two.png',
+    src: '/product-collection/product-collection-two.png',
     width: 1080,
     height: 1350,
   },
   stripe: {
-    src: '/product-collection-three.png',
+    src: '/product-collection/product-collection-three.png',
     width: 1080,
     height: 1350,
   },
@@ -39,17 +39,17 @@ export const VARIANT_PRODUCT_IMAGES: Record<
   { src: string; width: number; height: number }
 > = {
   black: {
-    src: '/product-collection/juespeace_mar4.png',
+    src: '/marque/juespeace_mar4.png',
     width: 744,
     height: 930,
   },
   white: {
-    src: '/product-collection/juspeace_mr3.png',
+    src: '/marque/juspeace_mr3.png',
     width: 726,
     height: 920,
   },
   stripe: {
-    src: '/product-collection/ju_mar6.png',
+    src: '/marque/ju_mar6.png',
     width: 746,
     height: 926,
   },
