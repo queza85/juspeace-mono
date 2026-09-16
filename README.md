@@ -16,6 +16,14 @@ E-commerce platform for the Juspeace shop — Next.js storefront and NestJS API 
 - pnpm 10+
 - Docker Desktop (for Postgres and containerized runs)
 
+Ubuntu server (Git + Docker Engine + Compose plugin):
+
+```bash
+sudo ./scripts/bootstrap-ubuntu.sh
+```
+
+`MODE=native` installs Node.js 22 and pnpm 10.22.0 instead of Docker. `MODE=all` installs both.
+
 ## Project layout
 
 ```text
@@ -24,6 +32,7 @@ juspeace-mono/
 ├── juspeace-admin-fe/ # Next.js admin console (port 3001)
 ├── juspeace-be/       # NestJS API (port 7777)
 ├── docker-compose.yml # Full stack: postgres + API + storefront + admin
+├── scripts/           # Host bootstrap (Ubuntu)
 ├── docs/              # Architecture, glossary, agent harness
 └── AGENTS.md          # AI agent identity and harness index
 ```
