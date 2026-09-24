@@ -30,11 +30,9 @@ import { prefersReducedMotion } from '@/lib/motion/prefers-reduced-motion';
 
 const SLIDE_ASSETS = {
   paperclip: '/brand/papper_click.png',
-  koreanHandwriting: '/brand-story/shared/korean-handwriting.png',
   koreanBesidePink: '/brand-story/origin/korean-hand-written-new.png',
   pinkPoster: '/brand-story/origin/gd-pink-rotate.png',
   besidePink: '/brand-story/origin/gd-image-beside-pink.jpg',
-  signature: '/brand-story/shared/signature.png',
   gDragonSign: '/brand-story/origin/g-dragon-sign.png',
   loveTogether: '/brand-story/slides/change/love-together-first-one.png',
   changeTogether: '/brand-story/slides/change/love-together-second.png',
