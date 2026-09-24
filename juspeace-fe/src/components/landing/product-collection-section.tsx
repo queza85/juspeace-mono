@@ -180,7 +180,7 @@ export async function ProductCollectionSection({
           <span className="block">{t('landing.collection.introLine1')}</span>
           <span className="block">{t('landing.collection.introLine2')}</span>
         </p>
-        <p className="mt-4 font-sans text-base leading-relaxed text-black sm:text-lg">
+        <p className="mt-10 font-sans text-base leading-relaxed text-black sm:mt-12 sm:text-lg lg:mt-14">
           <span className="block">{t('landing.collection.introKoLine1')}</span>
           <span className="block">{t('landing.collection.introKoLine2')}</span>
         </p>

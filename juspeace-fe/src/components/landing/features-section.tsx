@@ -156,10 +156,10 @@ export async function FeaturesSection() {
             className="size-full object-cover"
           />
         </div>
-        <SectionLabel className="mt-6 text-base sm:text-lg lg:text-xl">
+        <SectionLabel className="mt-6 text-base sm:mt-8 sm:text-lg lg:mt-10 lg:text-xl">
           {t('landing.features.label')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
+        <SectionHeading className="mt-1 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08] sm:mt-1.5 lg:mt-2">
           <span className="block">{t('landing.features.headingLine1')}</span>
           <span className="block">{t('landing.features.headingLine2')}</span>
           <span className="block">{t('landing.features.headingLine3')}</span>
