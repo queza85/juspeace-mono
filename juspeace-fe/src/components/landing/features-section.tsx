@@ -10,11 +10,31 @@ import { cn } from '@/lib/utils';
 const COLLECTION_LOGO = '/header/juspeace_header.png';
 
 const FEATURE_HUB = {
-  hero: { src: '/features/bracelet-hero.png', width: 722, height: 419 },
-  lettering: { src: '/features/pd-coll-two.png', width: 1254, height: 1254 },
-  endTip: { src: '/features/pd-coll-three.png', width: 484, height: 478 },
-  adjustment: { src: '/features/pd-coll-five.png', width: 488, height: 488 },
-  bead: { src: '/features/pd-coll-five.png', width: 488, height: 488 },
+  hero: {
+    src: '/product-feature/product-feature-middle.png',
+    width: 3784,
+    height: 2156,
+  },
+  lettering: {
+    src: '/product-feature/product-feature-1.png',
+    width: 1316,
+    height: 580,
+  },
+  endTip: {
+    src: '/product-feature/product-feature-2.png',
+    width: 956,
+    height: 820,
+  },
+  adjustment: {
+    src: '/product-feature/product-feature-4.png',
+    width: 816,
+    height: 896,
+  },
+  bead: {
+    src: '/product-feature/product-feature-3.png',
+    width: 1316,
+    height: 580,
+  },
 } as const;
 
 type DetailKey = 'lettering' | 'endTip' | 'bead' | 'adjustment';
@@ -29,8 +49,7 @@ const DETAIL_GRID: Record<
 > = {
   lettering: {
     frameClass: 'h-[88px] w-[160px] sm:h-[96px] sm:w-[176px] lg:h-[104px] lg:w-[188px]',
-    imageClass: 'object-cover',
-    crop: { scale: 3.1, origin: 'center 60%' },
+    imageClass: 'object-contain',
   },
   endTip: {
     frameClass: 'h-[108px] w-[132px] sm:h-[116px] sm:w-[140px] lg:h-[124px] lg:w-[148px]',
@@ -42,8 +61,7 @@ const DETAIL_GRID: Record<
   },
   adjustment: {
     frameClass: 'h-[120px] w-[120px] sm:h-[128px] sm:w-[128px] lg:h-[140px] lg:w-[140px]',
-    imageClass: 'object-cover',
-    crop: { scale: 1.35, origin: 'center center' },
+    imageClass: 'object-contain',
   },
 };
 
@@ -235,11 +253,11 @@ export async function FeaturesSection() {
         data-scroll-reveal
         className="mx-auto mt-16 flex max-w-[720px] flex-col items-center text-center lg:mt-20"
       >
-        <p className="font-sans text-base leading-relaxed text-black sm:text-lg">
+        <p className="font-sans text-lg leading-relaxed text-black sm:text-xl lg:text-2xl">
           <span className="block">{t('landing.features.subtextLine1')}</span>
           <span className="block">{t('landing.features.subtextLine2')}</span>
         </p>
-        <BracketLabel className="mt-6 text-black/70">
+        <BracketLabel className="mt-10 text-xs text-black sm:text-sm lg:text-base">
           {t('landing.features.tapHint')}
         </BracketLabel>
       </div>
