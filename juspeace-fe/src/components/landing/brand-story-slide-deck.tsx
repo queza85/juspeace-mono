@@ -30,16 +30,18 @@ import { prefersReducedMotion } from '@/lib/motion/prefers-reduced-motion';
 
 const SLIDE_ASSETS = {
   paperclip: '/brand/papper_click.png',
-  koreanHandwriting: '/brand-story/korean-handwriting.png',
-  pinkPoster: '/brand-story/gd-pick-photo.jpg',
-  besidePink: '/brand-story/gd-image-beside-pink.jpg',
-  signature: '/brand-story/signature.png',
-  loveTogether: '/brand-story/love-together.png',
-  changeTogether: '/story/love_together.png',
-  thirdSlideOne: '/brand-story/third-slide-one.png',
-  thirdSlideTwo: '/brand-story/third-slide-two.png',
-  arrowLeft: '/brand-story/arrow-left.svg',
-  arrowRight: '/brand-story/arrow-right.svg',
+  koreanHandwriting: '/brand-story/shared/korean-handwriting.png',
+  koreanBesidePink: '/brand-story/origin/korean-hand-written-new.png',
+  pinkPoster: '/brand-story/origin/gd-pink-rotate.png',
+  besidePink: '/brand-story/origin/gd-image-beside-pink.jpg',
+  signature: '/brand-story/shared/signature.png',
+  gDragonSign: '/brand-story/origin/g-dragon-sign.png',
+  loveTogether: '/brand-story/slides/change/love-together.png',
+  changeTogether: '/brand-story/slides/change/love-together-story.png',
+  thirdSlideOne: '/brand-story/slides/third/third-slide-one.png',
+  thirdSlideTwo: '/brand-story/slides/third/third-slide-two.png',
+  arrowLeft: '/brand-story/ui/arrow-left.svg',
+  arrowRight: '/brand-story/ui/arrow-right.svg',
 } as const;
 
 export const PEEK_X_REM = 1.15;
@@ -626,34 +628,36 @@ function BrandStorySlideVisual({
       <Image
         src={SLIDE_ASSETS.pinkPoster}
         alt={t('landing.brandStory.slidePinkPosterAlt')}
-        width={620}
-        height={875}
-        className="jp-brand-story-slide-photo-left jp-brand-story-slide-pink h-auto"
+        width={1560}
+        height={1965}
+        unoptimized
+        className="jp-brand-story-slide-photo-left jp-brand-story-slide-pink h-auto object-contain"
       />
       <Image
         src={SLIDE_ASSETS.besidePink}
         alt={t('landing.brandStory.slidePortraitAlt')}
         width={1200}
         height={1511}
-        className="jp-brand-story-slide-photo-right jp-brand-story-slide-beside h-auto"
+        className="jp-brand-story-slide-photo-right jp-brand-story-slide-beside h-auto object-contain"
       />
       <div className="jp-brand-story-slide-korean">
         <Image
-          src={SLIDE_ASSETS.koreanHandwriting}
+          src={SLIDE_ASSETS.koreanBesidePink}
           alt={t('landing.brandStory.slideKoreanTextAlt')}
-          width={850}
-          height={317}
+          width={671}
+          height={322}
           unoptimized
-          className="jp-brand-story-slide-korean-img"
+          className="jp-brand-story-slide-korean-img h-auto w-full object-contain"
         />
       </div>
       <div className="jp-brand-story-slide-sign">
         <Image
-          src={SLIDE_ASSETS.signature}
+          src={SLIDE_ASSETS.gDragonSign}
           alt={t('landing.brandStory.slideSignatureAlt')}
-          width={736}
-          height={1308}
-          className="jp-brand-story-slide-sign-img"
+          width={1161}
+          height={651}
+          unoptimized
+          className="jp-brand-story-slide-sign-img h-auto w-full object-contain"
         />
       </div>
     </div>

@@ -336,7 +336,7 @@
     "hero": {
       "titleLine1": "Love Together.",
       "titleLine2": "Change Together.",
-      "description": "JUSPEACE, a name combining Justice &\nPeace. This is a\nbracelet created by a foundation\nestablished through G-Dragon's\ncopyright donation .",
+      "description": "JUSPEACE, a name combining Justice & Peace. This is a bracelet created by a foundation established through G-Dragon's copyright donation .",
       "tag": "WHITE | PURE HOPE",
       "buyNow": "BUY NOW",
       "exploreCollection": "EXPLORE COLLECTION",
@@ -358,7 +358,8 @@
     "brandStory": {
       "label": "Brand Story",
       "flowerAlt": "JUSPEACE flower",
-      "quoteLine1": "JUSPEACE is more",
+      "quoteWordmark": "JUSPEACE",
+      "quoteLine1": " is more",
       "quoteLine2": "than a bracelet.",
       "quoteLine3": "It is a message we",
       "quoteLine4": "choose to carry.",

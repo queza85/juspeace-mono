@@ -336,7 +336,7 @@
     "hero": {
       "titleLine1": "함께 사랑하다.",
       "titleLine2": "함께 바꾸다.",
-      "description": "JUSPEACE는 Justice와 Peace를\n합친 이름입니다. G-Dragon의\n저작권 기부로 설립된 재단이\n만든 브레이슬릿입니다.",
+      "description": "JUSPEACE는 Justice와 Peace를 합친 이름입니다. G-Dragon의 저작권 기부로 설립된 재단이 만든 브레이슬릿입니다.",
       "tag": "WHITE | 순수한 희망",
       "buyNow": "구매하기",
       "exploreCollection": "컬렉션 살펴보기",
@@ -358,7 +358,8 @@
     "brandStory": {
       "label": "브랜드 스토리",
       "flowerAlt": "JUSPEACE 꽃",
-      "quoteLine1": "JUSPEACE는 단순한",
+      "quoteWordmark": "JUSPEACE",
+      "quoteLine1": "는 단순한",
       "quoteLine2": "팔찌가 아닙니다.",
       "quoteLine3": "우리가 선택해",
       "quoteLine4": "지니는 하나의 메시지입니다.",

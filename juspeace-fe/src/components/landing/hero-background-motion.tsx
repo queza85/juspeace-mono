@@ -45,7 +45,7 @@ export function HeroBackgroundMotion({ src }: HeroBackgroundMotionProps) {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_75%]"
+          className="object-fill"
         />
       </div>
       <div className="absolute inset-0 bg-jp-hero-overlay" aria-hidden />

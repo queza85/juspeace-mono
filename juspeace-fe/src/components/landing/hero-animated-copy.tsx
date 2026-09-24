@@ -90,7 +90,7 @@ export function HeroAnimatedCopy({
       <div className="flex w-full max-w-[433px] flex-col lg:mt-[100px] lg:w-[433px] lg:shrink-0 xl:mt-[120px] 2xl:mt-[142px]">
         <p
           data-hero-description
-          className="jp-hero-description whitespace-pre-line font-mono text-[18px] leading-[22px] font-normal tracking-normal text-white"
+          className="jp-hero-description text-left text-white"
         >
           {(() => {
             let wordIndex = 0;

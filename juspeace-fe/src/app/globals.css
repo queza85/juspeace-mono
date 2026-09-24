@@ -219,24 +219,63 @@
   }
 
   .jp-brand-story-quote {
-    font-family: var(--font-display);
+    width: 100%;
+    max-width: 100%;
     font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 27px;
     letter-spacing: -0.02em;
+    text-align: center;
     color: #000;
-    font-size: clamp(1.5rem, 3.5vw, 3.125rem);
-    line-height: 1.12;
+  }
+
+  @media (min-width: 640px) {
+    .jp-brand-story-quote {
+      font-size: 34px;
+      line-height: 38px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-brand-story-quote {
+      font-size: 52px;
+      line-height: 58px;
+    }
   }
 
   .jp-brand-story-quote-line {
     display: block;
-    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Shared Figma metrics on Instrument Sans + Satoshi spans */
+  .jp-brand-story-quote-part {
+    font-weight: 700;
+    font-style: normal;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+
+  .jp-brand-story-quote-satoshi {
+    font-family: var(--font-display), 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  @media (min-width: 640px) {
+    .jp-brand-story-quote-line {
+      white-space: nowrap;
+    }
   }
 
   .jp-brand-story-subtext {
+    width: 100%;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: clamp(1.125rem, 2.2vw, 1.5rem);
     line-height: 1.65;
+    text-align: center;
     color: #000;
   }
 
@@ -255,7 +294,7 @@
     --peek-y: 1rem;
     --peek-count: 2;
     position: relative;
-    width: min(94.8%, calc((100svh - 6.75rem) * 1.9));
+    width: min(98%, calc((100svh - 6.75rem) * 2.05));
     margin-inline: auto;
     overflow: visible;
   }
@@ -272,32 +311,32 @@
 
   @media (min-width: 1024px) {
     .jp-brand-story-slide-stack {
-      max-width: 56rem;
+      max-width: 68rem;
       margin-top: 3.5rem;
     }
   }
 
   @media (min-width: 1280px) {
     .jp-brand-story-slide-stack {
-      max-width: 70rem;
+      max-width: 82rem;
     }
   }
 
   @media (min-width: 1440px) {
     .jp-brand-story-slide-stack {
-      max-width: 76rem;
+      max-width: 88rem;
     }
   }
 
   @media (min-width: 1536px) {
     .jp-brand-story-slide-stack {
-      max-width: 80rem;
+      max-width: 92rem;
     }
   }
 
   @media (min-width: 1920px) {
     .jp-brand-story-slide-stack {
-      max-width: 88rem;
+      max-width: 96rem;
     }
   }
 
@@ -345,6 +384,9 @@
 
   .jp-brand-story-slide-paper--front {
     pointer-events: auto;
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.05);
   }
 
   .jp-brand-story-slide-paperclip {
@@ -388,39 +430,61 @@
     box-shadow: 0 10px 32px rgba(0, 0, 0, 0.14);
   }
 
-  .jp-brand-story-slide-pink {
-    rotate: 8deg;
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+    box-shadow: none;
   }
 
-  /* Origin slide: leave clear space for Korean left of the pink poster. */
   .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
     left: 0%;
-    top: 34%;
-    width: 22%;
+    top: 26%;
+    width: 24%;
+    max-width: 7.5rem;
+    rotate: none;
     z-index: 60;
   }
 
   .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-    left: 28%;
-    top: 10%;
-    width: 32%;
-    rotate: 8deg;
+    left: 21%;
+    top: 19%;
+    width: 40%;
+    max-width: 15.5rem;
+    height: auto;
+    object-fit: contain;
     z-index: 32;
+    transform-origin: center center;
   }
 
   .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
-    left: 46%;
-    top: 4%;
-    width: 44%;
-    rotate: -9deg;
+    left: 47%;
+    top: 18%;
+    width: 62%;
+    max-width: 19.5rem;
+    height: auto;
+    object-fit: contain;
     z-index: 20;
+    rotate: -9deg;
+    transform-origin: center center;
   }
 
   .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
-    left: 14%;
-    top: 78%;
-    width: 30%;
-    height: 20%;
+    left: 27%;
+    top: 85%;
+    width: 38%;
+    max-width: 9.25rem;
+    height: auto;
+    overflow: visible;
+    rotate: none;
+    transform-origin: center center;
+  }
+
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign-img {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    object-position: left center;
   }
 
   .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
@@ -580,7 +644,7 @@
 
   @media (min-width: 1024px) {
     .jp-brand-story-slide-folder {
-      width: min(94.8%, calc((100svh - 7rem) * 1.8));
+      width: min(98%, calc((100svh - 7rem) * 2.05));
     }
 
     .jp-brand-story-slide-paper {
@@ -595,6 +659,8 @@
       width: auto;
       aspect-ratio: auto;
       overflow: visible;
+      container-type: inline-size;
+      container-name: brand-story-visual;
     }
 
     .jp-brand-story-slide-photo-left {
@@ -624,30 +690,42 @@
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
       left: 0%;
-      top: 32%;
-      width: 20%;
+      top: 24%;
+      width: 22%;
+      max-width: 7.5rem;
+      rotate: none;
       z-index: 60;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-      left: 26%;
-      top: 8%;
-      width: 32%;
+      left: 21%;
+      top: 19%;
+      width: 40%;
+      max-width: 15.5rem;
+      height: auto;
+      object-fit: contain;
       z-index: 32;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
-      left: 44%;
-      top: 2%;
-      width: 46%;
+      left: 47%;
+      top: 18%;
+      width: 62%;
+      max-width: 19.5rem;
+      height: auto;
+      object-fit: contain;
       z-index: 20;
+      rotate: -9deg;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
-      left: 12%;
-      top: 78%;
-      width: 30%;
-      height: 20%;
+      left: 25%;
+      top: 83%;
+      width: 36%;
+      max-width: 9.25rem;
+      height: auto;
+      overflow: visible;
+      rotate: none;
     }
 
     .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
@@ -711,9 +789,95 @@
     }
   }
 
+  /* Laptop: keep Figma image size; lift collage so it does not sit on the card bottom. */
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .jp-brand-story-slide-visual {
+      inset: 8% 40% 14% 3%;
+    }
+
+    .jp-brand-story-slide-copy-wrap {
+      left: 58%;
+      width: 38%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+      top: 18%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      top: 11%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+      top: 9%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+      top: 79%;
+    }
+  }
+
+  /*
+   * Desktop (≥1440px): larger collage — explicit rem caps (no min-height gate; cqw was not biting).
+   * Laptop band 1024–1439 keeps 15.5rem / 19.5rem above.
+   */
+  @media (min-width: 1440px) {
+    .jp-brand-story-slide-visual {
+      inset: 6% 36% 10% 2%;
+    }
+
+    .jp-brand-story-slide-copy-wrap {
+      left: 60%;
+      width: 36%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+      top: 16%;
+      max-width: 8.5rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      top: 10%;
+      width: 40%;
+      max-width: 16rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+      top: 8%;
+      width: 62%;
+      max-width: 22.5rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+      left: 30%;
+      top: 74%;
+      max-width: 11rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      max-width: 17rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+      max-width: 23.75rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      max-width: 18.75rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+      max-width: 25.25rem;
+    }
+  }
+
   @media (min-width: 1536px) {
     .jp-brand-story-slide-folder {
-      width: min(94.8%, calc((100svh - 7rem) * 1.99));
+      width: min(98%, calc((100svh - 7rem) * 2.15));
     }
 
     .jp-brand-story-slide-paper {
@@ -741,6 +905,22 @@
       left: clamp(-5.25rem, -3.8vw, -3.75rem);
       top: clamp(-1.95rem, -1.45vw, -1.55rem);
     }
+
+    .jp-brand-story-slide-visual {
+      inset: 8% 44% 14% 3%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      top: 9%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+      top: 7%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+      top: 77%;
+    }
   }
 
   .jp-hero-title-line:hover {
@@ -749,7 +929,7 @@
   }
 
   .jp-hero-description {
-    @apply relative;
+    @apply relative w-full text-left font-sans text-[18px] font-normal leading-normal tracking-normal;
   }
 
   .jp-hero-description .jp-hero-word {

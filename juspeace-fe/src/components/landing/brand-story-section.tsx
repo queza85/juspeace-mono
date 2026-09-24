@@ -2,7 +2,9 @@ import Image from 'next/image';
 
 import { BrandStorySlide } from '@/components/landing/brand-story-slide';
 import { SectionShell } from '@/components/landing/section-shell';
+import { instrumentSansBold } from '@/lib/fonts';
 import { getTranslator } from '@/lib/i18n/server';
+import { cn } from '@/lib/utils';
 
 const BRAND_STORY_FLOWER = '/brand/gd-flower.png';
 
@@ -10,7 +12,7 @@ export async function BrandStorySection() {
   const { t } = await getTranslator();
 
   return (
-    <SectionShell id="story" className="bg-white pt-4 pb-20 lg:pt-6 lg:pb-28">
+    <SectionShell id="story" className="bg-white pt-24 pb-20 sm:pt-28 lg:pt-36 xl:pt-40 lg:pb-28">
       <div
         data-scroll-reveal
         className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
@@ -24,15 +26,25 @@ export async function BrandStorySection() {
         />
         <h2 className="jp-brand-story-quote">
           <span className="jp-brand-story-quote-line">
-            {t('landing.brandStory.quoteLine1')}
+            <span
+              className={cn(
+                'jp-brand-story-quote-part',
+                instrumentSansBold.className,
+              )}
+            >
+              {t('landing.brandStory.quoteWordmark')}
+            </span>
+            <span className="jp-brand-story-quote-part jp-brand-story-quote-satoshi">
+              {t('landing.brandStory.quoteLine1')}
+            </span>
           </span>
-          <span className="jp-brand-story-quote-line">
+          <span className="jp-brand-story-quote-line jp-brand-story-quote-part jp-brand-story-quote-satoshi">
             {t('landing.brandStory.quoteLine2')}
           </span>
-          <span className="jp-brand-story-quote-line">
+          <span className="jp-brand-story-quote-line jp-brand-story-quote-part jp-brand-story-quote-satoshi">
             {t('landing.brandStory.quoteLine3')}
           </span>
-          <span className="jp-brand-story-quote-line">
+          <span className="jp-brand-story-quote-line jp-brand-story-quote-part jp-brand-story-quote-satoshi">
             {t('landing.brandStory.quoteLine4')}
           </span>
         </h2>

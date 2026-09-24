@@ -1,10 +1,9 @@
 import { HeroAnimatedCopy } from '@/components/landing/hero-animated-copy';
 import { HeroBackgroundMotion } from '@/components/landing/hero-background-motion';
 import { HeroMarquee } from '@/components/landing/hero-marquee';
-import { HeroScrollHint } from '@/components/landing/hero-scroll-hint';
 import { getTranslator } from '@/lib/i18n/server';
 
-const HERO_BACKGROUND = '/landing/juspeace_just_hand.png';
+const HERO_BACKGROUND = '/landing/landing-page-hand-background.png';
 
 export async function HeroSection() {
   const { t } = await getTranslator();
@@ -26,8 +25,6 @@ export async function HeroSection() {
       <div className="relative z-10 mt-auto w-full min-h-[300px] overflow-visible pt-4 sm:min-h-[340px] lg:min-h-[380px] lg:pt-6">
         <HeroMarquee />
       </div>
-
-      <HeroScrollHint label={t('landing.hero.scroll')} />
     </section>
   );
 }

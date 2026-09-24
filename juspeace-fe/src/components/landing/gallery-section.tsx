@@ -30,7 +30,7 @@ const GALLERY_IMAGE_POOL = [
   '/marque/mar_7.png',
   '/marque/mar8.png',
   '/story/gd.png',
-  '/story/love_together.png',
+  '/brand-story/slides/change/love-together-story.png',
   '/story/story_love.png',
   '/product-feature/pf1.png',
   '/product-feature/pf2.png',
