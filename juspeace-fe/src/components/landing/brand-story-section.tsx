@@ -48,7 +48,7 @@ export async function BrandStorySection() {
             {t('landing.brandStory.quoteLine4')}
           </span>
         </h2>
-        <p className="jp-brand-story-subtext mt-8 sm:mt-10">
+        <p className="jp-brand-story-subtext">
           <span className="block">{t('landing.brandStory.subtextLine1')}</span>
           <span className="block">{t('landing.brandStory.subtextLine2')}</span>
         </p>

@@ -271,6 +271,7 @@
 
   .jp-brand-story-subtext {
     width: 100%;
+    margin-top: 3rem;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: clamp(1.125rem, 2.2vw, 1.5rem);
@@ -279,12 +280,30 @@
     color: #000;
   }
 
+  @media (min-width: 640px) {
+    .jp-brand-story-subtext {
+      margin-top: 3.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-brand-story-subtext {
+      margin-top: 4.75rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .jp-brand-story-subtext {
+      margin-top: 5.25rem;
+    }
+  }
+
   .jp-brand-story-slide-stack {
     position: relative;
     width: 100%;
     max-width: 100%;
     margin-inline: auto;
-    margin-top: 3rem;
+    margin-top: 9rem;
     padding-top: 2.15rem;
     overflow: visible;
   }
@@ -312,31 +331,35 @@
   @media (min-width: 1024px) {
     .jp-brand-story-slide-stack {
       max-width: 68rem;
-      margin-top: 3.5rem;
+      margin-top: 10rem;
     }
   }
 
   @media (min-width: 1280px) {
     .jp-brand-story-slide-stack {
       max-width: 82rem;
+      margin-top: 10.5rem;
     }
   }
 
   @media (min-width: 1440px) {
     .jp-brand-story-slide-stack {
       max-width: 88rem;
+      margin-top: 11rem;
     }
   }
 
   @media (min-width: 1536px) {
     .jp-brand-story-slide-stack {
       max-width: 92rem;
+      margin-top: 11.5rem;
     }
   }
 
   @media (min-width: 1920px) {
     .jp-brand-story-slide-stack {
       max-width: 96rem;
+      margin-top: 12rem;
     }
   }
 
@@ -431,43 +454,89 @@
   }
 
   .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change,
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one,
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
     box-shadow: none;
   }
 
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-korean,
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
     left: 0%;
     top: 26%;
-    width: 24%;
-    max-width: 7.5rem;
+    width: 21%;
+    max-width: 6.75rem;
     rotate: none;
     z-index: 60;
   }
 
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-    left: 21%;
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+    left: 17%;
     top: 19%;
-    width: 40%;
-    max-width: 15.5rem;
+    width: 38%;
+    max-width: 14.25rem;
     height: auto;
     object-fit: contain;
     z-index: 32;
     transform-origin: center center;
   }
 
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
     left: 47%;
     top: 18%;
-    width: 62%;
-    max-width: 19.5rem;
+    width: 58%;
+    max-width: 18rem;
     height: auto;
     object-fit: contain;
     z-index: 20;
-    rotate: -9deg;
     transform-origin: center center;
   }
 
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+    left: 17%;
+    top: 17%;
+    width: 42%;
+    max-width: 16rem;
+    height: auto;
+    object-fit: contain;
+    z-index: 32;
+    transform-origin: center center;
+    rotate: 1deg;
+  }
+
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+    left: 47%;
+    top: 11%;
+    width: 62%;
+    max-width: 20rem;
+    height: auto;
+    object-fit: contain;
+    z-index: 20;
+    transform-origin: center center;
+    rotate: 0deg;
+  }
+
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+    rotate: -9deg;
+  }
+
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+    top: 15%;
+    rotate: -0.75deg;
+  }
+
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+    top: 21%;
+  }
+
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign,
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
     left: 27%;
     top: 85%;
     width: 38%;
@@ -478,54 +547,15 @@
     transform-origin: center center;
   }
 
-  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign-img {
+  .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign-img,
+  .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign-img,
+  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign-img {
     position: static;
     width: 100%;
     height: auto;
     max-width: none;
     object-fit: contain;
     object-position: left center;
-  }
-
-  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
-    left: 2%;
-    top: 32%;
-    width: 20%;
-  }
-
-  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
-    left: 22%;
-    top: 10%;
-    width: 34%;
-    rotate: 8deg;
-    z-index: 32;
-  }
-
-  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
-    left: 40%;
-    top: 2%;
-    width: 48%;
-    height: 82%;
-    max-height: none;
-    object-fit: cover;
-    object-position: center 20%;
-    rotate: -9deg;
-    z-index: 20;
-  }
-
-  .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
-    left: 14%;
-    top: 78%;
-    width: 30%;
-    height: 20%;
-  }
-
-  .jp-brand-story-slide-love {
-    rotate: 8.55deg;
-  }
-
-  .jp-brand-story-slide-change {
-    rotate: -9deg;
   }
 
   .jp-brand-story-slide-korean {
@@ -573,7 +603,7 @@
   .jp-brand-story-slide-copy-wrap {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 2.5rem;
     padding: 0 1.75rem 2.75rem;
   }
@@ -627,19 +657,25 @@
   .jp-brand-story-slide-nav-arrows {
     display: flex;
     align-items: center;
-    gap: 1.15rem;
+    gap: 1rem;
   }
 
   .jp-brand-story-slide-nav-arrows button {
     display: inline-flex;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
+  }
+
+  .jp-brand-story-slide-nav-arrows button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   @media (min-width: 1024px) {
@@ -688,37 +724,70 @@
       height: 20%;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-korean,
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
       left: 0%;
       top: 24%;
-      width: 22%;
-      max-width: 7.5rem;
+      width: 20%;
+      max-width: 6.75rem;
       rotate: none;
       z-index: 60;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-      left: 21%;
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      left: 17%;
       top: 19%;
-      width: 40%;
-      max-width: 15.5rem;
+      width: 38%;
+      max-width: 14.25rem;
       height: auto;
       object-fit: contain;
       z-index: 32;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
       left: 47%;
       top: 18%;
-      width: 62%;
-      max-width: 19.5rem;
+      width: 58%;
+      max-width: 18rem;
       height: auto;
       object-fit: contain;
       z-index: 20;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
       rotate: -9deg;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      left: 17%;
+      top: 17%;
+      width: 42%;
+      max-width: 16rem;
+      rotate: 1deg;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      top: 11%;
+      width: 62%;
+      max-width: 20rem;
+      rotate: 0deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      top: 15%;
+      rotate: -0.75deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      top: 21%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
       left: 25%;
       top: 83%;
       width: 36%;
@@ -728,44 +797,21 @@
       rotate: none;
     }
 
-    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
-      left: 2%;
-      top: 30%;
-      width: 18%;
-    }
-
-    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
-      left: 22%;
-      top: 8%;
-      width: 34%;
-    }
-
-    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
-      left: 40%;
-      top: 1%;
-      width: 48%;
-      height: 84%;
-    }
-
-    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
-      left: 12%;
-      top: 78%;
-      width: 30%;
-      height: 20%;
-    }
-
     .jp-brand-story-slide-copy-wrap {
       position: absolute;
       top: 18%;
       left: 56%;
       width: 40%;
-      bottom: 12%;
+      bottom: 20%;
       right: auto;
       padding: 0 2rem 0 0.5rem;
       gap: 0;
+      justify-content: flex-start;
+      min-height: 0;
     }
 
     .jp-brand-story-slide-copy {
+      flex: 0 1 auto;
       font-size: clamp(0.8125rem, 1.55cqi, 1.125rem);
       line-height: 1.7;
       max-width: none;
@@ -780,11 +826,14 @@
     }
 
     .jp-brand-story-slide-nav {
+      flex: 0 0 auto;
       margin-top: auto;
+      margin-bottom: clamp(0.25rem, 0.75cqi, 0.5rem);
+      padding-top: clamp(1.5rem, 3.75cqi, 2.25rem);
     }
 
     .jp-brand-story-slide-nav-label {
-      font-size: clamp(0.875rem, 2.2cqi, 1.125rem);
+      font-size: clamp(0.8125rem, 2.05cqi, 1rem);
       line-height: 1.35;
     }
   }
@@ -800,30 +849,64 @@
       width: 38%;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-korean,
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
       top: 18%;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      left: 16%;
       top: 11%;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      left: 16%;
+      top: 9%;
+      width: 42%;
+      max-width: 16rem;
+      rotate: 1deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      left: 16%;
+      top: 13%;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
       top: 9%;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      top: 2.5%;
+      width: 62%;
+      max-width: 20rem;
+      rotate: 0deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      top: 6%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
       top: 79%;
     }
   }
 
   /*
    * Desktop (≥1440px): larger collage — explicit rem caps (no min-height gate; cqw was not biting).
-   * Laptop band 1024–1439 keeps 15.5rem / 19.5rem above.
+   * Laptop band 1024–1439 keeps 14.25rem / 18rem caps above.
    */
   @media (min-width: 1440px) {
     .jp-brand-story-slide-visual {
       inset: 6% 36% 10% 2%;
+    }
+
+    .jp-brand-story-slide-visual--story-3 {
+      /* Match laptop collage box; scale photos via rem caps only. */
+      inset: 8% 40% 14% 3%;
     }
 
     .jp-brand-story-slide-copy-wrap {
@@ -831,47 +914,110 @@
       width: 36%;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean {
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-korean,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-korean {
       top: 16%;
-      max-width: 8.5rem;
+      max-width: 7.5rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-korean {
+      top: 18%;
+      max-width: 7.5rem;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
+      left: 19%;
       top: 10%;
-      width: 40%;
-      max-width: 16rem;
+      width: 38%;
+      max-width: 14.75rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      left: 16%;
+      top: 9%;
+      width: 42%;
+      max-width: 18rem;
+      rotate: 1deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      left: 19%;
+      top: 12%;
+      width: 38%;
+      max-width: 14.75rem;
     }
 
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
       top: 8%;
-      width: 62%;
-      max-width: 22.5rem;
+      width: 58%;
+      max-width: 20.5rem;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      left: 47%;
+      top: 2.5%;
+      width: 62%;
+      max-width: 24rem;
+      rotate: 0deg;
+    }
+
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      top: 5%;
+      width: 58%;
+      max-width: 20.5rem;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign {
       left: 30%;
       top: 74%;
+      max-width: 11rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
+      left: 27%;
+      top: 79%;
       max-width: 11rem;
     }
   }
 
   @media (min-width: 1536px) {
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-      max-width: 17rem;
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      max-width: 15.5rem;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
-      max-width: 23.75rem;
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      max-width: 21.75rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      max-width: 19.5rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      max-width: 26rem;
     }
   }
 
   @media (min-width: 1920px) {
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink {
-      max-width: 18.75rem;
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-pink,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      max-width: 17.25rem;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
-      max-width: 25.25rem;
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      max-width: 23rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      max-width: 21rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      max-width: 28rem;
     }
   }
 
@@ -887,7 +1033,7 @@
 
   @media (min-width: 1024px) and (max-height: 900px) {
     .jp-brand-story-slide-stack {
-      margin-top: 1.5rem;
+      margin-top: 6rem;
       padding-top: 1.75rem;
     }
 
@@ -914,12 +1060,87 @@
       top: 9%;
     }
 
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-love {
+      top: 11%;
+    }
+
     .jp-brand-story-slide-visual--origin .jp-brand-story-slide-beside {
       top: 7%;
     }
 
-    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign {
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-change {
+      top: 4%;
+    }
+
+    .jp-brand-story-slide-visual--origin .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--change-together .jp-brand-story-slide-sign,
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
       top: 77%;
+    }
+  }
+
+  /* Laptop + short viewport only — was overriding desktop story-3 collage when width ≥1440. */
+  @media (min-width: 1024px) and (max-width: 1439px) and (max-height: 900px) {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      left: 17%;
+      top: 7%;
+      width: 42%;
+      max-width: 16rem;
+      rotate: 1deg;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      top: 1%;
+      width: 62%;
+      max-width: 20rem;
+      rotate: 0deg;
+    }
+  }
+
+  /* Desktop + short viewport: same story-3 layout as laptop (after shared max-height paper rules). */
+  @media (min-width: 1440px) and (max-height: 900px) {
+    .jp-brand-story-slide-visual--story-3 {
+      inset: 8% 40% 14% 3%;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      left: 16%;
+      top: 9%;
+      width: 42%;
+      max-width: 18rem;
+      rotate: 1deg;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      left: 47%;
+      top: 2.5%;
+      width: 62%;
+      max-width: 24rem;
+      rotate: 0deg;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-sign {
+      top: 79%;
+    }
+  }
+
+  @media (min-width: 1536px) and (max-height: 900px) {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      max-width: 19.5rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      max-width: 26rem;
+    }
+  }
+
+  @media (min-width: 1920px) and (max-height: 900px) {
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-one {
+      max-width: 21rem;
+    }
+
+    .jp-brand-story-slide-visual--story-3 .jp-brand-story-slide-third-two {
+      max-width: 28rem;
     }
   }
 

@@ -36,10 +36,10 @@ const SLIDE_ASSETS = {
   besidePink: '/brand-story/origin/gd-image-beside-pink.jpg',
   signature: '/brand-story/shared/signature.png',
   gDragonSign: '/brand-story/origin/g-dragon-sign.png',
-  loveTogether: '/brand-story/slides/change/love-together.png',
-  changeTogether: '/brand-story/slides/change/love-together-story.png',
-  thirdSlideOne: '/brand-story/slides/third/third-slide-one.png',
-  thirdSlideTwo: '/brand-story/slides/third/third-slide-two.png',
+  loveTogether: '/brand-story/slides/change/love-together-first-one.png',
+  changeTogether: '/brand-story/slides/change/love-together-second.png',
+  thirdSlideOne: '/brand-story/slides/third/third-one-new.png',
+  thirdSlideTwo: '/brand-story/slides/third/thrid-slide-two-new.png',
   arrowLeft: '/brand-story/ui/arrow-left.svg',
   arrowRight: '/brand-story/ui/arrow-right.svg',
 } as const;
@@ -496,8 +496,8 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
                         <img
                           src={SLIDE_ASSETS.arrowLeft}
                           alt=""
-                          width={24}
-                          height={24}
+                          width={22}
+                          height={22}
                           aria-hidden
                         />
                       </button>
@@ -511,8 +511,8 @@ export function BrandStorySlideDeck({ slides }: BrandStorySlideDeckProps) {
                         <img
                           src={SLIDE_ASSETS.arrowRight}
                           alt=""
-                          width={24}
-                          height={24}
+                          width={22}
+                          height={22}
                           aria-hidden
                         />
                       </button>
@@ -545,38 +545,41 @@ function BrandStorySlideVisual({
 }) {
   if (slide?.id === 'change-together') {
     return (
-      <div className="jp-brand-story-slide-visual">
-        <div className="jp-brand-story-slide-korean">
-          <Image
-            src={SLIDE_ASSETS.koreanHandwriting}
-            alt={t('landing.brandStory.slideKoreanTextAlt')}
-            width={850}
-            height={317}
-            unoptimized
-            className="jp-brand-story-slide-korean-img"
-          />
-        </div>
+      <div className="jp-brand-story-slide-visual jp-brand-story-slide-visual--change-together">
         <Image
           src={SLIDE_ASSETS.loveTogether}
           alt={t('landing.brandStory.slideLoveTogetherAlt')}
           width={1238}
           height={1550}
-          className="jp-brand-story-slide-photo-left jp-brand-story-slide-love"
+          unoptimized
+          className="jp-brand-story-slide-photo-left jp-brand-story-slide-love h-auto object-contain"
         />
         <Image
           src={SLIDE_ASSETS.changeTogether}
           alt={t('landing.brandStory.slideChangeTogetherAlt')}
           width={1240}
           height={1544}
-          className="jp-brand-story-slide-photo-right jp-brand-story-slide-change"
+          unoptimized
+          className="jp-brand-story-slide-photo-right jp-brand-story-slide-change h-auto object-contain"
         />
+        <div className="jp-brand-story-slide-korean">
+          <Image
+            src={SLIDE_ASSETS.koreanBesidePink}
+            alt={t('landing.brandStory.slideKoreanTextAlt')}
+            width={671}
+            height={322}
+            unoptimized
+            className="jp-brand-story-slide-korean-img h-auto w-full object-contain"
+          />
+        </div>
         <div className="jp-brand-story-slide-sign">
           <Image
-            src={SLIDE_ASSETS.signature}
+            src={SLIDE_ASSETS.gDragonSign}
             alt={t('landing.brandStory.slideSignatureAlt')}
-            width={736}
-            height={1308}
-            className="jp-brand-story-slide-sign-img"
+            width={1161}
+            height={651}
+            unoptimized
+            className="jp-brand-story-slide-sign-img h-auto w-full object-contain"
           />
         </div>
       </div>
@@ -586,37 +589,40 @@ function BrandStorySlideVisual({
   if (slide?.id === 'story-3') {
     return (
       <div className="jp-brand-story-slide-visual jp-brand-story-slide-visual--story-3">
-        <div className="jp-brand-story-slide-korean">
-          <Image
-            src={SLIDE_ASSETS.koreanHandwriting}
-            alt={t('landing.brandStory.slideKoreanTextAlt')}
-            width={850}
-            height={317}
-            unoptimized
-            className="jp-brand-story-slide-korean-img"
-          />
-        </div>
         <Image
           src={SLIDE_ASSETS.thirdSlideOne}
           alt={t('landing.brandStory.slide3FlowerWallAlt')}
           width={1140}
           height={990}
-          className="jp-brand-story-slide-photo-left jp-brand-story-slide-third-one h-auto"
+          unoptimized
+          className="jp-brand-story-slide-photo-left jp-brand-story-slide-third-one h-auto object-contain"
         />
         <Image
           src={SLIDE_ASSETS.thirdSlideTwo}
           alt={t('landing.brandStory.slide3EventHallAlt')}
           width={1108}
           height={914}
-          className="jp-brand-story-slide-photo-right jp-brand-story-slide-third-two"
+          unoptimized
+          className="jp-brand-story-slide-photo-right jp-brand-story-slide-third-two h-auto object-contain"
         />
+        <div className="jp-brand-story-slide-korean">
+          <Image
+            src={SLIDE_ASSETS.koreanBesidePink}
+            alt={t('landing.brandStory.slideKoreanTextAlt')}
+            width={671}
+            height={322}
+            unoptimized
+            className="jp-brand-story-slide-korean-img h-auto w-full object-contain"
+          />
+        </div>
         <div className="jp-brand-story-slide-sign">
           <Image
-            src={SLIDE_ASSETS.signature}
+            src={SLIDE_ASSETS.gDragonSign}
             alt={t('landing.brandStory.slideSignatureAlt')}
-            width={736}
-            height={1308}
-            className="jp-brand-story-slide-sign-img"
+            width={1161}
+            height={651}
+            unoptimized
+            className="jp-brand-story-slide-sign-img h-auto w-full object-contain"
           />
         </div>
       </div>
