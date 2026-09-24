@@ -148,13 +148,15 @@ export async function ProductCollectionSection({
         data-scroll-reveal
         className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
       >
-        <p className="font-display text-[clamp(2.25rem,6.25vw,7.5rem)] font-bold leading-[clamp(2.4rem,6.67vw,8rem)] tracking-[-0.02em] text-black">
-          {t('landing.collection.taglineLine1')}
-        </p>
-        <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
-          {t('landing.collection.taglineLine2')}
-        </p>
-        <div className="relative mt-12 size-20 shrink-0 overflow-hidden rounded-full sm:mt-16 sm:size-24 lg:mt-20 lg:size-28">
+        <div className="flex w-max max-w-full flex-col">
+          <p className="text-center font-display text-[clamp(2rem,5.75vw,7rem)] font-bold leading-[clamp(2.15rem,6.1vw,7.45rem)] tracking-[-0.02em] text-black">
+            {t('landing.collection.taglineLine1')}
+          </p>
+          <p className="text-center font-display text-[clamp(2.25rem,5.5vw,4.5rem)] font-medium italic leading-[1.12] font-synthesis-none tracking-[clamp(0.04em,0.35vw,0.14em)] text-black">
+            {t('landing.collection.taglineLine2')}
+          </p>
+        </div>
+        <div className="relative mt-16 size-20 shrink-0 overflow-hidden rounded-full sm:mt-20 sm:size-24 lg:mt-28 lg:size-28">
           <Image
             src={COLLECTION_LOGO}
             alt="JUSPEACE"
@@ -167,16 +169,16 @@ export async function ProductCollectionSection({
 
       <div
         data-scroll-reveal
-        className="mx-auto mt-16 flex max-w-[900px] flex-col items-center text-center lg:mt-24"
+        className="mx-auto mt-20 flex max-w-[900px] flex-col items-center text-center sm:mt-24 lg:mt-32"
       >
         <SectionLabel className="text-base sm:text-lg lg:text-xl">
           {t('landing.collection.label')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2.25rem,6vw,5rem)] leading-[1.08]">
+        <SectionHeading className="mt-1 text-[clamp(2.25rem,6vw,5rem)] leading-[1.08] sm:mt-1.5 lg:mt-2">
           <span className="block">{t('landing.collection.headingLine1')}</span>
           <span className="block">{t('landing.collection.headingLine2')}</span>
         </SectionHeading>
-        <p className="mt-6 font-sans text-base leading-relaxed text-black sm:text-lg">
+        <p className="mt-10 font-sans text-base leading-relaxed text-black sm:mt-12 sm:text-lg lg:mt-14">
           <span className="block">{t('landing.collection.introLine1')}</span>
           <span className="block">{t('landing.collection.introLine2')}</span>
         </p>

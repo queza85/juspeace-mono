@@ -68,21 +68,21 @@ export async function ProductVerificationSection() {
           <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
             {t('landing.productVerification.introBrand')}
           </p>
-          <div className="jp-product-verification-intro-logo relative size-20 shrink-0 overflow-hidden rounded-full sm:size-24 lg:size-28">
-            <Image
-              src={COLLECTION_LOGO}
-              alt="JUSPEACE"
-              width={112}
-              height={112}
-              className="size-full object-cover"
-            />
-          </div>
         </div>
       </SectionShell>
 
       <SectionShell fullWidth className="overflow-visible bg-white pt-0">
         <div data-scroll-reveal className="jp-product-verification-collage">
           <div className="jp-product-verification-intro-headlines mx-auto flex max-w-[900px] flex-col items-center px-4 text-center sm:px-6">
+            <div className="jp-product-verification-intro-logo relative size-20 shrink-0 overflow-hidden rounded-full sm:size-24 lg:size-28">
+              <Image
+                src={COLLECTION_LOGO}
+                alt="JUSPEACE"
+                width={112}
+                height={112}
+                className="size-full object-cover"
+              />
+            </div>
             <SectionLabel className="jp-product-verification-intro-label text-base sm:text-lg lg:text-xl">
               {t('landing.productVerification.label')}
             </SectionLabel>
