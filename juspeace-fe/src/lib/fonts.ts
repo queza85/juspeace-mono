@@ -1,9 +1,21 @@
-import { Fragment_Mono, Instrument_Sans, Instrument_Serif } from 'next/font/google';
+import {
+  Fragment_Mono,
+  Inria_Serif,
+  Instrument_Sans,
+  Instrument_Serif,
+} from 'next/font/google';
 
 export const instrumentSerif = Instrument_Serif({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-serif',
+  display: 'swap',
+});
+
+/** Figma: “128,540 people now carry” in the donation stat */
+export const inriaSerifBold = Inria_Serif({
+  weight: '700',
+  subsets: ['latin'],
   display: 'swap',
 });
 
