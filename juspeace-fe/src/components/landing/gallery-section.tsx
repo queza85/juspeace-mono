@@ -124,15 +124,15 @@ function GalleryStack({
   centerSrc: string;
 }) {
   return (
-    <div className="relative mx-auto h-[192px] w-[245px] sm:h-[217px] sm:w-[263px]">
-      <div className="absolute left-1/2 top-4 w-[150px] -translate-x-[calc(50%+51px)] -rotate-[16.59deg]">
-        <GalleryCard src={leftSrc} alt={label} aspectRatio="150 / 194" />
+    <div className="relative mx-auto h-[180px] w-[245px] sm:h-[204px] sm:w-[263px]">
+      <div className="absolute left-1/2 top-3 w-[150px] -translate-x-[calc(50%+51px)] -rotate-[16.59deg]">
+        <GalleryCard src={leftSrc} alt={label} aspectRatio="150 / 184" />
       </div>
-      <div className="absolute left-1/2 top-4 w-[150px] -translate-x-[calc(50%-51px)] rotate-[16.59deg]">
-        <GalleryCard src={rightSrc} alt={label} aspectRatio="150 / 194" />
+      <div className="absolute left-1/2 top-3 w-[150px] -translate-x-[calc(50%-51px)] rotate-[16.59deg]">
+        <GalleryCard src={rightSrc} alt={label} aspectRatio="150 / 184" />
       </div>
       <div className="absolute left-1/2 top-0 z-10 w-[168px] -translate-x-1/2">
-        <GalleryCard src={centerSrc} alt={label} aspectRatio="168 / 217" />
+        <GalleryCard src={centerSrc} alt={label} aspectRatio="168 / 204" />
         <GalleryPaperClip />
       </div>
     </div>
