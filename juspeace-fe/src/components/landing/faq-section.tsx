@@ -37,14 +37,14 @@ export function FaqSection() {
         <SectionLabel className="mt-10 text-base sm:mt-12 sm:text-lg lg:mt-14 lg:text-xl">
           {t('landing.faq.sectionLabel')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
+        <SectionHeading className="mt-1 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08] sm:mt-1.5 lg:mt-2">
           <span className="block">{t('landing.faq.headingLine1')}</span>
           <span className="block">{t('landing.faq.headingLine2')}</span>
         </SectionHeading>
       </div>
 
-      <div data-scroll-stagger className="grid gap-3 lg:grid-cols-2 lg:gap-4">
-        <div className="space-y-3 lg:space-y-4">
+      <div className="mx-auto grid w-[92%] max-w-[1080px] gap-3 lg:grid-cols-2 lg:gap-4">
+        <div data-scroll-stagger className="space-y-3 lg:space-y-4">
           {left.map((id) => (
             <div key={id} data-scroll-stagger-item>
               <FaqItem
@@ -57,7 +57,7 @@ export function FaqSection() {
             </div>
           ))}
         </div>
-        <div className="space-y-3 lg:space-y-4">
+        <div data-scroll-stagger className="space-y-3 lg:space-y-4">
           {right.map((id) => (
             <div key={id} data-scroll-stagger-item>
               <FaqItem
@@ -97,7 +97,7 @@ function FaqItem({
         aria-controls={`faq-panel-${id}`}
         onClick={onToggle}
       >
-        <span className="font-mono text-base leading-6 text-black sm:text-lg sm:leading-7">
+        <span className="font-sans text-base leading-6 text-black sm:text-lg sm:leading-7">
           {question}
         </span>
         <Plus
@@ -116,7 +116,7 @@ function FaqItem({
         )}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-4 font-mono text-sm leading-6 text-jp-muted sm:px-7 sm:pb-5 sm:text-base sm:leading-7">
+          <p className="px-5 pb-4 font-sans text-sm leading-6 text-jp-muted sm:px-7 sm:pb-5 sm:text-base sm:leading-7">
             {answer}
           </p>
         </div>
