@@ -1350,14 +1350,17 @@
   }
 
   .jp-product-verification-stage {
-    --jp-pv-phone-top-crop: 0.175;
-    --jp-pv-phone-visible-height: 987;
-    --jp-pv-paper-top-offset: 0.42;
-    --jp-pv-paper-width: 70%;
-    --jp-pv-paper-width-ratio: 0.7;
-    --jp-pv-torn-edge-offset: 0.13;
+    --jp-pv-phone-width: 7676;
+    --jp-pv-phone-top-crop: 0;
+    --jp-pv-phone-visible-height: 6260;
+    --jp-pv-paper-top-offset: 0.7;
+    --jp-pv-paper-width: 72%;
+    --jp-pv-paper-width-ratio: 0.72;
+    --jp-pv-torn-edge-offset: 0.1;
     --jp-pv-daisy-down-offset: clamp(1.25rem, 3.5vw, 2.5rem);
-    --jp-pv-paper-aspect: 1080 / 987;
+    --jp-pv-daisy-up-nudge: 100px;
+    --jp-pv-paper-aspect: 7676 / 6260;
+    --jp-pv-paper-down-nudge: 24px;
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -1375,7 +1378,7 @@
 
   .jp-product-verification-phone-crop {
     width: 100%;
-    aspect-ratio: 1080 / 987;
+    aspect-ratio: 7676 / 6260;
     overflow: hidden;
   }
 
@@ -1392,14 +1395,14 @@
     left: 50%;
     top: 0;
     z-index: 30;
-    width: clamp(7rem, 28vw, 18rem);
-    height: clamp(7rem, 28vw, 18rem);
+    width: clamp(9rem, 36vw, 24rem);
+    height: clamp(9rem, 36vw, 24rem);
     margin-top: calc(
       (
           var(--jp-pv-paper-top-offset) +
           var(--jp-pv-paper-width-ratio) * var(--jp-pv-torn-edge-offset)
-        ) * 100% * var(--jp-pv-phone-visible-height) / 1080 +
-        var(--jp-pv-daisy-down-offset)
+        ) * 100% * var(--jp-pv-phone-visible-height) / var(--jp-pv-phone-width) +
+        var(--jp-pv-daisy-down-offset) - var(--jp-pv-daisy-up-nudge)
     );
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -1408,10 +1411,14 @@
   .jp-product-verification-paper-layer {
     position: relative;
     z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: var(--jp-pv-paper-width);
     margin-inline: auto;
     margin-top: calc(
-      -1 * (1 - var(--jp-pv-paper-top-offset)) * 100% * var(--jp-pv-phone-visible-height) / 1080
+      -1 * (1 - var(--jp-pv-paper-top-offset)) * 100% * var(--jp-pv-phone-visible-height) /
+        var(--jp-pv-phone-width) + var(--jp-pv-paper-down-nudge)
     );
   }
 
@@ -1437,37 +1444,32 @@
   }
 
   .jp-product-verification-paper-copy {
+    /* Safe area on product-verfication-new-two.png (5540×3088) dot grid */
     position: absolute;
-    inset: 0;
+    top: 16%;
+    right: 7%;
+    bottom: 15%;
+    left: 7%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24% 8% 7%;
-    text-align: center;
-  }
-
-  .jp-product-verification-paper-text {
-    display: flex;
-    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
-    padding-top: clamp(1.25rem, 5.5cqi, 2.75rem);
+    gap: clamp(1.25rem, 5.25cqi, 2.5rem);
+    text-align: center;
   }
 
   .jp-product-verification-paper-heading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(88%, 36rem);
-    margin: 0 0 clamp(2.25rem, 12cqi, 5rem);
+    width: 100%;
+    max-width: 42rem;
+    margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 9.67cqi, 3.625rem);
+    font-size: clamp(1.1875rem, 3.85cqi, 2.375rem);
     font-weight: 700;
     font-style: normal;
-    line-height: clamp(1.6875rem, 10.83cqi, 4.0625rem);
+    line-height: clamp(1.3125rem, 4.35cqi, 2.6875rem);
     letter-spacing: -0.02em;
     text-align: center;
     color: #000;
@@ -1481,20 +1483,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(88%, 34rem);
+    width: 100%;
+    max-width: 42rem;
     margin: 0;
     font-family: var(--font-sans);
-    font-size: clamp(0.8125rem, 3.75cqi, 1.25rem);
+    font-size: clamp(0.75rem, 2.75cqi, 1.25rem);
     font-weight: 400;
     font-style: normal;
-    line-height: clamp(1.25rem, 6cqi, 2rem);
+    line-height: clamp(1.125rem, 4.15cqi, 2rem);
     letter-spacing: 0;
     text-align: center;
     color: #000;
   }
 
   .jp-product-verification-paper-passage + .jp-product-verification-paper-passage {
-    margin-top: clamp(1.375rem, 6.5cqi, 2.5rem);
+    margin-top: clamp(0.25rem, 1.5cqi, 0.75rem);
   }
 
   .jp-product-verification-paper-passage p {
@@ -1502,13 +1505,91 @@
     max-width: 100%;
   }
 
+  @media (min-width: 768px) {
+    .jp-product-verification-paper-passage:first-of-type > p:first-child,
+    .jp-product-verification-paper-passage:last-of-type > p:nth-child(2) {
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-product-verification-paper-copy {
+      right: 6%;
+      left: 6%;
+      gap: clamp(1.25rem, 4.75cqi, 2.25rem);
+    }
+
+    .jp-product-verification-paper-heading {
+      font-size: clamp(1.25rem, 3.75cqi, 2.4375rem);
+      line-height: clamp(1.375rem, 4.15cqi, 2.6875rem);
+    }
+
+    .jp-product-verification-paper-passage {
+      font-size: clamp(0.875rem, 2.55cqi, 1.25rem);
+      line-height: clamp(1.25rem, 3.95cqi, 2rem);
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .jp-product-verification-paper-passage:first-of-type {
+      margin-top: clamp(0.75rem, 2.75cqi, 1.625rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .jp-product-verification-paper-copy {
+      right: 5.5%;
+      left: 5.5%;
+    }
+
+    .jp-product-verification-paper-heading,
+    .jp-product-verification-paper-passage {
+      max-width: 44rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .jp-product-verification-paper-copy {
+      gap: clamp(1.75rem, 6.25cqi, 3.5rem);
+    }
+
+    .jp-product-verification-paper-heading {
+      font-size: clamp(2.375rem, 4.35cqi, 3.125rem);
+      line-height: clamp(2.625rem, 4.85cqi, 3.5rem);
+    }
+
+    .jp-product-verification-paper-passage {
+      font-size: clamp(1.1875rem, 2.85cqi, 1.4375rem);
+      line-height: clamp(1.8125rem, 4.25cqi, 2.1875rem);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .jp-product-verification-paper-copy {
+      gap: clamp(2.25rem, 7cqi, 4rem);
+    }
+
+    .jp-product-verification-paper-heading {
+      font-size: 3.375rem;
+      line-height: 3.75rem;
+    }
+
+    .jp-product-verification-paper-passage {
+      font-size: 1.5rem;
+      line-height: 2.3125rem;
+    }
+  }
+
   .jp-product-verification-paper-cta {
+    position: relative;
+    z-index: 25;
     flex-shrink: 0;
-    margin-top: clamp(1rem, 4cqi, 1.75rem);
+    margin-top: clamp(2.75rem, 7vw, 4.5rem);
     background: #000;
-    padding: clamp(0.5rem, 1.8cqi, 0.75rem) clamp(1.25rem, 5cqi, 2rem);
+    padding: clamp(0.5625rem, 0.9vw, 0.75rem) clamp(1.625rem, 4vw, 2.5rem);
+    min-width: clamp(10.25rem, 22vw, 12.25rem);
     font-family: var(--font-sans);
-    font-size: clamp(0.6875rem, 2.8cqi, 0.875rem);
+    font-size: clamp(0.6875rem, 1.35vw, 0.875rem);
     font-weight: 400;
     line-height: 1;
     color: #fff;
@@ -1520,120 +1601,143 @@
   }
 
   .jp-product-verification-note {
-    --jp-pv-note-height: clamp(5.25rem, 21vw, 9rem);
     position: absolute;
     z-index: 12;
-    width: clamp(6.5rem, 28vw, 11.5rem);
+    width: clamp(7.75rem, 25vw, 15.5rem);
+    container-type: inline-size;
+    container-name: pv-note-root;
   }
 
   .jp-product-verification-note--left {
-    left: 22%;
-    top: 7%;
-    transform: rotate(-10deg);
-    transform-origin: 0% 0%;
+    left: 20%;
+    top: 5.5%;
   }
 
   .jp-product-verification-note--right {
-    right: 22%;
-    top: 13%;
-    transform: rotate(10deg);
-    transform-origin: 0% 0%;
+    right: 20%;
+    top: 10.5%;
   }
 
-  .jp-product-verification-note-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  .jp-product-verification-note-img {
+    display: block;
     width: 100%;
-    height: var(--jp-pv-note-height);
-    border-radius: 2px;
-    background: #fff;
-    padding: 1.125rem 0.625rem 0.625rem;
-    text-align: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-    container-type: inline-size;
-    container-name: pv-note;
+    height: auto;
   }
 
   .jp-product-verification-note-clip {
     position: absolute;
-    top: 0;
-    z-index: 20;
+    z-index: 14;
     width: auto;
-    height: clamp(1.625rem, 5.25vw, 2.875rem);
+    height: clamp(3.75rem, 58cqi, 7.25rem);
     pointer-events: none;
     object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
   }
 
+  /* Top inner edge of each note (Figma: clip on margin where note meets phone) */
   .jp-product-verification-note--left .jp-product-verification-note-clip {
-    right: 0.125rem;
-    left: auto;
-    transform: translate(18%, -54%) rotate(8deg);
-    transform-origin: bottom center;
+    top: 0;
+    left: 58%;
+    right: auto;
+    height: clamp(4.125rem, 64cqi, 8rem);
+    transform: translate(calc(-58% - 16px), calc(-56% + 20px));
   }
 
   .jp-product-verification-note--right .jp-product-verification-note-clip {
-    left: 0.125rem;
+    top: 0;
+    left: 42%;
     right: auto;
-    transform: translate(-18%, -54%) rotate(-8deg);
-    transform-origin: bottom center;
+    transform: translate(calc(-58% + 72px), calc(-56% + 36px));
+  }
+
+  .jp-product-verification-note-copy {
+    position: absolute;
+    inset: 12% 8% 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    container-type: inline-size;
+    container-name: pv-note;
+    pointer-events: none;
+    transform-origin: 50% 50%;
+  }
+
+  .jp-product-verification-note--left .jp-product-verification-note-copy {
+    transform: rotate(-10deg) translateY(14px);
+  }
+
+  .jp-product-verification-note--right .jp-product-verification-note-copy {
+    transform: rotate(15deg) translateY(16px);
+  }
+
+  .jp-product-verification-note-quote-line {
+    display: block;
   }
 
   .jp-product-verification-note-lead {
     font-family: var(--font-serif);
-    font-size: clamp(0.625rem, 2.5vw, 0.875rem);
+    font-size: clamp(0.5625rem, 2.15vw, 0.8125rem);
     line-height: 1.35;
     color: #000;
   }
 
   .jp-product-verification-note-quote {
-    margin-top: 0.375rem;
+    margin-top: 0.3125rem;
     font-family: var(--font-display);
-    font-size: clamp(0.6875rem, 10.6cqi, 2.5rem);
+    font-size: clamp(0.625rem, 8.5cqi, 1.625rem);
     font-weight: 700;
     font-style: normal;
-    line-height: clamp(1.125rem, 17.2cqi, 4.0625rem);
+    line-height: clamp(1rem, 13.5cqi, 2.25rem);
     letter-spacing: -0.02em;
     text-align: center;
     color: #000;
     max-width: 100%;
   }
 
+  .jp-product-verification-note--left .jp-product-verification-note-quote {
+    font-size: clamp(0.6875rem, 10.25cqi, 1.9375rem);
+    line-height: clamp(1.0625rem, 16cqi, 2.625rem);
+  }
+
   @media (min-width: 640px) {
     .jp-product-verification-stage {
-      --jp-pv-paper-top-offset: 0.41;
+      --jp-pv-paper-top-offset: 0.58;
       --jp-pv-paper-width: 68%;
       --jp-pv-paper-width-ratio: 0.68;
     }
 
-    .jp-product-verification-paper-copy {
-      padding: 23% 9% 6.5%;
-    }
-
     .jp-product-verification-note--left {
-      left: 23%;
-      top: 8%;
+      left: 22%;
+      top: 6.5%;
     }
 
     .jp-product-verification-note--right {
-      right: 23%;
-      top: 14%;
+      right: 22%;
+      top: 11.5%;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .jp-product-verification-note {
+      width: clamp(8.25rem, 26.5vw, 17rem);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .jp-product-verification-note {
+      width: clamp(9.25rem, 30vw, 21.5rem);
     }
   }
 
   @media (min-width: 1024px) {
     .jp-product-verification-stage {
-      --jp-pv-paper-top-offset: 0.4;
-      --jp-pv-paper-width: 66%;
-      --jp-pv-paper-width-ratio: 0.66;
+      --jp-pv-paper-top-offset: 0.65;
+      --jp-pv-paper-width: 68%;
+      --jp-pv-paper-width-ratio: 0.68;
     }
 
-    .jp-product-verification-paper-copy {
-      padding: 22% 10% 6%;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
