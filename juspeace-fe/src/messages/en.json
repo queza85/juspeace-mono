@@ -472,7 +472,8 @@
     },
     "gallery": {
       "label": "Product Gallery",
-      "heading": "A Closer Look at JUSPEACE.",
+      "headingLine1": "A Closer Look",
+      "headingLine2": "at JUSPEACE",
       "count": "26",
       "categories": {
         "productOnly": "Product only images",

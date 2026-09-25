@@ -472,7 +472,8 @@
     },
     "gallery": {
       "label": "제품 갤러리",
-      "heading": "JUSPEACE를 자세히 살펴보세요.",
+      "headingLine1": "JUSPEACE를",
+      "headingLine2": "자세히 살펴보세요.",
       "count": "26",
       "categories": {
         "productOnly": "제품 단독 이미지",

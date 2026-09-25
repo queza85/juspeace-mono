@@ -184,7 +184,7 @@ export async function GallerySection() {
         data-scroll-reveal
         className="mx-auto mb-16 flex max-w-[1116px] flex-col items-center text-center lg:mb-24"
       >
-        <div className="relative -mt-4 size-16 shrink-0 overflow-hidden rounded-full sm:-mt-5 sm:size-20 lg:-mt-6 lg:size-24">
+        <div className="relative mt-4 mb-16 size-16 shrink-0 overflow-hidden rounded-full sm:mt-6 sm:mb-20 sm:size-20 lg:mt-8 lg:mb-24 lg:size-24">
           <Image
             src={COLLECTION_LOGO}
             alt="JUSPEACE"
@@ -196,8 +196,9 @@ export async function GallerySection() {
         <SectionLabel className="mt-8 text-base sm:mt-10 sm:text-lg lg:text-xl">
           {t('landing.gallery.label')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
-          {t('landing.gallery.heading')}
+        <SectionHeading className="mt-1 text-[clamp(2.25rem,6vw,5rem)] leading-[1.05] sm:mt-1.5 lg:mt-2">
+          <span className="block">{t('landing.gallery.headingLine1')}</span>
+          <span className="mb-10 block sm:mb-14 lg:mb-20">{t('landing.gallery.headingLine2')}</span>
         </SectionHeading>
       </div>
 
