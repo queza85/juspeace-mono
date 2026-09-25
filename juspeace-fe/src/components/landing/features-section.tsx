@@ -165,16 +165,16 @@ export async function FeaturesSection() {
         data-scroll-reveal
         className="mx-auto flex max-w-[900px] flex-col items-center text-center"
       >
-        <div className="relative size-20 shrink-0 overflow-hidden rounded-full sm:size-24 lg:size-28">
+        <div className="relative mb-14 size-[4.5rem] shrink-0 overflow-hidden rounded-full sm:mb-16 sm:size-[5.375rem] lg:mb-20 lg:size-[6.25rem]">
           <Image
             src={COLLECTION_LOGO}
             alt="JUSPEACE"
-            width={112}
-            height={112}
+            width={100}
+            height={100}
             className="size-full object-cover"
           />
         </div>
-        <SectionLabel className="mt-6 text-base sm:mt-8 sm:text-lg lg:mt-10 lg:text-xl">
+        <SectionLabel className="text-base sm:text-lg lg:text-xl">
           {t('landing.features.label')}
         </SectionLabel>
         <SectionHeading className="mt-1 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08] sm:mt-1.5 lg:mt-2">

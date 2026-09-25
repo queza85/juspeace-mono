@@ -124,7 +124,7 @@ function CollectionProductCard({
       <p className="mt-2 max-w-[340px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-[0.9375rem]">
         {card.description}
       </p>
-      <p className="mt-4 font-serif text-sm text-black">
+      <p className="mt-8 font-serif text-sm text-black sm:mt-10">
         <span className="font-bold">{stockCount}</span> {stockSuffix}
       </p>
       <CollectionCtaButton product={card.product} label={ctaLabel} />
