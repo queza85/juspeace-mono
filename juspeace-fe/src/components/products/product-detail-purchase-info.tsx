@@ -22,7 +22,7 @@ function AccordionCard({
   const panelId = `${id}-panel`;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-black/15">
+    <div className="overflow-hidden border border-[#D7D7D7]">
       <button
         type="button"
         aria-expanded={open}
@@ -95,7 +95,7 @@ export function ProductDetailPurchaseInfo() {
           {t('products.detail.authenticity.badge')}
           <VerifiedBadgeIcon size={12} className="shrink-0 text-white" />
         </span>
-        <p className="mt-3 font-sans text-xs leading-[1.7] text-black sm:text-[13px] sm:leading-[1.75]">
+        <p className="mt-5 max-w-[28rem] text-left font-sans text-sm leading-[1.7] text-black">
           {t('products.detail.authenticity.body')}
         </p>
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">

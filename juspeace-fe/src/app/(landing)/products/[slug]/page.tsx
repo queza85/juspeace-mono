@@ -5,13 +5,10 @@ import { ProductDetailGallery } from '@/components/products/product-detail-galle
 import { ProductDetailPageIntro } from '@/components/products/product-detail-page-intro';
 import { ProductDetailPurchase } from '@/components/products/product-detail-purchase';
 import { ProductDetailTabs } from '@/components/products/product-detail-tabs';
-import { ProductRelatedSection } from '@/components/products/product-related-section';
 import type { Product } from '@/lib/api/types';
-import { getProductBySlug, listProducts } from '@/lib/api/products';
+import { getProductBySlug } from '@/lib/api/products';
 import { getTranslator } from '@/lib/i18n/server';
 import {
-  buildFallbackCatalog,
-  COLLECTION_VARIANTS,
   createFallbackProduct,
   detectVariantKey,
   detectVariantKeyFromSlug,
@@ -21,28 +18,6 @@ import {
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
-}
-
-function fallbackLabels(
-  t: (key: string) => string,
-): Record<
-  (typeof COLLECTION_VARIANTS)[number],
-  { name: string; description: string }
-> {
-  return COLLECTION_VARIANTS.reduce(
-    (acc, variantKey) => {
-      const prefix = getFallbackI18nPrefix(variantKey);
-      acc[variantKey] = {
-        name: t(`${prefix}.title`),
-        description: t(`${prefix}.description`),
-      };
-      return acc;
-    },
-    {} as Record<
-      (typeof COLLECTION_VARIANTS)[number],
-      { name: string; description: string }
-    >,
-  );
 }
 
 async function resolveProduct(
@@ -95,12 +70,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const product = await resolveProduct(slug, t);
 
-  const productsResponse = await listProducts({ limit: 12 }).catch(() => null);
-  const relatedProducts =
-    productsResponse?.items && productsResponse.items.length > 0
-      ? productsResponse.items
-      : buildFallbackCatalog(fallbackLabels(t), slug);
-
   const variantKey = detectVariantKey(product);
   const fallbackPrefix = getFallbackI18nPrefix(variantKey);
   const displayName =
@@ -138,13 +107,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             <ProductDetailTabs variantName={displayName} />
           </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 lg:px-12 xl:px-[75px]">
-          <ProductRelatedSection
-            products={relatedProducts}
-            currentSlug={slug}
-          />
         </div>
       </article>
       <LandingFooter />

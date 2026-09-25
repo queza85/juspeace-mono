@@ -1,6 +1,7 @@
 'use client';
 
 import { Minus, Plus, Star } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { ProductDetailPurchaseInfo } from '@/components/products/product-detail-purchase-info';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
@@ -61,6 +62,7 @@ export function ProductDetailPurchase({
   const formatPrice = useFormatPrice();
   const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
+  const [saved, setSaved] = useState(false);
 
   const inStock = product.stock > 0;
   const canBuy = inStock;
@@ -81,15 +83,32 @@ export function ProductDetailPurchase({
 
   return (
     <div className={cn('flex min-h-0 min-w-0 flex-col', className)}>
-      <h1 className="font-display text-[clamp(1.875rem,3vw,2.5rem)] font-black leading-[1.15] tracking-tight text-black">
-        {displayName}
-      </h1>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="min-w-0 font-display text-[clamp(1.375rem,2vw,1.75rem)] font-black leading-[1.15] tracking-tight text-black">
+          {displayName}
+        </h1>
+        <button
+          type="button"
+          aria-pressed={saved}
+          aria-label={t('products.detail.save')}
+          onClick={() => setSaved((value) => !value)}
+          className="inline-flex size-8 shrink-0 items-center justify-center"
+        >
+          <Image
+            src="/product-detail/love%201.png"
+            alt=""
+            width={32}
+            height={32}
+            className={cn('size-8', saved && 'opacity-60')}
+          />
+        </button>
+      </div>
 
       <p className="mt-3 font-display text-xl font-normal text-black">
         {formatPdpPrice(formatPrice, product.priceCents, product.currency)}
       </p>
 
-      <p className="mt-6 min-h-[4.75rem] max-w-[420px] font-mono text-xs leading-[1.75] text-black sm:text-[13px] sm:leading-[1.8]">
+      <p className="mt-6 max-w-[420px] font-mono text-xs leading-[1.75] text-black sm:text-[13px] sm:leading-[1.8]">
         {tagline}
       </p>
 
@@ -98,7 +117,7 @@ export function ProductDetailPurchase({
       </div>
 
       <div className="mt-7 flex flex-wrap items-center gap-5 sm:gap-6">
-        <div className="flex h-11 w-[104px] items-center justify-between border border-black/10 bg-jp-light-gray px-3">
+        <div className="flex h-11 w-[148px] items-center justify-between border-t-[1.84px] border-t-[#FFFFFF99] bg-jp-light-gray px-3">
           <button
             type="button"
             aria-label={t('landing.collection.qtyDecrease')}
@@ -145,7 +164,7 @@ export function ProductDetailPurchase({
           type="button"
           disabled={!canBuy}
           onClick={handleAddToCart}
-          className="inline-flex h-12 flex-1 items-center justify-center bg-black px-6 font-display text-sm font-normal text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-12 w-full items-center justify-center bg-black px-6 font-display text-sm font-normal text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]"
         >
           {t('products.detail.buyNow')}
         </button>
@@ -153,7 +172,7 @@ export function ProductDetailPurchase({
           type="button"
           disabled={!canBuy}
           onClick={handleAddToCart}
-          className="inline-flex h-12 flex-1 items-center justify-center border border-black bg-white px-6 font-display text-sm font-normal text-black transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-12 w-full items-center justify-center border border-black bg-white px-6 font-display text-sm font-normal text-black transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]"
         >
           {t('products.detail.addToCart')}
         </button>

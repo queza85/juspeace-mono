@@ -16,6 +16,7 @@ interface ProductDetailGalleryProps {
 }
 
 const PDP_MAIN_IMAGE_SIZE = 480;
+const PDP_MAIN_IMAGE_HEIGHT = 600;
 const PDP_THUMBNAIL_COUNT = 3;
 
 export function ProductDetailGallery({
@@ -31,12 +32,12 @@ export function ProductDetailGallery({
 
   return (
     <div className="flex w-full max-w-[480px] flex-col gap-3">
-      <div className="relative aspect-square w-full overflow-hidden rounded-[10px] border border-dashed border-black/25 bg-white">
+      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[10px] border border-solid border-[#E7E9EB] bg-white">
         <Image
           src={activeSrc}
           alt={productName}
           width={PDP_MAIN_IMAGE_SIZE}
-          height={PDP_MAIN_IMAGE_SIZE}
+          height={PDP_MAIN_IMAGE_HEIGHT}
           className="h-full w-full object-cover"
           sizes="(max-width: 1024px) 100vw, 480px"
           priority

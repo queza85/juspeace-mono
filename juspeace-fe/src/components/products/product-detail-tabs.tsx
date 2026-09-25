@@ -98,7 +98,7 @@ export function ProductDetailTabs({
   };
 
   return (
-    <section className="mx-auto mb-20 mt-36 max-w-[1080px] lg:mb-28 lg:mt-44 xl:mt-52">
+    <section className="mx-auto mb-48 mt-36 max-w-[1080px] lg:mb-64 lg:mt-44 xl:mt-52">
       <div className="relative border-b border-black/15 pb-5">
         <div
           ref={tabListRef}
