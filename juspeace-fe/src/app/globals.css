@@ -1254,11 +1254,6 @@
     transition: color 0.25s ease, font-weight 0.25s ease;
   }
 
-  .jp-pdp-tab-indicator {
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
   .jp-pdp-tab-panel {
     animation: jp-pdp-tab-panel-in 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
@@ -1762,8 +1757,7 @@
       transform: none;
     }
 
-    .jp-pdp-tab,
-    .jp-pdp-tab-indicator {
+    .jp-pdp-tab {
       transition: none !important;
     }
 

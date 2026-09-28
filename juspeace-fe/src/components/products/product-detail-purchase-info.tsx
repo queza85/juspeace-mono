@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { ChevronDown, Package, Truck } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { OfficialRecordIcon, VerifiedBadgeIcon } from '@/components/icons';
 import { useT } from '@/lib/i18n/locale-context';
 import { cn } from '@/lib/utils';
@@ -146,7 +146,13 @@ export function ProductDetailPurchaseInfo() {
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex gap-3">
-            <Truck className="mt-0.5 size-[18px] shrink-0 text-black" aria-hidden />
+            <Image
+              src="/product-detail/express-delivery%201.png"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 shrink-0 object-contain"
+            />
             <div className="min-w-0">
               <p className="font-display text-sm font-semibold text-black">
                 {t('products.detail.deliveryTitle')}
@@ -157,9 +163,12 @@ export function ProductDetailPurchaseInfo() {
             </div>
           </div>
           <div className="flex gap-3">
-            <Package
-              className="mt-0.5 size-[18px] shrink-0 text-black"
-              aria-hidden
+            <Image
+              src="/product-detail/product-return%201.png"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 shrink-0 object-contain"
             />
             <div className="min-w-0">
               <p className="font-display text-sm font-semibold text-black">
