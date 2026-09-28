@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { LandingFooter } from '@/components/landing/landing-footer';
 import { LandingHeader } from '@/components/landing/landing-header';
 import { PaymentPageContent } from '@/components/checkout/payment-page-content';
@@ -19,39 +20,14 @@ export default async function CheckoutPaymentPage() {
     <>
       <LandingHeader variant="light" />
       <article className="min-h-[60vh] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10 min-[1680px]:max-w-[1560px]">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-8 font-mono text-xs text-jp-muted sm:text-sm"
+        <div className="mx-auto w-full max-w-[1280px] px-5 pt-8 pb-[226px] sm:px-8 lg:px-12 lg:pt-10 lg:pb-[374px] xl:px-[75px] min-[1680px]:max-w-[1560px]">
+          <Link
+            href="/checkout"
+            className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-black underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-sm"
           >
-            <ol className="flex flex-wrap items-center gap-1.5">
-              <li>
-                <Link
-                  href="/#collection"
-                  className="transition-colors hover:text-black"
-                >
-                  {t('products.detail.breadcrumbCollection')}
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link href="/cart" className="transition-colors hover:text-black">
-                  {t('cart.breadcrumb')}
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link
-                  href="/checkout"
-                  className="transition-colors hover:text-black"
-                >
-                  {t('checkout.breadcrumb')}
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-black">{t('payment.breadcrumb')}</li>
-            </ol>
-          </nav>
+            <ArrowLeft className="size-3.5" strokeWidth={2.25} aria-hidden />
+            {t('payment.back')}
+          </Link>
 
           <PaymentPageContent />
         </div>

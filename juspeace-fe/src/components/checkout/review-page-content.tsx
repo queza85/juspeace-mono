@@ -5,6 +5,7 @@ import { ArrowLeft, Pencil } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { CartOrderSummary } from '@/components/cart/cart-order-summary';
+import { VisaLogo } from '@/components/checkout/visa-logo';
 import { ReviewOrderLineItem } from '@/components/checkout/review-order-line-item';
 import {
   formatCardExpiry,
@@ -131,9 +132,7 @@ export function ReviewPageContent() {
               {showCardDetails ? (
                 <>
                   <div className="inline-flex h-7 items-center justify-center border border-black/10 bg-white px-2.5">
-                    <span className="font-display text-[11px] font-bold tracking-wide text-[#1A1F71]">
-                      VISA
-                    </span>
+                    <VisaLogo alt={t('payment.visa')} />
                   </div>
                   <p className="font-mono text-[11px] text-black sm:text-xs">
                     {t(getPaymentMethodLabelKey(payment))}

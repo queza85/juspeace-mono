@@ -93,6 +93,7 @@
     "back": "Back",
     "chooseMethod": "Choose Payment Method",
     "cardPayment": "Card / Debit Card Payment",
+    "visa": "Visa",
     "billingAddress": "Billing Address",
     "billingSameAsShipping": "Billing address same as shipping address",
     "streetAddress": "Street address",
@@ -102,7 +103,9 @@
       "card": "Card / Debit Card",
       "applePay": "Apple Pay",
       "googlePay": "Google Pay",
-      "paypal": "PayPal"
+      "paypal": "PayPal",
+      "pay": "Pay",
+      "paypalMark": "Paypal"
     },
     "fields": {
       "nameOnCard": "Name on Card",
@@ -118,8 +121,9 @@
     "placeholders": {
       "nameOnCard": "Jamie Lar",
       "cardNumber": "4242 4242 4242 4242",
-      "expiryDate": "10/8/2029",
+      "expiryDate": "10/29",
       "cvv": "123",
+      "cvvAmex": "1234",
       "line1": "Line 1",
       "line2": "Line 2 ( Optional )",
       "zipCode": "Zip Code"

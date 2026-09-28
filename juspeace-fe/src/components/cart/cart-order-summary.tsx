@@ -44,13 +44,14 @@ export function CartOrderSummary({
     subtotalCents + (items.length > 0 ? CART_SHIPPING_CENTS : 0);
   const compact =
     variant === 'shipping' || variant === 'payment' || variant === 'review';
+  const payment = variant === 'payment';
 
   return (
     <aside
       className={cn(
         'border border-black/10 bg-white',
         variant === 'cart' && 'lg:sticky lg:top-24',
-        compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6',
+        payment ? 'p-5 sm:p-6' : compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6',
       )}
     >
       <h2
@@ -64,13 +65,13 @@ export function CartOrderSummary({
         {t('cart.orderSummary')}
       </h2>
 
-      <ul className={cn(compact ? 'mt-3' : 'mt-4')}>
+      <ul className={cn(payment ? 'mt-5' : compact ? 'mt-3' : 'mt-4')}>
         {items.map((item) => (
           <li
             key={item.product.id}
             className={cn(
               'border-b border-black/10 last:border-b-0',
-              compact ? 'py-3' : 'py-4',
+              payment ? 'py-4' : compact ? 'py-3' : 'py-4',
             )}
           >
             <div className="flex items-start gap-2.5">
@@ -123,7 +124,7 @@ export function CartOrderSummary({
       <div
         className={cn(
           'border-y border-black/10',
-          compact ? 'mt-4 py-4' : 'mt-5 py-5',
+          payment ? 'mt-6 py-5' : compact ? 'mt-4 py-4' : 'mt-5 py-5',
         )}
       >
         <p
@@ -166,7 +167,9 @@ export function CartOrderSummary({
         className={cn(
           'font-mono text-black',
           compact
-            ? 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
+            ? payment
+              ? 'mt-6 space-y-3.5 text-[11px] sm:text-xs'
+              : 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
             : 'mt-6 space-y-4 text-xs sm:text-sm',
         )}
       >
@@ -189,7 +192,7 @@ export function CartOrderSummary({
         <div
           className={cn(
             'flex items-center justify-between border-t border-black/10 font-semibold',
-            compact ? 'pt-2 text-xs' : 'pt-3 text-[13px]',
+            payment ? 'pt-3.5 text-xs' : compact ? 'pt-2 text-xs' : 'pt-3 text-[13px]',
           )}
         >
           <dt>{t('cart.total')}</dt>
@@ -200,7 +203,7 @@ export function CartOrderSummary({
       <div
         className={cn(
           'flex gap-2.5 rounded-sm border border-black/10 bg-jp-light-gray',
-          compact ? 'mt-4 p-3' : 'mt-5 p-4',
+          payment ? 'mt-6 p-4' : compact ? 'mt-4 p-3' : 'mt-5 p-4',
         )}
       >
         <Image
@@ -221,7 +224,12 @@ export function CartOrderSummary({
         </p>
       </div>
 
-      <div className={cn('flex flex-col gap-2.5', compact ? 'mt-4' : 'mt-6')}>
+      <div
+        className={cn(
+          'flex flex-col gap-2.5',
+          payment ? 'mt-6' : compact ? 'mt-4' : 'mt-6',
+        )}
+      >
         {variant === 'shipping' ? (
           <button
             type="submit"

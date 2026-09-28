@@ -1,20 +1,28 @@
 'use client';
 
 import { useMemo, type ReactNode } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
 import {
   AlertTriangle,
-  Calendar,
   Check,
   ChevronDown,
   CreditCard,
 } from 'lucide-react';
 import {
+  detectCardBrand,
+  formatCardExpiry,
+  formatCardNumber,
+  formatCvv,
+  isCompleteCardNumber,
+} from '@/lib/checkout/card-input';
+import {
   createPaymentFormSchema,
   type PaymentFormValues,
   type PaymentMethod,
 } from '@/lib/checkout/payment-schema';
+import { VisaLogo } from '@/components/checkout/visa-logo';
 import { useLocale, useT } from '@/lib/i18n/locale-context';
 import { cn } from '@/lib/utils';
 import { useCheckoutStore } from '@/stores/checkout-store';
@@ -34,12 +42,28 @@ function fieldInputClassName(hasError?: boolean) {
 const PAYMENT_METHOD_OPTIONS: {
   id: PaymentMethod;
   labelKey: string;
-  brandClassName?: string;
+  markLabelKey: string;
+  logoSrc?: string;
 }[] = [
-  { id: 'card', labelKey: 'payment.methods.card' },
-  { id: 'apple_pay', labelKey: 'payment.methods.applePay' },
-  { id: 'google_pay', labelKey: 'payment.methods.googlePay' },
-  { id: 'paypal', labelKey: 'payment.methods.paypal' },
+  { id: 'card', labelKey: 'payment.methods.card', markLabelKey: 'payment.methods.card' },
+  {
+    id: 'apple_pay',
+    labelKey: 'payment.methods.applePay',
+    markLabelKey: 'payment.methods.pay',
+    logoSrc: '/payment-method-checkout/apple-pay-logo.png',
+  },
+  {
+    id: 'google_pay',
+    labelKey: 'payment.methods.googlePay',
+    markLabelKey: 'payment.methods.pay',
+    logoSrc: '/payment-method-checkout/google-pay-logo.png',
+  },
+  {
+    id: 'paypal',
+    labelKey: 'payment.methods.paypal',
+    markLabelKey: 'payment.methods.paypalMark',
+    logoSrc: '/payment-method-checkout/paypal-logo.png',
+  },
 ];
 
 const BILLING_COUNTRIES = [
@@ -114,60 +138,27 @@ function FieldError({ message }: { message: string }) {
 }
 
 function isLikelyValidCardNumber(value: string): boolean {
-  const digits = value.replace(/\D/g, '');
-  return digits.length >= 13 && digits.length <= 19;
+  return isCompleteCardNumber(value) && detectCardBrand(value) === 'visa';
 }
 
 function PaymentMethodCheckmark() {
   return (
-    <span className="absolute -right-px -top-px flex size-4 items-center justify-center rounded-full bg-black">
+    <span className="pointer-events-none absolute -right-1.5 -top-1.5 flex size-4 items-center justify-center rounded-full bg-black">
       <Check className="size-2.5 text-white" strokeWidth={3} aria-hidden />
     </span>
   );
 }
 
-function ApplePayMark() {
+function PaymentBrandLogo({ src }: { src: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="size-5 shrink-0"
+    <Image
+      src={src}
+      alt=""
+      width={22}
+      height={22}
+      className="size-[22px] shrink-0 object-contain"
       aria-hidden
-      fill="currentColor"
-    >
-      <path d="M16.34 12.67c-.02-2.14 1.75-3.17 1.83-3.22-1-.14-1.96.59-2.47.59-.52 0-1.31-.57-2.16-.55-1.11.02-2.14.65-2.71 1.65-1.16 2.01-.3 4.98.83 6.61.55.8 1.2 1.69 2.06 1.66.83-.03 1.14-.54 2.14-.54 1 0 1.28.54 2.15.52.89-.01 1.45-.81 1.99-1.62.63-.92.89-1.82.9-1.87-.02-.01-1.74-.67-1.76-2.65zm-1.66-4.86c.46-.56.77-1.33.69-2.1-.67.03-1.47.45-1.95 1.01-.43.5-.8 1.29-.7 2.05.74.06 1.5-.37 1.96-.96z" />
-    </svg>
-  );
-}
-
-function GooglePayMark() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5 shrink-0" aria-hidden>
-      <path
-        fill="#4285F4"
-        d="M21.8 12.227c0-.709-.064-1.39-.182-2.045H12v3.868h5.502a4.64 4.64 0 0 1-2.014 3.045v2.091h3.259c1.909-1.758 3.053-4.345 3.053-7.959z"
-      />
-      <path
-        fill="#34A853"
-        d="M12 22c2.7 0 4.964-.895 6.618-2.423l-3.259-2.091c-.905.605-2.064.964-3.359.964-2.582 0-4.773-1.745-5.555-4.091H3.18v2.159A9.996 9.996 0 0 0 12 22z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M6.445 13.359A5.985 5.985 0 0 1 6.14 12c0-.473.082-.932.223-1.359V8.482H3.18A9.996 9.996 0 0 0 2 12c0 1.614.386 3.141 1.068 4.518l3.377-2.159z"
-      />
-      <path
-        fill="#EA4335"
-        d="M12 5.864c1.468 0 2.786.505 3.823 1.496l2.868-2.868C16.955 2.864 14.695 2 12 2 8.091 2 4.818 4.137 3.18 7.482l3.377 2.159C7.227 7.609 9.418 5.864 12 5.864z"
-      />
-    </svg>
-  );
-}
-
-function PayPalMark() {
-  return (
-    <span className="font-display text-sm font-bold leading-none">
-      <span className="text-[#003087]">Pay</span>
-      <span className="text-[#009CDE]">Pal</span>
-    </span>
+    />
   );
 }
 
@@ -176,18 +167,21 @@ const BILLING_ZIP_CODES = ['60601', '60602', '60603'] as const;
 function PaymentMethodButton({
   selected,
   onClick,
+  label,
   children,
 }: {
   selected: boolean;
   onClick: () => void;
+  label: string;
   children: ReactNode;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      aria-label={label}
       className={cn(
-        'relative flex h-11 w-full items-center justify-center gap-2 rounded-none border px-2 text-center transition-colors sm:h-12 sm:gap-2.5 sm:px-3',
+        'relative inline-flex h-11 w-auto items-center justify-center gap-2 rounded-none border px-3 transition-colors sm:h-12 sm:gap-2.5 sm:px-3.5',
         selected
           ? 'border-2 border-black'
           : 'border border-black/10 hover:border-black/30',
@@ -272,7 +266,7 @@ export function PaymentForm() {
 
         <form.Field name="paymentMethod">
           {(field) => (
-            <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-2.5 sm:gap-3">
               {PAYMENT_METHOD_OPTIONS.map((option) => {
                 const selected = field.state.value === option.id;
 
@@ -280,38 +274,20 @@ export function PaymentForm() {
                   <PaymentMethodButton
                     key={option.id}
                     selected={selected}
+                    label={t(option.labelKey)}
                     onClick={() => field.handleChange(option.id)}
                   >
-                    {option.id === 'card' ? (
-                      <>
-                        <CreditCard
-                          className="size-4 shrink-0 text-black sm:size-[18px]"
-                          aria-hidden
-                        />
-                        <span className="font-display text-[10px] font-semibold leading-tight text-black sm:text-[11px]">
-                          {t(option.labelKey)}
-                        </span>
-                      </>
-                    ) : option.id === 'apple_pay' ? (
-                      <>
-                        <ApplePayMark />
-                        <span className="font-display text-sm font-semibold text-black">
-                          Pay
-                        </span>
-                      </>
-                    ) : option.id === 'google_pay' ? (
-                      <>
-                        <GooglePayMark />
-                        <span className="font-display text-sm font-semibold text-black">
-                          Pay
-                        </span>
-                      </>
+                    {option.logoSrc ? (
+                      <PaymentBrandLogo src={option.logoSrc} />
                     ) : (
-                      <>
-                        <PayPalMark />
-                        <span className="sr-only">{t(option.labelKey)}</span>
-                      </>
+                      <CreditCard
+                        className="size-5 shrink-0 text-black"
+                        aria-hidden
+                      />
                     )}
+                    <span className="whitespace-nowrap font-display text-sm font-medium leading-none text-black">
+                      {t(option.markLabelKey)}
+                    </span>
                   </PaymentMethodButton>
                 );
               })}
@@ -387,20 +363,20 @@ export function PaymentForm() {
                               value={field.state.value}
                               onBlur={field.handleBlur}
                               onChange={(event) =>
-                                field.handleChange(event.target.value)
+                                field.handleChange(
+                                  formatCardNumber(event.target.value),
+                                )
                               }
                               placeholder={t('payment.placeholders.cardNumber')}
                               aria-invalid={Boolean(error)}
                               className={cn(
                                 fieldInputClassName(Boolean(error)),
-                                'pr-16',
+                                'pr-20',
                               )}
                             />
                             {showCardBadge ? (
-                              <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-1">
-                                <span className="font-display text-[10px] font-bold tracking-wide text-[#1A1F71] sm:text-[11px]">
-                                  VISA
-                                </span>
+                              <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-1.5">
+                                <VisaLogo alt={t('payment.visa')} />
                                 <span className="flex size-3.5 items-center justify-center rounded-full bg-black">
                                   <Check
                                     className="size-2 text-white"
@@ -434,22 +410,21 @@ export function PaymentForm() {
                             <input
                               id={field.name}
                               name={field.name}
+                              inputMode="numeric"
                               autoComplete="cc-exp"
                               value={field.state.value}
                               onBlur={field.handleBlur}
                               onChange={(event) =>
-                                field.handleChange(event.target.value)
+                                field.handleChange(
+                                  formatCardExpiry(
+                                    event.target.value,
+                                    field.state.value,
+                                  ),
+                                )
                               }
                               placeholder={t('payment.placeholders.expiryDate')}
                               aria-invalid={Boolean(error)}
-                              className={cn(
-                                fieldInputClassName(Boolean(error)),
-                                'pr-9',
-                              )}
-                            />
-                            <Calendar
-                              className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-black/45"
-                              aria-hidden
+                              className={fieldInputClassName(Boolean(error))}
                             />
                           </div>
                         </FormFieldStack>
@@ -457,38 +432,51 @@ export function PaymentForm() {
                     }}
                   </form.Field>
 
-                  <form.Field name="cvv">
-                    {(field) => {
-                      const error = fieldErrorText(
-                        field.state.meta.errors,
-                        t('common.error'),
-                      );
+                  <form.Subscribe
+                    selector={(state) => state.values.cardNumber}
+                  >
+                    {(cardNumber) => (
+                      <form.Field name="cvv">
+                        {(field) => {
+                          const error = fieldErrorText(
+                            field.state.meta.errors,
+                            t('common.error'),
+                          );
+                          const brand = detectCardBrand(cardNumber);
 
-                      return (
-                        <FormFieldStack
-                          label={t('payment.fields.cvv')}
-                          htmlFor={field.name}
-                          required
-                          error={error}
-                        >
-                          <input
-                            id={field.name}
-                            name={field.name}
-                            inputMode="numeric"
-                            autoComplete="cc-csc"
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(event) =>
-                              field.handleChange(event.target.value)
-                            }
-                            placeholder={t('payment.placeholders.cvv')}
-                            aria-invalid={Boolean(error)}
-                            className={fieldInputClassName(Boolean(error))}
-                          />
-                        </FormFieldStack>
-                      );
-                    }}
-                  </form.Field>
+                          return (
+                            <FormFieldStack
+                              label={t('payment.fields.cvv')}
+                              htmlFor={field.name}
+                              required
+                              error={error}
+                            >
+                              <input
+                                id={field.name}
+                                name={field.name}
+                                inputMode="numeric"
+                                autoComplete="cc-csc"
+                                value={field.state.value}
+                                onBlur={field.handleBlur}
+                                onChange={(event) =>
+                                  field.handleChange(
+                                    formatCvv(event.target.value, brand),
+                                  )
+                                }
+                                placeholder={
+                                  brand === 'amex'
+                                    ? t('payment.placeholders.cvvAmex')
+                                    : t('payment.placeholders.cvv')
+                                }
+                                aria-invalid={Boolean(error)}
+                                className={fieldInputClassName(Boolean(error))}
+                              />
+                            </FormFieldStack>
+                          );
+                        }}
+                      </form.Field>
+                    )}
+                  </form.Subscribe>
                 </div>
 
                 <form.Field name="saveCard">

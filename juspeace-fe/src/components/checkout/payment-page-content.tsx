@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { CartOrderSummary } from '@/components/cart/cart-order-summary';
@@ -33,14 +31,6 @@ export function PaymentPageContent() {
 
   return (
     <div className="mx-auto w-full max-w-[1280px] min-[1680px]:max-w-none">
-      <Link
-        href="/checkout"
-        className="inline-flex items-center gap-1 font-mono text-[11px] text-jp-muted transition-colors hover:text-black sm:text-xs"
-      >
-        <ArrowLeft className="size-3" aria-hidden />
-        {t('payment.back')}
-      </Link>
-
       <header>
         <h1 className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] font-semibold leading-tight text-black">
           {t('payment.title')}
