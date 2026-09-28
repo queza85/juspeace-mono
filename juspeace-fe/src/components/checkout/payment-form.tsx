@@ -26,7 +26,7 @@ function fieldInputClassName(hasError?: boolean) {
   return cn(
     inputClassName,
     hasError
-      ? 'border-jp-stock-red focus:border-jp-stock-red'
+      ? 'border-jp-accent-red focus:border-jp-accent-red'
       : 'border-black/15 focus:border-black/40',
   );
 }
@@ -105,7 +105,7 @@ function FieldError({ message }: { message: string }) {
   return (
     <p
       role="alert"
-      className="mt-1.5 flex items-start gap-1 font-mono text-[11px] leading-snug text-jp-stock-red sm:text-xs"
+      className="mt-1.5 flex items-start gap-1 font-mono text-[11px] leading-snug text-jp-accent-red sm:text-xs"
     >
       <AlertTriangle className="mt-px size-3 shrink-0" aria-hidden />
       <span>{message}</span>

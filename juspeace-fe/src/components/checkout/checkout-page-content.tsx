@@ -23,9 +23,9 @@ export function CheckoutPageContent() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1280px]">
+    <div className="mx-auto w-full max-w-[1280px] min-[1680px]:max-w-none">
       <header>
-        <h1 className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] font-semibold leading-tight text-black">
+        <h1 className="font-display text-[clamp(1.625rem,2.6vw,2.125rem)] font-bold leading-tight text-black">
           {t('checkout.title')}
         </h1>
         <p className="mt-1.5 font-mono text-[11px] text-jp-muted sm:text-xs">

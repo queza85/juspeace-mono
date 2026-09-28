@@ -20,7 +20,7 @@ function fieldInputClassName(hasError?: boolean) {
   return cn(
     inputClassName,
     hasError
-      ? 'border-jp-stock-red focus:border-jp-stock-red'
+      ? 'border-jp-accent-red focus:border-jp-accent-red'
       : 'border-black/15 focus:border-black/40',
   );
 }
@@ -85,7 +85,7 @@ function FieldError({ message }: { message: string }) {
   return (
     <p
       role="alert"
-      className="mt-1.5 flex items-start gap-1 font-mono text-[11px] leading-snug text-jp-stock-red sm:text-xs"
+      className="mt-1.5 flex items-start gap-1 font-mono text-[11px] leading-snug text-jp-accent-red sm:text-xs"
     >
       <AlertTriangle className="mt-px size-3 shrink-0" aria-hidden />
       <span>{message}</span>
@@ -132,13 +132,13 @@ export function ShippingForm() {
         void form.handleSubmit();
       }}
     >
-      <section className="border border-black/10 p-5 sm:p-6">
-        <h2 className="font-display text-sm font-semibold text-black">
+      <section className="border border-black/10 px-5 py-6 sm:px-6 sm:max-[1679px]:py-7 min-[1680px]:py-8">
+        <h2 className="font-display text-lg font-bold text-black">
           {t('checkout.shippingDetails')}
         </h2>
 
-        <div className="mt-4 space-y-5">
-          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="mt-4 space-y-5 min-[1680px]:mt-7 min-[1680px]:space-y-8">
+          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)] min-[1680px]:gap-8">
             <form.Field name="name">
               {(field) => {
                 const nameError = fieldErrorText(
@@ -163,7 +163,7 @@ export function ShippingForm() {
                       aria-invalid={Boolean(nameError)}
                       className={cn(
                         fieldInputClassName(Boolean(nameError)),
-                        'mt-1.5',
+                        'mt-1.5 min-[1680px]:mt-3',
                       )}
                     />
                     {nameError ? <FieldError message={nameError} /> : null}
@@ -186,7 +186,7 @@ export function ShippingForm() {
 
                   return (
                     <>
-                      <div className="mt-1.5 flex items-center gap-2">
+                      <div className="mt-1.5 flex items-center gap-2 min-[1680px]:mt-3">
                         <form.Field name="phoneCountryCode">
                           {(field) => {
                             const selectedOption =
@@ -279,7 +279,7 @@ export function ShippingForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)] min-[1680px]:gap-8">
             <form.Field name="address">
               {(field) => {
                 const addressError = fieldErrorText(
@@ -300,7 +300,7 @@ export function ShippingForm() {
                       onChange={(event) => field.handleChange(event.target.value)}
                       placeholder={t('checkout.placeholders.address')}
                       aria-invalid={Boolean(addressError)}
-                      className={cn(fieldInputClassName(Boolean(addressError)), 'mt-1.5')}
+                      className={cn(fieldInputClassName(Boolean(addressError)), 'mt-1.5 min-[1680px]:mt-3')}
                     />
                     {addressError ? (
                       <FieldError message={addressError} />
@@ -330,7 +330,7 @@ export function ShippingForm() {
                       onChange={(event) => field.handleChange(event.target.value)}
                       placeholder={t('checkout.placeholders.city')}
                       aria-invalid={Boolean(cityError)}
-                      className={cn(fieldInputClassName(Boolean(cityError)), 'mt-1.5')}
+                      className={cn(fieldInputClassName(Boolean(cityError)), 'mt-1.5 min-[1680px]:mt-3')}
                     />
                     {cityError ? <FieldError message={cityError} /> : null}
                   </div>
@@ -360,7 +360,7 @@ export function ShippingForm() {
                       aria-invalid={Boolean(postalCodeError)}
                       className={cn(
                         fieldInputClassName(Boolean(postalCodeError)),
-                        'mt-1.5',
+                        'mt-1.5 min-[1680px]:mt-3',
                       )}
                     />
                     {postalCodeError ? (
@@ -388,7 +388,7 @@ export function ShippingForm() {
                   placeholder={t('checkout.placeholders.deliveryNote')}
                   className={cn(
                     fieldInputClassName(false),
-                    'mt-1.5 h-20 resize-none overflow-auto py-2',
+                    'mt-1.5 h-20 resize-none overflow-auto py-2 min-[1680px]:mt-3',
                   )}
                 />
               </div>
@@ -424,19 +424,19 @@ export function ShippingForm() {
         </div>
       </section>
 
-      <section className="border border-black/10 p-5 sm:p-6">
-        <h2 className="font-display text-sm font-semibold text-black">
+      <section className="border border-black/10 px-5 py-6 sm:px-6 sm:max-[1679px]:py-7 min-[1680px]:py-8">
+        <h2 className="font-display text-lg font-bold text-black">
           {t('checkout.shippingMethod')}
         </h2>
 
         <form.Field name="shippingMethod">
           {(field) => (
-            <div className="mt-4 space-y-2">
+            <div className="mt-4 space-y-2 min-[1680px]:mt-7 min-[1680px]:space-y-4">
               <button
                 type="button"
                 onClick={() => field.handleChange('standard')}
                 className={cn(
-                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors',
+                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors min-[1680px]:py-3.5',
                   field.state.value === 'standard'
                     ? 'border-black'
                     : 'border-black/10 hover:border-black/30',
@@ -474,7 +474,7 @@ export function ShippingForm() {
                       {t('checkout.free')}
                     </span>
                   </div>
-                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs">
+                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs min-[1680px]:mt-2">
                     {t('checkout.methods.standard.description')}
                   </p>
                 </div>
@@ -484,7 +484,7 @@ export function ShippingForm() {
                 type="button"
                 onClick={() => field.handleChange('pickup')}
                 className={cn(
-                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors',
+                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors min-[1680px]:py-3.5',
                   field.state.value === 'pickup'
                     ? 'border-black'
                     : 'border-black/10 hover:border-black/30',
@@ -522,7 +522,7 @@ export function ShippingForm() {
                       {t('checkout.free')}
                     </span>
                   </div>
-                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs">
+                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs min-[1680px]:mt-2">
                     {t('checkout.methods.pickup.description')}
                   </p>
                 </div>

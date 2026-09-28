@@ -16,7 +16,7 @@ export default async function CheckoutSuccessPage() {
     <>
       <LandingHeader variant="light" />
       <article className="min-h-[60vh] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10 min-[1680px]:max-w-[1560px]">
           <OrderSuccessContent />
         </div>
       </article>

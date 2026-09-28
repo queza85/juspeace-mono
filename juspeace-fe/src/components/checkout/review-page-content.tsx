@@ -72,7 +72,7 @@ export function ReviewPageContent() {
   const showCardDetails = payment.paymentMethod === 'card';
 
   return (
-    <div className="mx-auto w-full max-w-[1280px]">
+    <div className="mx-auto w-full max-w-[1280px] min-[1680px]:max-w-none">
       <Link
         href="/checkout/payment"
         className="inline-flex items-center gap-1 font-mono text-[11px] text-jp-muted transition-colors hover:text-black sm:text-xs"

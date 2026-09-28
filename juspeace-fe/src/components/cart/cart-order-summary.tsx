@@ -55,8 +55,10 @@ export function CartOrderSummary({
     >
       <h2
         className={cn(
-          'font-display font-semibold text-black',
-          compact ? 'text-sm' : 'text-base sm:text-lg',
+          'font-display text-black',
+          compact
+            ? 'text-lg font-bold'
+            : 'text-base font-semibold sm:text-lg',
         )}
       >
         {t('cart.orderSummary')}

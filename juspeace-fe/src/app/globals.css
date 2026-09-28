@@ -46,6 +46,7 @@
   --color-jp-card: var(--jp-card);
   --color-jp-accent-teal: var(--jp-accent-teal);
   --color-jp-stock-red: var(--jp-stock-red);
+  --color-jp-accent-red: var(--Accents-Red);
   --color-jp-border-hero: var(--jp-border-hero);
   --color-jp-muted: var(--jp-muted);
   --color-jp-light-gray: var(--jp-light-gray);
@@ -97,6 +98,7 @@
   --jp-card: rgba(231, 231, 231, 0.42);
   --jp-accent-teal: #33b194;
   --jp-stock-red: #b13333;
+  --Accents-Red: #ff383c;
   --jp-border-hero: rgba(255, 255, 255, 0.6);
   --jp-muted: rgba(0, 0, 0, 0.6);
   --jp-light-gray: #f5f5f5;

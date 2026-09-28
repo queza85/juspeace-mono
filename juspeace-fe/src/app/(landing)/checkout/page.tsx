@@ -20,7 +20,7 @@ export default async function CheckoutPage() {
     <>
       <LandingHeader variant="light" />
       <article className="min-h-[60vh] bg-white">
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
+        <div className="mx-auto w-full max-w-[1280px] px-5 pt-8 pb-[226px] sm:px-8 lg:px-12 lg:pt-10 lg:pb-[374px] xl:px-[75px] min-[1680px]:max-w-[1560px]">
           <Link
             href="/cart"
             className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-black underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-sm"
