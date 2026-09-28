@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Truck } from 'lucide-react';
 import { useState } from 'react';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import { resolveCartItemImage } from '@/lib/products/cart-item-image';
@@ -99,7 +98,7 @@ export function CartOrderSummary({
                   </p>
                   <p
                     className={cn(
-                      'shrink-0 font-display font-semibold text-black',
+                      'shrink-0 font-display font-bold text-black',
                       compact ? 'text-xs' : 'text-sm',
                     )}
                   >
@@ -121,8 +120,8 @@ export function CartOrderSummary({
 
       <div
         className={cn(
-          'border-t border-black/10',
-          compact ? 'mt-4 pt-4' : 'mt-5 pt-5',
+          'border-y border-black/10',
+          compact ? 'mt-4 py-4' : 'mt-5 py-5',
         )}
       >
         <p
@@ -163,8 +162,10 @@ export function CartOrderSummary({
 
       <dl
         className={cn(
-          'space-y-1.5 font-mono text-black',
-          compact ? 'mt-4 text-[11px] sm:text-xs' : 'mt-6 text-xs sm:text-sm',
+          'font-mono text-black',
+          compact
+            ? 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
+            : 'mt-6 space-y-4 text-xs sm:text-sm',
         )}
       >
         <div className="flex items-center justify-between">
@@ -186,7 +187,7 @@ export function CartOrderSummary({
         <div
           className={cn(
             'flex items-center justify-between border-t border-black/10 font-semibold',
-            compact ? 'pt-2 text-xs' : 'pt-3 text-sm sm:text-base',
+            compact ? 'pt-2 text-xs' : 'pt-3 text-[13px]',
           )}
         >
           <dt>{t('cart.total')}</dt>
@@ -200,21 +201,21 @@ export function CartOrderSummary({
           compact ? 'mt-4 p-3' : 'mt-5 p-4',
         )}
       >
-        <Truck
+        <Image
+          src="/product-detail/express-delivery%201.png"
+          alt=""
+          width={28}
+          height={28}
           className={cn(
-            'mt-0.5 shrink-0 text-black',
-            compact ? 'size-3.5' : 'size-4',
+            'mt-0.5 shrink-0 object-contain',
+            compact ? 'size-5' : 'size-7',
           )}
-          aria-hidden
         />
-        <p
-          className={cn(
-            'font-mono leading-relaxed text-black underline underline-offset-2',
-            compact ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm',
-          )}
-        >
-          {t('cart.deliveryEstimateTitle')}{' '}
-          <span>{t('cart.deliveryEstimateBody')}</span>
+        <p className="font-mono text-[11px] leading-relaxed text-black">
+          {t('cart.deliveryEstimateTitle')}
+          <span className="mt-0.5 block font-bold underline underline-offset-2">
+            {t('cart.deliveryEstimateBody')}
+          </span>
         </p>
       </div>
 
