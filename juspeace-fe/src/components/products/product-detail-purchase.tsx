@@ -82,7 +82,7 @@ export function ProductDetailPurchase({
   };
 
   return (
-    <div className={cn('flex min-h-0 min-w-0 flex-col', className)}>
+    <div className={cn('flex min-h-0 min-w-0 w-full flex-col lg:w-[calc(100%-10px)] 2xl:w-full', className)}>
       <div className="flex items-center justify-between gap-4">
         <h1 className="min-w-0 font-display text-[clamp(1.375rem,2vw,1.75rem)] font-black leading-[1.15] tracking-tight text-black">
           {displayName}
@@ -108,7 +108,7 @@ export function ProductDetailPurchase({
         {formatPdpPrice(formatPrice, product.priceCents, product.currency)}
       </p>
 
-      <p className="mt-6 max-w-[420px] font-mono text-xs leading-[1.75] text-black sm:text-[13px] sm:leading-[1.8]">
+      <p className="mt-6 max-w-[420px] font-sans text-base font-normal not-italic leading-[38px] tracking-normal text-black">
         {tagline}
       </p>
 

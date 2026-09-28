@@ -66,13 +66,20 @@ function AccordionCard({
 function FactItem({
   icon,
   label,
+  iconClassName = 'size-6',
 }: {
   icon: ReactNode;
   label: string;
+  iconClassName?: string;
 }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="flex size-6 shrink-0 items-center justify-center text-black">
+      <span
+        className={cn(
+          'flex shrink-0 items-center justify-center text-black',
+          iconClassName,
+        )}
+      >
         {icon}
       </span>
       <span className="font-sans text-xs leading-snug text-black sm:text-[13px]">
@@ -86,7 +93,7 @@ export function ProductDetailPurchaseInfo() {
   const t = useT();
 
   return (
-    <div className="mt-8 flex flex-col gap-3">
+    <div className="mt-8 flex w-full flex-col gap-3">
       <AccordionCard
         id="authenticity"
         title={t('products.detail.authenticity.title')}
@@ -98,31 +105,34 @@ export function ProductDetailPurchaseInfo() {
         <p className="mt-5 max-w-[28rem] text-left font-sans text-sm leading-[1.7] text-black">
           {t('products.detail.authenticity.body')}
         </p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6">
           <FactItem
+            iconClassName="size-9"
             icon={
               <Image
-                src="/icons/authentic-product.png"
+                src="/icons/authentic-product.svg"
                 alt=""
-                width={24}
-                height={24}
-                className="size-6 object-contain"
+                width={36}
+                height={36}
+                className="size-9 object-contain"
               />
             }
             label={t('products.detail.authenticity.authentic')}
           />
           <FactItem
-            icon={<OfficialRecordIcon size={24} className="size-6" />}
+            iconClassName="size-9"
+            icon={<OfficialRecordIcon size={36} className="size-9" />}
             label={t('products.detail.authenticity.record')}
           />
           <FactItem
+            iconClassName="size-9"
             icon={
               <Image
-                src="/icons/registry-juespeace.png"
+                src="/icons/registry-juspeace.svg"
                 alt=""
-                width={24}
-                height={24}
-                className="size-6 object-contain"
+                width={36}
+                height={36}
+                className="size-9 object-contain"
               />
             }
             label={t('products.detail.authenticity.registry')}

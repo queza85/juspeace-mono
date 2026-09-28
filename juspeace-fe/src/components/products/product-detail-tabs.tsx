@@ -11,10 +11,6 @@ import { cn } from '@/lib/utils';
 
 type TabKey = 'story' | 'closeUp' | 'productRegistration' | 'reviews';
 
-interface ProductDetailTabsProps {
-  variantName: string;
-}
-
 const TAB_KEYS: TabKey[] = [
   'story',
   'closeUp',
@@ -22,9 +18,7 @@ const TAB_KEYS: TabKey[] = [
   'reviews',
 ];
 
-export function ProductDetailTabs({
-  variantName,
-}: ProductDetailTabsProps) {
+export function ProductDetailTabs() {
   const t = useT();
   const [activeTab, setActiveTab] = useState<TabKey>('story');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -66,7 +60,7 @@ export function ProductDetailTabs({
   const renderTabPanel = () => {
     switch (activeTab) {
       case 'story':
-        return <ProductDetailStoryTab variantName={variantName} />;
+        return <ProductDetailStoryTab />;
       case 'closeUp':
         return (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:gap-5">
@@ -98,7 +92,7 @@ export function ProductDetailTabs({
   };
 
   return (
-    <section className="mx-auto mb-48 mt-36 max-w-[1080px] lg:mb-64 lg:mt-44 xl:mt-52">
+    <section className="mx-auto mb-48 mt-36 w-full lg:mb-64 lg:mt-44 lg:w-[92%] xl:mt-52">
       <div className="relative border-b border-black/15 pb-5">
         <div
           ref={tabListRef}

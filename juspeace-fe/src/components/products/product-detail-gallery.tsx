@@ -15,8 +15,8 @@ interface ProductDetailGalleryProps {
   productName: string;
 }
 
-const PDP_MAIN_IMAGE_SIZE = 480;
-const PDP_MAIN_IMAGE_HEIGHT = 600;
+const PDP_MAIN_IMAGE_SIZE = 560;
+const PDP_MAIN_IMAGE_HEIGHT = 747;
 const PDP_THUMBNAIL_COUNT = 3;
 
 export function ProductDetailGallery({
@@ -31,15 +31,15 @@ export function ProductDetailGallery({
   const thumbnails = images.slice(0, PDP_THUMBNAIL_COUNT);
 
   return (
-    <div className="flex w-full max-w-[480px] flex-col gap-3">
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[10px] border border-solid border-[#E7E9EB] bg-white">
+    <div className="flex w-full max-w-[520px] flex-col gap-3 2xl:max-w-[760px]">
+      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[10px] border border-solid border-[#E7E9EB] bg-white">
         <Image
           src={activeSrc}
           alt={productName}
           width={PDP_MAIN_IMAGE_SIZE}
           height={PDP_MAIN_IMAGE_HEIGHT}
           className="h-full w-full object-cover"
-          sizes="(max-width: 1024px) 100vw, 480px"
+          sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 520px, 760px"
           priority
         />
       </div>
@@ -55,7 +55,7 @@ export function ProductDetailGallery({
             aria-current={activeIndex === index ? 'true' : undefined}
             onClick={() => setActiveIndex(index)}
             className={cn(
-              'relative aspect-square w-[68px] shrink-0 overflow-hidden rounded-[4px] border bg-white sm:w-[72px]',
+              'relative aspect-square w-[80px] shrink-0 overflow-hidden rounded-[4px] border bg-white sm:w-[88px]',
               activeIndex === index
                 ? 'border-black'
                 : 'border-black/10 opacity-80 hover:opacity-100',

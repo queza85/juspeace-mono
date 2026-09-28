@@ -48,7 +48,7 @@ function LocaleFlagButton({ className }: { className?: string }) {
 }
 
 /** Shared header row height for logo / nav / bag — one optical line. */
-const CONTROL_H = 'h-10';
+const CONTROL_H = 'h-11';
 
 function HeaderUtilityCard({ light }: { light?: boolean }) {
   const t = useT();
@@ -59,7 +59,7 @@ function HeaderUtilityCard({ light }: { light?: boolean }) {
       <Link
         href="/cart"
         className={cn(
-          'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 px-3.5 font-serif text-[13px] leading-none tracking-[0.04em]',
+          'jp-utility-link box-border flex items-center gap-1.5 border border-r-0 px-3.5 font-serif text-sm leading-none tracking-[0.04em]',
           CONTROL_H,
           light
             ? 'border-black/20 text-black/70 hover:border-black hover:bg-black hover:text-white'
@@ -118,10 +118,10 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
       )}
     >
       {/* Single grid row — logo | nav | utilities, shared vertical center */}
-      <div className="relative mx-auto grid h-20 max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-[92px] sm:gap-6 sm:px-8 lg:px-12 xl:px-[75px] [@media(max-height:1000px)]:h-[72px]">
+      <div className="relative mx-auto grid h-[88px] max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-[108px] sm:gap-6 sm:px-8 lg:h-[112px] lg:px-12 xl:px-[75px]">
         <Link
           href="/"
-          className="relative block size-10 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-11 [@media(max-height:1000px)]:size-10"
+          className="relative block size-11 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-12"
           aria-label={t('common.brand')}
         >
           <Image
@@ -134,7 +134,7 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
           />
         </Link>
 
-        <nav className="col-start-2 hidden items-center justify-center gap-8 font-serif text-[14px] leading-none tracking-[1.6px] lg:flex xl:gap-12 xl:text-[15px] xl:tracking-[1.8px] [@media(max-height:1000px)]:xl:gap-10 [@media(max-height:1000px)]:xl:text-[14px]">
+        <nav className="col-start-2 hidden items-center justify-center gap-8 font-serif text-[15px] leading-none tracking-[1.6px] lg:flex xl:gap-12 xl:text-[16px] xl:tracking-[1.8px]">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.key}

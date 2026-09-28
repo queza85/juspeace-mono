@@ -81,8 +81,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <>
       <LandingHeader variant="light" />
       <article className="bg-white">
-        <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
-          <div className="mx-auto max-w-[1080px]">
+        <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-6 lg:px-8 lg:py-10 xl:px-10">
+          <div className="mx-auto w-[80vw] max-w-full">
             <ProductDetailPageIntro
               collectionLabel={t('products.detail.breadcrumbCollection')}
               productName={displayName}
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               bannerText={t('products.detail.registrationBanner')}
             />
 
-            <section className="grid grid-cols-1 gap-8 lg:grid-cols-[480px_520px] lg:items-stretch lg:gap-x-20">
+            <section className="grid grid-cols-1 gap-8 lg:grid-cols-[520px_minmax(0,1fr)] lg:items-start lg:gap-x-16 2xl:grid-cols-[minmax(560px,760px)_580px]">
               <div className="lg:self-start">
                 <ProductDetailGallery
                   variantKey={variantKey}
@@ -105,7 +105,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               />
             </section>
 
-            <ProductDetailTabs variantName={displayName} />
+            <ProductDetailTabs />
           </div>
         </div>
       </article>
