@@ -45,13 +45,20 @@ export function CartOrderSummary({
   const compact =
     variant === 'shipping' || variant === 'payment' || variant === 'review';
   const payment = variant === 'payment';
+  const review = variant === 'review';
 
   return (
     <aside
       className={cn(
         'border border-black/10 bg-white',
         variant === 'cart' && 'lg:sticky lg:top-24',
-        payment ? 'p-5 sm:p-6' : compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6',
+        review
+          ? 'p-6 sm:p-7'
+          : payment
+            ? 'p-5 sm:p-6'
+            : compact
+              ? 'p-4 sm:p-5'
+              : 'p-5 sm:p-6',
       )}
     >
       <h2
@@ -65,13 +72,13 @@ export function CartOrderSummary({
         {t('cart.orderSummary')}
       </h2>
 
-      <ul className={cn(payment ? 'mt-5' : compact ? 'mt-3' : 'mt-4')}>
+      <ul className={cn(review ? 'mt-6' : payment ? 'mt-5' : compact ? 'mt-3' : 'mt-4')}>
         {items.map((item) => (
           <li
             key={item.product.id}
             className={cn(
               'border-b border-black/10 last:border-b-0',
-              payment ? 'py-4' : compact ? 'py-3' : 'py-4',
+              review ? 'py-5' : payment ? 'py-4' : compact ? 'py-3' : 'py-4',
             )}
           >
             <div className="flex items-start gap-2.5">
@@ -124,7 +131,13 @@ export function CartOrderSummary({
       <div
         className={cn(
           'border-y border-black/10',
-          payment ? 'mt-6 py-5' : compact ? 'mt-4 py-4' : 'mt-5 py-5',
+          review
+            ? 'mt-7 py-6'
+            : payment
+              ? 'mt-6 py-5'
+              : compact
+                ? 'mt-4 py-4'
+                : 'mt-5 py-5',
         )}
       >
         <p
@@ -166,11 +179,13 @@ export function CartOrderSummary({
       <dl
         className={cn(
           'font-mono text-black',
-          compact
-            ? payment
-              ? 'mt-6 space-y-3.5 text-[11px] sm:text-xs'
-              : 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
-            : 'mt-6 space-y-4 text-xs sm:text-sm',
+          review
+            ? 'mt-7 space-y-4 text-[11px] sm:text-xs'
+            : compact
+              ? payment
+                ? 'mt-6 space-y-3.5 text-[11px] sm:text-xs'
+                : 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
+              : 'mt-6 space-y-4 text-xs sm:text-sm',
         )}
       >
         <div className="flex items-center justify-between">
@@ -192,7 +207,13 @@ export function CartOrderSummary({
         <div
           className={cn(
             'flex items-center justify-between border-t border-black/10 font-semibold',
-            payment ? 'pt-3.5 text-xs' : compact ? 'pt-2 text-xs' : 'pt-3 text-[13px]',
+            review
+              ? 'pt-4 text-xs'
+              : payment
+                ? 'pt-3.5 text-xs'
+                : compact
+                  ? 'pt-2 text-xs'
+                  : 'pt-3 text-[13px]',
           )}
         >
           <dt>{t('cart.total')}</dt>
@@ -203,7 +224,7 @@ export function CartOrderSummary({
       <div
         className={cn(
           'flex gap-2.5 rounded-sm border border-black/10 bg-jp-light-gray',
-          payment ? 'mt-6 p-4' : compact ? 'mt-4 p-3' : 'mt-5 p-4',
+          review ? 'mt-7 p-4' : payment ? 'mt-6 p-4' : compact ? 'mt-4 p-3' : 'mt-5 p-4',
         )}
       >
         <Image
@@ -227,7 +248,7 @@ export function CartOrderSummary({
       <div
         className={cn(
           'flex flex-col gap-2.5',
-          payment ? 'mt-6' : compact ? 'mt-4' : 'mt-6',
+          review ? 'mt-7' : payment ? 'mt-6' : compact ? 'mt-4' : 'mt-6',
         )}
       >
         {variant === 'shipping' ? (
