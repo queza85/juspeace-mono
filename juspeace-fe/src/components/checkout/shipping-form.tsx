@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useMemo, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from '@tanstack/react-form';
-import { AlertTriangle, Check, ChevronDown, MapPin, Package } from 'lucide-react';
+import { AlertTriangle, Check, ChevronDown } from 'lucide-react';
 import {
   createShippingFormSchema,
   type ShippingFormValues,
@@ -45,7 +45,7 @@ function FieldLabel({
   children: ReactNode;
 }) {
   const labelClassName = cn(
-    'font-display text-xs font-semibold leading-none text-black',
+    'block font-display text-xs font-semibold leading-none text-black',
     className,
   );
 
@@ -138,7 +138,7 @@ export function ShippingForm() {
         </h2>
 
         <div className="mt-4 space-y-5">
-          <div className="grid grid-cols-1 gap-x-5 gap-y-1.5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)]">
             <form.Field name="name">
               {(field) => {
                 const nameError = fieldErrorText(
@@ -147,41 +147,33 @@ export function ShippingForm() {
                 );
 
                 return (
-                  <>
-                    <FieldLabel
-                      htmlFor={field.name}
-                      required
-                      className="sm:col-start-1 sm:row-start-1"
-                    >
+                  <div>
+                    <FieldLabel htmlFor={field.name} required>
                       {t('checkout.fields.name')}
                     </FieldLabel>
-                    <div className="sm:col-start-1 sm:row-start-2">
-                      <input
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(event) =>
-                          field.handleChange(event.target.value)
-                        }
-                        placeholder={t('checkout.placeholders.name')}
-                        aria-invalid={Boolean(nameError)}
-                        className={fieldInputClassName(Boolean(nameError))}
-                      />
-                      {nameError ? <FieldError message={nameError} /> : null}
-                    </div>
-                  </>
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) =>
+                        field.handleChange(event.target.value)
+                      }
+                      placeholder={t('checkout.placeholders.name')}
+                      aria-invalid={Boolean(nameError)}
+                      className={cn(
+                        fieldInputClassName(Boolean(nameError)),
+                        'mt-1.5',
+                      )}
+                    />
+                    {nameError ? <FieldError message={nameError} /> : null}
+                  </div>
                 );
               }}
             </form.Field>
 
-            <FieldLabel
-              required
-              className="sm:col-start-2 sm:row-start-1"
-            >
-              {t('checkout.fields.phoneNumber')}
-            </FieldLabel>
-            <div className="sm:col-start-2 sm:row-start-2">
+            <div className="lg:col-span-2">
+              <FieldLabel required>{t('checkout.fields.phoneNumber')}</FieldLabel>
               <form.Subscribe
                 selector={(state) => state.fieldMeta.phoneNumber?.errors}
               >
@@ -194,7 +186,7 @@ export function ShippingForm() {
 
                   return (
                     <>
-                      <div className="flex items-center gap-2">
+                      <div className="mt-1.5 flex items-center gap-2">
                         <form.Field name="phoneCountryCode">
                           {(field) => {
                             const selectedOption =
@@ -287,7 +279,7 @@ export function ShippingForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+          <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.28fr)_minmax(0,1fr)_minmax(0,1fr)]">
             <form.Field name="address">
               {(field) => {
                 const addressError = fieldErrorText(
@@ -396,7 +388,7 @@ export function ShippingForm() {
                   placeholder={t('checkout.placeholders.deliveryNote')}
                   className={cn(
                     fieldInputClassName(false),
-                    'mt-1.5 min-h-[80px] resize-y py-2',
+                    'mt-1.5 h-20 resize-none overflow-auto py-2',
                   )}
                 />
               </div>
@@ -439,23 +431,23 @@ export function ShippingForm() {
 
         <form.Field name="shippingMethod">
           {(field) => (
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 space-y-2">
               <button
                 type="button"
                 onClick={() => field.handleChange('standard')}
                 className={cn(
-                  'flex w-full rounded-none border p-5 text-left transition-colors sm:p-6',
+                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors',
                   field.state.value === 'standard'
-                    ? 'border-2 border-black'
-                    : 'border border-black/10 hover:border-black/30',
+                    ? 'border-black'
+                    : 'border-black/10 hover:border-black/30',
                 )}
               >
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex min-w-0 items-center gap-3 sm:gap-3.5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2.5">
                       <span
                         className={cn(
-                          'flex size-5 shrink-0 items-center justify-center rounded-full border sm:size-6',
+                          'flex size-4 shrink-0 items-center justify-center rounded-full border',
                           field.state.value === 'standard'
                             ? 'border-black'
                             : 'border-black/30',
@@ -463,22 +455,26 @@ export function ShippingForm() {
                         aria-hidden
                       >
                         {field.state.value === 'standard' ? (
-                          <span className="size-2.5 rounded-full bg-black sm:size-3" />
+                          <span className="size-2 rounded-full bg-black" />
                         ) : null}
                       </span>
-                      <Package
-                        className="size-6 shrink-0 text-black sm:size-7"
+                      <Image
+                        src="/checkout/standard-delivery.png"
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="size-6 shrink-0 object-contain"
                         aria-hidden
                       />
-                      <span className="font-display text-base font-semibold text-black sm:text-lg">
+                      <span className="font-display text-base font-semibold text-black">
                         {t('checkout.methods.standard.title')}
                       </span>
                     </div>
-                    <span className="shrink-0 font-mono text-sm font-semibold text-black sm:text-base">
+                    <span className="shrink-0 font-mono text-xs font-semibold text-black">
                       {t('checkout.free')}
                     </span>
                   </div>
-                  <p className="mt-2 pl-[4.25rem] font-mono text-sm text-jp-muted sm:pl-[5.5rem] sm:text-base">
+                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs">
                     {t('checkout.methods.standard.description')}
                   </p>
                 </div>
@@ -488,18 +484,18 @@ export function ShippingForm() {
                 type="button"
                 onClick={() => field.handleChange('pickup')}
                 className={cn(
-                  'flex w-full rounded-none border p-5 text-left transition-colors sm:p-6',
+                  'flex w-full rounded-none border px-3.5 py-2.5 text-left transition-colors',
                   field.state.value === 'pickup'
-                    ? 'border-2 border-black'
-                    : 'border border-black/10 hover:border-black/30',
+                    ? 'border-black'
+                    : 'border-black/10 hover:border-black/30',
                 )}
               >
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex min-w-0 items-center gap-3 sm:gap-3.5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2.5">
                       <span
                         className={cn(
-                          'flex size-5 shrink-0 items-center justify-center rounded-full border sm:size-6',
+                          'flex size-4 shrink-0 items-center justify-center rounded-full border',
                           field.state.value === 'pickup'
                             ? 'border-black'
                             : 'border-black/30',
@@ -507,22 +503,26 @@ export function ShippingForm() {
                         aria-hidden
                       >
                         {field.state.value === 'pickup' ? (
-                          <span className="size-2.5 rounded-full bg-black sm:size-3" />
+                          <span className="size-2 rounded-full bg-black" />
                         ) : null}
                       </span>
-                      <MapPin
-                        className="size-6 shrink-0 text-black sm:size-7"
+                      <Image
+                        src="/checkout/pick-up.png"
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="size-6 shrink-0 object-contain"
                         aria-hidden
                       />
-                      <span className="font-display text-base font-semibold text-black sm:text-lg">
+                      <span className="font-display text-base font-semibold text-black">
                         {t('checkout.methods.pickup.title')}
                       </span>
                     </div>
-                    <span className="shrink-0 font-mono text-sm font-semibold text-black sm:text-base">
+                    <span className="shrink-0 font-mono text-xs font-semibold text-black">
                       {t('checkout.free')}
                     </span>
                   </div>
-                  <p className="mt-2 pl-[4.25rem] font-mono text-sm text-jp-muted sm:pl-[5.5rem] sm:text-base">
+                  <p className="mt-1 pl-[3.75rem] font-mono text-[11px] text-jp-muted sm:text-xs">
                     {t('checkout.methods.pickup.description')}
                   </p>
                 </div>

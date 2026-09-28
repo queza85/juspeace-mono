@@ -19,7 +19,7 @@ export default async function CheckoutPaymentPage() {
     <>
       <LandingHeader variant="light" />
       <article className="min-h-[60vh] bg-white">
-        <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
           <nav
             aria-label="Breadcrumb"
             className="mb-8 font-mono text-xs text-jp-muted sm:text-sm"
