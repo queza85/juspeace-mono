@@ -33,7 +33,7 @@ export function CheckoutPageContent() {
         </p>
       </header>
 
-      <div className="mt-5 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
+      <div className="mt-12 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
         <div className="min-w-0">
           <ShippingForm />
         </div>

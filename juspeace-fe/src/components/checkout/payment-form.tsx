@@ -260,7 +260,7 @@ export function PaymentForm() {
       }}
     >
       <section className="border border-black/10 p-5 sm:p-6">
-        <h2 className="font-display text-sm font-semibold text-black">
+        <h2 className="font-display text-lg font-bold text-black">
           {t('payment.chooseMethod')}
         </h2>
 
@@ -300,7 +300,7 @@ export function PaymentForm() {
         {(paymentMethod) =>
           paymentMethod === 'card' ? (
             <section className="border border-black/10 p-5 sm:p-6">
-              <h2 className="font-display text-sm font-semibold text-black">
+              <h2 className="font-display text-lg font-bold text-black">
                 {t('payment.cardPayment')}
               </h2>
 
@@ -517,7 +517,7 @@ export function PaymentForm() {
       </form.Subscribe>
 
       <section className="border border-black/10 p-5 sm:p-6">
-        <h2 className="font-display text-sm font-semibold text-black">
+        <h2 className="font-display text-lg font-bold text-black">
           {t('payment.billingAddress')}
         </h2>
 

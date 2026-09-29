@@ -92,7 +92,7 @@ export function ReviewOrderLineItem({ item }: ReviewOrderLineItemProps) {
           </div>
 
           <div className="flex shrink-0 flex-col items-end justify-between py-0.5">
-            <p className="font-display text-xs font-semibold text-black sm:text-sm">
+            <p className="font-display text-sm font-bold text-black sm:text-base">
               {formatReviewPrice(
                 formatPrice,
                 lineTotal,

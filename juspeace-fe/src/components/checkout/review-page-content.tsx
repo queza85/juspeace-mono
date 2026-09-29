@@ -75,7 +75,7 @@ export function ReviewPageContent() {
   return (
     <div className="mx-auto w-full max-w-[1280px] min-[1680px]:max-w-none">
       <header>
-        <h1 className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] font-semibold leading-tight text-black">
+        <h1 className="font-display text-[clamp(1.625rem,2.6vw,2.125rem)] font-bold leading-tight text-black">
           {t('review.title')}
         </h1>
         <p className="mt-1.5 font-mono text-[11px] text-jp-muted sm:text-xs">
@@ -83,11 +83,11 @@ export function ReviewPageContent() {
         </p>
       </header>
 
-      <div className="mt-5 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
+      <div className="mt-12 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
         <div className="min-w-0 space-y-5">
           <section className="border border-black/10 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-4">
-              <h2 className="font-display text-sm font-semibold text-black">
+              <h2 className="font-display text-lg font-bold text-black">
                 {t('review.shippingAddress')}
               </h2>
               <Link
@@ -109,7 +109,7 @@ export function ReviewPageContent() {
 
           <section className="border border-black/10 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-4">
-              <h2 className="font-display text-sm font-semibold text-black">
+              <h2 className="font-display text-lg font-bold text-black">
                 {t('review.paymentMethod')}
               </h2>
               <Link
@@ -145,7 +145,7 @@ export function ReviewPageContent() {
           </section>
 
           <section>
-            <h2 className="font-display text-sm font-semibold text-black">
+            <h2 className="font-display text-lg font-bold text-black">
               {t('review.reviewItems')}
             </h2>
             <div className="mt-3 border border-black/10 bg-white">
