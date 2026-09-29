@@ -55,7 +55,7 @@ const GALLERY_STACKS = {
 function GalleryPaperClip() {
   return (
     <div
-      className="pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-1/2 -translate-y-[48%]"
+      className="pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-[calc(50%+28px)] -translate-y-[48%]"
       aria-hidden
     >
       <Image
@@ -63,7 +63,7 @@ function GalleryPaperClip() {
         alt=""
         width={804}
         height={1134}
-        className="h-[64px] w-auto origin-bottom rotate-[14deg] object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] sm:h-[72px]"
+        className="h-[88px] w-auto origin-bottom rotate-[14deg] object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] sm:h-[96px] xl:h-[108px]"
       />
     </div>
   );

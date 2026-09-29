@@ -20,12 +20,12 @@ export function FaqSection() {
   const right = FAQ_IDS.filter((_, index) => index % 2 === 1);
 
   return (
-    <SectionShell id="faq" className="bg-white pt-6 pb-16 lg:pt-8 lg:pb-28">
+    <SectionShell id="faq" className="bg-white pt-28 pb-28 sm:pt-36 sm:pb-36 lg:pt-48 lg:pb-48">
       <div
         data-scroll-reveal
         className="mx-auto mb-12 flex max-w-[1116px] flex-col items-center text-center lg:mb-16"
       >
-        <div className="relative -mt-6 mb-2 size-20 shrink-0 overflow-hidden rounded-full sm:-mt-8 sm:mb-3 sm:size-24 lg:-mt-10 lg:mb-4 lg:size-28">
+        <div className="relative mb-2 size-20 shrink-0 overflow-hidden rounded-full sm:mb-3 sm:size-24 lg:mb-4 lg:size-28">
           <Image
             src={FAQ_LOGO}
             alt="JUSPEACE"
