@@ -448,7 +448,11 @@
       },
       "subtextLine1": "Not just made to wear , made to carry",
       "subtextLine2": "something with you.",
-      "tapHint": "Tap each image for closer view"
+      "tapHint": "Tap each image for closer view",
+      "closeZoom": "클로즈업 닫기",
+      "zoomBackButton": "돌아가기",
+      "zoomPrevious": "이전 디테일",
+      "zoomNext": "다음 디테일"
     },
     "productVerification": {
       "introLine1": "Wear it as a part of",

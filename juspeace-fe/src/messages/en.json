@@ -448,7 +448,11 @@
       },
       "subtextLine1": "Not just made to wear , made to carry",
       "subtextLine2": "something with you.",
-      "tapHint": "Tap each image for closer view"
+      "tapHint": "Tap each image for closer view",
+      "closeZoom": "Close closer view",
+      "zoomBackButton": "Back",
+      "zoomPrevious": "Previous detail",
+      "zoomNext": "Next detail"
     },
     "productVerification": {
       "introLine1": "Wear it as a part of",
