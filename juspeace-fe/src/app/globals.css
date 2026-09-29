@@ -926,6 +926,8 @@
       font-size: clamp(0.8125rem, 1.45cqi, 1.0625rem);
       line-height: 1.55;
       max-width: none;
+      /* Tallest slide is 6 lines plus the gap between paragraphs. */
+      min-height: calc(6 * 1.55em + clamp(1.125rem, 3cqi, 2rem) + 0.25rem);
     }
 
     .jp-brand-story-slide-copy-line {

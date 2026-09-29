@@ -739,16 +739,18 @@ function BrandStorySlideCopy({
           {t('landing.brandStory.slide1Paragraph1Line3')}
         </span>
       </p>
-      <p>
+      <p className="italic">
         <span className="jp-brand-story-slide-copy-line">
-          {t('landing.brandStory.slide1Paragraph2Lead')}
-          <em>{t('landing.brandStory.slide1Paragraph2Emphasis')}</em>
-          {t('landing.brandStory.slide1Paragraph2Tail')}
+          {t('landing.brandStory.slide1Paragraph2Line1')}
         </span>
         <span className="jp-brand-story-slide-copy-line">
-          {t('landing.brandStory.slide1Paragraph2Line2Lead')}
-          <em>{t('landing.brandStory.slide1Paragraph2Line2Emphasis')}</em>
+          {t('landing.brandStory.slide1Paragraph2Line2')}
         </span>
+        {t('landing.brandStory.slide1Paragraph2Line3') ? (
+          <span className="jp-brand-story-slide-copy-line">
+            {t('landing.brandStory.slide1Paragraph2Line3')}
+          </span>
+        ) : null}
       </p>
     </div>
   );
