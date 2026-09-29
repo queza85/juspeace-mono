@@ -182,9 +182,13 @@ export async function ProductCollectionSection({
           <span className="block">{t('landing.collection.introLine1')}</span>
           <span className="block">{t('landing.collection.introLine2')}</span>
         </p>
-        <p className="mt-10 font-sans text-base leading-relaxed text-black sm:mt-12 sm:text-lg lg:mt-14">
-          <span className="block">{t('landing.collection.introKoLine1')}</span>
-          <span className="block">{t('landing.collection.introKoLine2')}</span>
+        <p className="jp-collection-intro-ko mt-10 flex flex-col items-center gap-1.5 font-sans text-base font-normal leading-none text-black sm:mt-12 sm:text-lg lg:mt-14">
+          <span>
+            {t('landing.collection.introKoLine1Prefix')}
+            <span className="font-semibold">JUSPEACE</span>
+            {t('landing.collection.introKoLine1Suffix')}
+          </span>
+          <span>{t('landing.collection.introKoLine2')}</span>
         </p>
       </div>
 

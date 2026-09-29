@@ -114,8 +114,12 @@ function FeatureDetailCard({
           />
         </span>
       </button>
-      <figcaption className="max-w-[11rem] font-serif text-sm leading-snug text-black sm:text-base">
-        {label}
+      <figcaption className="jp-features-detail-caption">
+        {label.split('\n').map((line, index) => (
+          <span key={index} className="block">
+            {line}
+          </span>
+        ))}
       </figcaption>
     </figure>
   );

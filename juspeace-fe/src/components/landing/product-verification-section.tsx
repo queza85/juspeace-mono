@@ -87,7 +87,7 @@ export async function ProductVerificationSection() {
     <>
       <SectionShell
         id="product-verification"
-        className="bg-white pt-10 pb-0 lg:pt-14"
+        className="bg-white pt-28 pb-0 sm:pt-32 lg:pt-44 xl:pt-52"
       >
         <div
           data-scroll-reveal

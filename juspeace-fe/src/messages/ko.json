@@ -411,8 +411,9 @@
       "headingLine2": "선택하세요.",
       "introLine1": "단순한 구매를 넘어,",
       "introLine2": "JUSPEACE의 일부가 되는 방식.",
-      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
-      "introKoLine2": "방식.",
+      "introKoLine1Prefix": "단순한 구매를 넘어, ",
+      "introKoLine1Suffix": "의 일부가",
+      "introKoLine2": "되는 방식.",
       "cta": "This represent me",
       "stockSuffix": "pieces still carry this message",
       "moreDetails": "자세히 보기",
@@ -441,7 +442,7 @@
       "headingLine3": "필요한 것은 빠짐없이.",
       "heroAlt": "JUSPEACE 브레이슬릿",
       "items": {
-        "lettering": "Antique Silver Lettering",
+        "lettering": "Antique Silver\nLettering",
         "bead": "Engraved Bead",
         "endTip": "Metal End Tips",
         "adjustment": "Adjustable Fit"

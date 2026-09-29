@@ -168,7 +168,7 @@ export async function DonationSection() {
             ))}
           </div>
 
-          <p className="mt-12 flex flex-col items-center gap-1.5 font-sans text-sm font-normal leading-none text-black sm:text-base">
+          <p className="jp-donation-intro-ko mt-12 flex flex-col items-center gap-1.5 text-sm text-black sm:text-base">
             <span>{t('landing.donation.introKoLine1')}</span>
             <span className="text-black/80" aria-hidden>
               —

@@ -118,7 +118,7 @@ export function LandingHeader({ variant = 'hero' }: LandingHeaderProps) {
       )}
     >
       {/* Single grid row — logo | nav | utilities, shared vertical center */}
-      <div className="relative mx-auto grid h-[88px] max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-[108px] sm:gap-6 sm:px-8 lg:h-[112px] lg:px-12 xl:px-[75px]">
+      <div className="relative mx-auto grid h-[60px] max-w-[1920px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:h-[80px] sm:gap-6 sm:px-8 lg:h-[84px] lg:px-12 xl:px-[75px]">
         <Link
           href="/"
           className="relative block size-11 shrink-0 overflow-hidden rounded-full transition-transform duration-300 ease-out hover:scale-105 sm:size-12"

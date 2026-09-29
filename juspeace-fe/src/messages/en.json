@@ -411,8 +411,9 @@
       "headingLine2": "stand for.",
       "introLine1": "More than a purchase.",
       "introLine2": "A way to be part of JUSPEACE.",
-      "introKoLine1": "단순한 구매를 넘어, JUSPEACE의 일부가 되는",
-      "introKoLine2": "방식.",
+      "introKoLine1Prefix": "단순한 구매를 넘어, ",
+      "introKoLine1Suffix": "의 일부가",
+      "introKoLine2": "되는 방식.",
       "cta": "This represent me",
       "stockSuffix": "pieces still carry this message",
       "moreDetails": "More Details",
@@ -441,7 +442,7 @@
       "headingLine3": "nothing missing.",
       "heroAlt": "JUSPEACE bracelet",
       "items": {
-        "lettering": "Antique Silver Lettering",
+        "lettering": "Antique Silver\nLettering",
         "bead": "Engraved Bead",
         "endTip": "Metal End Tips",
         "adjustment": "Adjustable Fit"

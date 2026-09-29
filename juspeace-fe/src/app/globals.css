@@ -264,6 +264,54 @@
     }
   }
 
+  .jp-features-detail-caption {
+    max-width: 11rem;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #000;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .jp-features-detail-caption {
+      font-size: 1rem;
+      line-height: 1.375rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-features-detail-caption {
+      max-width: 11rem;
+      font-size: 1rem;
+      line-height: 1.25rem;
+    }
+  }
+
+  .jp-donation-intro-ko {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-style: normal;
+    line-height: calc(33 / 28);
+    letter-spacing: 0;
+    text-align: center;
+    color: #000;
+  }
+
+  .jp-collection-intro-ko {
+    letter-spacing: 0.04em;
+    word-spacing: 0.12em;
+  }
+
+  @media (min-width: 640px) {
+    .jp-collection-intro-ko {
+      letter-spacing: 0.045em;
+      word-spacing: 0.14em;
+    }
+  }
+
   .jp-brand-story-quote {
     width: 100%;
     max-width: 100%;
@@ -1357,16 +1405,19 @@
   }
 
   .jp-product-verification-closing {
-    width: 100%;
-    max-width: none;
-    padding-top: clamp(2.5rem, 6vw, 5rem);
+    box-sizing: border-box;
+    width: min(100%, 96vw);
+    max-width: 96vw;
+    margin-inline: auto;
+    padding-top: clamp(5.5rem, 12vw, 10rem);
     padding-bottom: clamp(14rem, 34vw, 22rem);
-    padding-inline: clamp(1rem, 4vw, 2rem);
+    padding-inline: 0;
     text-align: center;
   }
 
   .jp-product-verification-closing-line {
     display: block;
+    width: 100%;
     margin: 0;
     font-family: var(--font-display);
     font-size: clamp(1.75rem, 4.5vw, 3.75rem);
@@ -1376,18 +1427,32 @@
   }
 
   .jp-product-verification-closing-line--bold {
+    font-family: var(--font-sans);
     font-weight: 700;
     font-style: normal;
+    line-height: calc(128 / 120);
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 5.8vw, 4.75rem);
   }
 
   .jp-product-verification-closing-line--italic {
     margin-bottom: clamp(2.5rem, 6vw, 5rem);
+    font-family: var(--font-sans);
     font-weight: 400;
     font-style: italic;
+    line-height: calc(128 / 120);
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 6vw, 5.25rem);
   }
 
-  @media (min-width: 640px) {
-    .jp-product-verification-closing-line {
+  @media (min-width: 1024px) {
+    .jp-product-verification-closing-line--bold {
+      font-size: clamp(2.5rem, 6.25vw, 5.5rem);
+      white-space: nowrap;
+    }
+
+    .jp-product-verification-closing-line--italic {
+      font-size: clamp(2.75rem, 6.5vw, 6rem);
       white-space: nowrap;
     }
   }
@@ -1658,7 +1723,7 @@
 
   .jp-product-verification-note--right {
     right: 20%;
-    top: 10.5%;
+    top: 7.5%;
   }
 
   .jp-product-verification-note-img {
@@ -1758,7 +1823,7 @@
 
     .jp-product-verification-note--right {
       right: 22%;
-      top: 11.5%;
+      top: 8.5%;
     }
   }
 
