@@ -36,8 +36,8 @@ const GALLERY_STACKS = {
     '/product-gallery/third/first.png',
   ],
   packaging: [
-    '/product-gallery/fourth/second.png',
-    '/product-gallery/fourth/three.png',
+    '/product-gallery/fourth/second-new.png',
+    '/product-gallery/fourth/three-new.png',
     '/product-gallery/fourth/first.png',
   ],
   mobileSwipe: [
@@ -74,13 +74,11 @@ function GalleryCard({
   alt,
   aspectRatio,
   contained = false,
-  imageClassName,
 }: {
   src: string;
   alt: string;
   aspectRatio: string;
   contained?: boolean;
-  imageClassName?: string;
 }) {
   if (!src) {
     return null;
@@ -96,10 +94,7 @@ function GalleryCard({
         alt={alt}
         fill
         sizes="(max-width: 640px) 202px, 226px"
-        className={cn(
-          contained ? 'object-contain' : 'origin-center object-cover',
-          imageClassName,
-        )}
+        className={contained ? 'object-contain' : 'object-cover'}
       />
     </div>
   );
@@ -123,7 +118,6 @@ function GalleryStack({
           src={leftSrc}
           alt={label}
           aspectRatio="202 / 262"
-          imageClassName="origin-center -rotate-[19deg] scale-[1.4]"
         />
       </div>
       <div className="absolute left-1/2 top-3 w-[142px] -translate-x-[calc(50%-68px)] rotate-[16.59deg] xl:top-3.5 xl:w-[166px] xl:-translate-x-[calc(50%-80px)] 2xl:top-4 2xl:w-[202px] 2xl:-translate-x-[calc(50%-96px)]">
@@ -131,7 +125,6 @@ function GalleryStack({
           src={rightSrc}
           alt={label}
           aspectRatio="202 / 262"
-          imageClassName="origin-center rotate-[21deg] scale-[1.4]"
         />
       </div>
       <div className="absolute left-1/2 top-0 z-10 w-[160px] -translate-x-1/2 xl:w-[186px] 2xl:w-[226px]">
