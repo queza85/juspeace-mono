@@ -1,9 +1,10 @@
 'use client';
 
-import { Minus, Plus, Star } from 'lucide-react';
+import { Check, Minus, Plus, Star } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProductDetailPurchaseInfo } from '@/components/products/product-detail-purchase-info';
+import { toast } from '@/components/ui/toast';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import type { Product } from '@/lib/api/types';
 import { useCartStore } from '@/stores/cart-store';
@@ -63,11 +64,21 @@ export function ProductDetailPurchase({
   const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
   const [saved, setSaved] = useState(false);
+  const [cartAddedFlash, setCartAddedFlash] = useState(false);
+  const cartFlashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const inStock = product.stock > 0;
   const canBuy = inStock;
 
-  const handleAddToCart = () => {
+  useEffect(() => {
+    return () => {
+      if (cartFlashTimerRef.current) {
+        clearTimeout(cartFlashTimerRef.current);
+      }
+    };
+  }, []);
+
+  const addProductToCart = (options?: { animateAddButton?: boolean }) => {
     addItem(
       {
         id: product.id,
@@ -79,6 +90,23 @@ export function ProductDetailPurchase({
       },
       quantity,
     );
+    toast(
+      quantity > 1
+        ? t('products.detail.addedToCartToastQty', { count: quantity })
+        : t('products.detail.addedToCartToast'),
+      'success',
+    );
+
+    if (options?.animateAddButton) {
+      setCartAddedFlash(true);
+      if (cartFlashTimerRef.current) {
+        clearTimeout(cartFlashTimerRef.current);
+      }
+      cartFlashTimerRef.current = setTimeout(() => {
+        setCartAddedFlash(false);
+        cartFlashTimerRef.current = null;
+      }, 1400);
+    }
   };
 
   return (
@@ -163,7 +191,7 @@ export function ProductDetailPurchase({
         <button
           type="button"
           disabled={!canBuy}
-          onClick={handleAddToCart}
+          onClick={() => addProductToCart()}
           className="inline-flex h-12 w-full items-center justify-center bg-black px-6 font-display text-sm font-normal text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]"
         >
           {t('products.detail.buyNow')}
@@ -171,10 +199,22 @@ export function ProductDetailPurchase({
         <button
           type="button"
           disabled={!canBuy}
-          onClick={handleAddToCart}
-          className="inline-flex h-12 w-full items-center justify-center border border-black bg-white px-6 font-display text-sm font-normal text-black transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]"
+          onClick={() => addProductToCart({ animateAddButton: true })}
+          className={cn(
+            'inline-flex h-12 w-full items-center justify-center gap-2 border px-6 font-display text-sm font-normal transition-[transform,background-color,border-color,color,opacity] duration-300 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]',
+            cartAddedFlash
+              ? 'jp-cart-added-pop border-emerald-700 bg-emerald-50 text-emerald-950'
+              : 'border-black bg-white text-black hover:opacity-80',
+          )}
         >
-          {t('products.detail.addToCart')}
+          {cartAddedFlash ? (
+            <>
+              <Check className="size-4 shrink-0" aria-hidden />
+              {t('products.detail.addedToCartLabel')}
+            </>
+          ) : (
+            t('products.detail.addToCart')
+          )}
         </button>
       </div>
 

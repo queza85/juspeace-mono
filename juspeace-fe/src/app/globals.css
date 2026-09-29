@@ -408,6 +408,28 @@
     opacity: 0.5;
   }
 
+  @keyframes jp-cart-added-pop {
+    0% {
+      transform: scale(1);
+    }
+    45% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .jp-cart-added-pop {
+    animation: jp-cart-added-pop 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jp-cart-added-pop {
+      animation-duration: 1ms;
+    }
+  }
+
   .jp-brand-story-quote {
     width: 100%;
     max-width: 100%;
