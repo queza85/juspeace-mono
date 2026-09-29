@@ -93,10 +93,10 @@ export async function ProductVerificationSection() {
           data-scroll-reveal
           className="jp-product-verification-intro mx-auto flex max-w-[900px] flex-col items-center text-center"
         >
-          <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-black">
+          <p className="jp-product-verification-intro-line jp-product-verification-intro-line--bold">
             {t('landing.productVerification.introLine1')}
           </p>
-          <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
+          <p className="jp-product-verification-intro-line jp-product-verification-intro-line--italic">
             {t('landing.productVerification.introBrand')}
           </p>
         </div>

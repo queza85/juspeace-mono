@@ -11,7 +11,7 @@ const COLLECTION_LOGO = '/header/juspeace_header.png';
 const DAISY_ICON = '/brand/gd-flower.png';
 
 const CIRCLE_SIZE =
-  'h-[60px] w-[60px] sm:h-[68px] sm:w-[68px] lg:h-[76px] lg:w-[76px]';
+  'h-[72px] w-[72px] sm:h-[82px] sm:w-[82px] lg:h-[92px] lg:w-[92px]';
 
 /** Orbital positions: top pair flanks "Donation", bottom pair frames the headline. */
 const FLOATING_IMAGES = [
@@ -151,7 +151,7 @@ export async function DonationSection() {
             <span className="mt-1 block font-display font-medium">{t('landing.donation.statLine2')}</span>
           </p>
 
-          <div className="mt-12 flex items-center justify-center pl-3 lg:mt-14">
+          <div className="mt-20 mb-20 flex items-center justify-center pl-3 sm:mt-[5.25rem] sm:mb-[5.25rem] lg:mt-24 lg:mb-24">
             {AVATAR_IMAGES.map((src, index) => (
               <div
                 key={`${src}-${index}`}
@@ -168,7 +168,7 @@ export async function DonationSection() {
             ))}
           </div>
 
-          <p className="jp-donation-intro-ko mt-12 flex flex-col items-center gap-1.5 text-sm text-black sm:text-base">
+          <p className="jp-donation-intro-ko flex flex-col items-center gap-1.5 text-sm text-black sm:text-base">
             <span>{t('landing.donation.introKoLine1')}</span>
             <span className="text-black/80" aria-hidden>
               —
@@ -178,7 +178,7 @@ export async function DonationSection() {
 
           <button
             type="button"
-            className="mt-10 bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90"
+            className="mt-14 bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90 sm:mt-16"
           >
             {t('landing.donation.cta')}
           </button>
