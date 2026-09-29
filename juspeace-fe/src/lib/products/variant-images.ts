@@ -4,6 +4,13 @@ export type VariantKey = 'black' | 'white' | 'stripe';
 
 export const COLLECTION_VARIANTS: VariantKey[] = ['black', 'white', 'stripe'];
 
+/** Landing collection stock counts when API data is missing or for fallbacks. */
+export const COLLECTION_STOCK_BY_VARIANT: Record<VariantKey, number> = {
+  black: 20,
+  white: 15,
+  stripe: 18,
+};
+
 /** Canonical slugs used when the API has no matching product yet. */
 export const VARIANT_DETAIL_SLUGS: Record<VariantKey, string> = {
   black: 'black-strong-commitment',
@@ -122,7 +129,7 @@ export function createFallbackProduct(
     description: labels.description,
     priceCents: 150_00,
     currency: 'USD',
-    stock: 20,
+    stock: COLLECTION_STOCK_BY_VARIANT[variantKey],
     status: 'ACTIVE',
     imageUrl: VARIANT_PRODUCT_IMAGES[variantKey].src,
   };

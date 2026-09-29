@@ -117,7 +117,7 @@ export function HeroAnimatedCopy({
             });
           })()}
         </p>
-        <div className="mt-[52px] flex flex-wrap items-center gap-3.5">
+        <div className="mt-[52px] flex flex-wrap items-center gap-8">
           <a
             data-hero-cta
             href="#collection"

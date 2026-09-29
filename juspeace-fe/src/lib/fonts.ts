@@ -19,6 +19,13 @@ export const inriaSerifBold = Inria_Serif({
   display: 'swap',
 });
 
+/** Collection card stock line: 400 + 700 in one family */
+export const inriaSerif = Inria_Serif({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 /** Figma: “JUSPEACE” wordmark in Brand Story quote */
 export const instrumentSansBold = Instrument_Sans({
   weight: '700',

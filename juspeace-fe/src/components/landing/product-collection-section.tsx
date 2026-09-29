@@ -7,6 +7,7 @@ import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import type { Product } from '@/lib/api/types';
 import { getTranslator } from '@/lib/i18n/server';
+import { inriaSerif } from '@/lib/fonts';
 import {
   COLLECTION_VARIANTS,
   createFallbackProduct,
@@ -87,11 +88,13 @@ function buildCards(
 function CollectionProductCard({
   card,
   ctaLabel,
-  stockSuffix,
+  stockPiecesWord,
+  stockCarryMessage,
 }: {
   card: CollectionCard;
   ctaLabel: string;
-  stockSuffix: string;
+  stockPiecesWord: string;
+  stockCarryMessage: string;
 }) {
   const image = VARIANT_MAIN_IMAGES[card.key];
   const stockCount = Math.round(card.stock);
@@ -100,7 +103,7 @@ function CollectionProductCard({
   return (
     <article
       data-scroll-stagger-item
-      className="flex flex-col items-center text-center"
+      className="@container flex w-full min-w-0 flex-col items-center text-center"
     >
       <Link
         href={detailHref}
@@ -121,11 +124,16 @@ function CollectionProductCard({
           {card.title}
         </h3>
       </Link>
-      <p className="mt-2 max-w-[340px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-[0.9375rem]">
+      <p className="jp-collection-card-desc mt-2 w-full min-w-0 px-0.5 font-sans leading-snug whitespace-nowrap italic text-black/80">
         {card.description}
       </p>
-      <p className="mt-8 font-serif text-sm text-black sm:mt-10">
-        <span className="font-bold">{stockCount}</span> {stockSuffix}
+      <p
+        className={`mt-8 text-base leading-5 tracking-normal text-black sm:mt-10 ${inriaSerif.className}`}
+      >
+        <span className="font-bold">
+          {stockCount} {stockPiecesWord}
+        </span>{' '}
+        <span className="font-normal">{stockCarryMessage}</span>
       </p>
       <CollectionCtaButton product={card.product} label={ctaLabel} />
     </article>
@@ -194,14 +202,15 @@ export async function ProductCollectionSection({
 
       <div
         data-scroll-stagger
-        className="mx-auto mt-16 grid max-w-[1280px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-12"
+        className="mx-auto mt-16 grid w-full max-w-none grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-x-12 md:gap-y-12 lg:max-xl:gap-x-10 xl:gap-x-24 2xl:gap-x-32"
       >
         {cards.map((card) => (
           <CollectionProductCard
             key={card.key}
             card={card}
             ctaLabel={t('landing.collection.cta')}
-            stockSuffix={t('landing.collection.stockSuffix')}
+            stockPiecesWord={t('landing.collection.stockPiecesWord')}
+            stockCarryMessage={t('landing.collection.stockCarryMessage')}
           />
         ))}
       </div>
