@@ -12,7 +12,7 @@ export async function HeroSection() {
     <section className="relative flex min-h-[100svh] w-full flex-col overflow-x-clip bg-black text-white lg:min-h-[900px] xl:min-h-[1000px] 2xl:min-h-[1177px]">
       <HeroBackgroundMotion src={HERO_BACKGROUND} />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-1 flex-col px-5 pb-8 pt-[160px] sm:px-8 sm:pt-[180px] lg:px-[75px] lg:pb-10 lg:pt-[220px] xl:pt-[240px] 2xl:pt-[253px]">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1920px] flex-1 flex-col px-5 pb-8 pt-[160px] sm:px-8 sm:pt-[180px] lg:px-[75px] lg:pb-10 lg:pt-[268px] xl:pt-[288px] 2xl:pt-[308px]">
         <HeroAnimatedCopy
           titleLine1={t('landing.hero.titleLine1')}
           titleLine2={t('landing.hero.titleLine2')}

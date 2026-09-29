@@ -220,6 +220,50 @@
     @apply inline-block whitespace-nowrap transition-[opacity,transform,letter-spacing] duration-500 ease-out;
   }
 
+  /* Hero copy column vertical offset on desktop (title line 2 + extra nudge). */
+  .jp-hero-copy-row {
+    --jp-hero-title-line-height: 2.6875rem;
+  }
+
+  @media (min-width: 640px) {
+    .jp-hero-copy-row {
+      --jp-hero-title-line-height: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-hero-copy-row {
+      --jp-hero-title-line-height: 4.5625rem;
+      --jp-hero-title-offset: -2.5rem;
+      --jp-hero-copy-extra: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .jp-hero-copy-row {
+      --jp-hero-title-line-height: 5.375rem;
+      --jp-hero-title-offset: -3rem;
+      --jp-hero-copy-extra: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .jp-hero-copy-row {
+      --jp-hero-title-line-height: 5.9375rem;
+      --jp-hero-title-offset: -3rem;
+      --jp-hero-copy-extra: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .jp-hero-copy-side {
+      margin-top: calc(
+        var(--jp-hero-title-line-height) + var(--jp-hero-title-offset) +
+          var(--jp-hero-copy-extra)
+      );
+    }
+  }
+
   .jp-brand-story-quote {
     width: 100%;
     max-width: 100%;
@@ -1193,7 +1237,8 @@
   }
 
   .jp-hero-description {
-    @apply relative w-full text-left font-sans text-[18px] font-normal leading-normal tracking-normal;
+    @apply relative w-full text-left font-sans text-[18px] font-normal leading-[150%] tracking-normal;
+    color: #ffffffcc;
   }
 
   .jp-hero-description .jp-hero-word {
