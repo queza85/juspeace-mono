@@ -178,7 +178,7 @@ export async function DonationSection() {
 
           <button
             type="button"
-            className="mt-14 bg-black px-8 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90 sm:mt-16 sm:px-10"
+            className="jp-landing-cta mt-14 sm:mt-16"
           >
             {t('landing.donation.cta')}
           </button>

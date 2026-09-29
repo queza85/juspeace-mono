@@ -19,7 +19,7 @@ export function CollectionCtaButton({
     <button
       type="button"
       disabled={!inStock}
-      className="mt-5 min-w-[180px] bg-black px-6 py-3 font-sans text-sm text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+      className="jp-landing-cta mt-5"
       onClick={() =>
         addItem({
           id: product.id,

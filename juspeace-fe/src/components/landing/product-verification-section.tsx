@@ -191,7 +191,10 @@ export async function ProductVerificationSection() {
                   </div>
                 </div>
               </div>
-              <button type="button" className="jp-product-verification-paper-cta">
+              <button
+                type="button"
+                className="jp-landing-cta jp-product-verification-paper-cta"
+              >
                 {t('landing.productVerification.cta')}
               </button>
             </div>
