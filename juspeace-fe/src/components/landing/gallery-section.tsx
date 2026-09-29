@@ -21,18 +21,18 @@ const CATEGORIES = [
 
 const GALLERY_STACKS = {
   productOnly: [
-    '/product-gallery/first/second.png',
-    '/product-gallery/first/three.png',
+    '/product-gallery/first/second-new.png',
+    '/product-gallery/first/three-new.png',
     '/product-gallery/first/first.png',
   ],
   lifestyle: [
-    '/product-gallery/second/second.png',
-    '/product-gallery/second/third.png',
+    '/product-gallery/second/second-new.png',
+    '/product-gallery/second/third-new.png',
     '/product-gallery/second/first.png',
   ],
   closeUp: [
-    '/product-gallery/third/second.png',
-    '/product-gallery/third/third.png',
+    '/product-gallery/third/second-new.png',
+    '/product-gallery/third/third-new.png',
     '/product-gallery/third/first.png',
   ],
   packaging: [
@@ -41,13 +41,13 @@ const GALLERY_STACKS = {
     '/product-gallery/fourth/first.png',
   ],
   mobileSwipe: [
-    '/product-gallery/fifth/second.png',
-    '/product-gallery/fifth/third.png',
+    '/product-gallery/fifth/second-new.png',
+    '/product-gallery/fifth/third-new.png',
     '/product-gallery/fifth/first.png',
   ],
   desktopThumbnails: [
-    '/product-gallery/sixth/second.png',
-    '/product-gallery/sixth/third.png',
+    '/product-gallery/sixth/second-new.png',
+    '/product-gallery/sixth/third-new.png',
     '/product-gallery/sixth/first.png',
   ],
 } as const satisfies Record<(typeof CATEGORIES)[number], readonly [string, string, string]>;
