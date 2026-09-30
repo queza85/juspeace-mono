@@ -16,6 +16,20 @@ const PAGE_LINK_COLUMNS = [
   ['privacyPolicy', 'shippingPolicy', 'terms'],
 ] as const;
 
+/**
+ * Temporary footer trim. Set to `false` to show everything again.
+ * When `true`, hides only:
+ * - [ Pages ] bracket label (policy link text remains)
+ * - About Company / About Foundation / Customer Support column
+ * - Contact / business and Location blocks
+ * - Copyright line and foundation logo in the bottom bar
+ */
+const FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO = true;
+
+const VISIBLE_PAGE_LINK_COLUMNS = FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO
+  ? PAGE_LINK_COLUMNS.slice(1)
+  : PAGE_LINK_COLUMNS;
+
 function FooterBracketLabel({
   children,
   className,
@@ -105,10 +119,16 @@ export async function LandingFooter() {
 
           {/* Right — pages, contact, location */}
           <div className="w-full lg:max-w-[40rem] lg:justify-self-end lg:-mr-16 xl:max-w-[46rem] xl:-mr-20 2xl:max-w-[52rem] 2xl:-mr-24">
-            <FooterBracketLabel>{t('landing.footer.pagesLabel')}</FooterBracketLabel>
+            {!FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO ? (
+              <FooterBracketLabel>{t('landing.footer.pagesLabel')}</FooterBracketLabel>
+            ) : null}
 
-            <div className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-3 sm:gap-x-8 lg:gap-x-8 xl:gap-x-10 2xl:gap-x-14">
-              {PAGE_LINK_COLUMNS.map((column, columnIndex) => (
+            <div
+              className={`grid gap-x-6 gap-y-2 sm:gap-x-8 lg:gap-x-8 xl:gap-x-10 2xl:gap-x-14 ${
+                FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO ? 'sm:grid-cols-2' : 'mt-3 sm:grid-cols-3'
+              }`}
+            >
+              {VISIBLE_PAGE_LINK_COLUMNS.map((column, columnIndex) => (
                 <div key={columnIndex} className="space-y-2 sm:space-y-2.5">
                   {column.map((key) => (
                     <FooterPageLink
@@ -121,46 +141,64 @@ export async function LandingFooter() {
               ))}
             </div>
 
-            <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-x-8 lg:mt-12 lg:gap-x-8 xl:gap-x-10 2xl:gap-x-14">
-              <div>
-                <FooterBracketLabel className="whitespace-nowrap">
-                  {t('landing.footer.contactLabel')}
-                </FooterBracketLabel>
-                <p className="mt-2 whitespace-nowrap font-sans text-sm leading-7 text-white/80 sm:text-[15px] sm:leading-8">
-                  <a
-                    href="mailto:love@juspeace.ai"
-                    className="text-white transition-opacity hover:opacity-70"
-                  >
-                    {t('landing.footer.contactEmail')}
-                  </a>
-                  <br />
-                  {t('landing.footer.businessInfo')}
-                </p>
+            {!FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO ? (
+              <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-x-8 lg:mt-12 lg:gap-x-8 xl:gap-x-10 2xl:gap-x-14">
+                <div>
+                  <FooterBracketLabel className="whitespace-nowrap">
+                    {t('landing.footer.contactLabel')}
+                  </FooterBracketLabel>
+                  <p className="mt-2 whitespace-nowrap font-sans text-sm leading-7 text-white/80 sm:text-[15px] sm:leading-8">
+                    <a
+                      href="mailto:love@juspeace.ai"
+                      className="text-white transition-opacity hover:opacity-70"
+                    >
+                      {t('landing.footer.contactEmail')}
+                    </a>
+                    <br />
+                    {t('landing.footer.businessInfo')}
+                  </p>
+                </div>
+                <div className="sm:col-span-2 sm:pl-16 lg:pl-24 xl:pl-28">
+                  <FooterBracketLabel>{t('landing.footer.locationLabel')}</FooterBracketLabel>
+                  <p className="mt-2 max-w-[16rem] whitespace-pre-line font-sans text-sm leading-7 text-white/80 sm:max-w-[18rem] sm:text-[15px] sm:leading-8">
+                    {t('landing.footer.location')}
+                  </p>
+                </div>
               </div>
-              <div className="sm:col-span-2 sm:pl-16 lg:pl-24 xl:pl-28">
-                <FooterBracketLabel>{t('landing.footer.locationLabel')}</FooterBracketLabel>
-                <p className="mt-2 max-w-[16rem] whitespace-pre-line font-sans text-sm leading-7 text-white/80 sm:max-w-[18rem] sm:text-[15px] sm:leading-8">
-                  {t('landing.footer.location')}
-                </p>
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
 
-        <div className="mt-14 grid gap-6 font-mono text-xs text-white/80 sm:mt-16 sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-8 sm:text-sm lg:mt-20">
-          <p className="sm:justify-self-start">{t('landing.footer.copyright')}</p>
-          <p className="text-center uppercase tracking-[0.08em] sm:px-4">
+        <div
+          className={
+            FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO
+              ? 'mt-14 flex justify-center font-mono text-xs text-white/80 sm:mt-16 sm:text-sm lg:mt-20'
+              : 'mt-14 grid gap-6 font-mono text-xs text-white/80 sm:mt-16 sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-8 sm:text-sm lg:mt-20'
+          }
+        >
+          {!FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO ? (
+            <p className="sm:justify-self-start">{t('landing.footer.copyright')}</p>
+          ) : null}
+          <p
+            className={
+              FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO
+                ? 'text-center uppercase tracking-[0.08em]'
+                : 'text-center uppercase tracking-[0.08em] sm:px-4'
+            }
+          >
             {t('landing.footer.tagline')}
           </p>
-          <div className="sm:justify-self-end">
-            <Image
-              src={FOUNDATION_LOGO}
-              alt={t('landing.footer.foundation')}
-              width={320}
-              height={80}
-              className="h-9 w-auto object-contain sm:h-10 lg:h-11"
-            />
-          </div>
+          {!FOOTER_TEMPORARILY_HIDE_EXTENDED_INFO ? (
+            <div className="sm:justify-self-end">
+              <Image
+                src={FOUNDATION_LOGO}
+                alt={t('landing.footer.foundation')}
+                width={320}
+                height={80}
+                className="h-9 w-auto object-contain sm:h-10 lg:h-11"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </footer>
