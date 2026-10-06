@@ -92,7 +92,7 @@ export function CartLineItem({ item }: CartLineItemProps) {
           </div>
 
           <div className="flex shrink-0 flex-col items-end justify-between py-0.5">
-            <p className="font-display text-sm font-semibold text-black sm:text-base">
+            <p className="font-display text-sm font-bold text-black sm:text-base">
               {formatCartPrice(
                 formatPrice,
                 lineTotal,

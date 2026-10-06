@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { SectionHeading } from '@/components/landing/section-heading';
+import { inriaSerifBold } from '@/lib/fonts';
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
@@ -10,9 +11,9 @@ const COLLECTION_LOGO = '/header/juspeace_header.png';
 const DAISY_ICON = '/brand/gd-flower.png';
 
 const CIRCLE_SIZE =
-  'h-[60px] w-[60px] sm:h-[68px] sm:w-[68px] lg:h-[76px] lg:w-[76px]';
+  'h-[72px] w-[72px] sm:h-[82px] sm:w-[82px] lg:h-[92px] lg:w-[92px]';
 
-/** Orbital positions tuned to Figma: top pair flanks "Donation", bottom pair frames headline/body. */
+/** Orbital positions: top pair flanks "Donation", bottom pair frames the headline. */
 const FLOATING_IMAGES = [
   {
     src: '/donation/donation-one.png',
@@ -20,7 +21,7 @@ const FLOATING_IMAGES = [
     height: 738,
     altKey: 'floatingOne',
     className:
-      'left-[14%] top-[19%] sm:left-[16%] sm:top-[18%] lg:left-[18%] lg:top-[17%]',
+      'left-[2%] top-[19%] sm:-left-[2%] sm:top-[18%] lg:-left-[8%] lg:top-[17%]',
   },
   {
     src: '/donation/donation-two.png',
@@ -28,7 +29,7 @@ const FLOATING_IMAGES = [
     height: 1294,
     altKey: 'floatingTwo',
     className:
-      'right-[14%] top-[19%] sm:right-[16%] sm:top-[18%] lg:right-[18%] lg:top-[17%]',
+      'right-[2%] top-[19%] sm:-right-[2%] sm:top-[18%] lg:-right-[8%] lg:top-[17%]',
   },
   {
     src: '/donation/donation-three.png',
@@ -36,7 +37,7 @@ const FLOATING_IMAGES = [
     height: 796,
     altKey: 'floatingThree',
     className:
-      'left-[6%] top-[44%] sm:left-[7%] sm:top-[43%] lg:left-[8%] lg:top-[42%]',
+      'left-0 top-[56%] sm:-left-[12%] sm:top-[58%] lg:-left-[22%] lg:top-[60%]',
   },
   {
     src: '/donation/donation-four.png',
@@ -44,7 +45,7 @@ const FLOATING_IMAGES = [
     height: 820,
     altKey: 'floatingFour',
     className:
-      'right-[6%] top-[50%] sm:right-[7%] sm:top-[49%] lg:right-[8%] lg:top-[48%]',
+      'right-0 top-[56%] sm:-right-[12%] sm:top-[58%] lg:-right-[22%] lg:top-[60%]',
   },
 ] as const;
 
@@ -92,7 +93,7 @@ export async function DonationSection() {
   const { t } = await getTranslator();
 
   return (
-    <SectionShell id="donation" className="bg-white pt-16 pb-10 lg:pt-24 lg:pb-12">
+    <SectionShell id="donation" className="mb-16 bg-white pt-16 pb-10 lg:mb-28 lg:pt-24 lg:pb-12">
       <div data-scroll-reveal className="mx-auto max-w-[1116px]">
         <div className="relative mx-auto min-h-[320px] max-w-[720px] sm:min-h-[340px] lg:min-h-[360px] lg:max-w-[800px]">
           {FLOATING_IMAGES.map((item) => (
@@ -106,8 +107,8 @@ export async function DonationSection() {
             />
           ))}
 
-          <div className="relative z-10 mx-auto flex max-w-[480px] flex-col items-center px-8 text-center sm:px-10 lg:px-12">
-            <div className="relative size-16 shrink-0 overflow-hidden rounded-full sm:size-20 lg:size-24">
+          <div className="relative z-10 mx-auto flex w-full flex-col items-center px-4 text-center">
+            <div className="relative size-16 shrink-0 -translate-y-4 overflow-hidden rounded-full sm:size-20 sm:-translate-y-5 lg:size-24 lg:-translate-y-6">
               <Image
                 src={COLLECTION_LOGO}
                 alt="JUSPEACE"
@@ -120,36 +121,37 @@ export async function DonationSection() {
               {t('landing.donation.label')}
             </SectionLabel>
             <SectionHeading className="mt-8 text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.12]">
-              {t('landing.donation.headline')}
+              <span className="block">{t('landing.donation.headlineLine1')}</span>
+              <span className="block whitespace-nowrap">{t('landing.donation.headlineLine2')}</span>
             </SectionHeading>
-            <p className="mt-5 font-sans text-base leading-relaxed text-black sm:text-lg">
-              {t('landing.donation.body')}
+            <p className="mt-16 max-w-[34rem] px-4 text-center font-sans text-base leading-relaxed text-black sm:mt-20 sm:text-lg">
+              <span className="block">{t('landing.donation.bodyLine1')}</span>
+              <span className="block">{t('landing.donation.bodyLine2')}</span>
+              <span className="block">{t('landing.donation.bodyLine3')}</span>
             </p>
           </div>
         </div>
 
         <div
           data-scroll-reveal
-          className="mx-auto mt-14 flex max-w-[900px] flex-col items-center text-center lg:mt-16"
+          className="mx-auto mt-24 flex w-full flex-col items-center text-center lg:mt-32"
         >
-          <div className="relative px-4">
-            <Image
-              src={DAISY_ICON}
-              alt=""
-              width={128}
-              height={128}
-              aria-hidden
-              className="absolute left-[calc(50%-7.5rem)] top-[-0.5rem] h-8 w-8 object-contain sm:left-[calc(50%-8.5rem)] sm:h-10 sm:w-10 lg:left-[calc(50%-10rem)]"
-            />
-            <p className="font-serif text-[clamp(2rem,5.5vw,4.5rem)] leading-[1.05] text-black">
-              {t('landing.donation.statCount')}
-            </p>
-            <p className="mt-2 font-display text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold leading-[1.12] tracking-[-0.02em] text-black">
-              {t('landing.donation.statSuffix')}
-            </p>
-          </div>
+          <p className="font-display text-4xl font-bold leading-[1.02] tracking-[-0.035em] text-black sm:text-5xl lg:text-7xl xl:text-8xl">
+            <span className={`relative inline-block font-bold ${inriaSerifBold.className}`}>
+              <Image
+                src={DAISY_ICON}
+                alt=""
+                width={48}
+                height={48}
+                aria-hidden
+                className="absolute -top-14 left-[calc(13.6%-3rem)] !h-24 !w-24 object-contain sm:-top-16 sm:left-[calc(13.6%-3.5rem)] sm:!h-28 sm:!w-28 lg:-top-20 lg:left-[calc(13.6%-4.5rem)] lg:!h-36 lg:!w-36"
+              />
+              {t('landing.donation.statLine1')}
+            </span>
+            <span className="mt-1 block font-display font-medium">{t('landing.donation.statLine2')}</span>
+          </p>
 
-          <div className="mt-8 flex items-center justify-center pl-3">
+          <div className="mt-20 mb-20 flex items-center justify-center pl-3 sm:mt-[5.25rem] sm:mb-[5.25rem] lg:mt-24 lg:mb-24">
             {AVATAR_IMAGES.map((src, index) => (
               <div
                 key={`${src}-${index}`}
@@ -166,15 +168,17 @@ export async function DonationSection() {
             ))}
           </div>
 
-          <p className="mt-10 font-sans text-base leading-relaxed text-black sm:text-lg">
-            <span className="block">{t('landing.donation.introKoLine1')}</span>
-            <span className="my-3 block h-px w-10 bg-black/30" aria-hidden />
-            <span className="block">{t('landing.donation.introKoLine2')}</span>
+          <p className="jp-donation-intro-ko flex flex-col items-center gap-1.5 text-sm text-black sm:text-base">
+            <span>{t('landing.donation.introKoLine1')}</span>
+            <span className="text-black/80" aria-hidden>
+              —
+            </span>
+            <span>{t('landing.donation.introKoLine2')}</span>
           </p>
 
           <button
             type="button"
-            className="mt-10 bg-black px-8 py-3.5 font-sans text-sm text-white transition-opacity hover:opacity-90 sm:text-base"
+            className="jp-landing-cta mt-14 sm:mt-16"
           >
             {t('landing.donation.cta')}
           </button>

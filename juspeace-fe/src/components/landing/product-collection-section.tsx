@@ -7,6 +7,7 @@ import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
 import type { Product } from '@/lib/api/types';
 import { getTranslator } from '@/lib/i18n/server';
+import { inriaSerif } from '@/lib/fonts';
 import {
   COLLECTION_VARIANTS,
   createFallbackProduct,
@@ -87,11 +88,13 @@ function buildCards(
 function CollectionProductCard({
   card,
   ctaLabel,
-  stockSuffix,
+  stockPiecesWord,
+  stockCarryMessage,
 }: {
   card: CollectionCard;
   ctaLabel: string;
-  stockSuffix: string;
+  stockPiecesWord: string;
+  stockCarryMessage: string;
 }) {
   const image = VARIANT_MAIN_IMAGES[card.key];
   const stockCount = Math.round(card.stock);
@@ -100,7 +103,7 @@ function CollectionProductCard({
   return (
     <article
       data-scroll-stagger-item
-      className="flex flex-col items-center text-center"
+      className="@container flex w-full min-w-0 flex-col items-center text-center"
     >
       <Link
         href={detailHref}
@@ -121,11 +124,16 @@ function CollectionProductCard({
           {card.title}
         </h3>
       </Link>
-      <p className="mt-2 max-w-[340px] font-sans text-sm italic leading-relaxed text-black/80 sm:text-[0.9375rem]">
+      <p className="jp-collection-card-desc mt-2 w-full min-w-0 px-0.5 font-sans leading-snug whitespace-nowrap italic text-black/80">
         {card.description}
       </p>
-      <p className="mt-4 font-serif text-sm text-black">
-        <span className="font-bold">{stockCount}</span> {stockSuffix}
+      <p
+        className={`mt-8 text-base leading-5 tracking-normal text-black sm:mt-10 ${inriaSerif.className}`}
+      >
+        <span className="font-bold">
+          {stockCount} {stockPiecesWord}
+        </span>{' '}
+        <span className="font-normal">{stockCarryMessage}</span>
       </p>
       <CollectionCtaButton product={card.product} label={ctaLabel} />
     </article>
@@ -148,13 +156,15 @@ export async function ProductCollectionSection({
         data-scroll-reveal
         className="mx-auto flex max-w-[1116px] flex-col items-center text-center"
       >
-        <p className="font-display text-[clamp(2.25rem,6.25vw,7.5rem)] font-bold leading-[clamp(2.4rem,6.67vw,8rem)] tracking-[-0.02em] text-black">
-          {t('landing.collection.taglineLine1')}
-        </p>
-        <p className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] font-normal italic leading-[1.12] tracking-[-0.02em] text-black">
-          {t('landing.collection.taglineLine2')}
-        </p>
-        <div className="relative mt-12 size-20 shrink-0 overflow-hidden rounded-full sm:mt-16 sm:size-24 lg:mt-20 lg:size-28">
+        <div className="flex w-max max-w-full flex-col">
+          <p className="text-center font-display text-[clamp(2rem,5.75vw,7rem)] font-bold leading-[clamp(2.15rem,6.1vw,7.45rem)] tracking-[-0.02em] text-black">
+            {t('landing.collection.taglineLine1')}
+          </p>
+          <p className="text-center font-display text-[clamp(2.25rem,5.5vw,4.5rem)] font-medium italic leading-[1.12] font-synthesis-none tracking-[clamp(0.04em,0.35vw,0.14em)] text-black">
+            {t('landing.collection.taglineLine2')}
+          </p>
+        </div>
+        <div className="relative mt-16 size-20 shrink-0 overflow-hidden rounded-full sm:mt-20 sm:size-24 lg:mt-28 lg:size-28">
           <Image
             src={COLLECTION_LOGO}
             alt="JUSPEACE"
@@ -167,35 +177,40 @@ export async function ProductCollectionSection({
 
       <div
         data-scroll-reveal
-        className="mx-auto mt-16 flex max-w-[900px] flex-col items-center text-center lg:mt-24"
+        className="mx-auto mt-20 flex max-w-[900px] flex-col items-center text-center sm:mt-24 lg:mt-32"
       >
         <SectionLabel className="text-base sm:text-lg lg:text-xl">
           {t('landing.collection.label')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2.25rem,6vw,5rem)] leading-[1.08]">
+        <SectionHeading className="mt-1 text-[clamp(2.25rem,6vw,5rem)] leading-[1.08] sm:mt-1.5 lg:mt-2">
           <span className="block">{t('landing.collection.headingLine1')}</span>
           <span className="block">{t('landing.collection.headingLine2')}</span>
         </SectionHeading>
-        <p className="mt-6 font-sans text-base leading-relaxed text-black sm:text-lg">
+        <p className="mt-10 font-sans text-base leading-relaxed text-black sm:mt-12 sm:text-lg lg:mt-14">
           <span className="block">{t('landing.collection.introLine1')}</span>
           <span className="block">{t('landing.collection.introLine2')}</span>
         </p>
-        <p className="mt-4 font-sans text-base leading-relaxed text-black sm:text-lg">
-          <span className="block">{t('landing.collection.introKoLine1')}</span>
-          <span className="block">{t('landing.collection.introKoLine2')}</span>
+        <p className="jp-collection-intro-ko mt-10 flex flex-col items-center gap-1.5 font-sans text-base font-normal leading-none text-black sm:mt-12 sm:text-lg lg:mt-14">
+          <span>
+            {t('landing.collection.introKoLine1Prefix')}
+            <span className="font-semibold">JUSPEACE</span>
+            {t('landing.collection.introKoLine1Suffix')}
+          </span>
+          <span>{t('landing.collection.introKoLine2')}</span>
         </p>
       </div>
 
       <div
         data-scroll-stagger
-        className="mx-auto mt-16 grid max-w-[1280px] grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-10 lg:gap-12"
+        className="mx-auto mt-16 grid w-full max-w-none grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-x-12 md:gap-y-12 lg:max-xl:gap-x-10 xl:gap-x-24 2xl:gap-x-32"
       >
         {cards.map((card) => (
           <CollectionProductCard
             key={card.key}
             card={card}
             ctaLabel={t('landing.collection.cta')}
-            stockSuffix={t('landing.collection.stockSuffix')}
+            stockPiecesWord={t('landing.collection.stockPiecesWord')}
+            stockCarryMessage={t('landing.collection.stockCarryMessage')}
           />
         ))}
       </div>

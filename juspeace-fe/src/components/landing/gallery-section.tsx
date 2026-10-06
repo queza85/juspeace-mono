@@ -19,57 +19,43 @@ const CATEGORIES = [
   'desktopThumbnails',
 ] as const;
 
-const GALLERY_IMAGE_POOL = [
-  '/marque/juspeace_mar1.png',
-  '/marque/juspeace_mar2.png',
-  '/marque/juspeace_mr3.png',
-  '/marque/juspeace_mar4.png',
-  '/marque/juespeace_mar4.png',
-  '/marque/juspeace_mar5.jpg',
-  '/marque/ju_mar6.png',
-  '/marque/mar_7.png',
-  '/marque/mar8.png',
-  '/story/gd.png',
-  '/story/love_together.png',
-  '/story/story_love.png',
-  '/product-feature/pf1.png',
-  '/product-feature/pf2.png',
-  '/product-feature/pf3.png',
-  '/product-feature/pf5.png',
-  '/product-feature/pf6.png',
-  '/product-collection/product-collection-one.png',
-  '/product-collection/product-collection-two.png',
-  '/product-collection/product-collection-three.png',
-  '/landing/landing_love.png',
-  '/landing/juspeace_just_hand.png',
-  '/landing/intro.png',
-] as const;
-
-function pickFromPool(index: number): string {
-  const poolSize = GALLERY_IMAGE_POOL.length;
-  const normalized = ((index % poolSize) + poolSize) % poolSize;
-
-  return GALLERY_IMAGE_POOL[normalized] ?? GALLERY_IMAGE_POOL[0];
-}
-
-function getStackImages(stackIndex: number): [string, string, string] {
-  const base = stackIndex * 3;
-
-  return [
-    pickFromPool(base),
-    pickFromPool(base + 7),
-    pickFromPool(base + 13),
-  ];
-}
-
-const GALLERY_STACKS = Object.fromEntries(
-  CATEGORIES.map((key, index) => [key, getStackImages(index)]),
-) as Record<(typeof CATEGORIES)[number], [string, string, string]>;
+const GALLERY_STACKS = {
+  productOnly: [
+    '/product-gallery/first/second-new.png',
+    '/product-gallery/first/three-new.png',
+    '/product-gallery/first/first.png',
+  ],
+  lifestyle: [
+    '/product-gallery/second/second-new.png',
+    '/product-gallery/second/third-new.png',
+    '/product-gallery/second/first.png',
+  ],
+  closeUp: [
+    '/product-gallery/third/second-new.png',
+    '/product-gallery/third/third-new.png',
+    '/product-gallery/third/first.png',
+  ],
+  packaging: [
+    '/product-gallery/fourth/second-new.png',
+    '/product-gallery/fourth/three-new.png',
+    '/product-gallery/fourth/first.png',
+  ],
+  mobileSwipe: [
+    '/product-gallery/fifth/second-new.png',
+    '/product-gallery/fifth/third-new.png',
+    '/product-gallery/fifth/first.png',
+  ],
+  desktopThumbnails: [
+    '/product-gallery/sixth/second-new.png',
+    '/product-gallery/sixth/third-new.png',
+    '/product-gallery/sixth/first.png',
+  ],
+} as const satisfies Record<(typeof CATEGORIES)[number], readonly [string, string, string]>;
 
 function GalleryPaperClip() {
   return (
     <div
-      className="pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-1/2 -translate-y-[48%]"
+      className="pointer-events-none absolute left-1/2 top-0 z-30 -translate-x-[calc(50%+28px)] -translate-y-[48%]"
       aria-hidden
     >
       <Image
@@ -77,7 +63,7 @@ function GalleryPaperClip() {
         alt=""
         width={804}
         height={1134}
-        className="h-[64px] w-auto origin-bottom rotate-[14deg] object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] sm:h-[72px]"
+        className="h-[88px] w-auto origin-bottom rotate-[14deg] object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] sm:h-[96px] xl:h-[108px]"
       />
     </div>
   );
@@ -87,10 +73,12 @@ function GalleryCard({
   src,
   alt,
   aspectRatio,
+  contained = false,
 }: {
   src: string;
   alt: string;
   aspectRatio: string;
+  contained?: boolean;
 }) {
   if (!src) {
     return null;
@@ -105,8 +93,8 @@ function GalleryCard({
         src={src}
         alt={alt}
         fill
-        sizes="(max-width: 640px) 150px, 168px"
-        className="object-cover"
+        sizes="(max-width: 640px) 202px, 226px"
+        className={contained ? 'object-contain' : 'object-cover'}
       />
     </div>
   );
@@ -124,15 +112,23 @@ function GalleryStack({
   centerSrc: string;
 }) {
   return (
-    <div className="relative mx-auto h-[192px] w-[245px] sm:h-[217px] sm:w-[263px]">
-      <div className="absolute left-1/2 top-4 w-[150px] -translate-x-[calc(50%+51px)] -rotate-[16.59deg]">
-        <GalleryCard src={leftSrc} alt={label} aspectRatio="150 / 194" />
+    <div className="relative mx-auto h-[206px] w-[300px] xl:h-[240px] xl:w-[346px] 2xl:h-[291px] 2xl:w-[414px]">
+      <div className="absolute left-1/2 top-3 w-[142px] -translate-x-[calc(50%+68px)] -rotate-[16.59deg] xl:top-3.5 xl:w-[166px] xl:-translate-x-[calc(50%+80px)] 2xl:top-4 2xl:w-[202px] 2xl:-translate-x-[calc(50%+96px)]">
+        <GalleryCard
+          src={leftSrc}
+          alt={label}
+          aspectRatio="202 / 262"
+        />
       </div>
-      <div className="absolute left-1/2 top-4 w-[150px] -translate-x-[calc(50%-51px)] rotate-[16.59deg]">
-        <GalleryCard src={rightSrc} alt={label} aspectRatio="150 / 194" />
+      <div className="absolute left-1/2 top-3 w-[142px] -translate-x-[calc(50%-68px)] rotate-[16.59deg] xl:top-3.5 xl:w-[166px] xl:-translate-x-[calc(50%-80px)] 2xl:top-4 2xl:w-[202px] 2xl:-translate-x-[calc(50%-96px)]">
+        <GalleryCard
+          src={rightSrc}
+          alt={label}
+          aspectRatio="202 / 262"
+        />
       </div>
-      <div className="absolute left-1/2 top-0 z-10 w-[168px] -translate-x-1/2">
-        <GalleryCard src={centerSrc} alt={label} aspectRatio="168 / 217" />
+      <div className="absolute left-1/2 top-0 z-10 w-[160px] -translate-x-1/2 xl:w-[186px] 2xl:w-[226px]">
+        <GalleryCard src={centerSrc} alt={label} aspectRatio="226 / 291" contained />
         <GalleryPaperClip />
       </div>
     </div>
@@ -184,7 +180,7 @@ export async function GallerySection() {
         data-scroll-reveal
         className="mx-auto mb-16 flex max-w-[1116px] flex-col items-center text-center lg:mb-24"
       >
-        <div className="relative -mt-4 size-16 shrink-0 overflow-hidden rounded-full sm:-mt-5 sm:size-20 lg:-mt-6 lg:size-24">
+        <div className="relative mt-4 mb-16 size-16 shrink-0 overflow-hidden rounded-full sm:mt-6 sm:mb-20 sm:size-20 lg:mt-8 lg:mb-24 lg:size-24">
           <Image
             src={COLLECTION_LOGO}
             alt="JUSPEACE"
@@ -196,14 +192,15 @@ export async function GallerySection() {
         <SectionLabel className="mt-8 text-base sm:mt-10 sm:text-lg lg:text-xl">
           {t('landing.gallery.label')}
         </SectionLabel>
-        <SectionHeading className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]">
-          {t('landing.gallery.heading')}
+        <SectionHeading className="mt-1 text-[clamp(2.25rem,6vw,5rem)] leading-[1.05] sm:mt-1.5 lg:mt-2">
+          <span className="block">{t('landing.gallery.headingLine1')}</span>
+          <span className="mb-10 block sm:mb-14 lg:mb-20">{t('landing.gallery.headingLine2')}</span>
         </SectionHeading>
       </div>
 
       <div
         data-scroll-stagger
-        className="mx-auto hidden max-w-[1200px] gap-x-10 gap-y-16 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-20"
+        className="mx-auto hidden max-w-[1100px] gap-x-10 gap-y-24 md:grid md:grid-cols-2 lg:max-w-none lg:grid-cols-3 lg:gap-x-12 lg:gap-y-28 xl:gap-x-16 xl:gap-y-32 2xl:gap-x-20"
       >
         {CATEGORIES.map((key) => {
           const [leftSrc, rightSrc, centerSrc] = GALLERY_STACKS[key];
@@ -236,7 +233,7 @@ export async function GallerySection() {
               leftSrc={leftSrc}
               rightSrc={rightSrc}
               centerSrc={centerSrc}
-              className="w-[263px] shrink-0 snap-center"
+              className="w-[300px] shrink-0 snap-center"
             />
           );
         })}

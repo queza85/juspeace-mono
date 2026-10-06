@@ -5,13 +5,10 @@ import { ProductDetailGallery } from '@/components/products/product-detail-galle
 import { ProductDetailPageIntro } from '@/components/products/product-detail-page-intro';
 import { ProductDetailPurchase } from '@/components/products/product-detail-purchase';
 import { ProductDetailTabs } from '@/components/products/product-detail-tabs';
-import { ProductRelatedSection } from '@/components/products/product-related-section';
 import type { Product } from '@/lib/api/types';
-import { getProductBySlug, listProducts } from '@/lib/api/products';
+import { getProductBySlug } from '@/lib/api/products';
 import { getTranslator } from '@/lib/i18n/server';
 import {
-  buildFallbackCatalog,
-  COLLECTION_VARIANTS,
   createFallbackProduct,
   detectVariantKey,
   detectVariantKeyFromSlug,
@@ -21,28 +18,6 @@ import {
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
-}
-
-function fallbackLabels(
-  t: (key: string) => string,
-): Record<
-  (typeof COLLECTION_VARIANTS)[number],
-  { name: string; description: string }
-> {
-  return COLLECTION_VARIANTS.reduce(
-    (acc, variantKey) => {
-      const prefix = getFallbackI18nPrefix(variantKey);
-      acc[variantKey] = {
-        name: t(`${prefix}.title`),
-        description: t(`${prefix}.description`),
-      };
-      return acc;
-    },
-    {} as Record<
-      (typeof COLLECTION_VARIANTS)[number],
-      { name: string; description: string }
-    >,
-  );
 }
 
 async function resolveProduct(
@@ -95,12 +70,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const product = await resolveProduct(slug, t);
 
-  const productsResponse = await listProducts({ limit: 12 }).catch(() => null);
-  const relatedProducts =
-    productsResponse?.items && productsResponse.items.length > 0
-      ? productsResponse.items
-      : buildFallbackCatalog(fallbackLabels(t), slug);
-
   const variantKey = detectVariantKey(product);
   const fallbackPrefix = getFallbackI18nPrefix(variantKey);
   const displayName =
@@ -112,8 +81,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <>
       <LandingHeader variant="light" />
       <article className="bg-white">
-        <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-8 lg:px-12 xl:px-[75px] lg:py-10">
-          <div className="mx-auto max-w-[1080px]">
+        <div className="mx-auto w-full max-w-[1920px] px-5 py-8 sm:px-6 lg:px-8 lg:py-10 xl:px-10">
+          <div className="mx-auto w-[80vw] max-w-full">
             <ProductDetailPageIntro
               collectionLabel={t('products.detail.breadcrumbCollection')}
               productName={displayName}
@@ -121,7 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               bannerText={t('products.detail.registrationBanner')}
             />
 
-            <section className="grid grid-cols-1 gap-8 lg:grid-cols-[480px_520px] lg:items-stretch lg:gap-x-20">
+            <section className="grid grid-cols-1 gap-8 lg:grid-cols-[520px_minmax(0,1fr)] lg:items-start lg:gap-x-16 2xl:grid-cols-[minmax(560px,760px)_580px]">
               <div className="lg:self-start">
                 <ProductDetailGallery
                   variantKey={variantKey}
@@ -136,15 +105,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
               />
             </section>
 
-            <ProductDetailTabs variantName={displayName} />
+            <ProductDetailTabs />
           </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 lg:px-12 xl:px-[75px]">
-          <ProductRelatedSection
-            products={relatedProducts}
-            currentSlug={slug}
-          />
         </div>
       </article>
       <LandingFooter />

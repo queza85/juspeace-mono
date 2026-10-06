@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Truck } from 'lucide-react';
 import { useState } from 'react';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import { resolveCartItemImage } from '@/lib/products/cart-item-image';
@@ -45,31 +44,41 @@ export function CartOrderSummary({
     subtotalCents + (items.length > 0 ? CART_SHIPPING_CENTS : 0);
   const compact =
     variant === 'shipping' || variant === 'payment' || variant === 'review';
+  const payment = variant === 'payment';
+  const review = variant === 'review';
 
   return (
     <aside
       className={cn(
         'border border-black/10 bg-white',
         variant === 'cart' && 'lg:sticky lg:top-24',
-        compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6',
+        review
+          ? 'p-6 sm:p-7'
+          : payment
+            ? 'p-5 sm:p-6'
+            : compact
+              ? 'p-4 sm:p-5'
+              : 'p-5 sm:p-6',
       )}
     >
       <h2
         className={cn(
-          'font-display font-semibold text-black',
-          compact ? 'text-sm' : 'text-base sm:text-lg',
+          'font-display text-black',
+          compact
+            ? 'text-lg font-bold'
+            : 'text-base font-semibold sm:text-lg',
         )}
       >
         {t('cart.orderSummary')}
       </h2>
 
-      <ul className={cn(compact ? 'mt-3' : 'mt-4')}>
+      <ul className={cn(review ? 'mt-6' : payment ? 'mt-5' : compact ? 'mt-3' : 'mt-4')}>
         {items.map((item) => (
           <li
             key={item.product.id}
             className={cn(
               'border-b border-black/10 last:border-b-0',
-              compact ? 'py-3' : 'py-4',
+              review ? 'py-5' : payment ? 'py-4' : compact ? 'py-3' : 'py-4',
             )}
           >
             <div className="flex items-start gap-2.5">
@@ -99,7 +108,7 @@ export function CartOrderSummary({
                   </p>
                   <p
                     className={cn(
-                      'shrink-0 font-display font-semibold text-black',
+                      'shrink-0 font-display font-bold text-black',
                       compact ? 'text-xs' : 'text-sm',
                     )}
                   >
@@ -121,8 +130,14 @@ export function CartOrderSummary({
 
       <div
         className={cn(
-          'border-t border-black/10',
-          compact ? 'mt-4 pt-4' : 'mt-5 pt-5',
+          'border-y border-black/10',
+          review
+            ? 'mt-7 py-6'
+            : payment
+              ? 'mt-6 py-5'
+              : compact
+                ? 'mt-4 py-4'
+                : 'mt-5 py-5',
         )}
       >
         <p
@@ -163,8 +178,14 @@ export function CartOrderSummary({
 
       <dl
         className={cn(
-          'space-y-1.5 font-mono text-black',
-          compact ? 'mt-4 text-[11px] sm:text-xs' : 'mt-6 text-xs sm:text-sm',
+          'font-mono text-black',
+          review
+            ? 'mt-7 space-y-4 text-[11px] sm:text-xs'
+            : compact
+              ? payment
+                ? 'mt-6 space-y-3.5 text-[11px] sm:text-xs'
+                : 'mt-4 space-y-2.5 text-[11px] sm:text-xs'
+              : 'mt-6 space-y-4 text-xs sm:text-sm',
         )}
       >
         <div className="flex items-center justify-between">
@@ -186,7 +207,13 @@ export function CartOrderSummary({
         <div
           className={cn(
             'flex items-center justify-between border-t border-black/10 font-semibold',
-            compact ? 'pt-2 text-xs' : 'pt-3 text-sm sm:text-base',
+            review
+              ? 'pt-4 text-xs'
+              : payment
+                ? 'pt-3.5 text-xs'
+                : compact
+                  ? 'pt-2 text-xs'
+                  : 'pt-3 text-[13px]',
           )}
         >
           <dt>{t('cart.total')}</dt>
@@ -197,28 +224,33 @@ export function CartOrderSummary({
       <div
         className={cn(
           'flex gap-2.5 rounded-sm border border-black/10 bg-jp-light-gray',
-          compact ? 'mt-4 p-3' : 'mt-5 p-4',
+          review ? 'mt-7 p-4' : payment ? 'mt-6 p-4' : compact ? 'mt-4 p-3' : 'mt-5 p-4',
         )}
       >
-        <Truck
+        <Image
+          src="/product-detail/express-delivery%201.png"
+          alt=""
+          width={28}
+          height={28}
           className={cn(
-            'mt-0.5 shrink-0 text-black',
-            compact ? 'size-3.5' : 'size-4',
+            'mt-0.5 shrink-0 object-contain',
+            compact ? 'size-5' : 'size-7',
           )}
-          aria-hidden
         />
-        <p
-          className={cn(
-            'font-mono leading-relaxed text-black underline underline-offset-2',
-            compact ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm',
-          )}
-        >
-          {t('cart.deliveryEstimateTitle')}{' '}
-          <span>{t('cart.deliveryEstimateBody')}</span>
+        <p className="font-mono text-[11px] leading-relaxed text-black">
+          {t('cart.deliveryEstimateTitle')}
+          <span className="mt-0.5 block font-bold underline underline-offset-2">
+            {t('cart.deliveryEstimateBody')}
+          </span>
         </p>
       </div>
 
-      <div className={cn('flex flex-col gap-2.5', compact ? 'mt-4' : 'mt-6')}>
+      <div
+        className={cn(
+          'flex flex-col gap-2.5',
+          review ? 'mt-7' : payment ? 'mt-6' : compact ? 'mt-4' : 'mt-6',
+        )}
+      >
         {variant === 'shipping' ? (
           <button
             type="submit"

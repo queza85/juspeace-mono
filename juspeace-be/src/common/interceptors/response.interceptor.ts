@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
+  StreamableFile,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import type { Request } from 'express';
@@ -49,7 +50,7 @@ export class ResponseInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map((payload: unknown) => {
-        if (isAlreadyWrapped(payload)) {
+        if (payload instanceof StreamableFile || isAlreadyWrapped(payload)) {
           return payload;
         }
 

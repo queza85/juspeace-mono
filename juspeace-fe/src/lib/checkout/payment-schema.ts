@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { detectCardBrand } from '@/lib/checkout/card-input';
 import type { Locale } from '@/lib/i18n/config';
 import { translate } from '@/lib/i18n/translate';
 
@@ -17,16 +18,22 @@ function isValidCardNumber(value: string): boolean {
 }
 
 function isValidExpiryDate(value: string): boolean {
-  const trimmed = value.trim();
-  if (/^(0[1-9]|1[0-2])\/(\d{2})$/.test(trimmed)) {
-    return true;
-  }
-
-  return /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(trimmed);
+  return /^(0[1-9]|1[0-2])\/\d{2}$/.test(value.trim());
 }
 
-function isValidCvv(value: string): boolean {
-  return /^\d{3,4}$/.test(value.trim());
+function isValidCvv(value: string, cardNumber: string): boolean {
+  const digits = value.replace(/\D/g, '');
+  const brand = detectCardBrand(cardNumber);
+
+  if (brand === 'amex') {
+    return digits.length === 4;
+  }
+
+  if (brand === 'unknown') {
+    return digits.length === 3 || digits.length === 4;
+  }
+
+  return digits.length === 3;
 }
 
 export function createPaymentFormSchema(locale: Locale) {
@@ -76,7 +83,7 @@ export function createPaymentFormSchema(locale: Locale) {
         });
       }
 
-      if (!isValidCvv(values.cvv)) {
+      if (!isValidCvv(values.cvv, values.cardNumber)) {
         ctx.addIssue({
           code: 'custom',
           message: t('payment.validation.cvvInvalid'),

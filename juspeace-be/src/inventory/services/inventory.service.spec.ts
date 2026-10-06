@@ -70,9 +70,9 @@ describe('InventoryService', () => {
     expect(result.stockStatus).toBe('in_stock');
   });
 
-  it('rejects stock adjust until implemented', async () => {
-    await expect(
+  it('rejects stock adjust until implemented', () => {
+    expect(() =>
       service.adjustStock('variant-1', { quantityDelta: 10 }),
-    ).rejects.toBeInstanceOf(NotImplementedException);
+    ).toThrow(NotImplementedException);
   });
 });

@@ -76,21 +76,27 @@ export function HeroAnimatedCopy({
   return (
     <div
       ref={rootRef}
-      className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16"
+      className="jp-hero-copy-row flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16"
     >
-      <h1 className="jp-hero-title -mt-8 shrink-0 sm:-mt-10 lg:-mt-14 xl:-mt-16">
-        <span data-hero-line className="block overflow-hidden">
+      <h1 className="jp-hero-title -mt-8 shrink-0 sm:-mt-10 lg:-mt-10 xl:-mt-12">
+        <span
+          data-hero-line
+          className="-mb-[0.16em] block overflow-hidden pb-[0.16em]"
+        >
           <span className="jp-hero-title-line">{titleLine1}</span>
         </span>
-        <span data-hero-line className="block overflow-hidden">
+        <span
+          data-hero-line
+          className="-mb-[0.16em] block overflow-hidden pb-[0.16em]"
+        >
           <span className="jp-hero-title-line">{titleLine2}</span>
         </span>
       </h1>
 
-      <div className="flex w-full max-w-[433px] flex-col lg:mt-[100px] lg:w-[433px] lg:shrink-0 xl:mt-[120px] 2xl:mt-[142px]">
+      <div className="jp-hero-copy-side flex w-full max-w-[433px] flex-col lg:w-[433px] lg:shrink-0">
         <p
           data-hero-description
-          className="jp-hero-description whitespace-pre-line font-mono text-[18px] leading-[22px] font-normal tracking-normal text-white"
+          className="jp-hero-description text-left"
         >
           {(() => {
             let wordIndex = 0;
@@ -111,7 +117,7 @@ export function HeroAnimatedCopy({
             });
           })()}
         </p>
-        <div className="mt-[52px] flex flex-wrap items-center gap-3.5">
+        <div className="mt-[52px] flex flex-wrap items-center gap-8">
           <a
             data-hero-cta
             href="#collection"

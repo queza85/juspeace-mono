@@ -31,7 +31,7 @@ export function CartPageContent() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1200px]">
+    <div className="w-full">
       <header className="max-w-[720px]">
         <h1 className="font-display text-[clamp(1.625rem,2.8vw,2rem)] font-semibold leading-tight text-black">
           {t('cart.title', { count: totalItems })}
@@ -41,7 +41,7 @@ export function CartPageContent() {
         </p>
       </header>
 
-      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,640px)_minmax(340px,400px)] lg:items-start lg:gap-12">
+      <div className="mt-6 grid w-full grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-x-6 xl:max-w-[1120px] xl:grid-cols-[minmax(0,1fr)_440px] 2xl:max-w-none 2xl:grid-cols-[minmax(0,1fr)_460px] 2xl:gap-x-8">
         <section
           aria-labelledby="cart-items-heading"
           className="min-w-0 border border-black/10 bg-white"

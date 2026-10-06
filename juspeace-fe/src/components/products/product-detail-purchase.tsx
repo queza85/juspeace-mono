@@ -1,8 +1,10 @@
 'use client';
 
-import { Minus, Plus, Star } from 'lucide-react';
-import { useState } from 'react';
+import { Check, Minus, Plus, Star } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { ProductDetailPurchaseInfo } from '@/components/products/product-detail-purchase-info';
+import { toast } from '@/components/ui/toast';
 import { useFormatPrice, useT } from '@/lib/i18n/locale-context';
 import type { Product } from '@/lib/api/types';
 import { useCartStore } from '@/stores/cart-store';
@@ -61,11 +63,22 @@ export function ProductDetailPurchase({
   const formatPrice = useFormatPrice();
   const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
+  const [saved, setSaved] = useState(false);
+  const [cartAddedFlash, setCartAddedFlash] = useState(false);
+  const cartFlashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const inStock = product.stock > 0;
   const canBuy = inStock;
 
-  const handleAddToCart = () => {
+  useEffect(() => {
+    return () => {
+      if (cartFlashTimerRef.current) {
+        clearTimeout(cartFlashTimerRef.current);
+      }
+    };
+  }, []);
+
+  const addProductToCart = (options?: { animateAddButton?: boolean }) => {
     addItem(
       {
         id: product.id,
@@ -77,19 +90,53 @@ export function ProductDetailPurchase({
       },
       quantity,
     );
+    toast(
+      quantity > 1
+        ? t('products.detail.addedToCartToastQty', { count: quantity })
+        : t('products.detail.addedToCartToast'),
+      'success',
+    );
+
+    if (options?.animateAddButton) {
+      setCartAddedFlash(true);
+      if (cartFlashTimerRef.current) {
+        clearTimeout(cartFlashTimerRef.current);
+      }
+      cartFlashTimerRef.current = setTimeout(() => {
+        setCartAddedFlash(false);
+        cartFlashTimerRef.current = null;
+      }, 1400);
+    }
   };
 
   return (
-    <div className={cn('flex min-h-0 min-w-0 flex-col', className)}>
-      <h1 className="font-display text-[clamp(1.875rem,3vw,2.5rem)] font-black leading-[1.15] tracking-tight text-black">
-        {displayName}
-      </h1>
+    <div className={cn('flex min-h-0 min-w-0 w-full flex-col lg:w-[calc(100%-10px)] 2xl:w-full', className)}>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="min-w-0 font-display text-[clamp(1.375rem,2vw,1.75rem)] font-black leading-[1.15] tracking-tight text-black">
+          {displayName}
+        </h1>
+        <button
+          type="button"
+          aria-pressed={saved}
+          aria-label={t('products.detail.save')}
+          onClick={() => setSaved((value) => !value)}
+          className="inline-flex size-8 shrink-0 items-center justify-center"
+        >
+          <Image
+            src="/product-detail/love%201.png"
+            alt=""
+            width={32}
+            height={32}
+            className={cn('size-8', saved && 'opacity-60')}
+          />
+        </button>
+      </div>
 
       <p className="mt-3 font-display text-xl font-normal text-black">
         {formatPdpPrice(formatPrice, product.priceCents, product.currency)}
       </p>
 
-      <p className="mt-6 min-h-[4.75rem] max-w-[420px] font-mono text-xs leading-[1.75] text-black sm:text-[13px] sm:leading-[1.8]">
+      <p className="mt-6 max-w-[420px] font-sans text-base font-normal not-italic leading-[38px] tracking-normal text-black">
         {tagline}
       </p>
 
@@ -98,7 +145,7 @@ export function ProductDetailPurchase({
       </div>
 
       <div className="mt-7 flex flex-wrap items-center gap-5 sm:gap-6">
-        <div className="flex h-11 w-[104px] items-center justify-between border border-black/10 bg-jp-light-gray px-3">
+        <div className="flex h-11 w-[148px] items-center justify-between border-t-[1.84px] border-t-[#FFFFFF99] bg-jp-light-gray px-3">
           <button
             type="button"
             aria-label={t('landing.collection.qtyDecrease')}
@@ -144,18 +191,30 @@ export function ProductDetailPurchase({
         <button
           type="button"
           disabled={!canBuy}
-          onClick={handleAddToCart}
-          className="inline-flex h-12 flex-1 items-center justify-center bg-black px-6 font-display text-sm font-normal text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={() => addProductToCart()}
+          className="inline-flex h-12 w-full items-center justify-center bg-black px-6 font-display text-sm font-normal text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]"
         >
           {t('products.detail.buyNow')}
         </button>
         <button
           type="button"
           disabled={!canBuy}
-          onClick={handleAddToCart}
-          className="inline-flex h-12 flex-1 items-center justify-center border border-black bg-white px-6 font-display text-sm font-normal text-black transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={() => addProductToCart({ animateAddButton: true })}
+          className={cn(
+            'inline-flex h-12 w-full items-center justify-center gap-2 border px-6 font-display text-sm font-normal transition-[transform,background-color,border-color,color,opacity] duration-300 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[188px]',
+            cartAddedFlash
+              ? 'jp-cart-added-pop border-emerald-700 bg-emerald-50 text-emerald-950'
+              : 'border-black bg-white text-black hover:opacity-80',
+          )}
         >
-          {t('products.detail.addToCart')}
+          {cartAddedFlash ? (
+            <>
+              <Check className="size-4 shrink-0" aria-hidden />
+              {t('products.detail.addedToCartLabel')}
+            </>
+          ) : (
+            t('products.detail.addToCart')
+          )}
         </button>
       </div>
 

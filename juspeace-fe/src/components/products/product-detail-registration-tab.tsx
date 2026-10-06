@@ -6,14 +6,14 @@ export function ProductDetailRegistrationTab() {
   const t = useT();
 
   return (
-    <div className="max-w-[720px] text-left">
-      <h2 className="font-display text-base font-bold text-black sm:text-lg">
+    <div className="text-left">
+      <h2 className="font-sans text-base font-bold not-italic leading-[65px] tracking-[-0.02em] text-black sm:text-lg">
         {t('products.detail.registration.title')}
       </h2>
-      <p className="mt-4 font-sans text-sm font-normal leading-[1.75] text-black sm:text-base sm:leading-[1.8]">
+      <p className="mt-4 whitespace-pre font-sans text-lg font-normal not-italic leading-[38px] tracking-normal text-black">
         {t('products.detail.registration.body1')}
       </p>
-      <p className="mt-5 font-sans text-sm font-normal leading-[1.75] text-black sm:text-base sm:leading-[1.8]">
+      <p className="mt-5 whitespace-nowrap font-sans text-lg font-normal not-italic leading-[38px] tracking-normal text-black">
         {t('products.detail.registration.body2')}
       </p>
     </div>

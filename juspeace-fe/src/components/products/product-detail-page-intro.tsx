@@ -9,6 +9,10 @@ interface ProductDetailPageIntroProps {
   bannerText: string;
 }
 
+function formatBreadcrumbName(name: string) {
+  return name.trim().replace(/\s+/g, '_');
+}
+
 export function ProductDetailPageIntro({
   collectionLabel,
   productName,
@@ -30,7 +34,7 @@ export function ProductDetailPageIntro({
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="text-black/50">{productName}</li>
+          <li className="text-black/50">{formatBreadcrumbName(productName)}</li>
         </ol>
       </nav>
 

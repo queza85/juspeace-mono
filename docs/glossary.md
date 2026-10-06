@@ -44,6 +44,20 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `order.orderNumber` | Public order identifier (e.g. `ORD-00001`) | `orderNumber` | Order Number |
 | `orderLineItem` | Snapshot line on an order | `OrderLineItem` | — |
 | `orderStatusEvent` | Fulfillment status change audit | `OrderStatusEvent` | Status History |
+| `contentBlock` | Storefront section copy or media the admin publishes | `ContentBlock` | Content |
+| `contentBlock.section` | Which storefront area the block fills | `section` (`HERO`, `BRAND_STORY`, `FEATURES`, `VERIFICATION`, `DONATION`, `VIDEO`, `FAQ`, `GALLERY`, `ABOVE_FAQ`, `NAV_LINK`, `FOOTER_LINK`, `POLICY`) | Section |
+| `siteSetting` | Named storefront setting (logo, contact, policy links) | `SiteSetting` | Settings |
+| `shippingMethod` | Delivery option and fee shown at checkout | `ShippingMethod` | Shipping |
+| `shippingMethod.priceCents` | Shipping fee in minor currency units | `priceCents` | Shipping fee |
+| `paymentMethodConfig` | Checkout payment option. Provider stays `DUMMY` until a PG is connected; no credentials are stored | `PaymentMethodConfig` | Payment method |
+| `paymentMethodConfig.provider` | Payment processor slot | `provider` (`DUMMY`) | Provider |
+| `promotion` | Discount code | `Promotion` | Promotion |
+| `promotion.discountValue` | Percent (1–100) or fixed minor units, depending on `discountType` | `discountValue` | Discount |
+| `productReview` | Product rating moderated in admin | `ProductReview` | Review |
+| `newsletterSubscriber` | Email captured for the storefront newsletter | `NewsletterSubscriber` | Newsletter |
+| `featuredProduct` | Product chosen for the storefront collection, with optional card image | `FeaturedProduct` | Featured |
+| `storedFile` | Image kept in Azure Blob Storage. The database stores the relative blob path, not the storage account URL | `images/{uuid}.{ext}` | Image |
+| `storedFile.fileName` | Blob path passed to the file proxy | query `fileName` on `GET /files` | — |
 
 **Datetime rule:** Persist UTC only (`TIMESTAMPTZ`). Convert to the viewer’s timezone (e.g. Korea → `Asia/Seoul`, Myanmar → `Asia/Yangon`) in the UI — never store local wall-clock times in the database. Browser clients send `X-Timezone: Asia/Seoul` (IANA) on every API request so the backend can format or log in the caller’s zone without guessing.
 

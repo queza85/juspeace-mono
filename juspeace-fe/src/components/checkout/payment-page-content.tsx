@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { CartOrderSummary } from '@/components/cart/cart-order-summary';
@@ -32,15 +30,7 @@ export function PaymentPageContent() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1280px]">
-      <Link
-        href="/checkout"
-        className="inline-flex items-center gap-1 font-mono text-[11px] text-jp-muted transition-colors hover:text-black sm:text-xs"
-      >
-        <ArrowLeft className="size-3" aria-hidden />
-        {t('payment.back')}
-      </Link>
-
+    <div className="mx-auto w-full max-w-[1280px] min-[1680px]:max-w-none">
       <header>
         <h1 className="font-display text-[clamp(1.375rem,2.2vw,1.75rem)] font-semibold leading-tight text-black">
           {t('payment.title')}
@@ -50,7 +40,7 @@ export function PaymentPageContent() {
         </p>
       </header>
 
-      <div className="mt-5 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
+      <div className="mt-12 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:gap-x-12">
         <div className="min-w-0">
           <PaymentForm />
         </div>

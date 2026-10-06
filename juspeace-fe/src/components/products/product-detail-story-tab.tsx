@@ -6,13 +6,7 @@ import { useT } from '@/lib/i18n/locale-context';
 const STORY_LOGO = '/header/juspeace_header.png';
 const STORY_FLOWER = '/brand/gd-flower.png';
 
-interface ProductDetailStoryTabProps {
-  variantName: string;
-}
-
-export function ProductDetailStoryTab({
-  variantName,
-}: ProductDetailStoryTabProps) {
+export function ProductDetailStoryTab() {
   const t = useT();
 
   return (
@@ -26,7 +20,7 @@ export function ProductDetailStoryTab({
       />
 
       <p className="mt-9 font-serif text-base leading-none text-black sm:mt-11 sm:text-lg">
-        {variantName}
+        {t('products.detail.story.name')}
       </p>
 
       <h2 className="mt-5 font-display text-[clamp(2.25rem,5.5vw,3.5rem)] font-normal leading-[1.12] tracking-[-0.02em] text-black">
