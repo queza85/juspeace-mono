@@ -17,7 +17,6 @@ export async function HeroSection() {
           titleLine1={t('landing.hero.titleLine1')}
           titleLine2={t('landing.hero.titleLine2')}
           description={t('landing.hero.description')}
-          buyNow={t('landing.hero.buyNow')}
           exploreCollection={t('landing.hero.exploreCollection')}
         />
       </div>

@@ -9,7 +9,6 @@ interface HeroAnimatedCopyProps {
   titleLine1: string;
   titleLine2: string;
   description: string;
-  buyNow: string;
   exploreCollection: string;
 }
 
@@ -17,7 +16,6 @@ export function HeroAnimatedCopy({
   titleLine1,
   titleLine2,
   description,
-  buyNow,
   exploreCollection,
 }: HeroAnimatedCopyProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -122,13 +120,6 @@ export function HeroAnimatedCopy({
             data-hero-cta
             href="#collection"
             className="jp-cta-primary h-12 min-w-[140px] bg-white px-6 font-mono text-[16px] leading-none font-normal tracking-normal text-black"
-          >
-            {buyNow}
-          </a>
-          <a
-            data-hero-cta
-            href="#collection"
-            className="jp-cta-link pb-0.5 font-mono text-[16px] leading-none font-normal tracking-normal text-white underline-offset-[5px]"
           >
             {exploreCollection}
           </a>

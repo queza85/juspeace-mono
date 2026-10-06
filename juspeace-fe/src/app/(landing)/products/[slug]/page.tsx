@@ -46,9 +46,13 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
   try {
     const product = await getProductBySlug(slug);
+    const variantKey = detectVariantKey(product);
+    const prefix = getFallbackI18nPrefix(variantKey);
     return {
       title: product.name,
-      description: product.description ?? undefined,
+      description: isKnownProductSlug(slug)
+        ? t(`${prefix}.description`)
+        : (product.description ?? undefined),
     };
   } catch {
     if (!isKnownProductSlug(slug)) {
@@ -74,8 +78,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const fallbackPrefix = getFallbackI18nPrefix(variantKey);
   const displayName =
     product.name.trim() || t(`${fallbackPrefix}.title`);
-  const tagline =
-    product.description?.trim() || t(`${fallbackPrefix}.description`);
+  const tagline = isKnownProductSlug(slug)
+    ? t(`${fallbackPrefix}.description`)
+    : product.description?.trim() || t(`${fallbackPrefix}.description`);
 
   return (
     <>
