@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, Search } from 'lucide-react';
 import {
   ChevronDownIcon,
@@ -25,6 +25,7 @@ type AdminHeaderProps = {
 
 export function AdminHeader({ onToggleSidebar, className }: AdminHeaderProps) {
   const t = useT();
+  const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -50,7 +51,7 @@ export function AdminHeader({ onToggleSidebar, className }: AdminHeaderProps) {
       <button
         type="button"
         onClick={onToggleSidebar}
-        className="rounded-md p-2 hover:bg-white/10"
+        className="cursor-pointer rounded-md p-2 hover:bg-white/10"
         aria-label={t('admin.header.toggleSidebar')}
       >
         <Menu className="size-5" />
@@ -87,7 +88,11 @@ export function AdminHeader({ onToggleSidebar, className }: AdminHeaderProps) {
           <NotificationIcon size={20} />
         </HeaderIconButton>
 
-        <HeaderIconButton label={t('admin.header.settings')}>
+        <HeaderIconButton
+          href="/settings"
+          current={pathname === '/settings'}
+          label={t('admin.header.settings')}
+        >
           <SettingsIcon size={20} />
         </HeaderIconButton>
 
@@ -109,7 +114,7 @@ export function AdminHeader({ onToggleSidebar, className }: AdminHeaderProps) {
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-white/10"
+            className="flex cursor-pointer items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-white/10"
             aria-expanded={menuOpen}
             aria-haspopup="menu"
           >

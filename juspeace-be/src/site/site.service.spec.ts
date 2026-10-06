@@ -53,6 +53,10 @@ describe('SiteService', () => {
       listCustomers: jest.fn(),
       findCustomer: jest.fn(),
       setCustomerActive: jest.fn(),
+      listInquiries: jest.fn(),
+      findInquiry: jest.fn(),
+      createInquiry: jest.fn(),
+      updateInquiryStatus: jest.fn(),
       listSubscribers: jest.fn(),
       findSubscriberByEmail: jest.fn(),
       findSubscriber: jest.fn(),
@@ -77,6 +81,7 @@ describe('SiteService', () => {
         createdAt: new Date('2026-01-01T00:00:00.000Z'),
         updatedAt: new Date('2026-01-01T00:00:00.000Z'),
         ...input,
+        instructions: input.instructions ?? null,
       }),
     );
 
@@ -144,6 +149,80 @@ describe('SiteService', () => {
       service.subscribe({ email: 'Buyer@Example.com', locale: 'ko' }),
     ).resolves.toEqual(existing);
     expect(repository.createSubscriber.mock.calls).toHaveLength(0);
+  });
+
+  it('stores a contact inquiry as waiting', async () => {
+    repository.createInquiry.mockImplementation((input) =>
+      Promise.resolve({
+        id: 'inq-1',
+        status: 'WAITING',
+        createdAt: new Date('2026-01-01T00:00:00.000Z'),
+        updatedAt: new Date('2026-01-01T00:00:00.000Z'),
+        phone: input.phone ?? null,
+        subject: input.subject ?? null,
+        locale: input.locale ?? null,
+        name: input.name,
+        email: input.email,
+        message: input.message,
+      }),
+    );
+
+    await expect(
+      service.createInquiry({
+        name: '  Ada  ',
+        email: 'Ada@Example.com',
+        phone: '  ',
+        subject: ' Order ',
+        message: '  Where is my order?  ',
+        locale: 'en',
+      }),
+    ).resolves.toMatchObject({
+      name: 'Ada',
+      email: 'ada@example.com',
+      phone: null,
+      subject: 'Order',
+      message: 'Where is my order?',
+      status: 'WAITING',
+    });
+  });
+
+  it('updates a contact inquiry status', async () => {
+    repository.findInquiry.mockResolvedValue({
+      id: 'inq-1',
+      name: 'Ada',
+      email: 'ada@example.com',
+      phone: null,
+      subject: null,
+      message: 'Hello',
+      locale: 'en',
+      status: 'WAITING',
+      createdAt: new Date('2026-01-01T00:00:00.000Z'),
+      updatedAt: new Date('2026-01-01T00:00:00.000Z'),
+    });
+    repository.updateInquiryStatus.mockResolvedValue({
+      id: 'inq-1',
+      name: 'Ada',
+      email: 'ada@example.com',
+      phone: null,
+      subject: null,
+      message: 'Hello',
+      locale: 'en',
+      status: 'REPLIED',
+      createdAt: new Date('2026-01-01T00:00:00.000Z'),
+      updatedAt: new Date('2026-01-01T00:00:00.000Z'),
+    });
+
+    await expect(
+      service.updateInquiryStatus('inq-1', { status: 'REPLIED' }),
+    ).resolves.toMatchObject({ status: 'REPLIED' });
+  });
+
+  it('throws when the contact inquiry is missing', async () => {
+    repository.findInquiry.mockResolvedValue(null);
+
+    await expect(
+      service.updateInquiryStatus('missing', { status: 'REPLIED' }),
+    ).rejects.toBeInstanceOf(NotFoundException);
   });
 
   it('throws when the customer is not a storefront user', async () => {

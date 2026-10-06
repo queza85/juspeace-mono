@@ -4,7 +4,15 @@ import { MediaPlaceholder } from '@/components/landing/media-placeholder';
 import { SectionShell } from '@/components/landing/section-shell';
 import { getTranslator } from '@/lib/i18n/server';
 
+function landingVideoUrl(): string {
+  return '';
+}
+
 export async function LandingVideoSection() {
+  if (!landingVideoUrl()) {
+    return null;
+  }
+
   const { t } = await getTranslator();
 
   return (

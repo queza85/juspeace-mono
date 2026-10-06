@@ -12,9 +12,16 @@ const SOCIAL_LINKS = [
 
 const PAGE_LINK_COLUMNS = [
   ['aboutCompany', 'aboutFoundation', 'customerSupport'],
-  ['cancellationPolicy', 'donationNotice'],
+  ['cancellationPolicy', 'donationNotice', 'contactUs'],
   ['privacyPolicy', 'shippingPolicy', 'terms'],
 ] as const;
+
+type FooterPageKey = (typeof PAGE_LINK_COLUMNS)[number][number];
+
+const PAGE_HREF: Partial<Record<FooterPageKey, string>> = {
+  customerSupport: '/contact',
+  contactUs: '/contact',
+};
 
 /**
  * Temporary footer trim. Set to `false` to show everything again.
@@ -133,7 +140,7 @@ export async function LandingFooter() {
                   {column.map((key) => (
                     <FooterPageLink
                       key={key}
-                      href="#"
+                      href={PAGE_HREF[key] ?? '#'}
                       label={t(`landing.footer.${key}`)}
                     />
                   ))}

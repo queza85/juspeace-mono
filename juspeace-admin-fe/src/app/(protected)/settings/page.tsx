@@ -1,8 +1,7 @@
 'use client';
 
-import { SiteResourcePage } from '@/components/site/site-resource-page';
-import { settingsResource } from '@/lib/site/resources';
+import { SiteSettingsEditor } from '@/components/site/site-settings-editor';
 
 export default function SettingsAdminPage() {
-  return <SiteResourcePage config={settingsResource} />;
+  return <SiteSettingsEditor />;
 }

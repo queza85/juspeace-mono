@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, UserRole } from '@prisma/client';
+import { ContactInquiryStatus, Prisma, UserRole } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import type {
   ContentListFilter,
@@ -262,6 +262,34 @@ export class PrismaSiteRepository implements ISiteRepository {
       where: { id },
       data: { isActive },
       select: customerSelect,
+    });
+  }
+
+  listInquiries() {
+    return this.prisma.contactInquiry.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  findInquiry(id: string) {
+    return this.prisma.contactInquiry.findUnique({ where: { id } });
+  }
+
+  createInquiry(input: {
+    name: string;
+    email: string;
+    phone?: string | null;
+    subject?: string | null;
+    message: string;
+    locale?: string | null;
+  }) {
+    return this.prisma.contactInquiry.create({ data: input });
+  }
+
+  updateInquiryStatus(id: string, status: ContactInquiryStatus) {
+    return this.prisma.contactInquiry.update({
+      where: { id },
+      data: { status },
     });
   }
 

@@ -16,7 +16,6 @@ import {
   listPromotions,
   listReviews,
   listShippingMethods,
-  listSiteSettings,
   saveCategory,
   saveContentBlock,
   saveCustomer,
@@ -26,7 +25,6 @@ import {
   savePromotion,
   saveReview,
   saveShippingMethod,
-  saveSiteSetting,
 } from '@/lib/api/site';
 
 export type SiteOption = {
@@ -94,7 +92,7 @@ const SECTIONS: SiteOption[] = [
   'POLICY',
 ].map((value) => ({ value, labelKey: `admin.site.sections.${value}` }));
 
-const SETTING_KEYS: SiteOption[] = [
+export const SITE_SETTING_KEYS = [
   'storeName',
   'logoUrl',
   'contactEmail',
@@ -108,7 +106,9 @@ const SETTING_KEYS: SiteOption[] = [
   'shippingPolicyHref',
   'cancellationPolicyHref',
   'donationNoticeHref',
-].map((value) => ({ value, labelKey: `admin.site.settingKeys.${value}` }));
+] as const;
+
+export type SiteSettingKey = (typeof SITE_SETTING_KEYS)[number];
 
 const PAYMENT_CODES: SiteOption[] = [
   'CARD',
@@ -147,26 +147,6 @@ export const contentResource: SiteResourceConfig = {
   list: (token) => listContentBlocks(token),
   save: (token, body, id) => saveContentBlock(token, body, id),
   remove: deleteContentBlock,
-};
-
-export const settingsResource: SiteResourceConfig = {
-  titleKey: 'admin.site.settings.title',
-  descriptionKey: 'admin.site.settings.description',
-  queryKey: 'admin-site-settings',
-  idKey: 'key',
-  canCreate: true,
-  canEdit: true,
-  canDelete: false,
-  columns: [
-    { key: 'key', labelKey: 'admin.site.fields.key' },
-    { key: 'value', labelKey: 'admin.site.fields.value' },
-  ],
-  fields: [
-    { name: 'key', labelKey: 'admin.site.fields.key', type: 'select', required: true, options: SETTING_KEYS, defaultValue: 'storeName', readOnlyOnEdit: true },
-    { name: 'value', labelKey: 'admin.site.fields.value', type: 'text', required: true },
-  ],
-  list: (token) => listSiteSettings(token),
-  save: (token, body) => saveSiteSetting(token, body),
 };
 
 export const shippingResource: SiteResourceConfig = {

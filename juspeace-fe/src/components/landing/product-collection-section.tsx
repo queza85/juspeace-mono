@@ -73,8 +73,7 @@ function buildCards(
     return {
       key,
       title: product.name,
-      description:
-        product.description?.trim() || t(`${fallbackPrefix}.description`),
+      description: t(`${fallbackPrefix}.description`),
       stock: product.stock,
       imageAlt: product.name,
       product: {
@@ -88,16 +87,15 @@ function buildCards(
 function CollectionProductCard({
   card,
   ctaLabel,
-  stockPiecesWord,
+  stockCountLabel,
   stockCarryMessage,
 }: {
   card: CollectionCard;
   ctaLabel: string;
-  stockPiecesWord: string;
+  stockCountLabel: string;
   stockCarryMessage: string;
 }) {
   const image = VARIANT_MAIN_IMAGES[card.key];
-  const stockCount = Math.round(card.stock);
   const detailHref = getProductDetailHref(card.key, card.product);
 
   return (
@@ -130,12 +128,10 @@ function CollectionProductCard({
       <p
         className={`mt-8 text-base leading-5 tracking-normal text-black sm:mt-10 ${inriaSerif.className}`}
       >
-        <span className="font-bold">
-          {stockCount} {stockPiecesWord}
-        </span>{' '}
+        <span className="font-bold">{stockCountLabel}</span>{' '}
         <span className="font-normal">{stockCarryMessage}</span>
       </p>
-      <CollectionCtaButton product={card.product} label={ctaLabel} />
+      <CollectionCtaButton href={detailHref} label={ctaLabel} />
     </article>
   );
 }
@@ -190,14 +186,6 @@ export async function ProductCollectionSection({
           <span className="block">{t('landing.collection.introLine1')}</span>
           <span className="block">{t('landing.collection.introLine2')}</span>
         </p>
-        <p className="jp-collection-intro-ko mt-10 flex flex-col items-center gap-1.5 font-sans text-base font-normal leading-none text-black sm:mt-12 sm:text-lg lg:mt-14">
-          <span>
-            {t('landing.collection.introKoLine1Prefix')}
-            <span className="font-semibold">JUSPEACE</span>
-            {t('landing.collection.introKoLine1Suffix')}
-          </span>
-          <span>{t('landing.collection.introKoLine2')}</span>
-        </p>
       </div>
 
       <div
@@ -209,7 +197,9 @@ export async function ProductCollectionSection({
             key={card.key}
             card={card}
             ctaLabel={t('landing.collection.cta')}
-            stockPiecesWord={t('landing.collection.stockPiecesWord')}
+            stockCountLabel={t('landing.collection.stockCount', {
+              count: Math.round(card.stock),
+            })}
             stockCarryMessage={t('landing.collection.stockCarryMessage')}
           />
         ))}

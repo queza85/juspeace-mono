@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { SectionLabel } from '@/components/landing/section-label';
 import { SectionShell } from '@/components/landing/section-shell';
@@ -123,6 +124,9 @@ export async function ProductVerificationSection() {
             <p className="mt-2 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[1.12] tracking-[-0.02em] text-black">
               {t('landing.productVerification.headlineLine2')}
             </p>
+            <p className="mt-8 font-sans text-sm tracking-[0.14em] text-black sm:text-base">
+              {t('landing.productVerification.steps')}
+            </p>
           </div>
           <div className="jp-product-verification-stage">
             <div className="jp-product-verification-phone-layer">
@@ -191,12 +195,12 @@ export async function ProductVerificationSection() {
                   </div>
                 </div>
               </div>
-              <button
-                type="button"
-                className="jp-landing-cta jp-product-verification-paper-cta"
+              <Link
+                href="/verify"
+                className="jp-landing-cta jp-product-verification-paper-cta inline-flex items-center justify-center"
               >
                 {t('landing.productVerification.cta')}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

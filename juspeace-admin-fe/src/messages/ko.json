@@ -155,14 +155,16 @@
       "payments": "결제",
       "promotions": "프로모션",
       "newsletter": "뉴스레터",
+      "inquiries": "문의",
       "reports": "리포트",
       "content": "콘텐츠",
       "adminManagement": "관리자 관리",
       "settings": "설정",
       "sections": {
-        "menu": "메뉴",
-        "apps": "앱",
-        "others": "기타"
+        "catalog": "스토어",
+        "sales": "판매",
+        "customers": "고객",
+        "site": "사이트"
       }
     },
     "dashboard": {
@@ -1055,6 +1057,24 @@
         }
       }
     },
+    "inquiries": {
+      "title": "문의",
+      "description": "스토어프론트 Contact us로 접수된 메시지입니다. 응대한 뒤 상태를 바꾸세요.",
+      "empty": "접수된 문의가 없습니다.",
+      "fields": {
+        "name": "이름",
+        "email": "이메일",
+        "phone": "전화",
+        "subject": "제목",
+        "message": "내용",
+        "status": "상태",
+        "createdAt": "접수일"
+      },
+      "status": {
+        "WAITING": "대기",
+        "REPLIED": "답변 완료"
+      }
+    },
     "site": {
       "empty": "아직 데이터가 없습니다.",
       "required": "필수 항목입니다",
@@ -1064,6 +1084,7 @@
         "delete": "삭제",
         "edit": "수정",
         "clear": "지우기",
+        "cancel": "취소",
         "yes": "예",
         "no": "아니오",
         "column": "작업",
@@ -1154,7 +1175,7 @@
       },
       "settings": {
         "title": "설정",
-        "description": "로고, 연락처, 소셜 링크, 정책 URL입니다."
+        "description": "스토어프론트 설정이 모두 아래에 표시됩니다. 행의 수정으로 값을 바꿉니다."
       },
       "shipping": {
         "title": "배송",
@@ -1274,6 +1295,10 @@
     "NEWSLETTER_SUBSCRIBER_CREATED_SUCCESSFULLY": "구독자를 저장했습니다",
     "NEWSLETTER_SUBSCRIBER_DELETED_SUCCESSFULLY": "구독자를 삭제했습니다",
     "NEWSLETTER_SUBSCRIBER_NOT_FOUND": "구독자를 찾을 수 없습니다",
+    "CONTACT_INQUIRIES_RETRIEVED_SUCCESSFULLY": "문의를 불러왔습니다",
+    "CONTACT_INQUIRY_CREATED_SUCCESSFULLY": "문의를 접수했습니다",
+    "CONTACT_INQUIRY_UPDATED_SUCCESSFULLY": "문의 상태를 바꿨습니다",
+    "CONTACT_INQUIRY_NOT_FOUND": "문의를 찾을 수 없습니다",
     "FEATURED_PRODUCTS_RETRIEVED_SUCCESSFULLY": "추천 상품을 불러왔습니다",
     "FEATURED_PRODUCT_CREATED_SUCCESSFULLY": "추천 상품을 저장했습니다",
     "FEATURED_PRODUCT_UPDATED_SUCCESSFULLY": "추천 상품을 수정했습니다",

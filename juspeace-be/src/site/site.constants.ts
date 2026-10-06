@@ -1,3 +1,8 @@
+export const CONTACT_INQUIRY_STATUSES = ['WAITING', 'REPLIED'] as const;
+
+export type ContactInquiryStatusName =
+  (typeof CONTACT_INQUIRY_STATUSES)[number];
+
 export const CONTENT_LOCALES = ['en', 'ko'] as const;
 
 export type ContentLocale = (typeof CONTENT_LOCALES)[number];

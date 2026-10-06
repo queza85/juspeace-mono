@@ -150,6 +150,18 @@
   html {
     @apply font-sans scroll-smooth;
   }
+  a[href],
+  button:not(:disabled),
+  summary,
+  select,
+  label,
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
 }
 
 /* Landing hover interactions — quiet, editorial */
@@ -351,18 +363,6 @@
     letter-spacing: 0;
     text-align: center;
     color: #000;
-  }
-
-  .jp-collection-intro-ko {
-    letter-spacing: 0.04em;
-    word-spacing: 0.12em;
-  }
-
-  @media (min-width: 640px) {
-    .jp-collection-intro-ko {
-      letter-spacing: 0.045em;
-      word-spacing: 0.14em;
-    }
   }
 
   /* Collection card tagline: scale with column on small screens; fixed readable size on laptops */
@@ -1549,33 +1549,35 @@
 
   .jp-product-verification-closing {
     box-sizing: border-box;
-    width: min(100%, 96vw);
-    max-width: 96vw;
+    width: 100%;
+    max-width: 100%;
     margin-inline: auto;
-    padding-top: clamp(5.5rem, 12vw, 10rem);
-    padding-bottom: clamp(14rem, 34vw, 22rem);
-    padding-inline: 0;
+    padding-top: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+    padding-inline: 4%;
     text-align: center;
   }
 
   .jp-product-verification-closing-line {
     display: block;
     width: 100%;
+    max-width: 100%;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 4.5vw, 3.75rem);
-    line-height: 1.12;
+    font-size: clamp(1rem, 3.8vw, 4.5rem);
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: #000;
+    white-space: nowrap;
   }
 
   .jp-product-verification-closing-line--bold {
     font-family: var(--font-sans);
     font-weight: 700;
     font-style: normal;
-    line-height: calc(128 / 120);
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    font-size: clamp(2rem, 5.8vw, 4.75rem);
+    font-size: clamp(1rem, 3.8vw, 4.5rem);
   }
 
   .jp-product-verification-closing-line--italic {
@@ -1583,51 +1585,9 @@
     font-family: var(--font-sans);
     font-weight: 400;
     font-style: italic;
-    line-height: calc(128 / 120);
+    line-height: 1.2;
     letter-spacing: -0.02em;
-    font-size: clamp(2rem, 6vw, 5.25rem);
-  }
-
-  @media (min-width: 1024px) {
-    .jp-product-verification-closing-line--bold {
-      font-size: clamp(2.5rem, 6.25vw, 5.5rem);
-      white-space: nowrap;
-    }
-
-    .jp-product-verification-closing-line--italic {
-      font-size: clamp(2.75rem, 6.5vw, 6rem);
-      white-space: nowrap;
-    }
-  }
-
-  /*
-   * Large desktop: type was capped ~5.5–6rem at lg, so lines stayed narrow
-   * with huge side margins. Scale vw + max above 1440px; laptop unchanged.
-   */
-  @media (min-width: 1440px) {
-    .jp-product-verification-closing {
-      width: 100%;
-      max-width: none;
-      padding-inline: clamp(1.5rem, 4vw, 5rem);
-    }
-
-    .jp-product-verification-closing-line--bold {
-      font-size: clamp(3rem, 5.75vw, 6.75rem);
-    }
-
-    .jp-product-verification-closing-line--italic {
-      font-size: clamp(3.25rem, 6.25vw, 7.25rem);
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .jp-product-verification-closing-line--bold {
-      font-size: clamp(3.25rem, 5.25vw, 7.5rem);
-    }
-
-    .jp-product-verification-closing-line--italic {
-      font-size: clamp(3.5rem, 5.65vw, 8rem);
-    }
+    font-size: clamp(1rem, 3.8vw, 4.5rem);
   }
 
   .jp-product-verification-stage {

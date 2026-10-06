@@ -9,6 +9,7 @@ import { DiscountType, PaymentProviderKind } from '@prisma/client';
 import { slugify } from '../common/utils/slug.util';
 import type {
   CreateCategoryDto,
+  CreateContactInquiryDto,
   CreateContentBlockDto,
   CreateFeaturedProductDto,
   CreateNewsletterSubscriberDto,
@@ -19,6 +20,7 @@ import type {
   ListContentQueryDto,
   ListReviewsQueryDto,
   UpdateCategoryDto,
+  UpdateContactInquiryStatusDto,
   UpdateContentBlockDto,
   UpdateCustomerDto,
   UpdateFeaturedProductDto,
@@ -338,6 +340,29 @@ export class SiteService {
       throw new NotFoundException('CUSTOMER_NOT_FOUND');
     }
     return this.siteRepository.setCustomerActive(id, dto.isActive);
+  }
+
+  listInquiries() {
+    return this.siteRepository.listInquiries();
+  }
+
+  createInquiry(dto: CreateContactInquiryDto) {
+    return this.siteRepository.createInquiry({
+      name: dto.name.trim(),
+      email: dto.email.trim().toLowerCase(),
+      phone: emptyToNull(dto.phone),
+      subject: emptyToNull(dto.subject),
+      message: dto.message.trim(),
+      locale: dto.locale ?? null,
+    });
+  }
+
+  async updateInquiryStatus(id: string, dto: UpdateContactInquiryStatusDto) {
+    const inquiry = await this.siteRepository.findInquiry(id);
+    if (!inquiry) {
+      throw new NotFoundException('CONTACT_INQUIRY_NOT_FOUND');
+    }
+    return this.siteRepository.updateInquiryStatus(id, dto.status);
   }
 
   listSubscribers() {

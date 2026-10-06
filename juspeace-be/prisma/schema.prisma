@@ -137,6 +137,11 @@ enum SellerType {
   EVENT
 }
 
+enum ContactInquiryStatus {
+  WAITING
+  REPLIED
+}
+
 enum OAuthProvider {
   GOOGLE
 }
@@ -637,6 +642,22 @@ model ProductReview {
 
   @@index([productId, published])
   @@map("product_reviews")
+}
+
+model ContactInquiry {
+  id        String               @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  locale    String?
+  status    ContactInquiryStatus @default(WAITING)
+  createdAt DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime             @updatedAt @db.Timestamptz(3)
+
+  @@index([status, createdAt])
+  @@map("contact_inquiries")
 }
 
 model NewsletterSubscriber {

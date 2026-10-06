@@ -12,6 +12,7 @@ import {
   LayoutGrid,
   Mail,
   MapPin,
+  MessageSquare,
   ShoppingBag,
   ShoppingCart,
   SlidersHorizontal,
@@ -37,40 +38,47 @@ type NavItem = {
 };
 
 type NavSection = {
-  sectionKey: string;
+  sectionKey?: string;
   items: NavItem[];
 };
 
 const navSections: NavSection[] = [
   {
-    sectionKey: 'admin.nav.sections.menu',
+    items: [{ href: '/dashboard', labelKey: 'admin.nav.dashboard', icon: LayoutDashboard }],
+  },
+  {
+    sectionKey: 'admin.nav.sections.catalog',
     items: [
-      { href: '/dashboard', labelKey: 'admin.nav.dashboard', icon: LayoutDashboard },
+      { href: '/products', labelKey: 'admin.nav.products', icon: ShoppingBag },
+      { href: '/categories', labelKey: 'admin.nav.categories', icon: FolderTree },
+      { href: '/inventory', labelKey: 'admin.nav.inventory', icon: ClipboardList },
+      { href: '/featured', labelKey: 'admin.nav.featured', icon: Sparkles },
+      { href: '/reviews', labelKey: 'admin.nav.reviews', icon: Star },
     ],
   },
   {
-    sectionKey: 'admin.nav.sections.apps',
+    sectionKey: 'admin.nav.sections.sales',
     items: [
       { href: '/orders', labelKey: 'admin.nav.orders', icon: ShoppingCart },
-      { href: '/inventory', labelKey: 'admin.nav.inventory', icon: ClipboardList },
-      { href: '/products', labelKey: 'admin.nav.products', icon: ShoppingBag },
-      { href: '/categories', labelKey: 'admin.nav.categories', icon: FolderTree },
-      { href: '/featured', labelKey: 'admin.nav.featured', icon: Sparkles },
-      { href: '/reviews', labelKey: 'admin.nav.reviews', icon: Star },
-      { href: '/customers', labelKey: 'admin.nav.customers', icon: UserCircle },
       { href: '/shipping', labelKey: 'admin.nav.shipping', icon: MapPin },
       { href: '/payments', labelKey: 'admin.nav.payments', icon: Wallet },
       { href: '/promotions', labelKey: 'admin.nav.promotions', icon: BadgePercent },
+    ],
+  },
+  {
+    sectionKey: 'admin.nav.sections.customers',
+    items: [
+      { href: '/customers', labelKey: 'admin.nav.customers', icon: UserCircle },
+      { href: '/inquiries', labelKey: 'admin.nav.inquiries', icon: MessageSquare },
       { href: '/newsletter', labelKey: 'admin.nav.newsletter', icon: Mail },
     ],
   },
   {
-    sectionKey: 'admin.nav.sections.others',
+    sectionKey: 'admin.nav.sections.site',
     items: [
-      { labelKey: 'admin.nav.reports', icon: FileText, disabled: true },
       { href: '/content', labelKey: 'admin.nav.content', icon: LayoutGrid },
-      { labelKey: 'admin.nav.adminManagement', icon: UserCircle, disabled: true },
       { href: '/settings', labelKey: 'admin.nav.settings', icon: SlidersHorizontal },
+      { labelKey: 'admin.nav.reports', icon: FileText, disabled: true },
     ],
   },
 ];
@@ -96,7 +104,7 @@ function NavLink({
       ? 'bg-sidebar-accent text-sidebar-accent-foreground'
       : item.disabled
         ? 'cursor-not-allowed text-sidebar-foreground/50'
-        : 'text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
+        : 'cursor-pointer text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
   );
 
   if (item.disabled || !item.href) {
@@ -143,10 +151,12 @@ function AdminSidebarNav({
         data-open={open ? 'true' : 'false'}
       >
         {navSections.map((section) => (
-          <div key={section.sectionKey}>
-            <p className="mb-2 px-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
-              {t(section.sectionKey)}
-            </p>
+          <div key={section.sectionKey ?? section.items[0]?.labelKey}>
+            {section.sectionKey ? (
+              <p className="mb-2 px-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                {t(section.sectionKey)}
+              </p>
+            ) : null}
             <div className="flex flex-col gap-0.5">
               {section.items.map((item) => (
                 <NavLink

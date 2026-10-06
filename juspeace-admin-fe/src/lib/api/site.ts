@@ -81,6 +81,21 @@ export interface Customer {
   createdAt: string;
 }
 
+export type ContactInquiryStatus = 'WAITING' | 'REPLIED';
+
+export interface ContactInquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  subject: string | null;
+  message: string;
+  locale: string | null;
+  status: ContactInquiryStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface NewsletterSubscriber {
   id: string;
   email: string;
@@ -232,6 +247,21 @@ export function listCustomers(accessToken: string) {
 
 export function saveCustomer(accessToken: string, body: Body, id: string | null) {
   return apiRequest<Customer>(`/admin/customers/${id}`, mutation(accessToken, 'PATCH', body));
+}
+
+export function listContactInquiries(accessToken: string) {
+  return apiRequest<ContactInquiry[]>('/admin/contact-inquiries', authed(accessToken));
+}
+
+export function updateContactInquiryStatus(
+  accessToken: string,
+  id: string,
+  status: ContactInquiryStatus,
+) {
+  return apiRequest<ContactInquiry>(
+    `/admin/contact-inquiries/${id}`,
+    mutation(accessToken, 'PATCH', { status }),
+  );
 }
 
 export function listNewsletterSubscribers(accessToken: string) {
