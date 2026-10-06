@@ -147,9 +147,14 @@
       "orders": "주문",
       "inventory": "재고",
       "products": "상품",
+      "categories": "카테고리",
+      "featured": "추천 상품",
+      "reviews": "리뷰",
       "customers": "고객",
       "shipping": "배송 및 추적",
       "payments": "결제",
+      "promotions": "프로모션",
+      "newsletter": "뉴스레터",
       "reports": "리포트",
       "content": "콘텐츠",
       "adminManagement": "관리자 관리",
@@ -1049,6 +1054,141 @@
           }
         }
       }
+    },
+    "site": {
+      "empty": "아직 데이터가 없습니다.",
+      "required": "필수 항목입니다",
+      "actions": {
+        "save": "저장",
+        "saving": "저장 중...",
+        "delete": "삭제",
+        "edit": "수정",
+        "clear": "지우기",
+        "yes": "예",
+        "no": "아니오",
+        "column": "작업",
+        "confirmDelete": "이 항목을 삭제할까요?",
+        "uploadImage": "이미지 업로드",
+        "uploading": "업로드 중..."
+      },
+      "fields": {
+        "section": "섹션",
+        "locale": "언어",
+        "title": "제목",
+        "subtitle": "부제",
+        "body": "본문",
+        "imageUrl": "이미지 URL",
+        "href": "링크",
+        "sortOrder": "정렬",
+        "published": "게시",
+        "key": "설정",
+        "value": "값",
+        "code": "코드",
+        "name": "이름",
+        "description": "설명",
+        "priceCents": "요금(센트)",
+        "currency": "통화",
+        "estimatedDays": "예상 일수",
+        "enabled": "사용",
+        "provider": "제공자",
+        "instructions": "안내",
+        "discountType": "할인 유형",
+        "discountValue": "할인 값",
+        "startsAt": "시작",
+        "endsAt": "종료",
+        "usageLimit": "사용 한도",
+        "active": "활성",
+        "product": "상품",
+        "reviewerName": "작성자",
+        "rating": "평점",
+        "slug": "슬러그",
+        "email": "이메일",
+        "isActive": "활성",
+        "createdAt": "생성일",
+        "cardImageUrl": "카드 이미지 URL"
+      },
+      "locales": { "en": "영어", "ko": "한국어" },
+      "sections": {
+        "HERO": "히어로",
+        "BRAND_STORY": "브랜드 스토리",
+        "FEATURES": "특징",
+        "VERIFICATION": "검증",
+        "DONATION": "기부",
+        "VIDEO": "영상",
+        "FAQ": "FAQ",
+        "GALLERY": "갤러리",
+        "ABOVE_FAQ": "FAQ 위",
+        "NAV_LINK": "내비게이션",
+        "FOOTER_LINK": "푸터 링크",
+        "POLICY": "정책"
+      },
+      "settingKeys": {
+        "storeName": "스토어 이름",
+        "logoUrl": "로고 URL",
+        "contactEmail": "연락 이메일",
+        "contactPhone": "연락 전화",
+        "address": "주소",
+        "instagramUrl": "Instagram URL",
+        "youtubeUrl": "YouTube URL",
+        "facebookUrl": "Facebook URL",
+        "privacyPolicyHref": "개인정보 처리방침 링크",
+        "termsHref": "이용약관 링크",
+        "shippingPolicyHref": "배송 정책 링크",
+        "cancellationPolicyHref": "취소 정책 링크",
+        "donationNoticeHref": "기부 안내 링크"
+      },
+      "paymentCodes": {
+        "CARD": "카드",
+        "APPLE_PAY": "Apple Pay",
+        "GOOGLE_PAY": "Google Pay",
+        "PAYPAL": "PayPal",
+        "BANK_TRANSFER": "계좌이체"
+      },
+      "discountTypes": {
+        "PERCENTAGE": "퍼센트",
+        "FIXED": "정액(센트)"
+      },
+      "content": {
+        "title": "콘텐츠",
+        "description": "스토어프론트의 히어로, 브랜드 스토리, FAQ, 갤러리, 메뉴, 푸터, 정책 블록입니다."
+      },
+      "settings": {
+        "title": "설정",
+        "description": "로고, 연락처, 소셜 링크, 정책 URL입니다."
+      },
+      "shipping": {
+        "title": "배송",
+        "description": "체크아웃에 표시할 배송 방법과 요금입니다."
+      },
+      "payments": {
+        "title": "결제",
+        "description": "체크아웃에 표시할 결제 수단입니다.",
+        "notice": "지금은 더미입니다. 카드 정보와 PG 자격 증명은 저장하지 않습니다. PG 연동은 나중에 붙입니다."
+      },
+      "promotions": {
+        "title": "프로모션",
+        "description": "할인 코드입니다. 퍼센트는 1–100, 정액은 센트 단위입니다."
+      },
+      "reviews": {
+        "title": "리뷰",
+        "description": "상품 리뷰입니다. 게시된 리뷰만 스토어프론트 API에 노출됩니다."
+      },
+      "categories": {
+        "title": "카테고리",
+        "description": "상품 그룹입니다. 슬러그를 비우면 이름에서 만듭니다."
+      },
+      "customers": {
+        "title": "고객",
+        "description": "스토어프론트 계정입니다. 비활성화하면 해당 로그인이 막힙니다."
+      },
+      "newsletter": {
+        "title": "뉴스레터",
+        "description": "스토어프론트 뉴스레터로 모은 이메일입니다."
+      },
+      "featured": {
+        "title": "추천 상품",
+        "description": "스토어프론트 컬렉션에 올릴 상품과 카드 이미지입니다. 정렬 순서가 노출 순서입니다."
+      }
     }
   },
   "apiMessages": {
@@ -1086,7 +1226,69 @@
     "FORBIDDEN": "접근이 거부되었습니다",
     "NOT_FOUND": "요청한 리소스를 찾을 수 없습니다",
     "TOO_MANY_REQUESTS": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요",
-    "INTERNAL_SERVER_ERROR": "문제가 발생했습니다. 다시 시도해 주세요"
+    "INTERNAL_SERVER_ERROR": "문제가 발생했습니다. 다시 시도해 주세요",
+    "CONTENT_BLOCKS_RETRIEVED_SUCCESSFULLY": "콘텐츠를 불러왔습니다",
+    "CONTENT_BLOCK_CREATED_SUCCESSFULLY": "콘텐츠를 저장했습니다",
+    "CONTENT_BLOCK_UPDATED_SUCCESSFULLY": "콘텐츠를 수정했습니다",
+    "CONTENT_BLOCK_DELETED_SUCCESSFULLY": "콘텐츠를 삭제했습니다",
+    "CONTENT_BLOCK_NOT_FOUND": "콘텐츠 블록을 찾을 수 없습니다",
+    "SITE_SETTINGS_RETRIEVED_SUCCESSFULLY": "설정을 불러왔습니다",
+    "SITE_SETTING_SAVED_SUCCESSFULLY": "설정을 저장했습니다",
+    "SITE_SETTING_KEY_INVALID": "허용되지 않은 설정입니다",
+    "SHIPPING_METHODS_RETRIEVED_SUCCESSFULLY": "배송 방법을 불러왔습니다",
+    "SHIPPING_METHOD_CREATED_SUCCESSFULLY": "배송 방법을 저장했습니다",
+    "SHIPPING_METHOD_UPDATED_SUCCESSFULLY": "배송 방법을 수정했습니다",
+    "SHIPPING_METHOD_DELETED_SUCCESSFULLY": "배송 방법을 삭제했습니다",
+    "SHIPPING_METHOD_NOT_FOUND": "배송 방법을 찾을 수 없습니다",
+    "SHIPPING_METHOD_CODE_TAKEN": "이미 사용 중인 배송 코드입니다",
+    "SHIPPING_METHOD_CODE_INVALID": "올바른 배송 코드를 입력해 주세요",
+    "PAYMENT_METHODS_RETRIEVED_SUCCESSFULLY": "결제 수단을 불러왔습니다",
+    "PAYMENT_METHOD_CREATED_SUCCESSFULLY": "결제 수단을 저장했습니다",
+    "PAYMENT_METHOD_UPDATED_SUCCESSFULLY": "결제 수단을 수정했습니다",
+    "PAYMENT_METHOD_DELETED_SUCCESSFULLY": "결제 수단을 삭제했습니다",
+    "PAYMENT_METHOD_NOT_FOUND": "결제 수단을 찾을 수 없습니다",
+    "PAYMENT_METHOD_CODE_TAKEN": "이미 있는 결제 수단입니다",
+    "PROMOTIONS_RETRIEVED_SUCCESSFULLY": "프로모션을 불러왔습니다",
+    "PROMOTION_CREATED_SUCCESSFULLY": "프로모션을 저장했습니다",
+    "PROMOTION_UPDATED_SUCCESSFULLY": "프로모션을 수정했습니다",
+    "PROMOTION_DELETED_SUCCESSFULLY": "프로모션을 삭제했습니다",
+    "PROMOTION_NOT_FOUND": "프로모션을 찾을 수 없습니다",
+    "PROMOTION_CODE_TAKEN": "이미 사용 중인 프로모션 코드입니다",
+    "PROMOTION_DISCOUNT_INVALID": "할인 값을 확인해 주세요",
+    "REVIEWS_RETRIEVED_SUCCESSFULLY": "리뷰를 불러왔습니다",
+    "REVIEW_CREATED_SUCCESSFULLY": "리뷰를 저장했습니다",
+    "REVIEW_UPDATED_SUCCESSFULLY": "리뷰를 수정했습니다",
+    "REVIEW_DELETED_SUCCESSFULLY": "리뷰를 삭제했습니다",
+    "REVIEW_NOT_FOUND": "리뷰를 찾을 수 없습니다",
+    "CATEGORIES_RETRIEVED_SUCCESSFULLY": "카테고리를 불러왔습니다",
+    "CATEGORY_CREATED_SUCCESSFULLY": "카테고리를 저장했습니다",
+    "CATEGORY_UPDATED_SUCCESSFULLY": "카테고리를 수정했습니다",
+    "CATEGORY_DELETED_SUCCESSFULLY": "카테고리를 삭제했습니다",
+    "CATEGORY_NOT_FOUND": "카테고리를 찾을 수 없습니다",
+    "CATEGORY_SLUG_TAKEN": "이미 사용 중인 슬러그입니다",
+    "CATEGORY_SLUG_INVALID": "올바른 카테고리 이름을 입력해 주세요",
+    "CUSTOMERS_RETRIEVED_SUCCESSFULLY": "고객을 불러왔습니다",
+    "CUSTOMER_UPDATED_SUCCESSFULLY": "고객을 수정했습니다",
+    "CUSTOMER_NOT_FOUND": "고객을 찾을 수 없습니다",
+    "NEWSLETTER_SUBSCRIBERS_RETRIEVED_SUCCESSFULLY": "구독자를 불러왔습니다",
+    "NEWSLETTER_SUBSCRIBER_CREATED_SUCCESSFULLY": "구독자를 저장했습니다",
+    "NEWSLETTER_SUBSCRIBER_DELETED_SUCCESSFULLY": "구독자를 삭제했습니다",
+    "NEWSLETTER_SUBSCRIBER_NOT_FOUND": "구독자를 찾을 수 없습니다",
+    "FEATURED_PRODUCTS_RETRIEVED_SUCCESSFULLY": "추천 상품을 불러왔습니다",
+    "FEATURED_PRODUCT_CREATED_SUCCESSFULLY": "추천 상품을 저장했습니다",
+    "FEATURED_PRODUCT_UPDATED_SUCCESSFULLY": "추천 상품을 수정했습니다",
+    "FEATURED_PRODUCT_DELETED_SUCCESSFULLY": "추천 상품을 삭제했습니다",
+    "FEATURED_PRODUCT_NOT_FOUND": "추천 상품을 찾을 수 없습니다",
+    "FEATURED_PRODUCT_ALREADY_SET": "이미 추천 상품으로 등록되어 있습니다",
+    "PRODUCT_NOT_FOUND": "상품을 찾을 수 없습니다",
+    "FILE_UPLOADED_SUCCESSFULLY": "이미지를 업로드했습니다",
+    "FILE_TYPE_NOT_ALLOWED": "JPG, PNG, GIF, WebP 이미지만 업로드할 수 있습니다",
+    "FILE_REQUIRED": "업로드할 이미지를 선택하세요",
+    "FILE_NAME_INVALID": "허용되지 않는 파일 이름입니다",
+    "FILE_PATH_INVALID": "허용되지 않는 이미지 경로입니다",
+    "FILE_TOO_LARGE": "이미지는 5MB 이하여야 합니다",
+    "FILE_NOT_FOUND": "이미지를 찾을 수 없습니다",
+    "STORAGE_NOT_CONFIGURED": "이미지 저장소가 아직 설정되지 않았습니다"
   },
   "language": {
     "label": "언어",

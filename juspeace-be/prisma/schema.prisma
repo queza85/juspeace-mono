@@ -109,6 +109,26 @@ enum PaymentMethod {
   OTHER
 }
 
+enum ContentSection {
+  HERO
+  BRAND_STORY
+  FEATURES
+  VERIFICATION
+  DONATION
+  VIDEO
+  FAQ
+  GALLERY
+  ABOVE_FAQ
+  NAV_LINK
+  FOOTER_LINK
+  POLICY
+}
+
+/// Checkout provider slot. Only DUMMY is implemented until a PG contract exists.
+enum PaymentProviderKind {
+  DUMMY
+}
+
 enum SellerType {
   OFFICIAL_ONLINE
   DISTRIBUTOR
@@ -264,6 +284,8 @@ model Product {
   sales              Sale[]
   inventoryAllocations InventoryAllocation[]
   orderLineItems     OrderLineItem[]
+  reviews            ProductReview[]
+  featuredPlacement  FeaturedProduct?
   createdAt          DateTime         @default(now()) @db.Timestamptz(3)
   updatedAt          DateTime         @updatedAt @db.Timestamptz(3)
 
@@ -523,4 +545,118 @@ model DigitalCertificate {
 
   @@index([status])
   @@map("digital_certificates")
+}
+
+model ContentBlock {
+  id        String         @id @default(cuid())
+  section   ContentSection
+  locale    String         @default("en")
+  title     String
+  subtitle  String?
+  body      String?
+  imageUrl  String?
+  href      String?
+  sortOrder Int            @default(0)
+  published Boolean        @default(true)
+  createdAt DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime       @updatedAt @db.Timestamptz(3)
+
+  @@index([section, locale, published, sortOrder])
+  @@map("content_blocks")
+}
+
+model SiteSetting {
+  key       String   @id
+  value     String   @default("")
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@map("site_settings")
+}
+
+model ShippingMethod {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  name          String
+  description   String?
+  priceCents    Int      @default(0)
+  currency      String   @default("USD")
+  estimatedDays String?
+  enabled       Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([enabled, sortOrder])
+  @@map("shipping_methods")
+}
+
+model PaymentMethodConfig {
+  id           String              @id @default(cuid())
+  code         String              @unique
+  name         String
+  enabled      Boolean             @default(false)
+  provider     PaymentProviderKind @default(DUMMY)
+  sortOrder    Int                 @default(0)
+  instructions String?
+  createdAt    DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime            @updatedAt @db.Timestamptz(3)
+
+  @@index([enabled, sortOrder])
+  @@map("payment_method_configs")
+}
+
+model Promotion {
+  id            String       @id @default(cuid())
+  code          String       @unique
+  name          String
+  discountType  DiscountType
+  discountValue Int
+  startsAt      DateTime?    @db.Timestamptz(3)
+  endsAt        DateTime?    @db.Timestamptz(3)
+  usageLimit    Int?
+  usedCount     Int          @default(0)
+  active        Boolean      @default(true)
+  createdAt     DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime     @updatedAt @db.Timestamptz(3)
+
+  @@index([active])
+  @@map("promotions")
+}
+
+model ProductReview {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  rating       Int
+  title        String?
+  body         String
+  reviewerName String
+  published    Boolean  @default(false)
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([productId, published])
+  @@map("product_reviews")
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  locale    String?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@map("newsletter_subscribers")
+}
+
+model FeaturedProduct {
+  id           String   @id @default(cuid())
+  productId    String   @unique
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sortOrder    Int      @default(0)
+  cardImageUrl String?
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([sortOrder])
+  @@map("featured_products")
 }

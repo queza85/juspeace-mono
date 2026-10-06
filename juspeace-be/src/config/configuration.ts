@@ -79,4 +79,8 @@ export default () => ({
       process.env.REGISTRATION_TOKEN_TTL_DAYS ?? 30,
     ),
   },
+  storage: {
+    connectionString: process.env.CONNECTION_STRING ?? '',
+    containerName: process.env.CONTAINER_NAME ?? '',
+  },
 });

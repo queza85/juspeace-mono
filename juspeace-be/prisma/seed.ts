@@ -1,4 +1,10 @@
-import { PrismaClient, ProductStatus, UserRole } from '@prisma/client';
+import {
+  ContentSection,
+  PaymentProviderKind,
+  PrismaClient,
+  ProductStatus,
+  UserRole,
+} from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
@@ -74,6 +80,103 @@ async function main() {
         imageUrl: product.imageUrl,
         priceCents: 150_00,
         currency: 'USD',
+      },
+    });
+  }
+
+  await seedStorefrontAdmin();
+}
+
+async function seedStorefrontAdmin() {
+  const settings: Array<{ key: string; value: string }> = [
+    { key: 'storeName', value: 'Juspeace' },
+    { key: 'logoUrl', value: '/header/juspeace_header.png' },
+  ];
+
+  for (const setting of settings) {
+    await prisma.siteSetting.upsert({
+      where: { key: setting.key },
+      update: {},
+      create: setting,
+    });
+  }
+
+  const shipping = [
+    {
+      code: 'standard',
+      name: 'Standard',
+      description: 'Default delivery fee. Adjust before connecting checkout.',
+      priceCents: 500,
+      sortOrder: 0,
+    },
+    {
+      code: 'pickup',
+      name: 'Pickup',
+      description: 'Customer pickup.',
+      priceCents: 0,
+      sortOrder: 1,
+    },
+  ];
+
+  for (const method of shipping) {
+    await prisma.shippingMethod.upsert({
+      where: { code: method.code },
+      update: {},
+      create: { ...method, currency: 'USD', enabled: true },
+    });
+  }
+
+  const payments = [
+    { code: 'CARD', name: 'Card', sortOrder: 0 },
+    { code: 'APPLE_PAY', name: 'Apple Pay', sortOrder: 1 },
+    { code: 'GOOGLE_PAY', name: 'Google Pay', sortOrder: 2 },
+    { code: 'PAYPAL', name: 'PayPal', sortOrder: 3 },
+  ];
+
+  for (const method of payments) {
+    await prisma.paymentMethodConfig.upsert({
+      where: { code: method.code },
+      update: {},
+      create: {
+        ...method,
+        enabled: true,
+        provider: PaymentProviderKind.DUMMY,
+        instructions:
+          'Dummy method. No charge is sent until a payment gateway is connected.',
+      },
+    });
+  }
+
+  const hero = await prisma.contentBlock.findFirst({
+    where: { section: ContentSection.HERO, locale: 'en', title: 'Juspeace' },
+  });
+  if (!hero) {
+    await prisma.contentBlock.create({
+      data: {
+        section: ContentSection.HERO,
+        locale: 'en',
+        title: 'Juspeace',
+        subtitle: 'Replace this block with the live hero copy.',
+        imageUrl: '/landing/landing-page-hand-background.png',
+        sortOrder: 0,
+        published: true,
+      },
+    });
+  }
+
+  const products = await prisma.product.findMany({
+    where: { slug: { in: COLLECTION_PRODUCTS.map((product) => product.slug) } },
+    orderBy: { slug: 'asc' },
+  });
+
+  for (const [index, product] of products.entries()) {
+    await prisma.featuredProduct.upsert({
+      where: { productId: product.id },
+      update: {},
+      create: {
+        productId: product.id,
+        sortOrder: index,
+        cardImageUrl: product.imageUrl,
       },
     });
   }

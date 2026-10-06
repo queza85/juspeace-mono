@@ -14,6 +14,8 @@ import { OrdersModule } from './orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProductsModule } from './products/products.module';
 import { RegistryModule } from './registry/registry.module';
+import { SiteModule } from './site/site.module';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { RegistryModule } from './registry/registry.module';
     InventoryModule,
     OrdersModule,
     RegistryModule,
+    SiteModule,
+    StorageModule,
   ],
   controllers: [AppController],
   providers: [

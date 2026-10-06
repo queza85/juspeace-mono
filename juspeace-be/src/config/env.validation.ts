@@ -191,6 +191,16 @@ export class EnvironmentVariables {
   @Min(1)
   @Max(365)
   REGISTRATION_TOKEN_TTL_DAYS: number = 30;
+
+  /** Azure Storage connection string. Upload stays disabled until this is set. */
+  @IsString()
+  @IsOptional()
+  CONNECTION_STRING?: string;
+
+  /** Private blob container for images. Same role as LPA CONTAINER_NAME. */
+  @IsString()
+  @IsOptional()
+  CONTAINER_NAME?: string;
 }
 
 export function validateEnv(config: Record<string, unknown>) {

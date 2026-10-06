@@ -4,14 +4,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { LucideIcon } from 'lucide-react';
 import {
+  BadgePercent,
   ClipboardList,
   FileText,
+  FolderTree,
   LayoutDashboard,
   LayoutGrid,
+  Mail,
   MapPin,
   ShoppingBag,
   ShoppingCart,
   SlidersHorizontal,
+  Sparkles,
+  Star,
   UserCircle,
   Wallet,
 } from 'lucide-react';
@@ -49,18 +54,23 @@ const navSections: NavSection[] = [
       { href: '/orders', labelKey: 'admin.nav.orders', icon: ShoppingCart },
       { href: '/inventory', labelKey: 'admin.nav.inventory', icon: ClipboardList },
       { href: '/products', labelKey: 'admin.nav.products', icon: ShoppingBag },
-      { labelKey: 'admin.nav.customers', icon: UserCircle, disabled: true },
-      { labelKey: 'admin.nav.shipping', icon: MapPin, disabled: true },
-      { labelKey: 'admin.nav.payments', icon: Wallet, disabled: true },
+      { href: '/categories', labelKey: 'admin.nav.categories', icon: FolderTree },
+      { href: '/featured', labelKey: 'admin.nav.featured', icon: Sparkles },
+      { href: '/reviews', labelKey: 'admin.nav.reviews', icon: Star },
+      { href: '/customers', labelKey: 'admin.nav.customers', icon: UserCircle },
+      { href: '/shipping', labelKey: 'admin.nav.shipping', icon: MapPin },
+      { href: '/payments', labelKey: 'admin.nav.payments', icon: Wallet },
+      { href: '/promotions', labelKey: 'admin.nav.promotions', icon: BadgePercent },
+      { href: '/newsletter', labelKey: 'admin.nav.newsletter', icon: Mail },
     ],
   },
   {
     sectionKey: 'admin.nav.sections.others',
     items: [
       { labelKey: 'admin.nav.reports', icon: FileText, disabled: true },
-      { labelKey: 'admin.nav.content', icon: LayoutGrid, disabled: true },
+      { href: '/content', labelKey: 'admin.nav.content', icon: LayoutGrid },
       { labelKey: 'admin.nav.adminManagement', icon: UserCircle, disabled: true },
-      { labelKey: 'admin.nav.settings', icon: SlidersHorizontal, disabled: true },
+      { href: '/settings', labelKey: 'admin.nav.settings', icon: SlidersHorizontal },
     ],
   },
 ];
