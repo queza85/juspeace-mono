@@ -1,10 +1,13 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 type HeaderIconButtonProps = {
   label: string;
+  href?: string;
+  current?: boolean;
   onClick?: () => void;
   badge?: number;
   badgeClassName?: string;
@@ -14,22 +17,20 @@ type HeaderIconButtonProps = {
 
 export function HeaderIconButton({
   label,
+  href,
+  current = false,
   onClick,
   badge,
   badgeClassName,
   children,
   className,
 }: HeaderIconButtonProps) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        'relative rounded-md p-2 text-admin-header-foreground hover:bg-white/10',
-        className,
-      )}
-      aria-label={label}
-    >
+  const classes = cn(
+    'relative cursor-pointer rounded-md p-2 text-admin-header-foreground hover:bg-white/10',
+    className,
+  );
+  const content = (
+    <>
       {children}
       {badge != null && badge > 0 ? (
         <span
@@ -41,6 +42,26 @@ export function HeaderIconButton({
           {badge > 99 ? '99+' : badge}
         </span>
       ) : null}
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        onClick={onClick}
+        className={classes}
+        aria-label={label}
+        aria-current={current ? 'page' : undefined}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button type="button" onClick={onClick} className={classes} aria-label={label}>
+      {content}
     </button>
   );
 }

@@ -11,6 +11,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiMessage } from '../../common/decorators/api-message.decorator';
 import { ApiResponseDto } from '../../common/dto/api-response.dto';
 import {
+  CreateContactInquiryDto,
   CreateNewsletterSubscriberDto,
   ListContentQueryDto,
   ListReviewsQueryDto,
@@ -69,6 +70,14 @@ export class SiteController {
   @ApiOperation({ summary: 'Featured products for the storefront' })
   listFeatured() {
     return this.siteService.listFeatured(true);
+  }
+
+  @Post('contact-inquiries')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiMessage('CONTACT_INQUIRY_CREATED_SUCCESSFULLY')
+  @ApiOperation({ summary: 'Submit a Contact us inquiry' })
+  createInquiry(@Body() dto: CreateContactInquiryDto) {
+    return this.siteService.createInquiry(dto);
   }
 
   @Post('newsletter-subscribers')

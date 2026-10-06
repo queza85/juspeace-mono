@@ -35,6 +35,7 @@ import {
   ListContentQueryDto,
   ListReviewsQueryDto,
   UpdateCategoryDto,
+  UpdateContactInquiryStatusDto,
   UpdateContentBlockDto,
   UpdateCustomerDto,
   UpdateFeaturedProductDto,
@@ -239,6 +240,23 @@ export class AdminSiteController {
   @ApiMessage('CUSTOMER_UPDATED_SUCCESSFULLY')
   updateCustomer(@Param('id') id: string, @Body() dto: UpdateCustomerDto) {
     return this.siteService.updateCustomer(id, dto);
+  }
+
+  @Get('contact-inquiries')
+  @ApiMessage('CONTACT_INQUIRIES_RETRIEVED_SUCCESSFULLY')
+  @ApiOperation({ summary: 'List Contact us inquiries' })
+  listInquiries() {
+    return this.siteService.listInquiries();
+  }
+
+  @Patch('contact-inquiries/:id')
+  @ApiMessage('CONTACT_INQUIRY_UPDATED_SUCCESSFULLY')
+  @ApiOperation({ summary: 'Update a Contact us inquiry status' })
+  updateInquiry(
+    @Param('id') id: string,
+    @Body() dto: UpdateContactInquiryStatusDto,
+  ) {
+    return this.siteService.updateInquiryStatus(id, dto);
   }
 
   @Get('newsletter-subscribers')

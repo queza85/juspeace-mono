@@ -1,5 +1,7 @@
 import type {
   Category,
+  ContactInquiry,
+  ContactInquiryStatus,
   ContentBlock,
   ContentSection,
   DiscountType,
@@ -182,6 +184,21 @@ export interface ISiteRepository {
   listCustomers(): Promise<CustomerRecord[]>;
   findCustomer(id: string): Promise<CustomerRecord | null>;
   setCustomerActive(id: string, isActive: boolean): Promise<CustomerRecord>;
+
+  listInquiries(): Promise<ContactInquiry[]>;
+  findInquiry(id: string): Promise<ContactInquiry | null>;
+  createInquiry(input: {
+    name: string;
+    email: string;
+    phone?: string | null;
+    subject?: string | null;
+    message: string;
+    locale?: string | null;
+  }): Promise<ContactInquiry>;
+  updateInquiryStatus(
+    id: string,
+    status: ContactInquiryStatus,
+  ): Promise<ContactInquiry>;
 
   listSubscribers(): Promise<NewsletterSubscriber[]>;
   findSubscriberByEmail(email: string): Promise<NewsletterSubscriber | null>;

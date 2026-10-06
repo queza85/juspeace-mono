@@ -47,7 +47,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
-          className="flex items-center gap-1.5 rounded-md px-1.5 py-1.5 text-admin-header-foreground hover:bg-white/10"
+          className="flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1.5 text-admin-header-foreground hover:bg-white/10"
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-label={t('language.label')}
@@ -80,7 +80,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
                       setOpen(false);
                     }}
                     className={cn(
-                      'flex w-full items-center gap-2 px-3 py-2 text-sm hover:bg-muted',
+                      'flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-sm hover:bg-muted',
                       active && 'bg-muted/60 font-medium',
                     )}
                   >
@@ -119,7 +119,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
             type="button"
             onClick={() => setLocale(code)}
             className={cn(
-              'min-w-9 rounded-md px-2 py-1 text-xs font-medium transition-colors',
+              'min-w-9 cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors',
               active
                 ? 'bg-white/20 text-white'
                 : 'text-white/70 hover:bg-white/10 hover:text-white',

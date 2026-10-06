@@ -11,10 +11,12 @@ import {
   IsOptional,
   IsString,
   Max,
+  MaxLength,
   Min,
   MinLength,
 } from 'class-validator';
 import {
+  CONTACT_INQUIRY_STATUSES,
   CONTENT_LOCALES,
   PAYMENT_METHOD_CODES,
   SITE_SETTING_KEYS,
@@ -519,6 +521,48 @@ export class UpdateCustomerDto {
   @ApiProperty()
   @IsBoolean()
   isActive!: boolean;
+}
+
+export class CreateContactInquiryDto {
+  @ApiProperty()
+  @IsString()
+  @MinLength(1)
+  @MaxLength(80)
+  name!: string;
+
+  @ApiProperty()
+  @IsEmail()
+  @MaxLength(254)
+  email!: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(40)
+  phone?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(160)
+  subject?: string;
+
+  @ApiProperty()
+  @IsString()
+  @MinLength(1)
+  @MaxLength(4000)
+  message!: string;
+
+  @ApiPropertyOptional({ enum: CONTENT_LOCALES })
+  @IsOptional()
+  @IsIn(CONTENT_LOCALES)
+  locale?: string;
+}
+
+export class UpdateContactInquiryStatusDto {
+  @ApiProperty({ enum: CONTACT_INQUIRY_STATUSES })
+  @IsIn(CONTACT_INQUIRY_STATUSES)
+  status!: (typeof CONTACT_INQUIRY_STATUSES)[number];
 }
 
 export class CreateNewsletterSubscriberDto {

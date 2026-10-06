@@ -155,14 +155,16 @@
       "payments": "Payments",
       "promotions": "Promotions",
       "newsletter": "Newsletter",
+      "inquiries": "Inquiries",
       "reports": "Reports",
       "content": "Content",
       "adminManagement": "Admin Management",
       "settings": "Settings",
       "sections": {
-        "menu": "Menu",
-        "apps": "Apps",
-        "others": "Others"
+        "catalog": "Store",
+        "sales": "Sales",
+        "customers": "Customers",
+        "site": "Site"
       }
     },
     "dashboard": {
@@ -1055,6 +1057,24 @@
         }
       }
     },
+    "inquiries": {
+      "title": "Inquiries",
+      "description": "Messages sent from the storefront Contact us form. Set the status after you reply.",
+      "empty": "No inquiries yet.",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "subject": "Subject",
+        "message": "Message",
+        "status": "Status",
+        "createdAt": "Received"
+      },
+      "status": {
+        "WAITING": "Waiting",
+        "REPLIED": "Replied"
+      }
+    },
     "site": {
       "empty": "No records yet.",
       "required": "This field is required",
@@ -1064,6 +1084,7 @@
         "delete": "Delete",
         "edit": "Edit",
         "clear": "Clear",
+        "cancel": "Cancel",
         "yes": "Yes",
         "no": "No",
         "column": "Actions",
@@ -1154,7 +1175,7 @@
       },
       "settings": {
         "title": "Settings",
-        "description": "Logo, contact details, social links, and policy URLs."
+        "description": "Every storefront setting is listed below. Use Edit on a row to change its value."
       },
       "shipping": {
         "title": "Shipping",
@@ -1274,6 +1295,10 @@
     "NEWSLETTER_SUBSCRIBER_CREATED_SUCCESSFULLY": "Subscriber saved",
     "NEWSLETTER_SUBSCRIBER_DELETED_SUCCESSFULLY": "Subscriber deleted",
     "NEWSLETTER_SUBSCRIBER_NOT_FOUND": "Subscriber was not found",
+    "CONTACT_INQUIRIES_RETRIEVED_SUCCESSFULLY": "Inquiries loaded",
+    "CONTACT_INQUIRY_CREATED_SUCCESSFULLY": "Inquiry received",
+    "CONTACT_INQUIRY_UPDATED_SUCCESSFULLY": "Inquiry status updated",
+    "CONTACT_INQUIRY_NOT_FOUND": "Inquiry was not found",
     "FEATURED_PRODUCTS_RETRIEVED_SUCCESSFULLY": "Featured products loaded",
     "FEATURED_PRODUCT_CREATED_SUCCESSFULLY": "Featured product saved",
     "FEATURED_PRODUCT_UPDATED_SUCCESSFULLY": "Featured product updated",

@@ -55,6 +55,8 @@ Source of truth for domain terms used in code, API fields, UI labels, and databa
 | `promotion.discountValue` | Percent (1–100) or fixed minor units, depending on `discountType` | `discountValue` | Discount |
 | `productReview` | Product rating moderated in admin | `ProductReview` | Review |
 | `newsletterSubscriber` | Email captured for the storefront newsletter | `NewsletterSubscriber` | Newsletter |
+| `contactInquiry` | Message submitted from the storefront Contact us form | `ContactInquiry` | Inquiry |
+| `contactInquiry.status` | Whether an admin has replied | `status` (`WAITING`, `REPLIED`) | Waiting / Replied |
 | `featuredProduct` | Product chosen for the storefront collection, with optional card image | `FeaturedProduct` | Featured |
 | `storedFile` | Image kept in Azure Blob Storage. The database stores the relative blob path, not the storage account URL | `images/{uuid}.{ext}` | Image |
 | `storedFile.fileName` | Blob path passed to the file proxy | query `fileName` on `GET /files` | — |
