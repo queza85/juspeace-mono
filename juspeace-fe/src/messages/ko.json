@@ -629,7 +629,8 @@
       "signupTitle": "계정 만들기",
       "signupBody": "가입 폼을 작성하고 완료 화면을 확인하세요.",
       "cartTitle": "장바구니 확인",
-      "cartBody": "수량을 바꾸고 상품을 삭제한 뒤, 금액과 개수를 확인하세요.",
+      "cartBody": "수량을 바꾸고 상품을 삭제한 뒤, 금액과 개수를 확인하세요. 이 과제는 템플릿에 테스트 케이스 시나리오도 작성하세요.",
+      "downloadTemplate": "테스트 케이스 템플릿",
       "shippingTitle": "배송지 입력",
       "shippingBody": "주소를 입력한 뒤, 배송 방법과 총액을 비교하세요.",
       "openTask": "과제 열기"
