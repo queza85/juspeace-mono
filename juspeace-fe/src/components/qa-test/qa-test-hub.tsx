@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getTranslator } from '@/lib/i18n/server';
 
+const CART_TEST_CASE_TEMPLATE = '/qa-test/cart-test-case-template.xlsx';
+
 const TASKS = [
   {
     href: '/qa-test/signup',
@@ -11,6 +13,7 @@ const TASKS = [
     href: '/qa-test/cart',
     titleKey: 'qaTest.hub.cartTitle',
     bodyKey: 'qaTest.hub.cartBody',
+    templateHref: CART_TEST_CASE_TEMPLATE,
   },
   {
     href: '/qa-test/shipping',
@@ -51,12 +54,23 @@ export async function QaTestHub() {
             <li key={task.href} className="border border-black/10 px-5 py-5 sm:px-6">
               <h3 className="font-display text-base font-semibold">{t(task.titleKey)}</h3>
               <p className="mt-2 text-sm leading-6 text-black/70">{t(task.bodyKey)}</p>
-              <Link
-                href={task.href}
-                className="mt-4 inline-flex text-sm font-medium underline underline-offset-4"
-              >
-                {t('qaTest.hub.openTask')}
-              </Link>
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <Link
+                  href={task.href}
+                  className="inline-flex text-sm font-medium underline underline-offset-4"
+                >
+                  {t('qaTest.hub.openTask')}
+                </Link>
+                {'templateHref' in task ? (
+                  <a
+                    href={task.templateHref}
+                    download="cart-test-case-template.xlsx"
+                    className="inline-flex text-sm font-medium underline underline-offset-4"
+                  >
+                    {t('qaTest.hub.downloadTemplate')}
+                  </a>
+                ) : null}
+              </div>
             </li>
           ))}
         </ul>
