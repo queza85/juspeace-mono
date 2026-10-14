@@ -629,7 +629,7 @@
       "signupTitle": "Create an account",
       "signupBody": "Fill in the sign-up form and read the confirmation.",
       "cartTitle": "Review the cart",
-      "cartBody": "Change quantities and remove items, then check the amounts and the count. For this task, also write test-case scenarios in the template.",
+      "cartBody": "Change quantities and remove items, then check the amounts and the count. For this task, also write test-case scenarios in the template. Some columns are marked ?. From your experience writing test scenarios, which fields would be useful to add? Write a field name in each ? column, and add more columns if you need them.",
       "downloadTemplate": "Test case template",
       "shippingTitle": "Enter a shipping address",
       "shippingBody": "Enter an address, then compare each shipping method with the total.",
